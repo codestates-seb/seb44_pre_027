@@ -1,5 +1,15 @@
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import './index.css';
+import './index.pcss';
+import Providers from './components/Providers';
+import { worker } from './mocks/worker';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(<App />);
+if (process.env.NODE_ENV === 'development') {
+  worker.start();
+}
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <Providers>
+    <App />
+  </Providers>
+);
