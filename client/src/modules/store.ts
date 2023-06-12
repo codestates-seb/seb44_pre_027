@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import dahamReducer from './dahamReducer';
-import darkSlice from './DarkSlice';
+import darkSlice from './darkSlice';
+import dahamReducer from './dahamSlice';
 
 const store = configureStore({
   reducer: {
