@@ -16,4 +16,14 @@ public class AnswerService {
         return answerRepository.save(answer);
     }
 
+    public Answer updateAnswer(Answer answer) {
+        Answer foundAnswer = findAnswerByAnswerId(answer.getAnswerId());
+
+        return updatedAnswer;
+    }
+
+    public Answer findAnswerByAnswerId(long answerId){
+        return foundAnswer
+    }
+
 }

@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.net.URI;
 
@@ -36,12 +37,18 @@ public class AnswerController {
 
         return ResponseEntity.created(location).build();
     }
-/*
-    @PostMapping
-    public ResponseEntity postAnswer() {
+    /*
+        고려할것... 답변 작성자가 아닐경우의 처리
+     */
+    @PatchMapping("/{answer-id}")
+    public ResponseEntity patchAnswer(@Valid @RequestBody AnswerDto.Patch request,
+                                      @Positive @PathVariable("answer-id") long answerId)  {
+        request.setAnswerId(answerId);
+        answerService.update answerMapper.answerPatchToAnswer(request);
         return ResponseEntity;
     }
 
+/*
     @PostMapping
     public ResponseEntity postAnswer() {
         return ResponseEntity;

@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
-
+@Getter
 public class AnswerDto {
     @Getter
     @Setter
@@ -15,14 +15,14 @@ public class AnswerDto {
         @NotBlank
         private String content;
     }
-
     @Getter
+    @Setter
     public static class Patch {
         private long answerId;
     }
 
     @AllArgsConstructor
-    @Getter
+
     public static class Response {
 
     }
