@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import LeftSideBar from './components/LeftSideBar';
 import UseDahamComponent from './components/UseDahamComponent';
 
 interface AppProps {}
-
 
 const App = ({}: AppProps) => {
   return (
@@ -11,6 +11,7 @@ const App = ({}: AppProps) => {
       <React.Suspense fallback={<div>loading</div>}>
         <UseDahamComponent />
       </React.Suspense>
+      <LeftSideBar />
     </div>
   );
 };
