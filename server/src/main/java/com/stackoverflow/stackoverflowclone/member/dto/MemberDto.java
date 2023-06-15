@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class MemberDTO {
+public class MemberDto {
     private String nickname;
     private String email;
     private String password;
@@ -15,7 +15,7 @@ public class MemberDTO {
     private String bioTitle;
     private String bioContent;
 
-    public MemberDTO(String nickname, String email, String password, String location, String title, String content) {
+    public MemberDto(String nickname, String email, String password, String location, String title, String content) {
         this.nickname = nickname;
         this.email = email;
         this.password = password;

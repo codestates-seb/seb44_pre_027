@@ -1,6 +1,10 @@
 package com.stackoverflow.stackoverflowclone.member.entity;
 
+import com.stackoverflow.stackoverflowclone.answer.entity.Answer;
 import com.stackoverflow.stackoverflowclone.audit.Auditable;
+import com.stackoverflow.stackoverflowclone.comment.entity.Comment;
+import com.stackoverflow.stackoverflowclone.question.entity.Question;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Member extends Auditable {
 
@@ -32,6 +37,7 @@ public class Member extends Auditable {
 
     private String bioContent;
 
+    /*
     @OneToMany(mappedBy = "member")
     private List<Question> questions = new ArrayList<>();
 
@@ -41,7 +47,12 @@ public class Member extends Auditable {
     @OneToMany(mappedBy = "member")
     private List<Comment> comments = new ArrayList<>();
 
+     */
+
+
+    /*
     @OneToMany(mappedBy = "member")
     private List<Vote> votes = new ArrayList<>();
+     */
 
 }
