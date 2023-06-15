@@ -50,7 +50,7 @@ public class AnswerController {
 
 /*
     @PostMapping
-    public ResponseEntity postAnswer() {
+    public ResponseEntity deleteAnswer() {
         return ResponseEntity;
     }
 
