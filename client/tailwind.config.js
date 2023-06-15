@@ -2,7 +2,13 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      fontSize:{
+        sxs: ['8px', {
+          lineHeight: '12px'
+        }],
+      }
+    },
   },
   plugins: [],
   darkMode: 'class',
