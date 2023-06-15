@@ -1,9 +1,9 @@
 package com.stackoverflow.stackoverflowclone.question.entity;
 
 
-import com.stackoverflow.stackoverflowclone.Member.entity.Member;
 import com.stackoverflow.stackoverflowclone.answer.entity.Answer;
 import com.stackoverflow.stackoverflowclone.audit.Auditable;
+import com.stackoverflow.stackoverflowclone.member.entity.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
