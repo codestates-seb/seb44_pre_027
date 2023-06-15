@@ -26,7 +26,7 @@ public class Question extends Auditable {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content; // 본문
 
-    private int views = 0; // 조회수
+    private int views; // 조회수
 
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
