@@ -6,7 +6,7 @@ import org.mapstruct.Mapper;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface AnswerMapper {
     Answer answerPostToAnswer(AnswerDto.Post requestBody);
     Answer answerPatchToAnswer(AnswerDto.Patch requestBody);
