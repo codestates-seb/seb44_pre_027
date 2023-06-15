@@ -1,3 +1,6 @@
+import PencilIcon from '@/assets/icons/PencilIcon';
+import SmallPencilIcon from '@/assets/icons/SmallPencilIcon';
+import LabelItem, { LabelItemArray } from './LabelItem';
 import React from 'react';
 
 interface LabelContainerProps {}
@@ -5,8 +8,13 @@ interface LabelContainerProps {}
 const LabelContainer = ({}: LabelContainerProps) => {
   return (
     <section>
-      <div className=" border border-slate-300 bg-slate-200"></div>
-      <div className="">dsadsads</div>
+      {LabelItemArray.map((list, idx) => (
+        <LabelItem
+          key={`LabelItem${idx}`}
+          subject={list.subject}
+          listDescription={list.listDescription}
+        />
+      ))}
     </section>
   );
 };
