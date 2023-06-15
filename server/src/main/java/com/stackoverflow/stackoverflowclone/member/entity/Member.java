@@ -28,9 +28,9 @@ public class Member extends Auditable {
 
     private String location;
 
-    private String title;
+    private String bioTitle;
 
-    private String content;
+    private String bioContent;
 
     @OneToMany(mappedBy = "member")
     private List<Question> questions = new ArrayList<>();

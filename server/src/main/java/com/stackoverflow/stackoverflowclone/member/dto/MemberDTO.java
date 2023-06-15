@@ -12,15 +12,15 @@ public class MemberDTO {
     private String email;
     private String password;
     private String location;
-    private String title;
-    private String content;
+    private String bioTitle;
+    private String bioContent;
 
     public MemberDTO(String nickname, String email, String password, String location, String title, String content) {
         this.nickname = nickname;
         this.email = email;
         this.password = password;
         this.location = location;
-        this.title = title;
-        this.content = content;
+        this.bioTitle = title;
+        this.bioContent = content;
     }
 }
