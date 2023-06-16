@@ -24,7 +24,8 @@ const Widget = ({idx, type, title, children}:WidgetProps) => {
         }
         ${(props) => props.type === 'Light' &&
             css`
-                margin-top: 16px;
+                margin-top: ${props.idx === 1 && '16px'};
+                margin-bottom: 16px;
                 background-color: transparent;
                 border-color: #d6d9dc;
             `
