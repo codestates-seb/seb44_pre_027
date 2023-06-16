@@ -6,6 +6,26 @@ interface LabelItemProps {
   listDescription: string[];
 }
 
+const LabelItem = ({ subject, listDescription }: LabelItemProps) => {
+  return (
+    <div className=" flex w-[300px] max-w-[300px] flex-col justify-center border border-slate-300 bg-slate-200">
+      <h2 className=" h-[41px] bg-slate-200 pl-4 pt-2 text-sm font-semibold">{subject}</h2>
+      <ul className=" border-t border-slate-300 bg-slate-100 px-4">
+        {listDescription.map((list, idx) => (
+          <li key={`list ${idx}`} className="my-1 flex">
+            <div className=" pt-[6px]">
+              <SmallPencilIcon className=" mx-2 h-[14px] w-[14px] flex-shrink-0" />
+            </div>
+            <span className=" cursor-pointer py-2 text-xs">{list}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default LabelItem;
+
 export const LabelItemArray: LabelItemProps[] = [
   {
     subject: 'The Overflow Blog',
@@ -31,23 +51,3 @@ export const LabelItemArray: LabelItemProps[] = [
     ],
   },
 ];
-
-const LabelItem = ({ subject, listDescription }: LabelItemProps) => {
-  return (
-    <div className=" flex w-[300px] max-w-[300px] flex-col justify-center border border-slate-300 bg-slate-200">
-      <h2 className=" h-[41px] bg-slate-200 pl-4 pt-2 text-sm font-semibold">{subject}</h2>
-      <ul className=" border-t border-slate-300 bg-slate-100 px-4">
-        {listDescription.map((list, idx) => (
-          <li key={`list ${idx}`} className="my-1 flex">
-            <div className=" pt-[6px]">
-              <SmallPencilIcon className=" mx-2 h-[14px] w-[14px] flex-shrink-0" />
-            </div>
-            <span className=" cursor-pointer py-2 text-xs">{list}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
-
-export default LabelItem;

@@ -15,7 +15,6 @@ const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
   return (
     <main>
       <DetailTitle />
-
       <div className="flex">
         <QuestionAnswerComponent />
         <div className=" mt-4 flex flex-col">

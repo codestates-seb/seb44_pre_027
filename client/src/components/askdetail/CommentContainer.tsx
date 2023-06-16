@@ -1,4 +1,5 @@
 import React from 'react';
+import CommentItem from './CommentItem';
 // 추후 API 규격 정해지면 qnaData type은 API Data
 
 interface CommentContainerProps {
@@ -7,15 +8,9 @@ interface CommentContainerProps {
 
 const CommentContainer = ({}: CommentContainerProps) => {
   return (
-    <section>
-      <p>
-        {`
-    I have been stuck on this error in my project when I add "proxy": "http://localhost:6000" in my package.json.
-    This is the error response after yarn start.
-    But everything is fine when I remove the "proxy": "http://localhost:6000".
-    This is on my package.json:
-      `}
-      </p>
+    <section className="px-16 py-6 text-xs">
+      <CommentItem />
+      <button className=" text-slate-500 hover:text-sky-600">Add a Comment</button>
     </section>
   );
 };

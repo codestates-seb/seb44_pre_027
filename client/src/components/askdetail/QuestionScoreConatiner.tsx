@@ -1,6 +1,24 @@
 import React from 'react';
 import QuestionScoreItem, { QuestionItemInterface } from './QuestionScoreItem';
 
+interface QuestionScoreConatinerProps {
+  itemArray: QuestionItemInterface[];
+  title: string;
+}
+
+const QuestionScoreConatiner = ({ itemArray, title }: QuestionScoreConatinerProps) => {
+  return (
+    <section>
+      <h2 className=" mb-6 text-xl font-light">{title}</h2>
+      {itemArray.map((item, idx) => (
+        <QuestionScoreItem key={`qsi${idx}`} voteCount={item.voteCount} subject={item.subject} />
+      ))}
+    </section>
+  );
+};
+
+export default QuestionScoreConatiner;
+
 export const questionItemArray: QuestionItemInterface[] = [
   {
     voteCount: 24,
@@ -63,21 +81,3 @@ export const relatedItemArray: QuestionItemInterface[] = [
       'Invalid configuration object. Webpack has been initialized using a configuration object that does not match the API schema. 2022 problem',
   },
 ];
-
-interface QuestionScoreConatinerProps {
-  itemArray: QuestionItemInterface[];
-  title: string;
-}
-
-const QuestionScoreConatiner = ({ itemArray, title }: QuestionScoreConatinerProps) => {
-  return (
-    <section>
-      <h2 className=" mb-6 text-xl font-light">{title}</h2>
-      {itemArray.map((item, idx) => (
-        <QuestionScoreItem key={`qsi${idx}`} voteCount={item.voteCount} subject={item.subject} />
-      ))}
-    </section>
-  );
-};
-
-export default QuestionScoreConatiner;
