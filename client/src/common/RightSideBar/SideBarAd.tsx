@@ -14,6 +14,11 @@ const SideBarAd = ({url, src}:SideBarAdProps):JSX.Element => {
     `;
 
     const ImgContainer = styled.a`
+        width: 100%;
+        height: 100%;
+
+        display: inline-block;
+        position: relative;
     `
 
     const AdImage = styled.img`
