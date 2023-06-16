@@ -29,4 +29,18 @@ public class Answer extends Auditable {
     @ManyToOne
     @JoinColumn(name = "QUESTION_ID")
     private Question question;
+
+    public void addQuestion(Question question){
+        this.question = question;
+        if(this.question.getAnswers().contains(this)){
+            this.question.getAnswers().add(this);
+        }
+    }
+
+    public void addMember(Member member) {
+        this.member = member;
+        if(this.member.getAnswers().contains(this)){
+            this.member.getAnswers().add(this);
+        }
+    }
 }

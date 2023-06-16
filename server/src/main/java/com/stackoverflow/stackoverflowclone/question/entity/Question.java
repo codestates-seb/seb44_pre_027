@@ -51,6 +51,8 @@ public class Question extends Auditable {
         this.member = member;
     }
 
+
+
     /**
      * 조회수 1 증가 메서드
      */

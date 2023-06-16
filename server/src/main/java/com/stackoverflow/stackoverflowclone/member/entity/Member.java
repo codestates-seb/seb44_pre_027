@@ -39,10 +39,12 @@ public class Member extends Auditable {
     private List<Question> questions = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
-    private List<Answer> anwsers = new ArrayList<>();
+    private List<Answer> answers = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
     private List<Comment> comments = new ArrayList<>();
+
+
 
     /*
     @OneToMany(mappedBy = "member")
