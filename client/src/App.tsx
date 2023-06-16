@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import LeftSideBar from './components/LeftSideBar';
 import RightSideBar from './common/RightSideBar/RightSideBar';
-
 import UseDahamComponent from './components/UseDahamComponent';
 
 interface AppProps {}

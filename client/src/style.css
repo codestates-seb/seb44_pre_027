@@ -1,0 +1,26 @@
+input:focus {
+  outline: none !important;
+  border-color: #59a4de;
+  box-shadow: 0px 0px 0px 5px #d9eaf7;
+}
+
+textarea:focus {
+  outline: none !important;
+  border-color: #59a4de;
+  box-shadow: 0px 0px 0px 5px #d9eaf7;
+}
+::-webkit-scrollbar {
+  width: 12px;
+  background-color: #f5f5f5;
+}
+
+/* Color of the scrollbar handle */
+::-webkit-scrollbar-thumb {
+  background-color: rgb(194, 194, 194);
+  border-radius: 30cm;
+}
+
+/* Color of the scrollbar handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
