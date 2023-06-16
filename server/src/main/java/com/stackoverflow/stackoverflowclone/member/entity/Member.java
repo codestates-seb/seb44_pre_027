@@ -4,6 +4,9 @@ import com.stackoverflow.stackoverflowclone.answer.entity.Answer;
 import com.stackoverflow.stackoverflowclone.audit.Auditable;
 import com.stackoverflow.stackoverflowclone.comment.entity.Comment;
 import com.stackoverflow.stackoverflowclone.question.entity.Question;
+
+
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,20 +34,19 @@ public class Member extends Auditable {
 
     private String location;
 
-    private String title;
+    private String bioTitle;
 
-    private String content;
+    private String bioContent;
+
 
     @OneToMany(mappedBy = "member")
     private List<Question> questions = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
-    private List<Answer> answers = new ArrayList<>();
+    private List<Answer> anwsers = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
     private List<Comment> comments = new ArrayList<>();
-
-
 
     /*
     @OneToMany(mappedBy = "member")
