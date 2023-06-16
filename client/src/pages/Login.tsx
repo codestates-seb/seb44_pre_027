@@ -10,7 +10,7 @@ import Phrase from '@/common/atoms/Phrase';
 import Link from '@/common/atoms/Link';
 
 import GoogleIcon from '@/assets/icons/GoogleIcon';
-import GithubIcon from '@/assets/icons/GithubIcon';
+import GithubIcon from '@/assets/icons/GithubIconWhite';
 import FacebookIcon from '@/assets/icons/FacebookIcon';
 
 const Login = () => {
