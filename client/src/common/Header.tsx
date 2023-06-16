@@ -13,7 +13,7 @@ interface HeaderUI {};
 /*dropwdown이름 겹침 -> ProductIcon 수정완료 */
 const ProductIcon = cva(
     `
-    block flex flex-col px-4 py-2 cursor-pointer 
+    block flex flex-col px-4 py-2 cursor-pointer
     `,{
         variants:{
             variant:{
@@ -75,7 +75,7 @@ const Header = ({}:HeaderUI) => {
        <nav className="bg-white border-gray-200 border-b border-zinc-200">
             <div className="max-w-screen-xl flex justify-center items-center h-12 space-x-6">
                 <div className="hover:bg-slate-200">
-                    <a href="https://stackoverflow.com/" className="flex items-center"> 
+                    <a href="https://stackoverflow.com/" className="flex items-center">
                         <BigLogoIcon/>
                     </a>
                 </div>
@@ -84,10 +84,10 @@ const Header = ({}:HeaderUI) => {
                         <a href="#" className="block py-2 px-2 lr-4 text-gray-500 bg-transparent font-normal text-sm ">About</a>
                     </li>
                     <li className="w-full md:w-auto relative">
-                        <button className="block py-2 px-2 lr-4 text-gray-500 bg-transparent 
+                        <button className="block py-2 px-2 lr-4 text-gray-500 bg-transparent
                             font-normal text-sm hover:bg-slate-200 rounded-full" onClick={handleDropdown}>Products
                         </button>
-                        { isOpen ? 
+                        { isOpen ?
                         (
                         <div className="z-10 absolute top-full left-1/2 transform -translate-x-1/2 divide-y divide-gray-100 rounded-lg ">
                             <ul className="pt-2 w-52 drop-shadow-lg border border-inherit rounded-lg bg-white divide-y divide-gray-100">
@@ -128,7 +128,7 @@ const Header = ({}:HeaderUI) => {
                         : null}
                     </li>
                     <li className="w-full md:w-auto hidden md:block hover:bg-slate-200 rounded-full">
-                        <a href="#" className="block py-2 px-2 lr-4 text-gray-500 bg-transparent 
+                        <a href="#" className="block py-2 px-2 lr-4 text-gray-500 bg-transparent
                             font-normal text-sm whitespace-nowrap">For Teams
                         </a>
                     </li>
@@ -138,16 +138,16 @@ const Header = ({}:HeaderUI) => {
                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                             <SearchIcon className="fill-gray-400"/>
                         </div>
-                        <input type="text" id="search-navbar" className="block w-full h-8 p-2 pl-10 text-sm text-gray-900 
-                        border border-gray-300 focus:border-sky-200 placeholder-gray-400" 
+                        <input type="text" id="search-navbar" className="block w-full h-8 p-2 pl-10 text-sm text-gray-900
+                        border border-gray-300 focus:border-sky-200 placeholder-gray-400"
                         placeholder="Search...">{/*focus효과 적용 안됨 */}</input>
                     </div>
                 </div>
                 <ul className="flex flex-row space-x-2">
                     <li className={cn(IconHover({ variant: 'hover'}))}>
                         <a href="#" className="block p-2 text-gray-500 bg-transparent">
-                            <img src="https://www.gravatar.com/avatar/9bcf7a89f50be51792a0ce9e6af9e917?s=48&d=identicon&r=PG" 
-                            alt="user image" 
+                            <img src="https://www.gravatar.com/avatar/9bcf7a89f50be51792a0ce9e6af9e917?s=48&d=identicon&r=PG"
+                            alt="user image"
                             className="w-5 h-5" />
                         </a>
                     </li>
