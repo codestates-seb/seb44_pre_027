@@ -16,6 +16,7 @@ const Collective = ({item}:CollectiveProps) => {
     const CollectiveContainer = styled.div`
         height: 100%;
         padding: 16px 15px;
+        border-top: 1px solid #d6d9dc;
     `;
 
     const ProfileContainer = styled.div`

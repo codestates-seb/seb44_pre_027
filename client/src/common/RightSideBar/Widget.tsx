@@ -12,11 +12,12 @@ const Widget = ({idx, type, title, children}:WidgetProps) => {
     const WidgetContainer = styled.div<{type:string, idx:number}>`
         height  : 100%;
         border: 1px solid;
-        border-radius: ${(props)=> props.idx === 1 && '3px 3px 0 0'};
+
         overflow: hidden;
 
         ${(props) => props.type === 'Basic' &&
             css`
+                border-radius: ${props.idx === 1 && '3px 3px 0 0'};
                 border-top: ${props.idx !== 1 && '0px'};
                 border-color: #f1e5bc;
                 background-color: #fdf7e2;
@@ -24,6 +25,7 @@ const Widget = ({idx, type, title, children}:WidgetProps) => {
         }
         ${(props) => props.type === 'Light' &&
             css`
+                border-radius: '3px 3px 0 0';
                 margin-top: ${props.idx === 1 && '16px'};
                 margin-bottom: 16px;
                 background-color: transparent;
