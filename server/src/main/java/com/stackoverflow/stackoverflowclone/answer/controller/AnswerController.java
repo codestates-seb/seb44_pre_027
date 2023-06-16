@@ -6,6 +6,7 @@ import com.stackoverflow.stackoverflowclone.answer.mapper.AnswerMapper;
 import com.stackoverflow.stackoverflowclone.answer.service.AnswerService;
 import com.stackoverflow.stackoverflowclone.dto.MultiResponseDto;
 import com.stackoverflow.stackoverflowclone.dto.SingleResponseDto;
+import com.stackoverflow.stackoverflowclone.member.service.MemberService;
 import com.stackoverflow.stackoverflowclone.question.entity.Question;
 import com.stackoverflow.stackoverflowclone.question.service.QuestionService;
 import com.stackoverflow.stackoverflowclone.utils.UriCreator;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -29,47 +31,40 @@ public class AnswerController {
     private final AnswerMapper answerMapper;
     private final AnswerService answerService;
     private final QuestionService questionService;
+    private final MemberService memberService;
 
-    public AnswerController(AnswerMapper answerMapper, AnswerService answerService, QuestionService questionService) {
+    public AnswerController(AnswerMapper answerMapper, AnswerService answerService, QuestionService questionService, MemberService memberService) {
         this.answerMapper = answerMapper;
         this.answerService = answerService;
         this.questionService = questionService;
+        this.memberService = memberService;
     }
 
     @PostMapping
     public ResponseEntity postAnswer(@Valid @RequestBody AnswerDto.Post request,
                                      @Positive @PathVariable("question-id") long questionId) {
         //TODO:
-
         Answer answer = answerMapper.answerPostToAnswer(request);
-//        answer.setQuestion(questionService.findVerifiedQuestion(questionId));
-        System.out.println(answer.getQuestion().getQuestionId());
-        Answer createdAnswer = answerService.createAnswer(answer);
-//        createdAnswer.getQuestion().setQuestionId(questionId);
-        AnswerDto.Response response = answerMapper.answerToAnswerResponse(createdAnswer);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        answer.setQuestion(questionService.findVerifiedQuestion(questionId));
+        answer.setMember(memberService.findVerifiedMember(request.getMemberId()));
 
+        answerService.createAnswer(answer);
+
+        URI location = UriComponentsBuilder
+                .newInstance()
+                .path(ANSWER_DEFAULT_URL)
+                .buildAndExpand(questionId)
+                .toUri();
+        return ResponseEntity.created(location).build();
     }
     //TODO: 본인이 아닐경우의 처리 추가
     @PatchMapping("/{answer-id}")
     public ResponseEntity patchAnswer(@Valid @RequestBody AnswerDto.Patch request,
-                                      @Positive @PathVariable("answer-id") long answerId,
-                                      @Positive @PathVariable("question-id") long questionId)  {
-        System.out.println("questionId = "+ questionId);
+                                      @Positive @PathVariable("answer-id") long answerId)  {
         request.setAnswerId(answerId);
-        System.out.println(request.getAnswerId());
-        Answer updatedAnswer = answerService.updateAnswer(answerMapper.answerPatchToAnswer(request));
-        updatedAnswer.getQuestion().setQuestionId(questionId);
-        System.out.println(updatedAnswer.getContent());
-        System.out.println("updated.questionid = "+ updatedAnswer.getQuestion().getQuestionId());
-
-        AnswerDto.Response response = answerMapper.answerToAnswerResponse(updatedAnswer);
-        response.setQuestionId(questionId);
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
-
-//        return new ResponseEntity<>(
-//                new SingleResponseDto<>(answerMapper.answerToAnswerResponse(updatedAnswer)),HttpStatus.OK);
+        Answer answer = answerMapper.answerPatchToAnswer(request);
+        answerService.updateAnswer(answer);
+        return ResponseEntity.ok().build();
     }
 
     //TODO: 본인이 아닐경우의 처리 추가
@@ -77,6 +72,7 @@ public class AnswerController {
     public ResponseEntity deleteAnswer(@Positive @PathVariable("answer-id") long answerId) {
         answerService.deleteAnswer(answerId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        return ResponseEntity.noContent().build();
     }
 
 /*
