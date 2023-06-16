@@ -15,7 +15,9 @@ const DetailTitle = ({ className, qnaData, ...attribute }: DetailTitleProps) => 
             'Invalid options object. Dev Server has been initialized using an options object that does not match the API schema'
           }
         </h2>
-        <button className="">Ask Question</button>
+        <button className=" h-[38px] w-[100px] rounded-sm bg-sky-500 text-xs text-white hover:bg-sky-700">
+          Ask Question
+        </button>
       </div>
       <div className=" flex border-b border-slate-200 pb-4 pt-2 text-xs text-slate-500">
         <span className=" mr-4">Asked {'1 year, 6 months ago'}</span>
