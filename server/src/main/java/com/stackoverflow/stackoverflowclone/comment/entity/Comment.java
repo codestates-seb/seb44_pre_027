@@ -1,6 +1,8 @@
 package com.stackoverflow.stackoverflowclone.comment.entity;
 
 import com.stackoverflow.stackoverflowclone.audit.Auditable;
+import com.stackoverflow.stackoverflowclone.member.entity.Member;
+import com.stackoverflow.stackoverflowclone.question.entity.Question;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
