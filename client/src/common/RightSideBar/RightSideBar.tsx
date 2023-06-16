@@ -41,6 +41,7 @@ const RightSideBar = ({size}: RightSideBarProps):JSX.Element => {
 
     const RightSideBarContainer = styled.div<{size:number}>`
         width: ${size}px;
+        float: right;
     `
 
     const Title = styled.h4`
@@ -48,6 +49,7 @@ const RightSideBar = ({size}: RightSideBarProps):JSX.Element => {
 
         font-size: 19px;
         color: #3b4045;
+        cursor: pointer;
     `
 
     const NetworkQuestionsContainer = styled.div`
