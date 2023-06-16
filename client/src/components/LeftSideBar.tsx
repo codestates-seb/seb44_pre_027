@@ -28,7 +28,7 @@ const FocusVariants = cva(
 
 const LeftSideBar = ({}: LeftSideBarProps) => {
   return (
-    <div>
+    <div className=" border-r border-slate-200">
       <nav
         className={`
         sticky top-[56px] max-h-[100vh-56px]
