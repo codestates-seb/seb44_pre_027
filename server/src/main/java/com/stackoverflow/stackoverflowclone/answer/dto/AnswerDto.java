@@ -14,17 +14,28 @@ public class AnswerDto {
     @Getter
     @Setter
     public static class Post {
+        @JsonProperty("question-id")
+        private long questionId;
+        @NotBlank
+        private String content;
+
+        @Override
+        public String toString() {
+            return "Post{" +
+                    "questionId=" + questionId +
+                    ", content='" + content + '\'' +
+                    '}';
+        }
+    }
+    @Getter
+    @Setter
+    public static class Patch {
         @JsonProperty("answer-id")
         private long answerId;
         @JsonProperty("question-id")
         private long questionId;
         @NotBlank
         private String content;
-    }
-    @Getter
-    @Setter
-    public static class Patch {
-        private long answerId;
     }
 
     @AllArgsConstructor
