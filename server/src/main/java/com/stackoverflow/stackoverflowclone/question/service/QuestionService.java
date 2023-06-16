@@ -38,13 +38,13 @@ public class QuestionService {
     }
 
 
-    /** 질문 수정 메서드 **/
+    /** 질문 수정 메서드
+     * - 모든 회원이 글 수정 가능 (OK)
+     * **/
     public Question updateQuestion(Question question){
 
         Question findQuestion = findVerifiedQuestion(question.getQuestionId());
 
-        // TODO : Q? 작성한 회원만 수정할 수 있는지 아무나 수정 할 수 있는지
-        // TODO : 로그인된 회원의 id를 얻어서 question을 등록한 회원의 id와 비교
         Question updatedQuestion = beanUtils.copyNonNullProperties(question, findQuestion);
 
         return questionRepository.save(updatedQuestion);
@@ -54,16 +54,42 @@ public class QuestionService {
     /**
      * 전체 질문 목록 조회 메서드
      * - 1페이지 당 질문 5개 (size : 5로 고정값)
-     * - 정렬 sort (최신,.
+     * - 정렬 sort (최신 순, 조회수 순, 투표순 OK)
      */
-    /*
     public Page<Question> findQuestions(int page, String sort){
 
-        // TODO : 정렬 기준에 따라 바꾸기
-        return questionRepository.findAll(PageRequest.of(page,5, Sort.by("question_id").descending()));
+        // 받아온 정렬 기준이 최신 순이면
+        if(sort.equals("new")){
+            return questionRepository.findAll(PageRequest.of(page,5, Sort.by("questionId").descending()));
+        }
+        // 받아온 정렬 기준이 조회수 순이면
+        else if(sort.equals("views")){
+            return questionRepository.findAll(PageRequest.of(page,5,Sort.by("views").descending()));
+        }
+        // 받아온 정렬 기준이 투표 순이면
+        else if(sort.equals("votes")){
+            // TODO : 투표 순 구현
+            return questionRepository.findAll(PageRequest.of(page,5, Sort.by("questionId").descending()));
+        }
+        // 정렬 3개 외 나머지는 에러 발생
+        else {
+            // TODO : 에러 발생
+            throw new RuntimeException();
+        }
     }
-    
+
+
+    /**
+     * 질문 검색 메서드
+     * - 질문 제목이나 본문에 해당 단어가 포함되면 검색
+     * - 최신 순으로 나열
      */
+    public Page<Question> searchQuestion(int page, String keyword){
+
+        return questionRepository.searchByKeyword(keyword, PageRequest.of(page,5,Sort.by("questionId").descending()));
+    }
+
+
 
     /**
      * 질문 삭제 메서드
