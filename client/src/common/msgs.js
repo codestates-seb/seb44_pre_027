@@ -2,49 +2,90 @@ export const RSideBarWidgetData = {
     Basic:[
         {
             id: 1,
+            type: 'BLOG',
             title: 'The Overflow Blog',
-            content: [
-                "2023 Developer Survey results are in: the latest trends in technology and work from the Stack Overflow community",
-                "Hype or not? Al's benefits for developers explored in the 2023 Developer Survey"
+            items: [
+                {
+                    id: 1,
+                    url: 'https://stackoverflow.blog/2023/06/13/developer-survey-results-are-in/?cb=1',
+                    content: "2023 Developer Survey results are in: the latest trends in technology and work from the Stack Overflow community"
+                },
+                {
+                    id: 2,
+                    url: 'https://stackoverflow.blog/2023/06/14/hype-or-not-developers-have-something-to-say-about-ai/?cb=1',
+                    content: "Hype or not? Al's benefits for developers explored in the 2023 Developer Survey"
+                }
             ]
         },
         {
             id: 2,
+            type: 'META',
             title: 'Featured on Meta',
-            content: [
-                'Statement from SO: June 5, 2023 Moderator Action',
-                'Planned maintenance scheduled for Thursday, June, 15, 2023 at 21:00 UTC',
-                'Does the policy change for AI-generated content affect users who (want to) flag such content?',
-                'Temporary policy: ChatGPT is banned'
+            items: [
+                {
+                    id: 1,
+                    url:'https://meta.stackexchange.com/questions/389834/statement-from-so-june-5-2023-moderator-action?cb=1',
+                    content:'Statement from SO: June 5, 2023 Moderator Action'
+                },
+                {
+                    id: 2,
+                    url:'https://meta.stackexchange.com/questions/390234/planned-maintenance-scheduled-for-thursday-june-15-2023-at-2100-utc?cb=1',
+                    content:'Planned maintenance scheduled for Thursday, June, 15, 2023 at 21:00 UTC'
+                },
+                {
+                    id: 3,
+                    url:'https://meta.stackoverflow.com/questions/424910/does-the-policy-change-for-ai-generated-content-affect-users-who-want-to-flag?cb=1',
+                    content:'Does the policy change for AI-generated content affect users who (want to) flag such content?',
+                },
+                {
+                    id: 4,
+                    url:'https://meta.stackoverflow.com/questions/421831/temporary-policy-chatgpt-is-banned?cb=1',
+                    content: 'Temporary policy: ChatGPT is banned'
+                }
             ]
         },
         {
             id: 3,
+            type: 'POST',
             title: 'Hot Meta Posts',
-            content: [
-                'Moderation Strike update: Data dumps, choosing representatives, GPT data, and the policy change for AI-generated content affect users',
-                'What is the impact of the moderation strike?'
+            items: [
+                {
+                    id: 1,
+                    url:'https://meta.stackoverflow.com/questions/425114/error-in-2023-developer-survey-analysis?cb=1',
+                    content: 'What is the impact of the moderation strike?'
+                },
+                {
+                    id: 2,
+                    url:'https://meta.stackoverflow.com/questions/425110/should-the-recognized-member-flair-on-answers-stay-when-someone-leaves-a-collect?cb=1',
+                    content: 'Moderation Strike update: Data dumps, choosing representatives, GPT data, and the policy change for AI-generated content affect users'
+                },
             ]
         }
     ],
     Light: [
         {
             id: 1,
+            type: 'CUSTOM_FILTERS',
             title: 'Custom Filters',
+            contents: []
         },
         {
             id: 2,
+            type: 'WATCHED_TAGS',
             title: 'Watched Tags',
-            content: 'Watch tags to curate your list of questions.'
+            contents: []
         },
         {
             id: 3,
+            type: 'IGNORED_TAGS',
             title: 'Ignored Tags',
+            contents: []
         },
         {
             id: 4,
+            type: 'COLLECTIVES',
             title: 'Collectives',
-            content: [
+            contents: [
                 {
                     id: 1,
                     title: 'AWS',
