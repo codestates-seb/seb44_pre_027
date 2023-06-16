@@ -21,7 +21,12 @@ public class AnswerDto {
     @Getter
     @Setter
     public static class Patch {
+        @JsonProperty("answer-id")
         private long answerId;
+        @JsonProperty("question-id")
+        private long questionId;
+        @NotBlank
+        private String content;
     }
 
     @AllArgsConstructor
