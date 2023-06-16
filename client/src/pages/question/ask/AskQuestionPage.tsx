@@ -1,6 +1,6 @@
 import { AskInputInformation } from './askInputInformation';
 import AskInput from '@/components/askquestion/AskInput';
-import AskTextArea from '@/components/askquestion/AskTextarea';
+import AskTextArea from '@/components/askquestion/AskTextArea';
 import GoodQuestion from '@/components/askquestion/GoodQuestion';
 import WriteInputContainer from '@/components/askquestion/WriteInputContainer';
 
