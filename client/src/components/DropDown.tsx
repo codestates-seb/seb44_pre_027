@@ -1,10 +1,12 @@
 import React from 'react';
 import {cva} from 'class-variance-authority';
 import {cn} from '@/utils/cn';
-import ShortLogoIcon from '../assets/icons/ShortLogoIcon';
+import ShortLogoIcon from '@/assets/icons/ShortLogoIcon';
+import SmallMailIcon from '@/assets/icons/SmallMailIcon';
+
 
 interface DropDownUI {
-    variant: 'box' | 'cup' | 'question' | 'menu'; 
+    variant: 'box' | 'cup' | 'question' | 'menu';
 };
 
 const handlePosition = cva(
@@ -36,7 +38,7 @@ const DropDown = ({variant}: DropDownUI):JSX.Element | null => {
                             <span className="text-sky-400">Mark all as red</span>
                         </div>
                         <div className="bg-slate-200 flex flex-col justify-between pb-2 border-b border-zinc-400">
-                            
+
                             <div className="flex flex-row justify-between items-end py-1">
                                 <div className="flex flex-row items-end ">
                                     <ShortLogoIcon className="w-4 h-4 ml-2 mr-1"/>
@@ -44,9 +46,7 @@ const DropDown = ({variant}: DropDownUI):JSX.Element | null => {
                                 </div>
                                 <span className="flex flex-row">
                                     Nov24, 2022 at 8:33
-                                    <svg viewBox="0 0 14 14" className="w-2 h-2 mx-2">
-                                        <path d="M7 9 1.52 5.87a1 1 0 0 1 0-1.74L7 1l5.48 3.13a1 1 0 0 1 0 1.74L7 9ZM1 7.14l6 3.6 6-3.6v5.43c0 .8-.71 1.43-1.5 1.43h-9c-.79 0-1.5-.62-1.5-1.43V7.14Z"></path>
-                                    </svg>
+                                    <SmallMailIcon className="mx-2"/>
                                 </span>
                             </div>
                             <span className="ml-7">Welcome to Stack Overflow! Take the 2-minute site tour to earn your first badge.</span>
@@ -56,7 +56,7 @@ const DropDown = ({variant}: DropDownUI):JSX.Element | null => {
                     </li>
                 </ul>
             </div>
-    
+
         )
     }else if (variant === 'cup'){
         return(
@@ -145,7 +145,7 @@ const DropDown = ({variant}: DropDownUI):JSX.Element | null => {
                             <span className="flex flex-rowtext-sxs ext-cyan-500 text-cyan-500">company blog</span>
                         </div>
                         <div className="relative mt-1 border-b border-zinc-200">
-                            <input type="text" id="search-navbar" className="block w-11/12 h-8 m-3 p-2 text-sxs text-gray-900 border border-solid placeholder-gray-400" 
+                            <input type="text" id="search-navbar" className="block w-11/12 h-8 m-3 p-2 text-sxs text-gray-900 border border-solid placeholder-gray-400"
                             placeholder="Find a Stack Exchange community">{/*focus효과 적용 안됨 */}</input>
                         </div>
                     </li>
