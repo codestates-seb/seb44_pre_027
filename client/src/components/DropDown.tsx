@@ -1,6 +1,7 @@
 import React from 'react';
 import {cva} from 'class-variance-authority';
 import {cn} from '@/utils/cn';
+import ShortLogoIcon from '../assets/icons/ShortLogoIcon';
 
 interface DropDownUI {
     variant: 'box' | 'cup' | 'question' | 'menu'; 
@@ -13,7 +14,7 @@ const handlePosition = cva(
         variants:{
             data:{
                 default:'',
-                box: 'end-44 w-64 transform -translate-x-52',
+                box: 'end-44 w-72 transform -translate-x-60',
                 cup:'end-32 w-72 transform -translate-x-60',
                 question:'h-auto end-20 w-48 transform -translate-x-3/4',
                 menu: 'end-12 w-80  transform -translate-x-72',
@@ -34,17 +35,21 @@ const DropDown = ({variant}: DropDownUI):JSX.Element | null => {
                             <span >INBOX(ALL)</span>
                             <span className="text-sky-400">Mark all as red</span>
                         </div>
-                        {/*스크롤바 포기*/}
                         <div className="bg-slate-200 flex flex-col justify-between pb-2 border-b border-zinc-400">
-                            {/*아이콘 들어갈 자리*/}
-                            <div className="flex flex-row justify-between py-1">
-                                    <span className="ml-2">welcome</span><span className="flex flex-row">Nov24, 2022 at 8:33
-                                        <svg viewBox="0 0 14 14" className="w-2 h-2 mx-2">
-                                            <path d="M7 9 1.52 5.87a1 1 0 0 1 0-1.74L7 1l5.48 3.13a1 1 0 0 1 0 1.74L7 9ZM1 7.14l6 3.6 6-3.6v5.43c0 .8-.71 1.43-1.5 1.43h-9c-.79 0-1.5-.62-1.5-1.43V7.14Z"></path>
-                                        </svg>
-                                    </span>
+                            
+                            <div className="flex flex-row justify-between items-end py-1">
+                                <div className="flex flex-row items-end ">
+                                    <ShortLogoIcon className="w-4 h-4 ml-2 mr-1"/>
+                                    <span>welcome</span>
+                                </div>
+                                <span className="flex flex-row">
+                                    Nov24, 2022 at 8:33
+                                    <svg viewBox="0 0 14 14" className="w-2 h-2 mx-2">
+                                        <path d="M7 9 1.52 5.87a1 1 0 0 1 0-1.74L7 1l5.48 3.13a1 1 0 0 1 0 1.74L7 9ZM1 7.14l6 3.6 6-3.6v5.43c0 .8-.71 1.43-1.5 1.43h-9c-.79 0-1.5-.62-1.5-1.43V7.14Z"></path>
+                                    </svg>
+                                </span>
                             </div>
-                            <span className="ml-2">Welcome to Stack Overflow! Take the 2-minute site tour to earn your first badge.</span>
+                            <span className="ml-7">Welcome to Stack Overflow! Take the 2-minute site tour to earn your first badge.</span>
                         </div>
                         <div className="grow"></div>
                         <span className="text-cyan-600 py-1 text-center font-medium hover:bg-slate-200">Go full box</span>
@@ -62,9 +67,7 @@ const DropDown = ({variant}: DropDownUI):JSX.Element | null => {
                             <span >ACHIEVEMENTS</span>
                             <span className="text-sky-400">privilieges . badges</span>
                         </div>
-                        {/*스크롤바 포기*/}
                         <div className="flex flex-col justify-between pb-2 ">
-                            {/*아이콘 들어갈 자리*/}
                             <div className="flex flex-col pl-2 py-1">
                                 <span className="py-1">You have not yet earned any achievements.</span>
                                 <span>Why not <span className="text-sky-400 underline decoration-solid">take the tour</span> or <span className="text-sky-400 underline decoration-solid">fill out your profile?</span></span>
@@ -108,7 +111,6 @@ const DropDown = ({variant}: DropDownUI):JSX.Element | null => {
                         <span className="font-semibold bg-zinc-200 p-2 border-b border-zinc-300 text-sky-800">CURRENT COMMUNITY</span>
                         <div className="flex flex-col p-2 bg-blue-50 hover:bg-blue-100 justify-between font-normal border-b border-zinc-200">
                             <div className=" flex flex-row justify-between text-sxs">
-                                {/* 아이콘 들어갈 자리  */}
                                 <span className="font-semibold text-sky-800">Stack Overflow</span>
                                 <ul className="flex flex-rowtext-sxs pb-2 text-cyan-500">
                                     <li className="pl-4">help</li>
@@ -130,7 +132,6 @@ const DropDown = ({variant}: DropDownUI):JSX.Element | null => {
                         </div>
                         <div className="flex flex-col p-2  bg-blue-50 hover:bg-blue-100 justify-between font-normal border-b border-zinc-200">
                             <div className=" flex flex-row justify-between text-sxs">
-                                {/* 아이콘 들어갈 자리  */}
                                 <span className="font-semibold text-sky-800">Stack Overflow</span>
                                 <span className="flex flex-rowtext-sxs pb-2 text-black">
                                     1
@@ -151,7 +152,6 @@ const DropDown = ({variant}: DropDownUI):JSX.Element | null => {
                     <li className="block flex flex-col cursor-pointer text-sxs">
                         <div className="flex flex-col p-2 bg-white hover:bg-blue-100 justify-between font-normal border-b border-zinc-200">
                             <div className=" flex flex-col justify-between text-sxs">
-                                {/* 아이콘 들어갈 자리  */}
                                 <span className="font-semibold text-sky-500 pb-1">3D Printing</span>
                                 <span className="flex flex-rowtext-sxs pb-2 text-black">
                                     For 3D printing enthusiasts
@@ -162,7 +162,6 @@ const DropDown = ({variant}: DropDownUI):JSX.Element | null => {
                     <li className="block flex flex-col cursor-pointer text-sxs">
                         <div className="flex flex-col p-2 bg-white hover:bg-blue-100 justify-between font-normal border-b border-zinc-200">
                             <div className=" flex flex-col justify-between text-sxs">
-                                {/* 아이콘 들어갈 자리  */}
                                 <span className="font-semibold text-sky-500 pb-1">Academic</span>
                                 <span className="flex flex-rowtext-sxs pb-2 text-black">
                                     For academics and those enrolled in higher education
