@@ -4,8 +4,9 @@ import {cn} from '@/utils/cn';
 import ShortLogoIcon from '@/assets/icons/ShortLogoIcon';
 import SmallMailIcon from '@/assets/icons/SmallMailIcon';
 
+
 interface DropDownUI {
-    variant: 'box' | 'cup' | 'question' | 'menu'; 
+    variant: 'box' | 'cup' | 'question' | 'menu';
 };
 
 const handlePosition = cva(
@@ -37,7 +38,7 @@ const DropDown = ({variant}: DropDownUI):JSX.Element | null => {
                             <span className="text-sky-400">Mark all as red</span>
                         </div>
                         <div className="bg-slate-200 flex flex-col justify-between pb-2 border-b border-zinc-400">
-                            
+
                             <div className="flex flex-row justify-between items-end py-1">
                                 <div className="flex flex-row items-end ">
                                     <ShortLogoIcon className="w-4 h-4 ml-2 mr-1"/>
@@ -55,7 +56,7 @@ const DropDown = ({variant}: DropDownUI):JSX.Element | null => {
                     </li>
                 </ul>
             </div>
-    
+
         )
     }else if (variant === 'cup'){
         return(
@@ -144,7 +145,7 @@ const DropDown = ({variant}: DropDownUI):JSX.Element | null => {
                             <span className="flex flex-rowtext-sxs ext-cyan-500 text-cyan-500">company blog</span>
                         </div>
                         <div className="relative mt-1 border-b border-zinc-200">
-                            <input type="text" id="search-navbar" className="block w-11/12 h-8 m-3 p-2 text-sxs text-gray-900 border border-solid placeholder-gray-400" 
+                            <input type="text" id="search-navbar" className="block w-11/12 h-8 m-3 p-2 text-sxs text-gray-900 border border-solid placeholder-gray-400"
                             placeholder="Find a Stack Exchange community">{/*focus효과 적용 안됨 */}</input>
                         </div>
                     </li>
