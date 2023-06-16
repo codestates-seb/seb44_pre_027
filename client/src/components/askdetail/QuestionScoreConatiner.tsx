@@ -8,7 +8,7 @@ interface QuestionScoreConatinerProps {
 
 const QuestionScoreConatiner = ({ itemArray, title }: QuestionScoreConatinerProps) => {
   return (
-    <section>
+    <section className="">
       <h2 className=" mb-6 text-xl font-light">{title}</h2>
       {itemArray.map((item, idx) => (
         <QuestionScoreItem key={`qsi${idx}`} voteCount={item.voteCount} subject={item.subject} />

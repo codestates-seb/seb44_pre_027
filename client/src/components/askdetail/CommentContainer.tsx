@@ -8,9 +8,9 @@ interface CommentContainerProps {
 
 const CommentContainer = ({}: CommentContainerProps) => {
   return (
-    <section className="px-16 py-6 text-xs">
+    <section className=" ">
       <CommentItem />
-      <button className=" text-slate-500 hover:text-sky-600">Add a Comment</button>
+      <button className=" mt-3 text-slate-500 hover:text-sky-600">Add a Comment</button>
     </section>
   );
 };

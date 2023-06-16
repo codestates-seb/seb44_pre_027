@@ -9,7 +9,7 @@ interface DetailTitleProps extends HTMLAttributes<HTMLDivElement> {
 const DetailTitle = ({ className, qnaData, ...attribute }: DetailTitleProps) => {
   return (
     <div className={cn('  ' + className)} {...attribute}>
-      <div className=" flex">
+      <div className=" flex justify-between">
         <h2 className=" pr-6 text-2xl text-slate-700">
           {
             'Invalid options object. Dev Server has been initialized using an options object that does not match the API schema'

@@ -13,7 +13,7 @@ interface QuestionDetailPageProps {}
 
 const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
   return (
-    <main>
+    <main className=" px-6">
       <DetailTitle />
       <div className="flex">
         <QuestionAnswerComponent />
