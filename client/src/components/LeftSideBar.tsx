@@ -20,6 +20,9 @@ const FocusVariants = cva(
         focus: 'bg-slate-200 border-r-4 border-orange-400 font-bold',
       },
     },
+    defaultVariants: {
+      variant: 'default',
+    },
   }
 );
 
