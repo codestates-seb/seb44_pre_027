@@ -10,7 +10,7 @@ import Phrase from '@/common/atoms/Phrase';
 import Link from '@/common/atoms/Link';
 
 import GoogleIcon from '@/assets/icons/GoogleIcon';
-import GithubIcon from '@/assets/icons/GithubIconWhite';
+import GithubIconWhite from '@/assets/icons/GithubIconWhite';
 import FacebookIcon from '@/assets/icons/FacebookIcon';
 
 const Login = () => {
@@ -49,7 +49,7 @@ const Login = () => {
                         </OAuthButton>
                         <OAuthButton type="Github">
                             <TextWithIconContianer>
-                                <GithubIcon/>Log in with GitHub
+                                <GithubIconWhite/>Log in with GitHub
                             </TextWithIconContianer>
                         </OAuthButton>
                         <OAuthButton type="Facebook">
