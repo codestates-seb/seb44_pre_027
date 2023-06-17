@@ -12,8 +12,7 @@ interface LabelInputProps {
 const LabelInput = ({type, isWithLink, title, linkText}: LabelInputProps)=>{
 
     const LabelInputContainer = styled.div`
-        margin: 6px 0;
-        margin-bottom: 16px;
+        width: 100%;
         display: flex;
         flex-direction: column;
         gap: 2px;
@@ -28,7 +27,7 @@ const LabelInput = ({type, isWithLink, title, linkText}: LabelInputProps)=>{
         padding: 0px 2px;
 
         color: #0C0D0E;
-        font-size: 12.6923px;
+        font-size: 15px;
         font-weight: 600;
     `;
 
