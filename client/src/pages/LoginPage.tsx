@@ -19,8 +19,8 @@ const LoginPage = () => {
 
     return(
         <Container color='#f1f2f3'>
-            <ContentContainer size={525.46}>
-                <ColumnItemWrapper size={295} gap={0}>
+            <ContentContainer size='100%' direction='column'>
+                <ColumnItemWrapper size={316} gap={0}>
                     <div className="mb-7">
                         <a href="https://stackoverflow.com/">
                             <LogoGlyphMd/>
@@ -46,11 +46,11 @@ const LoginPage = () => {
                     </div>
 
                     <Card>
-                        <LabelInput title={'Email'} isWithLink={false}/>
-                        <LabelInput title={'Password'} isWithLink={true} type={'password'} linkText={'Forgot password?'}/>
-                        <div className='my-5'>
-                            <PrimaryBtn size='100%'>Log in</PrimaryBtn>
-                        </div>
+                        <ColumnItemWrapper size='100%' gap={16}>
+                            <LabelInput title={'Email'} isWithLink={false}/>
+                            <LabelInput title={'Password'} isWithLink={true} type={'password'} linkText={'Forgot password?'}/>
+                        </ColumnItemWrapper>
+                        <PrimaryBtn size='100%' className='my-5'>Log in</PrimaryBtn>
                     </Card>
 
                     <ColumnItemWrapper size='100%' gap={10} className={'mt-2'}>
