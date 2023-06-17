@@ -1,32 +1,28 @@
-import styled from 'styled-components';
+import { css, styled } from 'styled-components';
+import { FlexCenter, FlexColumnCenter } from './styles';
 
 export const Container = styled.div<{color:string}>`
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  ${FlexColumnCenter}
   background-color: ${(props)=>props.color};
 `;
 
-export const ColumnContent = styled.div<{size:number}>`
+export const ContentContainer = styled.div<{size:number}>`
     width: ${(props)=>props.size}px;
+    height: 100vh;
     padding: 24px 16px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
+    ${FlexColumnCenter}
     background-color: transparent;
 `;
 
-export const FlexItem = styled.div<{size:number}>`
-    width: ${(props)=>props.size}px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
+export const ColumnItemWrapper = styled.div<{size:number|string, gap:number}>`
+    width: ${(props)=> typeof props.size === 'string' ? props.size : `${props.size}px`};
+    ${FlexColumnCenter}
+    gap: ${(props)=> props.gap}px;
     background-color: transparent;
+`;
+
+export const RowItemWrapper = styled.div`
+  ${FlexCenter};
+  gap: 5px;
 `;
