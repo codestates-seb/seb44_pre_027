@@ -1,17 +1,19 @@
+import React from 'react';
 import {css, styled} from 'styled-components';
 
 import { Container, ContentContainer, ColumnItemWrapper, RowItemWrapper } from '../common/style/Containers.styled';
-import { PrimaryBtn } from '@/common/style/Buttons.styled';
-import LogoGlyphMd from '@/assets/icons/LogoGlyphMd';
-import OAuthButton from '@/common/basic/OAuthButton';
-import Card from '@/common/basic/Card';
-import LabelInput from '@/common/basic/LabelInput';
-import Phrase from '@/common/atoms/Phrase';
-import Link from '@/common/atoms/Link';
+import { PrimaryBtn } from '../common/style/Buttons.styled';
+import LogoGlyphMd from '../assets/icons/LogoGlyphMd';
+import OAuthButton from '../common/basic/OAuthButton';
+import Card from '../common/basic/Card';
+import LabelInput from '../common/basic/LabelInput';
+import Phrase from '../common/atoms/Phrase';
+import Link from '../common/atoms/Link';
 
-import GoogleIcon from '@/assets/icons/GoogleIcon';
-import GithubIconWhite from '@/assets/icons/GithubIconWhite';
-import FacebookIcon from '@/assets/icons/FacebookIcon';
+import GoogleIcon from '../assets/icons/GoogleIcon';
+import GithubIconWhite from '../assets/icons/GithubIconWhite';
+import FacebookIcon from '../assets/icons/FacebookIcon';
+
 
 const LoginPage = () => {
 
