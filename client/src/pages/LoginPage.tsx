@@ -1,6 +1,6 @@
 import {css, styled} from 'styled-components';
 
-import { Container, ColumnContent, FlexItem } from '../common/style/Containers.styled';
+import { Container, ContentContainer, ColumnItemWrapper, RowItemWrapper } from '../common/style/Containers.styled';
 import { PrimaryBtn } from '@/common/style/Buttons.styled';
 import LogoGlyphMd from '@/assets/icons/LogoGlyphMd';
 import OAuthButton from '@/common/basic/OAuthButton';
@@ -13,28 +13,12 @@ import GoogleIcon from '@/assets/icons/GoogleIcon';
 import GithubIconWhite from '@/assets/icons/GithubIconWhite';
 import FacebookIcon from '@/assets/icons/FacebookIcon';
 
-const Login = () => {
-    const FlexRowAndCenter = css`
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    `;
-
-    const TextWithIconContianer = styled.div`
-        ${FlexRowAndCenter}
-        gap: 5px;
-    `
-
-    const HelpWrapper = styled.div`
-        ${FlexRowAndCenter}
-        gap: 5px;
-
-    `
+const LoginPage = () => {
 
     return(
         <Container color='#f1f2f3'>
-            <ColumnContent size={525.46}>
-                <FlexItem size={295}>
+            <ContentContainer size={525.46}>
+                <ColumnItemWrapper size={295} gap={0}>
                     <div className="mb-7">
                         <a href="https://stackoverflow.com/">
                             <LogoGlyphMd/>
@@ -43,19 +27,19 @@ const Login = () => {
 
                     <div className='mb-6'>
                         <OAuthButton type="Google">
-                            <TextWithIconContianer>
+                            <RowItemWrapper>
                                 <GoogleIcon/>Log in with Google
-                            </TextWithIconContianer>
+                            </RowItemWrapper>
                         </OAuthButton>
                         <OAuthButton type="Github">
-                            <TextWithIconContianer>
+                            <RowItemWrapper>
                                 <GithubIconWhite/>Log in with GitHub
-                            </TextWithIconContianer>
+                            </RowItemWrapper>
                         </OAuthButton>
                         <OAuthButton type="Facebook">
-                            <TextWithIconContianer>
+                            <RowItemWrapper>
                                 <FacebookIcon/>Log in with Facebook
-                            </TextWithIconContianer>
+                            </RowItemWrapper>
                         </OAuthButton>
                     </div>
 
@@ -67,21 +51,21 @@ const Login = () => {
                         </div>
                     </Card>
 
-                    <HelpWrapper>
-                        <Phrase text="Don't have and account?"/>
-                        <Link text='Sign up'></Link>
-                    </HelpWrapper>
-                    <div className='mt-2'>
-                        <HelpWrapper>
+                    <ColumnItemWrapper size='100%' gap={10} className={'mt-2'}>
+                        <RowItemWrapper>
+                            <Phrase text="Don't have and account?"/>
+                            <Link text='Sign up'></Link>
+                        </RowItemWrapper>
+                        <RowItemWrapper>
                             <Phrase text="Are you an employer?"/>
                             <Link text='Sign up on Talent'></Link>
-                        </HelpWrapper>
-                    </div>
+                        </RowItemWrapper>
+                    </ColumnItemWrapper>
 
-                </FlexItem>
-            </ColumnContent>
+                </ColumnItemWrapper>
+            </ContentContainer>
         </Container>
     )
 }
 
-export default Login;
+export default LoginPage;
