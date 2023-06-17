@@ -7,11 +7,12 @@ export const Container = styled.div<{color:string}>`
   background-color: ${(props)=>props.color};
 `;
 
-export const ContentContainer = styled.div<{size:number}>`
-    width: ${(props)=>props.size}px;
+export const ContentContainer = styled.div<{size:number|string, direction:string}>`
+    width: ${(props)=> typeof props.size === 'string' ? props.size : `${props.size}px`};
     height: 100vh;
     padding: 24px 16px;
-    ${FlexColumnCenter}
+    ${FlexCenter}
+    flex-direction: ${(props)=>props.direction};
     background-color: transparent;
 `;
 
