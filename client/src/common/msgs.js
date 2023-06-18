@@ -107,12 +107,48 @@ export const RSideBarWidgetData = {
 }
 
 export const HotNetworkQuestions = [
-    'How can I land without any propulsion? Was the Microsoft simulator right?',
-    'Special parliament that controls and oversees the Justice and Law enforcement systems',
-    "Is it ok that an oven circuit's wire is much larger than the oven's wire?",
-    'Why do sinusoids have DFT magnitudes of N / 2 while we typically normalize by N?',
-    "Should I ever be influenced by an argument that I can't understand?",
-    'Omitted from flight manifest',
-    '17 going on 30 movie with an "aging machine"?',
-    'How to turn a 3D polytope into a mesh?'
+    {
+        favicon: -5796,
+        content: 'How can I land without any propulsion? Was the Microsoft simulator right?'
+    },
+    {
+        favicon: -4860,
+        content: 'Special parliament that controls and oversees the Justice and Law enforcement systems'
+    },
+    {
+        favicon: -1080,
+        content: "Is it ok that an oven circuit's wire is much larger than the oven's wire?"
+    },
+    {
+        favicon: -2196,
+        content: 'Why do sinusoids have DFT magnitudes of N / 2 while we typically normalize by N?'
+    },
+    {
+        favicon: -6210,
+        content: "Should I ever be influenced by an argument that I can't understand?"
+    },
+    {
+        favicon: -576,
+        content: 'Omitted from flight manifest'
+    },
+    {
+        favicon: -756,
+        content: '17 going on 30 movie with an "aging machine"?'
+    },
+    {
+        favicon: -3960,
+        content: 'How to turn a 3D polytope into a mesh?'
+    },
+]
+
+export const Tags = [
+    'javascript',
+    'css',
+    'python',
+    'java',
+    'c#',
+    'android',
+    'html',
+    'jquery',
+    'c++'
 ]
