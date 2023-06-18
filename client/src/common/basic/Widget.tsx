@@ -33,7 +33,7 @@ const WidgetContainer = styled.div<{type:string|undefined, idx:number, isStuck:b
     }
 `;
 
-const WidgetHeader = styled.div<{type:string|undefined, title:string}>`
+const WidgetHeader = styled.div<{type:string|undefined}>`
     width: 100%;
     height: 41.69px;
 
@@ -64,7 +64,7 @@ const WidgetHeader = styled.div<{type:string|undefined, title:string}>`
 const Widget = ({id, type, isStuck, title, children}:WidgetProps) => {
     return(
         <WidgetContainer type={type} idx={id} isStuck={isStuck}>
-            <WidgetHeader type={type} title={title}>{title}</WidgetHeader>
+            <WidgetHeader type={type}>{title}</WidgetHeader>
             {children}
         </WidgetContainer>
     )
