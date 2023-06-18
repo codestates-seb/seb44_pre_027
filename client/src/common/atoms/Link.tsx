@@ -2,9 +2,10 @@ import { css, styled } from 'styled-components';
 
 interface LinkProps {
     text:string|undefined;
+    url?:string|undefined;
 }
 
-const Link = ({text}:LinkProps) => {
+const Link = ({text, url}:LinkProps) => {
     const Link = styled.a`
         font-size: 12px;
         color: #0074cc;
@@ -15,7 +16,7 @@ const Link = ({text}:LinkProps) => {
     `;
 
     return(
-        <Link>{text}</Link>
+        <Link href={url}>{text}</Link>
     )
 }
 
