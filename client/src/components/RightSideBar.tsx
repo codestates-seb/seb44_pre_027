@@ -6,7 +6,7 @@ import { Favicon } from '../common/style/Images.styled.js';
 import Link from '../common/atoms/Link.js';
 import Widget from '../common/basic/Widget';
 import BasicWidgetItem from '../common/basic/BasicWidgetItem';
-import LightWidgetItem from '../common/basic/RightSideBar/LightWidgetItem';
+import LightWidgetItem from '../common/basic/LightWidgetItem';
 import SideBarAd from '../common/basic/SideBarAd.js';
 
 import { BasicWidgetData, LightWidgetData, WidgetItem } from '../types/WidgetPropsType'

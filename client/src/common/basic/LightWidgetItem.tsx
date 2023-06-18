@@ -1,12 +1,12 @@
 import { css, styled } from 'styled-components';
 import SpotSearch from '@/assets/icons/SpotSearch';
 import IconEye from '@/assets/icons/IconEye';
-import Collective from '../Collective';
+import Collective from './Collective';
 
-import { LightWidgetItem as LtWidgetItem } from '../../../types/WidgetPropsType';
-import { ColumnItemWrapper, RowItemWrapper } from '../../style/Containers.styled';
-import { FilledBtn } from '../../style/Buttons.styled';
-import Link from '../../atoms/Link';
+import { LightWidgetItem as LtWidgetItem } from '../../types/WidgetPropsType';
+import { ColumnItemWrapper, RowItemWrapper } from '../style/Containers.styled';
+import { FilledBtn } from '../style/Buttons.styled';
+import Link from '../atoms/Link';
 
 interface LightWidgetItemProps {
     type: string|undefined;
