@@ -85,21 +85,21 @@ export const RSideBarWidgetData = {
             items: [
                 {
                     id: 1,
-                    title: 'AWS',
-                    url: '',
-                    content: "Amazone Web Services (AWS) is the world's most comprehensive and broadly adopted blablabla"
+                    title: 'Twilio',
+                    url: 'https://cdn.sstatic.net/Sites/stackoverflow/Img/subcommunities/twilio.svg?v=ab07490da974',
+                    content: "Twilio has democratized channels like voice, text, chat, video, and email by virtualizing the blablabla"
                 },
                 {
                     id: 2,
                     title: 'Microsoft Azure',
-                    url: '',
+                    url: 'https://cdn.sstatic.net/Sites/stackoverflow/Img/subcommunities/azure.svg?v=acd37945b78d',
                     content: 'On-premises, hybrid, multicloud, or at the edge―build on your terms with best-in-class blablabla'
                 },
                 {
                     id: 3,
-                    title: 'CI/CD',
-                    url: '',
-                    content: 'A collective where developers focused on continuous integration, delivery, and blablabla'
+                    title: 'R Language',
+                    url: 'https://cdn.sstatic.net/Sites/stackoverflow/Img/subcommunities/r-language.svg?v=284038a37d38',
+                    content: 'A collective where data scientists and AI researchers gather to find, share, and learn about R and other subtags like knit blablabla'
                 }
             ]
         }

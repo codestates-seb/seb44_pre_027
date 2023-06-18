@@ -1,4 +1,4 @@
-import { css, styled } from 'styled-components';
+import { styled } from 'styled-components';
 
 export const Favicon = styled.div<{bgPosition:number}>`
     width: 16px;

@@ -36,3 +36,18 @@ export const FilledBtn = styled.button<{size:string|number}>`
         box-shadow: inset 0 1px 0 0 hsla(0,0%,100%,0.7);
     }
 `;
+
+export const TransparentBtn = styled.button<{size:string|number}>`
+    width: ${(props)=>typeof props.size === 'string'? props.size : `${props.size}px`};
+    padding: 9.6px;
+
+    font-size: 12px;
+    color: #0074cc;
+    background-color: white;
+    border: 1px solid #379fef;
+    border-radius: 3px;
+    &:hover {
+        background-color: #f0f8ff;
+        color: #0063bf;
+    }
+`
