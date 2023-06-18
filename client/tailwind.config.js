@@ -7,6 +7,9 @@ export default {
         sxs: ['8px', {
           lineHeight: '12px'
         }],
+        13: ['13px', {
+          lineHeight: '19px'
+        }],
       }
     },
   },

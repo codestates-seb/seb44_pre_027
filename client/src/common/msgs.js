@@ -2,7 +2,6 @@ export const RSideBarWidgetData = {
     Basic:[
         {
             id: 1,
-            type: 'BLOG',
             title: 'The Overflow Blog',
             items: [
                 {
@@ -19,7 +18,6 @@ export const RSideBarWidgetData = {
         },
         {
             id: 2,
-            type: 'META',
             title: 'Featured on Meta',
             items: [
                 {
@@ -46,7 +44,6 @@ export const RSideBarWidgetData = {
         },
         {
             id: 3,
-            type: 'POST',
             title: 'Hot Meta Posts',
             items: [
                 {
@@ -67,39 +64,42 @@ export const RSideBarWidgetData = {
             id: 1,
             type: 'CUSTOM_FILTERS',
             title: 'Custom Filters',
-            contents: []
+            items: []
         },
         {
             id: 2,
             type: 'WATCHED_TAGS',
             title: 'Watched Tags',
-            contents: []
+            items: []
         },
         {
             id: 3,
             type: 'IGNORED_TAGS',
             title: 'Ignored Tags',
-            contents: []
+            items: []
         },
         {
             id: 4,
             type: 'COLLECTIVES',
             title: 'Collectives',
-            contents: [
+            items: [
                 {
                     id: 1,
-                    title: 'AWS',
-                    content: "Amazone Web Services (AWS) is the world's most comprehensive and broadly adopted blablabla"
+                    title: 'Twilio',
+                    url: 'https://cdn.sstatic.net/Sites/stackoverflow/Img/subcommunities/twilio.svg?v=ab07490da974',
+                    content: "Twilio has democratized channels like voice, text, chat, video, and email by virtualizing the blablabla"
                 },
                 {
                     id: 2,
                     title: 'Microsoft Azure',
+                    url: 'https://cdn.sstatic.net/Sites/stackoverflow/Img/subcommunities/azure.svg?v=acd37945b78d',
                     content: 'On-premises, hybrid, multicloud, or at the edge―build on your terms with best-in-class blablabla'
                 },
                 {
                     id: 3,
-                    title: 'CI/CD',
-                    content: 'A collective where developers focused on continuous integration, delivery, and blablabla'
+                    title: 'R Language',
+                    url: 'https://cdn.sstatic.net/Sites/stackoverflow/Img/subcommunities/r-language.svg?v=284038a37d38',
+                    content: 'A collective where data scientists and AI researchers gather to find, share, and learn about R and other subtags like knit blablabla'
                 }
             ]
         }
@@ -107,12 +107,48 @@ export const RSideBarWidgetData = {
 }
 
 export const HotNetworkQuestions = [
-    'How can I land without any propulsion? Was the Microsoft simulator right?',
-    'Special parliament that controls and oversees the Justice and Law enforcement systems',
-    "Is it ok that an oven circuit's wire is much larger than the oven's wire?",
-    'Why do sinusoids have DFT magnitudes of N / 2 while we typically normalize by N?',
-    "Should I ever be influenced by an argument that I can't understand?",
-    'Omitted from flight manifest',
-    '17 going on 30 movie with an "aging machine"?',
-    'How to turn a 3D polytope into a mesh?'
+    {
+        favicon: -5796,
+        content: 'How can I land without any propulsion? Was the Microsoft simulator right?'
+    },
+    {
+        favicon: -4860,
+        content: 'Special parliament that controls and oversees the Justice and Law enforcement systems'
+    },
+    {
+        favicon: -1080,
+        content: "Is it ok that an oven circuit's wire is much larger than the oven's wire?"
+    },
+    {
+        favicon: -2196,
+        content: 'Why do sinusoids have DFT magnitudes of N / 2 while we typically normalize by N?'
+    },
+    {
+        favicon: -6210,
+        content: "Should I ever be influenced by an argument that I can't understand?"
+    },
+    {
+        favicon: -576,
+        content: 'Omitted from flight manifest'
+    },
+    {
+        favicon: -756,
+        content: '17 going on 30 movie with an "aging machine"?'
+    },
+    {
+        favicon: -3960,
+        content: 'How to turn a 3D polytope into a mesh?'
+    },
+]
+
+export const Tags = [
+    'javascript',
+    'css',
+    'python',
+    'java',
+    'c#',
+    'android',
+    'html',
+    'jquery',
+    'c++'
 ]
