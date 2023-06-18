@@ -26,6 +26,7 @@ export const FilledBtn = styled.button<{size:string|number}>`
     ${defaultBtnStyles};
     width: ${(props)=>typeof props.size === 'string'? props.size : `${props.size}px`};
 
+    padding: 8px 10.4px;
     border-color: #7aa7c7;
     color: #39739d;
     background-color: #e1ecf4;

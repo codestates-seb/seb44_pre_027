@@ -9,7 +9,7 @@ interface CollectiveProps{
     item: LightWidgetItem;
 }
 
-const CollectiveContainer = styled.div`
+const CollectiveContainer = styled.div<{idx:number}>`
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -18,6 +18,7 @@ const CollectiveContainer = styled.div`
     border-top: 1px solid #d6d9dc;
 `;
 const Title = styled.div`
+    text-align: left;
     color: #6A737C;
     font-size: 15px;
     line-height: 15px;
@@ -36,16 +37,16 @@ const Summary = styled.span`
 const Collective = ({item}:CollectiveProps) => {
 
     return(
-        <CollectiveContainer>
+        <CollectiveContainer idx={item.id}>
             <RowItemWrapper gap={12}>
                 <img src={item.url} className='w-8 h-8 rounded-md' />
                 <ColumnItemWrapper size='100%' gap={4}>
                     <Title>{item.title}</Title>
-                    <span className='text-xs decoration-gray-500'>{Math.floor(Math.random()*13)}k Members</span>
+                    <span className='text-xs text-left decoration-gray-500'>{Math.floor(Math.random()*13)}k Members</span>
                 </ColumnItemWrapper>
                 <TransparentBtn size={42}>Join</TransparentBtn>
             </RowItemWrapper>
-            <Summary className='text-13'>{item.content}</Summary>
+            <Summary className='text-13 text-left'>{item.content}</Summary>
         </CollectiveContainer>
     )
 }
