@@ -1,6 +1,6 @@
 export interface WidgetData {
     id:number;
-    type: string;
+    type?: string|undefined;
     title:string;
 }
 

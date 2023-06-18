@@ -3,12 +3,12 @@ import SpotSearch from '@/assets/icons/SpotSearch';
 import IconEye from '@/assets/icons/IconEye';
 import Collective from './Collective';
 
-import { LightWidgetItem as WidgetItem } from './RightSideBar'
+import { LightWidgetItem as LtWidgetItem } from '../../types/WidgetPropsType';
 
 
 interface LightWidgetItemProps {
-    type: string;
-    contents: Array<WidgetItem>;
+    type: string|undefined;
+    contents: Array<LtWidgetItem>;
 }
 
 const LightWidgetItem = ({type, contents}: LightWidgetItemProps) => {
@@ -102,7 +102,7 @@ const LightWidgetItem = ({type, contents}: LightWidgetItemProps) => {
                 <FilledButton icon={false} style={{margin:"18px"}}>Add an ignored tag</FilledButton>
             }
             { type === 'COLLECTIVES' &&
-                contents.map((item: WidgetItem):JSX.Element => {
+                contents.map((item: LtWidgetItem):JSX.Element => {
                     return <Collective key={item.id} item={item}/>;
                 })
             }

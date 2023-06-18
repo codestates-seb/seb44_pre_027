@@ -4,16 +4,20 @@ import PencilSM from '../../assets/icons/PencilSM';
 
 import { RowItemWrapper } from '../style/Containers.styled.js';
 import { WidgetItem } from '../../types/WidgetPropsType';
+import { Favicon } from '../style/Images.styled';
 
 interface BasicWidgetItemProps {
-    type: string;
     item: WidgetItem;
 }
 
 const TextLink = styled.a`
+    width: 85%;
     font-size: 13px;
     overflow: hidden;
     text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     word-wrap: break-word;
     &:hover {
         color: #525960;
@@ -24,16 +28,19 @@ const QuestionScore = styled.span`
     color:#6a737c;
 `;
 
-const BasicWidgetItem = ({type, item}: BasicWidgetItemProps) => {
+const BasicWidgetItem = ({item}: BasicWidgetItemProps) => {
     return (
         <RowItemWrapper gap={10} className='h-10 my-3 px-4'>
-            { type  === 'BLOG' &&
+            {item.url.includes('stackoverflow.blog') &&
                 <PencilSM/>
             }
-            { type === 'META' &&
-                <PencilSM/>
+            { item.url.includes('https://meta.stackexchange.com/questions/3') &&
+                <Favicon bgPosition={-6156}/>
             }
-            { type === 'POST' &&
+            { item.url.includes('policy') &&
+                <Favicon bgPosition={-6192}/>
+            }
+            { item.url.includes('https://meta.stackoverflow.com/questions/425') &&
                 <QuestionScore title={"Question Score"}>{Math.floor(Math.random()*150)}</QuestionScore>
             }
             <TextLink href={item.url} title={item.content}>{item.content}</TextLink>

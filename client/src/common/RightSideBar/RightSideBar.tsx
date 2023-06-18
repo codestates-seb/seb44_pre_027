@@ -30,7 +30,7 @@ const RightSideBar = ({size}: RightSideBarProps):JSX.Element => {
                     return (
                         <Widget type="Basic" title={data.title} key={data.id} id={data.id} isStuck={true}>
                             {data.items.map((item:WidgetItem)=>{
-                                return <BasicWidgetItem type={data.type} item={item} key={item.id}/>})
+                                return <BasicWidgetItem item={item} key={item.id}/>})
                             }
                         </Widget>
                     )

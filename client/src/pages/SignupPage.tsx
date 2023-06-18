@@ -21,17 +21,17 @@ const SignupPage = () => {
                 <ColumnItemWrapper size={316} gap={0}>
                     <div className='mb-6'>
                         <OAuthButton type="Google">
-                            <RowItemWrapper>
+                            <RowItemWrapper gap={5}>
                                 <GoogleIcon/>Log in with Google
                             </RowItemWrapper>
                         </OAuthButton>
                         <OAuthButton type="Github">
-                            <RowItemWrapper>
+                            <RowItemWrapper gap={5}>
                                 <GithubIconWhite/>Log in with GitHub
                             </RowItemWrapper>
                         </OAuthButton>
                         <OAuthButton type="Facebook">
-                            <RowItemWrapper>
+                            <RowItemWrapper gap={5}>
                                 <FacebookIcon/>Log in with Facebook
                             </RowItemWrapper>
                         </OAuthButton>
@@ -57,11 +57,11 @@ const SignupPage = () => {
                     </Card>
 
                     <ColumnItemWrapper size='100%' gap={10} className='mt-2'>
-                        <RowItemWrapper>
+                        <RowItemWrapper gap={5}>
                             <Phrase text="Don't have and account?"/>
                             <Link text='Sign up'></Link>
                         </RowItemWrapper>
-                        <RowItemWrapper>
+                        <RowItemWrapper gap={5}>
                             <Phrase text="Are you an employer?"/>
                             <Link text='Sign up on Talent'></Link>
                         </RowItemWrapper>

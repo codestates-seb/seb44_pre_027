@@ -2,7 +2,6 @@ export const RSideBarWidgetData = {
     Basic:[
         {
             id: 1,
-            type: 'BLOG',
             title: 'The Overflow Blog',
             items: [
                 {
@@ -19,7 +18,6 @@ export const RSideBarWidgetData = {
         },
         {
             id: 2,
-            type: 'META',
             title: 'Featured on Meta',
             items: [
                 {
@@ -46,7 +44,6 @@ export const RSideBarWidgetData = {
         },
         {
             id: 3,
-            type: 'POST',
             title: 'Hot Meta Posts',
             items: [
                 {
