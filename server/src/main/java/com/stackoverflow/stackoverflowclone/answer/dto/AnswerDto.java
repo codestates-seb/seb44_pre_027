@@ -1,10 +1,7 @@
 package com.stackoverflow.stackoverflowclone.answer.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
@@ -13,9 +10,11 @@ import java.time.LocalDateTime;
 public class AnswerDto{
     @Getter
     @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class Post {
         @JsonProperty("member-id")
-        private long MemberId;
+        private long memberId;
 
         private long questionId;
 
