@@ -11,10 +11,6 @@ import SideBarAd from '../basic/SideBarAd.js';
 
 import { BasicWidgetData, LightWidgetData, WidgetItem } from '../../types/WidgetPropsType'
 
-interface RightSideBarProps {
-    size: number;
-}
-
 const Title = styled.h4`
     font-size: 19px;
     color: #3b4045;
@@ -35,10 +31,10 @@ const Tag = styled.a`
     }
 `
 
-const RightSideBar = ({size}: RightSideBarProps):JSX.Element => {
+const RightSideBar = ():JSX.Element => {
 
     return(
-        <ColumnItemWrapper size={size} gap={16}>
+        <ColumnItemWrapper size={298} gap={16}>
             <div>
                 {RSideBarWidgetData.Basic.map((data:BasicWidgetData):JSX.Element => {
                     return (
