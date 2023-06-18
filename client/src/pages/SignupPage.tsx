@@ -11,6 +11,7 @@ import GoogleIcon from '../assets/icons/GoogleIcon';
 import GithubIconWhite from '../assets/icons/GithubIconWhite';
 import FacebookIcon from '../assets/icons/FacebookIcon';
 import HelpSm from '../assets/icons/HelpSm';
+import GotoLinkIcon from '../assets/icons/GotoLinkIcon';
 
 const SignupPage = () => {
 
@@ -56,17 +57,18 @@ const SignupPage = () => {
                         <p className='text-xs text-slate-400 mt-5' >By clicking “Sign up”, you agree to our <Link text='terms of service'/> and acknowledge that you have read and understand our <Link text='privacy policy'/> and <Link text='code of conduct.'/></p>
                     </Card>
 
+
                     <ColumnItemWrapper size='100%' gap={10} className='mt-2' align='center'>
                         <RowItemWrapper gap={5}>
                             <Phrase text="Don't have and account?"/>
-                            <Link text='Sign up'></Link>
+                            <Link text='Sign up'/>
                         </RowItemWrapper>
                         <RowItemWrapper gap={5}>
                             <Phrase text="Are you an employer?"/>
-                            <Link text='Sign up on Talent'></Link>
+                            <Link text='Sign up on Talent'/>
+                            <GotoLinkIcon/>
                         </RowItemWrapper>
                     </ColumnItemWrapper>
-
                 </ColumnItemWrapper>
             </ContentContainer>
         </Container>

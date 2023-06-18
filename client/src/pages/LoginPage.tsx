@@ -13,6 +13,7 @@ import Link from '../common/atoms/Link';
 import GoogleIcon from '../assets/icons/GoogleIcon';
 import GithubIconWhite from '../assets/icons/GithubIconWhite';
 import FacebookIcon from '../assets/icons/FacebookIcon';
+import GotoLinkIcon from '../assets/icons/GotoLinkIcon';
 
 
 const LoginPage = () => {
@@ -61,6 +62,7 @@ const LoginPage = () => {
                         <RowItemWrapper gap={5}>
                             <Phrase text="Are you an employer?"/>
                             <Link text='Sign up on Talent'></Link>
+                            <GotoLinkIcon/>
                         </RowItemWrapper>
                     </ColumnItemWrapper>
 
