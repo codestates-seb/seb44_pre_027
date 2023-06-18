@@ -1,15 +1,15 @@
 import { css, styled } from 'styled-components';
-import { RSideBarWidgetData, HotNetworkQuestions, Tags } from '../msgs.js';
+import { RSideBarWidgetData, HotNetworkQuestions, Tags } from '../common/msgs.js';
 
-import { ColumnItemWrapper, RowItemWrapper } from '../style/Containers.styled.js';
-import { Favicon } from '../style/Images.styled.js';
-import Link from '../atoms/Link.js';
-import Widget from '../basic/Widget';
-import BasicWidgetItem from './BasicWidgetItem';
-import LightWidgetItem from './LightWidgetItem';
-import SideBarAd from '../basic/SideBarAd.js';
+import { ColumnItemWrapper, RowItemWrapper } from '../common/style/Containers.styled.js';
+import { Favicon } from '../common/style/Images.styled.js';
+import Link from '../common/atoms/Link.js';
+import Widget from '../common/basic/Widget';
+import BasicWidgetItem from '../common/basic/BasicWidgetItem';
+import LightWidgetItem from '../common/basic/RightSideBar/LightWidgetItem';
+import SideBarAd from '../common/basic/SideBarAd.js';
 
-import { BasicWidgetData, LightWidgetData, WidgetItem } from '../../types/WidgetPropsType'
+import { BasicWidgetData, LightWidgetData, WidgetItem } from '../types/WidgetPropsType'
 
 const Title = styled.h4`
     font-size: 19px;

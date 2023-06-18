@@ -1,12 +1,12 @@
 import { css, styled } from 'styled-components';
 import SpotSearch from '@/assets/icons/SpotSearch';
 import IconEye from '@/assets/icons/IconEye';
-import Collective from './Collective';
+import Collective from '../Collective';
 
-import { LightWidgetItem as LtWidgetItem } from '../../types/WidgetPropsType';
-import { ColumnItemWrapper, RowItemWrapper } from '../style/Containers.styled';
-import { FilledBtn } from '../style/Buttons.styled';
-import Link from '../atoms/Link';
+import { LightWidgetItem as LtWidgetItem } from '../../../types/WidgetPropsType';
+import { ColumnItemWrapper, RowItemWrapper } from '../../style/Containers.styled';
+import { FilledBtn } from '../../style/Buttons.styled';
+import Link from '../../atoms/Link';
 
 interface LightWidgetItemProps {
     type: string|undefined;
@@ -34,7 +34,7 @@ const LightWidgetItem = ({type, contents}: LightWidgetItemProps) => {
     return (
         <ColumnItemWrapper size='100%' gap={0} align='center'>
             { type  === 'CUSTOM_FILTERS' &&
-            <div className='py-1 px-4 my-3 w-full'>
+            <div className='py-1 px-4 my-3 w-full text-left'>
                 <Link text='Create a custom filter'/>
             </div>
             }
