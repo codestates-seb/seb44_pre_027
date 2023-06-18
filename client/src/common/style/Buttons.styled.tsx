@@ -39,9 +39,12 @@ export const FilledBtn = styled.button<{size:string|number}>`
 
 export const TransparentBtn = styled.button<{size:string|number}>`
     width: ${(props)=>typeof props.size === 'string'? props.size : `${props.size}px`};
+    height: 34.84px;
     padding: 9.6px;
 
     font-size: 12px;
+    line-height: 12px;
+    vertical-align: top;
     color: #0074cc;
     background-color: white;
     border: 1px solid #379fef;

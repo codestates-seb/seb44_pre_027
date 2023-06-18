@@ -20,6 +20,8 @@ const CollectiveContainer = styled.div`
 const Title = styled.div`
     color: #6A737C;
     font-size: 15px;
+    line-height: 15px;
+    vertical-align: top;
     cursor: pointer;
 `;
 const Summary = styled.span`
@@ -37,9 +39,9 @@ const Collective = ({item}:CollectiveProps) => {
         <CollectiveContainer>
             <RowItemWrapper gap={12}>
                 <img src={item.url} className='w-8 h-8 rounded-md' />
-                <ColumnItemWrapper size='100%' gap={0}>
+                <ColumnItemWrapper size='100%' gap={3}>
                     <Title>{item.title}</Title>
-                    <span className='text-13 decoration-gray-700'>{Math.floor(Math.random()*13)}k Members</span>
+                    <span className='text-13 decoration-gray-500'>{Math.floor(Math.random()*13)}k Members</span>
                 </ColumnItemWrapper>
                 <TransparentBtn size={42}>Join</TransparentBtn>
             </RowItemWrapper>
