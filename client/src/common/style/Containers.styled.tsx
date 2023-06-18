@@ -16,10 +16,16 @@ export const ContentContainer = styled.div<{size:number|string, direction:string
     background-color: transparent;
 `;
 
-export const ColumnItemWrapper = styled.div<{size:number|string, gap:number}>`
+export const ColumnItemWrapper = styled.div<{size:number|string, gap:number, align?:string|undefined}>`
     width: ${(props) => typeof props.size === 'string' ? props.size : `${props.size}px`};
-    display: flex;
-    flex-direction: column;
+    ${ (props) => props.align === 'center' ?
+      FlexColumnCenter
+      :
+      css`
+        display: flex;
+        flex-direction: column;
+      `
+    }
     gap: ${(props)=> props.gap}px;
     background-color: transparent;
 `;

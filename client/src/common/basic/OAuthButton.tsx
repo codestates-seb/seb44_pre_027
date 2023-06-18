@@ -1,6 +1,7 @@
 import { css, styled } from 'styled-components';
 import {ReactNode} from 'react';
 
+import { FlexCenter } from '../style/styles';
 import { defaultBtnStyles} from '../style/Buttons.styled'
 
 interface OAuthButtonProps {
@@ -17,6 +18,7 @@ const OAuthButton = ({type, children}:OAuthButtonProps)=>{
         margin: 4px 0;
         padding: 10.4px;
 
+        ${FlexCenter}
         border-radius: 5px;
 
         ${type === 'Google' &&

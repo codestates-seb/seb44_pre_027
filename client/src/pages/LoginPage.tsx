@@ -20,30 +20,30 @@ const LoginPage = () => {
     return(
         <Container color='#f1f2f3'>
             <ContentContainer size='100%' direction='column'>
-                <ColumnItemWrapper size={316} gap={0}>
+                <ColumnItemWrapper size={316} gap={16} align="center">
                     <div className="mb-7">
                         <a href="https://stackoverflow.com/">
                             <LogoGlyphMd/>
                         </a>
                     </div>
 
-                    <div className='mb-6'>
-                        <OAuthButton type="Google">
-                            <RowItemWrapper gap={5}>
-                                <GoogleIcon/>Log in with Google
-                            </RowItemWrapper>
-                        </OAuthButton>
-                        <OAuthButton type="Github">
-                            <RowItemWrapper gap={5}>
-                                <GithubIconWhite/>Log in with GitHub
-                            </RowItemWrapper>
-                        </OAuthButton>
-                        <OAuthButton type="Facebook">
-                            <RowItemWrapper gap={5}>
-                                <FacebookIcon/>Log in with Facebook
-                            </RowItemWrapper>
-                        </OAuthButton>
-                    </div>
+                    <ColumnItemWrapper size='100%' gap={0}>
+                    <OAuthButton type="Google">
+                        <RowItemWrapper gap={5}>
+                            <GoogleIcon/>Log in with Google
+                        </RowItemWrapper>
+                    </OAuthButton>
+                    <OAuthButton type="Github">
+                        <RowItemWrapper gap={5}>
+                            <GithubIconWhite/>Log in with GitHub
+                        </RowItemWrapper>
+                    </OAuthButton>
+                    <OAuthButton type="Facebook">
+                        <RowItemWrapper gap={5}>
+                            <FacebookIcon/>Log in with Facebook
+                        </RowItemWrapper>
+                    </OAuthButton>
+                    </ColumnItemWrapper>
 
                     <Card>
                         <ColumnItemWrapper size='100%' gap={16}>
@@ -53,7 +53,7 @@ const LoginPage = () => {
                         <PrimaryBtn size='100%' className='my-5'>Log in</PrimaryBtn>
                     </Card>
 
-                    <ColumnItemWrapper size='100%' gap={10} className={'mt-2'}>
+                    <ColumnItemWrapper size='100%' gap={10} className={'mt-2'} align="center">
                         <RowItemWrapper gap={5}>
                             <Phrase text="Don't have and account?"/>
                             <Link text='Sign up'></Link>
