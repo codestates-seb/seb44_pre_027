@@ -20,6 +20,15 @@ const Phrase = styled.p`
     color: #6a737c;
 `;
 
+const IconWrapper = styled.div`
+  & svg {
+    fill: #39739d;
+  }
+  & svg:hover {
+    fill: #2c5877;
+  }
+`;
+
 const LightWidgetItem = ({type, contents}: LightWidgetItemProps) => {
 
     return (
@@ -35,7 +44,10 @@ const LightWidgetItem = ({type, contents}: LightWidgetItemProps) => {
                     <Phrase>Watch tags to curate your list of questions.</Phrase>
                     <FilledBtn size='fit-content'>
                         <RowItemWrapper gap={5}>
-                            <IconEye/>Watch a tag
+                            <IconWrapper>
+                                <IconEye/>
+                            </IconWrapper>
+                            Watch a tag
                         </RowItemWrapper>
                     </FilledBtn>
                 </ColumnItemWrapper>
