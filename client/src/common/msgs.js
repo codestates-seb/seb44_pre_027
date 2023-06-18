@@ -67,38 +67,41 @@ export const RSideBarWidgetData = {
             id: 1,
             type: 'CUSTOM_FILTERS',
             title: 'Custom Filters',
-            contents: []
+            items: []
         },
         {
             id: 2,
             type: 'WATCHED_TAGS',
             title: 'Watched Tags',
-            contents: []
+            items: []
         },
         {
             id: 3,
             type: 'IGNORED_TAGS',
             title: 'Ignored Tags',
-            contents: []
+            items: []
         },
         {
             id: 4,
             type: 'COLLECTIVES',
             title: 'Collectives',
-            contents: [
+            items: [
                 {
                     id: 1,
                     title: 'AWS',
+                    url: '',
                     content: "Amazone Web Services (AWS) is the world's most comprehensive and broadly adopted blablabla"
                 },
                 {
                     id: 2,
                     title: 'Microsoft Azure',
+                    url: '',
                     content: 'On-premises, hybrid, multicloud, or at the edge―build on your terms with best-in-class blablabla'
                 },
                 {
                     id: 3,
                     title: 'CI/CD',
+                    url: '',
                     content: 'A collective where developers focused on continuous integration, delivery, and blablabla'
                 }
             ]
