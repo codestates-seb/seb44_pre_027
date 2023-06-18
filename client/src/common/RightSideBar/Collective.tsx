@@ -15,7 +15,7 @@ const CollectiveContainer = styled.div<{idx:number}>`
     flex-direction: column;
     gap: 12px;
     padding: 16px 15px;
-    border-top: 1px solid #d6d9dc;
+    border-top: ${(props)=>props.idx !== 1 && '1px solid #d6d9dc'};
 `;
 const Title = styled.div`
     text-align: left;
