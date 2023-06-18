@@ -1,89 +1,52 @@
 import {ReactNode} from 'react';
 import {css, styled} from 'styled-components';
 
-import { LightWidgetItem } from './RightSideBar';
+import { LightWidgetItem } from '../../types/WidgetPropsType';
+import { TransparentBtn } from '../style/Buttons.styled';
+import { ColumnItemWrapper, RowItemWrapper } from '../style/Containers.styled';
 
 interface CollectiveProps{
     item: LightWidgetItem;
 }
 
+const CollectiveContainer = styled.div<{idx:number}>`
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 15px;
+    border-top: ${(props)=>props.idx !== 1 && '1px solid #d6d9dc'};
+`;
+const Title = styled.div`
+    text-align: left;
+    color: #6A737C;
+    font-size: 15px;
+    line-height: 15px;
+    vertical-align: top;
+    cursor: pointer;
+`;
+const Summary = styled.span`
+    height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+`;
+
 const Collective = ({item}:CollectiveProps) => {
-    const Text = css`
-        font-size: 13px;
-        color: #3B4045;
-    `;
-
-    const CollectiveContainer = styled.div`
-        height: 100%;
-        padding: 16px 15px;
-        border-top: 1px solid #d6d9dc;
-    `;
-
-    const ProfileContainer = styled.div`
-        display: grid;
-        grid-template-columns: 1fr 3fr 1fr;
-        gap: 12px;
-        margin-bottom: 12px;
-    `
-
-    const Intro = styled.span`
-        height: 40px;
-        ${Text};
-
-        display: inline-block;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        word-wrap: break-word;
-        /* white-space: norwrap; */
-    `;
-
-    const Image = styled.img`
-        width: 100%;
-        background-color: red;
-    `
-
-    const TitleContainer = styled.div`
-        height: 31.99px;
-        display : flex;
-        flex-direction: column;
-    ` ;
-
-    const Title = styled.div`
-        color: #6A737C;
-        font-size: 15px;
-        cursor: pointer;
-    `;
-
-    const Caption = styled.div`
-        ${Text};
-    `;
-
-    const Button = styled.button`
-        width: fit-content;
-        padding: 9.6px;
-
-        font-size: 12px;
-        color: #0074cc;
-        background-color: white;
-        border: 1px solid #379fef;
-        border-radius: 3px;
-        &:hover {
-            background-color: #f0f8ff;
-            color: #0063bf;
-        }
-    `;
 
     return(
-        <CollectiveContainer>
-            <ProfileContainer>
-                <Image/>
-                <TitleContainer>
+        <CollectiveContainer idx={item.id}>
+            <RowItemWrapper gap={12}>
+                <img src={item.url} className='w-8 h-8 rounded-md' />
+                <ColumnItemWrapper size='100%' gap={4}>
                     <Title>{item.title}</Title>
-                    <Caption>{Math.floor(Math.random()*13)}k Members</Caption>
-                </TitleContainer>
-                <Button>Join</Button>
-            </ProfileContainer>
-            <Intro>{item.content}</Intro>
+                    <span className='text-xs text-left decoration-gray-500'>{Math.floor(Math.random()*13)}k Members</span>
+                </ColumnItemWrapper>
+                <TransparentBtn size={42}>Join</TransparentBtn>
+            </RowItemWrapper>
+            <Summary className='text-13 text-left'>{item.content}</Summary>
         </CollectiveContainer>
     )
 }

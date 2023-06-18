@@ -1,6 +1,7 @@
 import { css, styled } from 'styled-components';
 
 import Link from '../atoms/Link';
+import { ColumnItemWrapper } from '../style/Containers.styled';
 
 interface LabelInputProps {
     type?: string;
@@ -11,13 +12,6 @@ interface LabelInputProps {
 
 const LabelInput = ({type, isWithLink, title, linkText}: LabelInputProps)=>{
 
-    const LabelInputContainer = styled.div`
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-    `;
-
     const LabelContainer = styled.div`
         display: flex;
         justify-content: space-between;
@@ -25,7 +19,7 @@ const LabelInput = ({type, isWithLink, title, linkText}: LabelInputProps)=>{
 
     const Label = styled.label`
         padding: 0px 2px;
-
+        text-align: left;
         color: #0C0D0E;
         font-size: 15px;
         font-weight: 600;
@@ -38,7 +32,7 @@ const LabelInput = ({type, isWithLink, title, linkText}: LabelInputProps)=>{
     `;
 
     return(
-        <LabelInputContainer>
+        <ColumnItemWrapper size='100%' gap={2}>
             { isWithLink === true ?
                 <LabelContainer>
                     <Label>{title}</Label>
@@ -48,7 +42,7 @@ const LabelInput = ({type, isWithLink, title, linkText}: LabelInputProps)=>{
                 <Label>{title}</Label>
             }
             <Input type={type}/>
-        </LabelInputContainer>
+        </ColumnItemWrapper>
     )
 }
 

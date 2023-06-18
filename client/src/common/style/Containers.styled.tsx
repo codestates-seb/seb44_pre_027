@@ -16,14 +16,21 @@ export const ContentContainer = styled.div<{size:number|string, direction:string
     background-color: transparent;
 `;
 
-export const ColumnItemWrapper = styled.div<{size:number|string, gap:number}>`
-    width: ${(props)=> typeof props.size === 'string' ? props.size : `${props.size}px`};
-    ${FlexColumnCenter}
+export const ColumnItemWrapper = styled.div<{size:number|string, gap:number, align?:string|undefined}>`
+    width: ${(props) => typeof props.size === 'string' ? props.size : `${props.size}px`};
+    ${ (props) => props.align === 'center' ?
+      FlexColumnCenter
+      :
+      css`
+        display: flex;
+        flex-direction: column;
+      `
+    }
     gap: ${(props)=> props.gap}px;
     background-color: transparent;
 `;
 
-export const RowItemWrapper = styled.div`
-  ${FlexCenter};
-  gap: 5px;
+export const RowItemWrapper = styled.div<{gap:number}>`
+  display: flex;
+  gap: ${(props)=> props.gap}px;
 `;
