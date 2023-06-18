@@ -8,7 +8,7 @@ interface WidgetProps extends WidgetData{
     children: ReactNode;
 };
 
-const WidgetContainer = styled.div<{type:string, idx:number, isStuck:boolean|undefined}>`
+const WidgetContainer = styled.div<{type:string|undefined, idx:number, isStuck:boolean|undefined}>`
     height  : 100%;
     border: 1px solid;
     border-radius: 3px 3px 0 0;
@@ -33,7 +33,7 @@ const WidgetContainer = styled.div<{type:string, idx:number, isStuck:boolean|und
     }
 `;
 
-const WidgetHeader = styled.div<{type:string, title:string}>`
+const WidgetHeader = styled.div<{type:string|undefined, title:string}>`
     width: 100%;
     height: 41.69px;
 
