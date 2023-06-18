@@ -39,9 +39,9 @@ const Collective = ({item}:CollectiveProps) => {
         <CollectiveContainer>
             <RowItemWrapper gap={12}>
                 <img src={item.url} className='w-8 h-8 rounded-md' />
-                <ColumnItemWrapper size='100%' gap={3}>
+                <ColumnItemWrapper size='100%' gap={4}>
                     <Title>{item.title}</Title>
-                    <span className='text-13 decoration-gray-500'>{Math.floor(Math.random()*13)}k Members</span>
+                    <span className='text-xs decoration-gray-500'>{Math.floor(Math.random()*13)}k Members</span>
                 </ColumnItemWrapper>
                 <TransparentBtn size={42}>Join</TransparentBtn>
             </RowItemWrapper>
