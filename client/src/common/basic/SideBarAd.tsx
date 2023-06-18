@@ -7,10 +7,6 @@ interface SideBarAdProps {
     src: string;
 }
 
-const AdContainer = styled.div`
-    margin-bottom: 16px;
-`;
-
 const ImgContainer = styled.a`
     width: 100%;
     height: 100%;
@@ -20,13 +16,26 @@ const ImgContainer = styled.a`
 
 const AdImage = styled.img`
     height: 250px;
-    position: relative;
 `;
 
 const IconWrapper = styled.div`
     position: absolute;
-    left: 278px;
+    cursor: pointer;
+    top: 0.5px;
+    left: 277px;
     z-index: 10;
+
+    & svg {
+        fill: #00aecd;
+        background-color: white;
+        stroke: #00aecd;
+        stroke-width:1.25px;
+    }
+
+    & svg:hover {
+        background-color: #707070;
+        stroke: white;
+    }
 `;
 
 const ReportButtonContainer = styled.div`
@@ -45,7 +54,7 @@ const ReportButton = styled.button`
 
 const SideBarAd = ({url, src}:SideBarAdProps):JSX.Element => {
     return(
-        <AdContainer>
+        <div className='mb-3'>
             <ImgContainer href={url}>
                 <IconWrapper>
                     <XIcon/>
@@ -55,7 +64,7 @@ const SideBarAd = ({url, src}:SideBarAdProps):JSX.Element => {
             <ReportButtonContainer>
                 <ReportButton>Report this add</ReportButton>
             </ReportButtonContainer>
-        </AdContainer>
+        </div>
     )
 }
 
