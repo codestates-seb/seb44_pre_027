@@ -49,4 +49,9 @@ jobs:
         aws-region: ap-northeast-2
     - name: Upload to S3
       run: aws s3 cp --region ap-northeast-2 ./stackoverflow-clone.zip s3://$S3_BUCKET_NAME/stackoverflow-clone.zip
-
+    - name: Code Deploy
+      run: >
+        aws deploy create-deployment --application-name stackoverflow-clone
+        --deployment-config-name CodeDeployDefault.AllAtOnce
+        --deployment-group-name
+        --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=stackoverflow-clone.zip
