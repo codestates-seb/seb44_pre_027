@@ -6,13 +6,12 @@ files:
     overwrite: yes
 
 permissions:
-  - object: /
-    pattern: "**"
+  - object: /home/ubuntu/action/
     owner: ubuntu
     group: ubuntu
 
 hooks:
-  ApplicationStart:
+  AfterInstall:
     - location: scripts/deploy.sh
       timeout: 60
       runas: ubuntu
