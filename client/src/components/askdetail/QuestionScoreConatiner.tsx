@@ -10,9 +10,11 @@ const QuestionScoreConatiner = ({ itemArray, title }: QuestionScoreConatinerProp
   return (
     <section className="">
       <h2 className=" mb-6 text-xl font-light">{title}</h2>
-      {itemArray.map((item, idx) => (
-        <QuestionScoreItem key={`qsi${idx}`} voteCount={item.voteCount} subject={item.subject} />
-      ))}
+      <ol className=" list-none">
+        {itemArray.map((item, idx) => (
+          <QuestionScoreItem key={`qsi${idx}`} voteCount={item.voteCount} subject={item.subject} />
+        ))}
+      </ol>
     </section>
   );
 };

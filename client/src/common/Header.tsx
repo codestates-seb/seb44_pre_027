@@ -1,15 +1,14 @@
 import React, {useState} from 'react';
-import DropDown from '../components/DropDown';
+import {Link} from 'react-router-dom';
 import {cva} from 'class-variance-authority';
 import {cn} from '@/utils/cn';
+import LoginHeader from '../components/LoginHeader';
 import BigLogoIcon from '@/assets/icons/BigLogoIcon';
 import SearchIcon from '@/assets/icons/SearchIcon';
-import HeadMenuIcon from '@/assets/icons/HeadMenuIcon';
-import HeadQuestionIcon from '@/assets/icons/HeadQuestionIcon';
-import HeadBoxIcon from '@/assets/icons/HeadBoxIcon';
-import HeadCupIcon from '@/assets/icons/HeadCupIcon';
 
-interface HeaderUI {};
+interface HeaderProps {
+    changeNav:boolean;
+};
 /*dropwdown이름 겹침 -> ProductIcon 수정완료 */
 const ProductIcon = cva(
     `
@@ -24,60 +23,26 @@ const ProductIcon = cva(
     }
 );
 
-const IconHover = cva(
-    `
-    cursor-pointer cursor-pointer relative
-    `,{
-        variants:{
-            variant:{
-                default:'',
-                hover:'hover:bg-slate-200'
-            }
-        }
-    }
-);
 
-
-const Header = ({}:HeaderUI) => {
-
-    const [isOpen, setIsOpen] = useState(false);
-    const [isOpen01, setIsOpen01] = useState(false);
-    const [isOpen02, setIsOpen02] = useState(false);
-    const [isOpen03, setIsOpen03] = useState(false);
-    const [isOpen04, setIsOpen04] = useState(false);
+const Header = ({changeNav}:HeaderProps) => {
     const [dropdownVariant , setDropdownVariant] = useState('box');
+
+    const [isUser, setIsUser] = useState(true);
+    //changeNav 임시 props - true:로그인 상태 false:비로그인 상태
+    const [isOpen, setIsOpen] = useState(false);
+
 
     const handleDropdown = ():void => {
         setIsOpen(!isOpen)
-    }
-
-    const handleDropdown01 = (): void => {
-        setIsOpen01(!isOpen01)
-        setDropdownVariant('box')
-    }
-
-    const handleDropdown02 = (): void => {
-        setIsOpen02(!isOpen02)
-        setDropdownVariant('cup')
-    }
-
-    const handleDropdown03 = (): void => {
-        setIsOpen03(!isOpen03)
-        setDropdownVariant('question')
-    }
-
-    const handleDropdown04 = (): void => {
-        setIsOpen04(!isOpen04)
-        setDropdownVariant('menu')
-    }
+    } 
 
     return(
-       <nav className="bg-white border-gray-200 border-b border-zinc-200">
-            <div className="max-w-screen-xl flex justify-center items-center h-12 space-x-6">
+       <nav className="sticky top-0 z-10 w-screen bg-white border-gray-200 border-b border-zinc-200 ">
+            <div className=" flex justify-center items-center h-12 mx-auto space-x-6">
                 <div className="hover:bg-slate-200">
-                    <a href="https://stackoverflow.com/" className="flex items-center">
-                        <BigLogoIcon/>
-                    </a>
+                    <Link to="/">
+                        <BigLogoIcon  className="flex items-center"/>
+                    </Link>
                 </div>
                 <ul className="flex space-x-5 font-medium p-3">
                     <li className="w-full md:w-auto hidden md:block hover:bg-slate-200 rounded-full">
@@ -143,55 +108,9 @@ const Header = ({}:HeaderUI) => {
                         placeholder="Search...">{/*focus효과 적용 안됨 */}</input>
                     </div>
                 </div>
-                <ul className="flex flex-row space-x-2">
-                    <li className={cn(IconHover({ variant: 'hover'}))}>
-                        <a href="#" className="block p-2 text-gray-500 bg-transparent">
-                            <img src="https://www.gravatar.com/avatar/9bcf7a89f50be51792a0ce9e6af9e917?s=48&d=identicon&r=PG"
-                            alt="user image"
-                            className="w-5 h-5" />
-                        </a>
-                    </li>
-                    <li className={cn(IconHover({ variant: 'hover'}))}>
-                        <button onClick={handleDropdown01}>
-                            <a href="#"  className="block p-2 text-gray-500 bg-transparent">
-                                <HeadBoxIcon/>
-                            </a>
-                        </button>
-                        {
-                            isOpen01 ?<DropDown variant="box"></DropDown> : null
-                        }
-                    </li>
-                    <li className={cn(IconHover({ variant: 'hover'}))}>
-                        <button onClick={handleDropdown02}>
-                            <a href="#"  className="block p-2 text-gray-500 bg-transparent">
-                                <HeadCupIcon/>
-                            </a>
-                        </button>
-                        {
-                            isOpen02 ? <DropDown variant="cup"></DropDown> : null
-                        }
-                    </li>
-                    <li className={cn(IconHover({ variant: 'hover'}))}>
-                        <button onClick={handleDropdown03}>
-                            <a href="#"  className="block p-2 text-gray-500 bg-transparent">
-                                <HeadQuestionIcon/>
-                            </a>
-                        </button>
-                        {
-                            isOpen03 ? <DropDown variant="question"></DropDown> : null
-                        }
-                    </li>
-                    <li className={cn(IconHover({ variant: 'hover'}))}>
-                        <button onClick={handleDropdown04}>
-                            <a href="#"  className="block p-2 text-gray-500 bg-transparent">
-                                <HeadMenuIcon/>
-                            </a>
-                        </button>
-                        {
-                            isOpen04 ? <DropDown variant="menu"></DropDown> : null
-                        }
-                    </li>
-                </ul>
+                <div>
+                    <LoginHeader changeNav={isUser}/>
+                </div>
             </div>
        </nav>
     )
