@@ -21,12 +21,14 @@ const AskTextAreaVariants = cva(
 
 interface AskTextAreaProps
   extends HTMLAttributes<HTMLTextAreaElement>,
-    VariantProps<typeof AskTextAreaVariants> {}
+    VariantProps<typeof AskTextAreaVariants> {
+      value: {value:string, onChange: React.ChangeEventHandler<HTMLTextAreaElement>}
+    }
 
 const AskTextArea = forwardRef<HTMLTextAreaElement, AskTextAreaProps>(
-  ({ className, variant, ...attribute }: AskTextAreaProps) => {
+  ({ className, variant, value, ...attribute }: AskTextAreaProps) => {
     return (
-      <textarea className={cn(AskTextAreaVariants({ variant }) + ' ' + className)} {...attribute} />
+      <textarea className={cn(AskTextAreaVariants({ variant }) + ' ' + className)} {...attribute} {...value}/>
     );
   }
 );

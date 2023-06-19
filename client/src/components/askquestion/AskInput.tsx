@@ -4,7 +4,7 @@ import React, { forwardRef, HTMLAttributes } from 'react';
 
 const AskInputVariants = cva(
   `
-  w-[80vw] max-w-[800px] rounded-md 
+  w-[80vw] max-w-[800px] rounded-md
   border border-slate-300 px-3 py-2 text-xs
   `,
   {
@@ -23,15 +23,17 @@ interface AskInputProps
   extends HTMLAttributes<HTMLInputElement>,
     VariantProps<typeof AskInputVariants> {
   type?: string;
+  value: {value:string, onChange: React.ChangeEventHandler<HTMLInputElement>}
 }
 
 const AskInput = forwardRef<HTMLInputElement, AskInputProps>(
-  ({ className, variant, type, ...attribute }: AskInputProps) => {
+  ({ className, variant, type, value, ...attribute }: AskInputProps) => {
     return (
       <input
         className={cn(AskInputVariants({ variant }) + ' ' + className)}
         {...attribute}
         type={type}
+        {...value}
       />
     );
   }
