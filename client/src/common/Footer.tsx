@@ -7,9 +7,9 @@ const Footer = ({}: FooterUI) => {
     return(
         <footer className="bg-neutral-800">
             <div className="mx-auto w-full max-w-screen-xl">
-                <div className="grid grid-cols-6 py-6 lg:py-8 cursor-pointer">
+                <div className="grid grid-cols-6 py-6 pl-24 lg:py-8 cursor-pointer">
                     <div className="flex flex-row">
-                        <ShortLogoIcon className="mr-4"/>
+                        <ShortLogoIcon className="mr-4 "/>
                         <div>
                             <h5 className="text-xs font-semibold text-gray-300">STACK OVERFLOW</h5>
                             <ul className="font-medium text-xs text-gray-500 ">

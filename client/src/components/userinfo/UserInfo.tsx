@@ -7,6 +7,7 @@ interface User {
 }
 
 const UserInfo = ({}: User) => {
+
     return(
         <main className="mx-4 mt-4 max-w-full-xl flex flex-row justify-between">
             <div className="flex flex-row basis-10/12 ">
@@ -27,9 +28,8 @@ const UserInfo = ({}: User) => {
                 </div>
             </div>
             <div className="basis-2/12 flex flex-row">
-                {/* 유저 정보 수정 버튼 */}
+                {/* 유저 정보 수정 버튼  - 버튼 클릭 시 특정 상태 값 하단 메인 세팅 부분 변경할 수 있게 적용 필요. */}
                 <button 
-                    type="submit"
                     className="px-3 py-2 m-2 w-32 h-10 border border-slate-400 rounded flex felx-row justify-center
                                 text-sm text-gray-500 font-normal bg-white
                                 hover:bg-slate-200">
