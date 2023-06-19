@@ -82,7 +82,6 @@ public class AnswerController {
     @GetMapping //여기서 필요없을거같지만 일단구현...
     public ResponseEntity getAnswers(@PathVariable("question-id") long questionId) {
         logger.info("questionId: {}", questionId);
-        //question-id 설정작업 필요
         List<Answer> answers = answerService.findAnswers(questionId);
 
         for (Answer answer : answers) {
