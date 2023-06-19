@@ -35,36 +35,37 @@ type SignupType = z.infer<typeof signupSchema>;
 
 const SignupPage = () => {
   const signup = useForm<SignupType>({ resolver: zodResolver(signupSchema) });
-  const onSubmit: SubmitHandler<SignupType> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<SignupType> = (data) => {
+    console.log(data);
+  };
 
   return (
-    <FormProvider {...signup}>
-      <Container color="#f1f2f3">
-        <ContentContainer size="100%" direction="row">
-          <SignupIntro />
-          <ColumnItemWrapper size={316} gap={0}>
-            <div className="mb-6">
-              <OAuthButton type="Google">
-                <RowItemWrapper gap={5}>
-                  <GoogleIcon />
-                  Log in with Google
-                </RowItemWrapper>
-              </OAuthButton>
-              <OAuthButton type="Github">
-                <RowItemWrapper gap={5}>
-                  <GithubIconWhite />
-                  Log in with GitHub
-                </RowItemWrapper>
-              </OAuthButton>
-              <OAuthButton type="Facebook">
-                <RowItemWrapper gap={5}>
-                  <FacebookIcon />
-                  Log in with Facebook
-                </RowItemWrapper>
-              </OAuthButton>
-            </div>
-
-            <Card>
+    <Container color="#f1f2f3">
+      <ContentContainer size="100%" direction="row">
+        <SignupIntro />
+        <ColumnItemWrapper size={316} gap={0}>
+          <div className="mb-6">
+            <OAuthButton type="Google">
+              <RowItemWrapper gap={5}>
+                <GoogleIcon />
+                Log in with Google
+              </RowItemWrapper>
+            </OAuthButton>
+            <OAuthButton type="Github">
+              <RowItemWrapper gap={5}>
+                <GithubIconWhite />
+                Log in with GitHub
+              </RowItemWrapper>
+            </OAuthButton>
+            <OAuthButton type="Facebook">
+              <RowItemWrapper gap={5}>
+                <FacebookIcon />
+                Log in with Facebook
+              </RowItemWrapper>
+            </OAuthButton>
+          </div>
+          <Card>
+            <FormProvider {...signup}>
               <form onSubmit={signup.handleSubmit(onSubmit)}>
                 <ColumnItemWrapper size="100%" gap={16}>
                   <LabelInput
@@ -110,23 +111,22 @@ const SignupPage = () => {
                   and <Link text="code of conduct." />
                 </p>
               </form>
-            </Card>
-
-            <ColumnItemWrapper size="100%" gap={10} className="mt-2" align="center">
-              <RowItemWrapper gap={5}>
-                <Phrase text="Don't have and account?" />
-                <Link text="Sign up" />
-              </RowItemWrapper>
-              <RowItemWrapper gap={5}>
-                <Phrase text="Are you an employer?" />
-                <Link text="Sign up on Talent" />
-                <GotoLinkIcon />
-              </RowItemWrapper>
-            </ColumnItemWrapper>
+            </FormProvider>
+          </Card>
+          <ColumnItemWrapper size="100%" gap={10} className="mt-2" align="center">
+            <RowItemWrapper gap={5}>
+              <Phrase text="Don't have and account?" />
+              <Link text="Sign up" />
+            </RowItemWrapper>
+            <RowItemWrapper gap={5}>
+              <Phrase text="Are you an employer?" />
+              <Link text="Sign up on Talent" />
+              <GotoLinkIcon />
+            </RowItemWrapper>
           </ColumnItemWrapper>
-        </ContentContainer>
-      </Container>
-    </FormProvider>
+        </ColumnItemWrapper>
+      </ContentContainer>
+    </Container>
   );
 };
 
