@@ -28,7 +28,7 @@ jobs:
       - run: gradle init
 
       - name: Build with Gradle
-        uses: ./server/gradlew
+        uses: ./server/gradlew build test
         with:
           arguments: build
 
