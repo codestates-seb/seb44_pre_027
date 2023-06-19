@@ -34,7 +34,7 @@ const LightWidgetItem = ({type, contents}: LightWidgetItemProps) => {
     return (
         <ColumnItemWrapper size='100%' gap={0} align='center'>
             { type  === 'CUSTOM_FILTERS' &&
-            <div className='py-1 px-4 my-3 w-full'>
+            <div className='py-1 px-4 my-3 w-full text-left'>
                 <Link text='Create a custom filter'/>
             </div>
             }
