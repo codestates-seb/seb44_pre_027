@@ -26,8 +26,9 @@ jobs:
       - name: Init with Gradle
         run: gradle init
       - name: Build with Gradle
-        run: gradle build
         working-directory: ./server
+
+        run: gradle build
       - name: Make zip file
         run: zip -r ./stackoverflow-clone.zip .
         shell: bash
@@ -40,10 +41,8 @@ jobs:
       - name: Upload to S3
         run: aws s3 cp --region ap-northeast-2 ./stackoverflow-clone.zip s3://$S3_BUCKET_NAME/stackoverflow-clone.zip
       - name: Code Deploy
-        run: |
-          aws deploy create-deployment --application-name stackoverflow-clone \
-          --deployment-config-name CodeDeployDefault.AllAtOnce \
-          --deployment-group-name stackoverflow-clone-group \
+        run: >
+          aws deploy create-deployment --application-name stackoverflow-clone
+          --deployment-config-name CodeDeployDefault.AllAtOnce
+          --deployment-group-name stackoverflow-clone-group
           --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=stackoverflow-clone.zip
-          
-          
