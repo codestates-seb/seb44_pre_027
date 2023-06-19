@@ -44,4 +44,6 @@ jobs:
           aws deploy create-deployment --application-name stackoverflow-clone \
           --deployment-config-name CodeDeployDefault.AllAtOnce \
           --deployment-group-name stackoverflow-clone-group \
-          --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=stackoverflow-clone.zip
+          --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=stackoverflow-clone.
+          
+          
