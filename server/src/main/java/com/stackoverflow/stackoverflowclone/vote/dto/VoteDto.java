@@ -1,8 +1,6 @@
 package com.stackoverflow.stackoverflowclone.vote.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.Positive;
 
@@ -11,6 +9,8 @@ public class VoteDto {
 
     @Getter
     @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class Post {
 
         @Positive
@@ -22,6 +22,7 @@ public class VoteDto {
 
     @Getter @Setter
     @Builder
+    @AllArgsConstructor
     public static class Response {
 
         @Positive
