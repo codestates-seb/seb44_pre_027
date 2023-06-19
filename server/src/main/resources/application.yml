@@ -13,8 +13,9 @@ spring:
     properties:
       hibernate:
         format_sql: true  # (3) SQL pretty print
+
   sql:
-    init:
+   init:
       data-locations: classpath*:db/h2/data.sql
 
 logging:
