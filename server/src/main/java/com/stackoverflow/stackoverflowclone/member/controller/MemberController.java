@@ -8,7 +8,6 @@ import com.stackoverflow.stackoverflowclone.member.dto.MemberResponseDto;
 import com.stackoverflow.stackoverflowclone.member.entity.Member;
 import com.stackoverflow.stackoverflowclone.member.mapper.MemberMapper;
 import com.stackoverflow.stackoverflowclone.member.service.MemberService;
-import com.stackoverflow.stackoverflowclone.utils.UriCreator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -16,12 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
-
-import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static com.stackoverflow.stackoverflowclone.question.controller.QuestionController.QUESTION_DEFAULT_URL;
 
 @RestController
 @RequestMapping("/members")
@@ -41,9 +36,7 @@ public class MemberController {
 
         Member response = memberService.createMember(member);
 
-        URI location = UriCreator.createUri(QUESTION_DEFAULT_URL, response.getMemberId());
-
-        return ResponseEntity.created(location).build();
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @PatchMapping("/{member-id}")
@@ -57,32 +50,31 @@ public class MemberController {
         return new ResponseEntity<>(memberMapper.memberToMemberResponseDto(response),
                 HttpStatus.OK);
     }
-    @GetMapping("/{member-id}")
-    public ResponseEntity getMember(@PathVariable("member-id") @Positive long memberId) {
-        Member response = memberService.findMember(memberId);
 
+    @GetMapping("/{member-id}")
+    public ResponseEntity getMember(
+            @PathVariable("member-id") @Positive long memberId) {
+        Member response = memberService.findMember(memberId);
         return new ResponseEntity<>(memberMapper.memberToMemberResponseDto(response), HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity getMembers() {
         List<Member> members = memberService.findMembers();
-
         List<MemberResponseDto> response =
                 members.stream()
                         .map(member -> memberMapper.memberToMemberResponseDto(member))
                         .collect(Collectors.toList());
-
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/{member-id}")
     public ResponseEntity deleteMember(
-            @PathVariable("member-id") @Positive long memberId,
-            @RequestParam("password") String password) {
+            @PathVariable("member-id") @Positive long memberId) {
         memberService.deleteMember(memberId);
 
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 }
 
