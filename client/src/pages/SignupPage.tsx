@@ -6,7 +6,7 @@ import {
 } from '../common/style/Containers.styled';
 import z from 'zod';
 import { PrimaryBtn } from '../common/style/Buttons.styled';
-import { SubmitHandler, FormProvider, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import OAuthButton from '../common/basic/OAuthButton';
 import Card from '../common/basic/Card';
@@ -67,53 +67,51 @@ const SignupPage = () => {
             </OAuthButton>
           </div>
           <Card>
-            <FormProvider {...signup}>
-              <form onSubmit={signup.handleSubmit(onSubmit)}>
-                <ColumnItemWrapper size="100%" gap={16}>
-                  <LabelInput
-                    title={'Display Name'}
-                    isWithLink={false}
-                    {...signup.register('nickname')}
-                  />
-                  <LabelInput title={'Email'} isWithLink={false} {...signup.register('email')} />
-                  <LabelInput
-                    title={'Password'}
-                    isWithLink={false}
-                    type={'password'}
-                    {...signup.register('password')}
-                  />
-                </ColumnItemWrapper>
-                <p className="text-xs text-slate-400">
-                  Passwords must contain at least eight characters, including at least 1 letter and
-                  1 number.
-                </p>
+            <form onSubmit={signup.handleSubmit(onSubmit)}>
+              <ColumnItemWrapper size="100%" gap={16}>
+                <LabelInput
+                  title={'Display Name'}
+                  isWithLink={false}
+                  {...signup.register('nickname')}
+                />
+                <LabelInput title={'Email'} isWithLink={false} {...signup.register('email')} />
+                <LabelInput
+                  title={'Password'}
+                  isWithLink={false}
+                  type={'password'}
+                  {...signup.register('password')}
+                />
+              </ColumnItemWrapper>
+              <p className="text-xs text-slate-400">
+                Passwords must contain at least eight characters, including at least 1 letter and 1
+                number.
+              </p>
 
-                <div className="mt-5 flex items-start gap-2">
-                  <input type="checkbox" />
-                  <label className="cursor-pointer text-xs text-slate-600">
-                    Opt-in to receive occasional product updates, user research invitations, company
-                    announcements, and digests.
-                  </label>
-                  <HelpSm />
-                </div>
+              <div className="mt-5 flex items-start gap-2">
+                <input type="checkbox" />
+                <label className="cursor-pointer text-xs text-slate-600">
+                  Opt-in to receive occasional product updates, user research invitations, company
+                  announcements, and digests.
+                </label>
+                <HelpSm />
+              </div>
 
-                <PrimaryBtn size="100%" className="my-4" type="submit">
-                  Sign up
-                </PrimaryBtn>
-                {(signup.formState.errors.email ||
-                  signup.formState.errors.password ||
-                  signup.formState.errors.nickname) && (
-                  <span className="  text-xs text-red-500">
-                    something went wrong please check your password, email, name, daham
-                  </span>
-                )}
-                <p className="mt-5 text-xs text-slate-400">
-                  By clicking “Sign up”, you agree to our <Link text="terms of service" /> and
-                  acknowledge that you have read and understand our <Link text="privacy policy" />{' '}
-                  and <Link text="code of conduct." />
-                </p>
-              </form>
-            </FormProvider>
+              <PrimaryBtn size="100%" className="my-4" type="submit">
+                Sign up
+              </PrimaryBtn>
+              {(signup.formState.errors.email ||
+                signup.formState.errors.password ||
+                signup.formState.errors.nickname) && (
+                <span className="  text-xs text-red-500">
+                  something went wrong please check your password, email, name, daham
+                </span>
+              )}
+              <p className="mt-5 text-xs text-slate-400">
+                By clicking “Sign up”, you agree to our <Link text="terms of service" /> and
+                acknowledge that you have read and understand our <Link text="privacy policy" /> and{' '}
+                <Link text="code of conduct." />
+              </p>
+            </form>
           </Card>
           <ColumnItemWrapper size="100%" gap={10} className="mt-2" align="center">
             <RowItemWrapper gap={5}>

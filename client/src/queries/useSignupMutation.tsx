@@ -12,6 +12,11 @@ const postSignup = async (signupData: SignupType) => {
   const response = await fetch(`${url}/users/signup`, {
     method: 'POST',
     body: JSON.stringify(signupData),
+    credentials: 'include',
+    headers: {
+      Origin: 'http://localhost:5173',
+      'Access-Control-Request-Method': 'POST',
+    },
   });
 
   // const header = getHeader(response, 'authorization');
