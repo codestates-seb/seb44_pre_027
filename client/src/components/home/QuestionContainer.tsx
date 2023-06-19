@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '../Button';
 import PagenationBtn from './PagenationBtn';
 import QuestionItem from './QuestionItem';
+import {Link} from 'react-router-dom';
 
 interface QuestionContainerProps {}
 
@@ -11,7 +12,7 @@ const QuestionContainer = ({}: QuestionContainerProps) => {
       <div className=" px-4 py-4">
         <div className=" mb-6 flex justify-between">
           <h2 className=" text-2xl">{'All Questions'}</h2>
-          <Button>Ask Question</Button>
+          <Link to="/questions/ask"><Button>Ask Question</Button></Link> 
         </div>
 
         <div className=" flex items-center justify-between gap-3">
@@ -26,7 +27,7 @@ const QuestionContainer = ({}: QuestionContainerProps) => {
       </div>
 
       {Array.from({ length: 10 }).map((e) => (
-        <QuestionItem />
+        <Link to="/questions"><QuestionItem /></Link>
       ))}
 
       <div className=" mx-24 mb-24 mt-12 flex">

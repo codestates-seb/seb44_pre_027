@@ -6,7 +6,7 @@ interface ProvidersProps {
 }
 
 const Providers = ({ children }: ProvidersProps) => {
-  const queryCache = new QueryCache();
+  // const queryCache = new QueryCache();
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
