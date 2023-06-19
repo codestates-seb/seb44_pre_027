@@ -29,7 +29,9 @@ jobs:
         working-directory: ./server
         run: |
           ls -R  
+          mkdir -p build/libs
           gradle build
+          cp build/libs/*.jar build/libs/
       - name: Make zip file
         run: zip -r ./stackoverflow-clone.zip .
         shell: bash
