@@ -25,8 +25,8 @@ public class VoteDto {
     public static class Response {
 
         @Positive
-        private long voteId;
+        private long questionId;
 
-        private int score;  // 점수 합
+        private int score;  // 총 점수
     }
 }

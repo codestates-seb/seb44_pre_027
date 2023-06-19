@@ -43,4 +43,8 @@ public class Answer extends Auditable {
             this.member.getAnswers().add(this);
         }
     }
+
+    public Answer(String content) {
+        this.content = content;
+    }
 }
