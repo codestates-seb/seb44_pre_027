@@ -3,6 +3,8 @@ package com.stackoverflow.stackoverflowclone.question.controller;
 import com.google.gson.Gson;
 import com.stackoverflow.stackoverflowclone.answer.dto.AnswerDto;
 import com.stackoverflow.stackoverflowclone.answer.entity.Answer;
+import com.stackoverflow.stackoverflowclone.comment.dto.CommentDto;
+import com.stackoverflow.stackoverflowclone.comment.entity.Comment;
 import com.stackoverflow.stackoverflowclone.member.entity.Member;
 import com.stackoverflow.stackoverflowclone.question.dto.QuestionDto;
 import com.stackoverflow.stackoverflowclone.question.entity.Question;
@@ -166,6 +168,7 @@ public class QuestionControllerTest {
                 ));
     }
 
+
     @Test
     @DisplayName("질문 개별 조회 테스트")
     public void getQuestionTest() throws Exception{
@@ -177,6 +180,13 @@ public class QuestionControllerTest {
 
         List<Answer> answers = createMockAnswers(question);
         question.setAnswers(answers);
+
+        List<Comment> comments = new ArrayList<>();
+        Comment comment = new Comment();
+        comment.setCommentId(1L);
+        comment.setQuestion(question);
+        comments.add(comment);
+        question.setComments(comments);
 
         AnswerDto.Response answerResponse = new AnswerDto.Response(
              1L,
@@ -190,6 +200,19 @@ public class QuestionControllerTest {
         List<AnswerDto.Response> answerResponses = new ArrayList<>();
         answerResponses.add(answerResponse);
 
+
+        CommentDto.Response commentResponse = new CommentDto.Response(
+                1L,
+                "댓글",
+                1L,
+                LocalDateTime.now(),
+                LocalDateTime.now()
+        );
+
+        List<CommentDto.Response> commentResponses = new ArrayList<>();
+        commentResponses.add(commentResponse);
+
+
         QuestionDto.Response response = new QuestionDto.Response(
                 1L,
                 "닉네임",
@@ -199,7 +222,8 @@ public class QuestionControllerTest {
                 LocalDateTime.now(),
                 3,
                 4,
-                answerResponses
+                answerResponses,
+                commentResponses
         );
 
         // stubbing
@@ -246,7 +270,14 @@ public class QuestionControllerTest {
                                         fieldWithPath("answers[].content").type(JsonFieldType.STRING).description("답변 내용"),
                                         fieldWithPath("answers[].memberId").type(JsonFieldType.NUMBER).description("회원 식별자"),
                                         fieldWithPath("answers[].createdAt").type(JsonFieldType.STRING).description("답변 생성일"),
-                                        fieldWithPath("answers[].modifiedAt").type(JsonFieldType.STRING).description("답변 수정일")
+                                        fieldWithPath("answers[].modifiedAt").type(JsonFieldType.STRING).description("답변 수정일"),
+
+                                        fieldWithPath("comments").type(JsonFieldType.ARRAY).description("댓글 목록"),
+                                        fieldWithPath("comments[].commentId").type(JsonFieldType.NUMBER).description("댓글 식별자"),
+                                        fieldWithPath("comments[].content").type(JsonFieldType.STRING).description("댓글 내용"),
+                                        fieldWithPath("comments[].memberId").type(JsonFieldType.NUMBER).description("댓글을 단 회원의 식별자"),
+                                        fieldWithPath("comments[].createdAt").type(JsonFieldType.STRING).description("댓글 생성일"),
+                                        fieldWithPath("comments[].modifiedAt").type(JsonFieldType.STRING).description("댓글 수정일")
                                 )
                         )
                 ));
@@ -262,6 +293,8 @@ public class QuestionControllerTest {
         answers.add(answer1);
         return answers;
     }
+
+
 
 
     @Test
@@ -287,6 +320,21 @@ public class QuestionControllerTest {
 
         question1.setAnswers(answers1);
         question2.setAnswers(answers2);
+
+        // comment
+        List<Comment> comments1 = new ArrayList<>();
+        Comment comment1 = new Comment();
+        comment1.setCommentId(1L);
+        comment1.setQuestion(question1);
+        comments1.add(comment1);
+        question1.setComments(comments1);
+
+        List<Comment> comments2 = new ArrayList<>();
+        Comment comment2 = new Comment();
+        comment2.setCommentId(2L);
+        comment2.setQuestion(question2);
+        comments2.add(comment2);
+        question2.setComments(comments2);
 
         PageImpl<Question> pageQuestions =
                 new PageImpl<>(List.of(question1,question2),
@@ -317,6 +365,28 @@ public class QuestionControllerTest {
         List<AnswerDto.Response> answerResponses2 = new ArrayList<>();
         answerResponses2.add(answerResponse2);
 
+        CommentDto.Response commentResponse1 = new CommentDto.Response(
+                1L,
+                "댓글",
+                1L,
+                LocalDateTime.now(),
+                LocalDateTime.now()
+        );
+
+        List<CommentDto.Response> commentResponses1 = new ArrayList<>();
+        commentResponses1.add(commentResponse1);
+
+        CommentDto.Response commentResponse2 = new CommentDto.Response(
+                2L,
+                "댓글2",
+                2L,
+                LocalDateTime.now(),
+                LocalDateTime.now()
+        );
+
+        List<CommentDto.Response> commentResponses2 = new ArrayList<>();
+        commentResponses2.add(commentResponse2);
+
         List<QuestionDto.Response> responses = List.of(
                 new QuestionDto.Response(
                         1L,
@@ -327,7 +397,8 @@ public class QuestionControllerTest {
                         LocalDateTime.now(),
                         1,
                         1,
-                        answerResponses1
+                        answerResponses1,
+                        commentResponses1
                 ),
                 new QuestionDto.Response(
                         2L,
@@ -338,7 +409,8 @@ public class QuestionControllerTest {
                         LocalDateTime.now(),
                         2,
                         2,
-                        answerResponses2
+                        answerResponses2,
+                        commentResponses2
                 )
         );
 
@@ -390,6 +462,13 @@ public class QuestionControllerTest {
                                         fieldWithPath("data[].answers[].createdAt").type(JsonFieldType.STRING).description("답변 생성일"),
                                         fieldWithPath("data[].answers[].modifiedAt").type(JsonFieldType.STRING).description("답변 수정일"),
 
+                                        fieldWithPath("data[].comments").type(JsonFieldType.ARRAY).description("댓글 목록"),
+                                        fieldWithPath("data[].comments[].commentId").type(JsonFieldType.NUMBER).description("댓글 식별자"),
+                                        fieldWithPath("data[].comments[].content").type(JsonFieldType.STRING).description("댓글 내용"),
+                                        fieldWithPath("data[].comments[].memberId").type(JsonFieldType.NUMBER).description("댓글을 단 회원의 식별자"),
+                                        fieldWithPath("data[].comments[].createdAt").type(JsonFieldType.STRING).description("댓글 생성일"),
+                                        fieldWithPath("data[].comments[].modifiedAt").type(JsonFieldType.STRING).description("댓글 수정일"),
+
                                         fieldWithPath("pageInfo").type(JsonFieldType.OBJECT).description("페이지 정보"),
                                         fieldWithPath("pageInfo.page").type(JsonFieldType.NUMBER).description("페이지 번호"),
                                         fieldWithPath("pageInfo.size").type(JsonFieldType.NUMBER).description("페이지 사이즈"),
@@ -400,6 +479,7 @@ public class QuestionControllerTest {
                 ));
 
     }
+
 
 
     @Test

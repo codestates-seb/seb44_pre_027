@@ -48,9 +48,10 @@ public class QuestionService {
 
         Question findQuestion = findVerifiedQuestion(question.getQuestionId());
 
-        Question updatedQuestion = beanUtils.copyNonNullProperties(question, findQuestion);
+        Optional.ofNullable(question.getContent()).ifPresent(content -> findQuestion.setContent(content));
+        Optional.ofNullable(question.getTitle()).ifPresent(title -> findQuestion.setTitle(title));
 
-        return questionRepository.save(updatedQuestion);
+        return questionRepository.save(findQuestion);
     }
 
     /** 질문 조회 메서드 (OK)
