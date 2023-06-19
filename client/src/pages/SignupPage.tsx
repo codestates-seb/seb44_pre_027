@@ -19,11 +19,12 @@ import GithubIconWhite from '../assets/icons/GithubIconWhite';
 import FacebookIcon from '../assets/icons/FacebookIcon';
 import HelpSm from '../assets/icons/HelpSm';
 import GotoLinkIcon from '../assets/icons/GotoLinkIcon';
+import useSignupMutation from '@/queries/useSignupMutation';
 
 const passwordRegex = new RegExp(/^(?=.*[a-zA-Z])(?=.*[0-9])/);
 
 const signupSchema = z.object({
-  displayname: z.string().min(2).max(10),
+  nickname: z.string().min(2).max(10),
   email: z
     .string()
     .min(1, { message: 'This field has to be filled' })
@@ -31,12 +32,13 @@ const signupSchema = z.object({
   password: z.string().min(8).regex(passwordRegex),
 });
 
-type SignupType = z.infer<typeof signupSchema>;
+export type SignupType = z.infer<typeof signupSchema>;
 
 const SignupPage = () => {
+  const signupMutation = useSignupMutation();
   const signup = useForm<SignupType>({ resolver: zodResolver(signupSchema) });
-  const onSubmit: SubmitHandler<SignupType> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<SignupType> = async (data) => {
+    const mutate = await signupMutation.mutateAsync(data);
   };
 
   return (
@@ -71,7 +73,7 @@ const SignupPage = () => {
                   <LabelInput
                     title={'Display Name'}
                     isWithLink={false}
-                    {...signup.register('displayname')}
+                    {...signup.register('nickname')}
                   />
                   <LabelInput title={'Email'} isWithLink={false} {...signup.register('email')} />
                   <LabelInput
@@ -100,7 +102,7 @@ const SignupPage = () => {
                 </PrimaryBtn>
                 {(signup.formState.errors.email ||
                   signup.formState.errors.password ||
-                  signup.formState.errors.displayname) && (
+                  signup.formState.errors.nickname) && (
                   <span className="  text-xs text-red-500">
                     something went wrong please check your password, email, name, daham
                   </span>
