@@ -14,18 +14,18 @@ VALUES
   ('james@example.com', 'James Wilson', 'password123', '2023-06-15 20:45:00', '2023-06-15 20:45:00', 'Title 11', 'Content 11', 'Location 11');
 
   -- 테이블명: question
-  INSERT INTO question (member_id, title, content, created_at, modified_at, views)
+  INSERT INTO question (member_id, title, content, created_at, modified_at, views, vote_score)
   VALUES
-    (1, 'Question 1', 'Content 1', '2023-06-15 10:30:00', '2023-06-15 10:30:00', 10),
-    (1, 'Question 2', 'Content 2', '2023-06-15 11:45:00', '2023-06-15 11:45:00', 5),
-    (3, 'Question 3', 'Content 3', '2023-06-15 12:15:00', '2023-06-15 12:15:00', 8),
-    (4, 'Question 4', 'Content 4', '2023-06-15 13:20:00', '2023-06-15 13:20:00', 12),
-    (5, 'Question 5', 'Content 5', '2023-06-15 14:45:00', '2023-06-15 14:45:00', 3),
-    (5, 'Question 6', 'Content 6', '2023-06-15 15:30:00', '2023-06-15 15:30:00', 20),
-    (5, 'Question 7', 'Content 7', '2023-06-15 16:15:00', '2023-06-15 16:15:00', 15),
-    (6, 'Question 8', 'Content 8', '2023-06-15 17:00:00', '2023-06-15 17:00:00', 6),
-    (7, 'Question 9', 'Content 9', '2023-06-15 18:15:00', '2023-06-15 18:15:00', 9),
-    (8, 'Question 10', 'Content 10', '2023-06-15 19:30:00', '2023-06-15 19:30:00', 10);
+    (1, 'Question 1', 'Content 1', '2023-06-15 10:30:00', '2023-06-15 10:30:00', 10, 1),
+    (1, 'Question 2', 'Content 2', '2023-06-15 11:45:00', '2023-06-15 11:45:00', 5, 6),
+    (3, 'Question 3', 'Content 3', '2023-06-15 12:15:00', '2023-06-15 12:15:00', 8, 5),
+    (4, 'Question 4', 'Content 4', '2023-06-15 13:20:00', '2023-06-15 13:20:00', 12, 4),
+    (5, 'Question 5', 'Content 5', '2023-06-15 14:45:00', '2023-06-15 14:45:00', 3, 6),
+    (5, 'Question 6', 'Content 6', '2023-06-15 15:30:00', '2023-06-15 15:30:00', 20, 7),
+    (5, 'Question 7', 'Content 7', '2023-06-15 16:15:00', '2023-06-15 16:15:00', 15, 10),
+    (6, 'Question 8', 'Content 8', '2023-06-15 17:00:00', '2023-06-15 17:00:00', 6, 15),
+    (7, 'Question 9', 'Content 9', '2023-06-15 18:15:00', '2023-06-15 18:15:00', 9, -3),
+    (8, 'Question 10', 'Content 10', '2023-06-15 19:30:00', '2023-06-15 19:30:00', 10, -1);
 
 -- 테이블명: answer
 INSERT INTO answer (question_id, member_id, content, created_at, modified_at)
