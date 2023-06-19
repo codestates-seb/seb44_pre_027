@@ -14,7 +14,7 @@ const WriteInputContainer = ({
   description,
 }: WriteInputContainerProps) => {
   return (
-    <section className={cn('mt-4 rounded-sm border border-slate-200 p-6', className)}>
+    <section className={cn('mt-4 rounded-sm border border-slate-200 p-6 bg-white', className)}>
       <h2 className=" font-medium">{subject}</h2>
       <p className=" mb-3 text-xs text-slate-600">{description}</p>
       {children}
