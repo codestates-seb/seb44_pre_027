@@ -1,10 +1,12 @@
-import RightSideBar from '@/common/RightSideBar/RightSideBar';
 import Wrapper from '@/common/Wrapper';
 import QuestionContainer from '@/components/home/QuestionContainer';
 import LeftSideBar from '@/components/LeftSideBar';
+import RightSideBar from '@/components/RightSideBar';
 import React from 'react';
 
-interface QuestionsPageProps {}
+interface QuestionsPageProps {
+
+}
 
 const QuestionsPage = ({}: QuestionsPageProps) => {
   return (
