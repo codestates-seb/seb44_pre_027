@@ -1,7 +1,7 @@
 import { todos } from './data';
 import { rest } from 'msw';
 
-export const handlers = [
+const dahamHandlers = [
   rest.get('/todos', (_, res, ctx) => {
     return res(ctx.status(200), ctx.json(todos));
   }),
@@ -11,3 +11,11 @@ export const handlers = [
     return res(ctx.status(201));
   }),
 ];
+
+type DahamType = typeof dahamHandlers;
+
+const giljongHandlers: DahamType = [];
+
+const hyejinHandlers: DahamType = [];
+
+export const handlers = dahamHandlers.concat(giljongHandlers).concat(hyejinHandlers);
