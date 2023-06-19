@@ -23,7 +23,6 @@ interface AskInputProps
   extends React.ComponentPropsWithRef<'input'>,
     VariantProps<typeof AskInputVariants> {
   type?: string;
-  value: {value:string, onChange: React.ChangeEventHandler<HTMLInputElement>}
 }
 
 const AskInput = (

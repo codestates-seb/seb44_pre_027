@@ -1,5 +1,5 @@
 import React from 'react';
-import useInput from '../../../utils/DaHamHooks/useInput';
+import { SubmitHandler, FormProvider, useForm, FieldValues } from 'react-hook-form';
 
 import { AskInputInformation } from './askInputInformation';
 import AskInput from '@/components/askquestion/AskInput';
@@ -14,20 +14,12 @@ import Wrapper from '@/common/Wrapper';
 interface AskQuestionPageProps {}
 
 const AskQuestionPage = ({}: AskQuestionPageProps) => {
-  const titleBind = useInput();
-  const problemBodyBind = useInput();
-  const expectedBodyBind = useInput();
-  const tagBind = useInput();
+  const { register, handleSubmit, formState: { isSubmitting } } = useForm();
 
-  const handleSubmit = (e:React.FormEvent) => {
-    e.preventDefault();
-    const data = {
-      "title": titleBind.value,
-      "body": problemBodyBind.value + `\n\n` + expectedBodyBind.value,
-      "tag": tagBind.value,
-    }
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    console.log(data);
     call('/questions', 'POST', data);
-    // window.location.href=`/questions/${id}`
+    // window.location.href=`/questions/${id}`;
   }
 
   return (
@@ -35,7 +27,7 @@ const AskQuestionPage = ({}: AskQuestionPageProps) => {
       <main className=" mx-4 mb-4 flex max-w-[878px] flex-col">
         <h2 className=" mb-12 mt-6 text-3xl font-semibold">Ask a public question</h2>
         <GoodQuestion />
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           {AskInputInformation.map((element, idx) => {
             const { type, input, subject, description } = element;
             switch (type) {
@@ -46,7 +38,7 @@ const AskQuestionPage = ({}: AskQuestionPageProps) => {
                     description={description}
                   >
                     <AskInput placeholder={element.placeholder}
-                    />
+                    {...register(input)}/>
                   </WriteInputContainer>
                 );
               case 'textarea':
@@ -56,12 +48,13 @@ const AskQuestionPage = ({}: AskQuestionPageProps) => {
                     subject={subject}
                     description={description}
                   >
-                    <AskTextArea/>
+                    <AskTextArea {...register(input)}/>
                   </WriteInputContainer>
                 );}
           })}
           <PrimaryBtn size="fit-content"
-          className='mt-3 mb-14'>Post your question</PrimaryBtn>
+          className='mt-3 mb-14'
+          disabled={isSubmitting}>Post your question</PrimaryBtn>
         </form>
       </main>
     </Container>
