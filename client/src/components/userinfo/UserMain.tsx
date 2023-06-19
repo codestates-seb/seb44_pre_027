@@ -7,7 +7,7 @@ import UserSummary from './UserSummary';
 const UserMain = () => {
     const [isProfile, setIsProfile] = useState(true);
     return(
-        <main className="ml-4 h-screen flex flex-row">
+        <main className="ml-4 flex flex-row flex-grow-1">
             {isProfile ? 
             (   <>
                 <div className="basis-2/12">
