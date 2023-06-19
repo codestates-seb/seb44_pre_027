@@ -24,11 +24,11 @@ jobs:
           java-version: 11
 
       - name: Permission for gradlew
-        run: chmod +x ./gradlew
+        run: chmod +x ./server/gradlew
         shell: bash
 
       - name: Build and Test
-        run: ./gradlew build test
+        run: ./server/gradlew build test
 
       - name: Make Zip File
         run: zip -qq -r ./$GITHUB_SHA.zip .
