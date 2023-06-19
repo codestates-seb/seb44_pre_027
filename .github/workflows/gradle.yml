@@ -27,8 +27,9 @@ jobs:
         run: gradle init
       - name: Build with Gradle
         working-directory: ./server
-
-        run: gradle build
+        run: |
+          ls -R  
+          gradle build
       - name: Make zip file
         run: zip -r ./stackoverflow-clone.zip .
         shell: bash
