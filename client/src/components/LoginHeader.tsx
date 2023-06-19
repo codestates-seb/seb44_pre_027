@@ -58,7 +58,7 @@ const handleDropdown01 = (): void => {
       {changeNav ? (
         <ul className="flex flex-row space-x-2">
           <li className={cn(IconHover({ variant: 'hover' }))}>
-            <Link to="/userinfo" className="block p-2 text-gray-500 bg-transparent">
+            <Link to="/users" className="block p-2 text-gray-500 bg-transparent">
               <img
                 src="https://www.gravatar.com/avatar/9bcf7a89f50be51792a0ce9e6af9e917?s=48&d=identicon&r=PG"
                 alt="user image"
@@ -101,12 +101,12 @@ const handleDropdown01 = (): void => {
         </ul>
       ) : (
         <div className="my-4 text-sm mb-3">
-          <Link to="/loginpage">
+          <Link to="/users/login">
             <button className="bg-white text-sky-500 py-2 px-3 mx-2 border-zinc-200 w-[80px] rounded bg-sky-50 hover:bg-blue-200 font-normal">
               Log in
             </button>
           </Link>
-          <Link to="/signuppage">
+          <Link to="/users/signup">
             <button className="border border-zinc-200 bg-blue-500 py-2 px-3 w-[80px] hover:bg-blue-800 rounded text-white font-normal">
               Sign up
             </button>

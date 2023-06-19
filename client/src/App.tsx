@@ -19,11 +19,11 @@ const App = ({}: AppProps) => {
         <main className="flex-grow">
             <Routes>
               <Route path="/" element={<QuestionsPage/>}/>
-              <Route path="/ask" element={<AskQuestionPage/>}/>
-              <Route path="/detail" element={<QuestionDetailPage/>}/>
-              <Route path="/userinfo" element={<UserPage/>}/>
-              <Route path="/loginpage" element={<LoginPage/>}/>
-              <Route path="/signuppage" element={<SignupPage/>}/>
+              <Route path="/questions/ask" element={<AskQuestionPage/>}/>
+              <Route path="/questions" element={<QuestionDetailPage/>}/>
+              <Route path="/users" element={<UserPage/>}/>
+              <Route path="/users/login" element={<LoginPage/>}/>
+              <Route path="/users/signup" element={<SignupPage/>}/>
             </Routes>
           </main>
         <Footer/>
