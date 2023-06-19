@@ -1,6 +1,6 @@
 import { VariantProps, cva } from 'class-variance-authority';
 import { cn } from '@/utils/cn';
-import React, { forwardRef, HTMLAttributes } from 'react';
+import React, { forwardRef, HTMLAttributes, Ref } from 'react';
 
 const AskInputVariants = cva(
   `
@@ -20,23 +20,24 @@ const AskInputVariants = cva(
 );
 
 interface AskInputProps
-  extends HTMLAttributes<HTMLInputElement>,
+  extends React.ComponentPropsWithRef<'input'>,
     VariantProps<typeof AskInputVariants> {
   type?: string;
   value: {value:string, onChange: React.ChangeEventHandler<HTMLInputElement>}
 }
 
-const AskInput = forwardRef<HTMLInputElement, AskInputProps>(
-  ({ className, variant, type, value, ...attribute }: AskInputProps) => {
-    return (
-      <input
-        className={cn(AskInputVariants({ variant }) + ' ' + className)}
-        {...attribute}
-        type={type}
-        {...value}
-      />
-    );
-  }
-);
+const AskInput = (
+  { className, variant, type, ...attribute }: AskInputProps,
+  ref: Ref<HTMLInputElement>
+) => {
+  return (
+    <input
+      className={cn(AskInputVariants({ variant }) + ' ' + className)}
+      {...attribute}
+      type={type}
+      ref={ref}
+    />
+  );
+};
 
-export default AskInput;
+export default forwardRef(AskInput);

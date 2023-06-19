@@ -9,6 +9,7 @@ import WriteInputContainer from '@/components/askquestion/WriteInputContainer';
 import { Container } from '@/common/style/Containers.styled';
 import { PrimaryBtn } from '@/common/style/Buttons.styled';
 import { call } from '@/utils/ApiService';
+import Wrapper from '@/common/Wrapper';
 
 interface AskQuestionPageProps {}
 
@@ -45,8 +46,6 @@ const AskQuestionPage = ({}: AskQuestionPageProps) => {
                     description={description}
                   >
                     <AskInput placeholder={element.placeholder}
-                      value={input === 'title'?
-                      titleBind : tagBind}
                     />
                   </WriteInputContainer>
                 );
@@ -57,7 +56,7 @@ const AskQuestionPage = ({}: AskQuestionPageProps) => {
                     subject={subject}
                     description={description}
                   >
-                    <AskTextArea value={input === 'problem'? problemBodyBind : expectedBodyBind}/>
+                    <AskTextArea/>
                   </WriteInputContainer>
                 );}
           })}

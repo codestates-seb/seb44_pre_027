@@ -9,16 +9,20 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.1.1",
     "@reduxjs/toolkit": "^1.9.5",
     "@tanstack/react-query": "^4.29.12",
+    "@tanstack/react-query-devtools": "^4.29.14",
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.45.0-next.1",
     "react-redux": "^8.0.7",
     "react-router-dom": "^6.13.0",
     "styled-components": "^6.0.0-rc.3",
-    "tailwind-merge": "^1.13.1"
+    "tailwind-merge": "^1.13.1",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@types/node": "^18.15.13",

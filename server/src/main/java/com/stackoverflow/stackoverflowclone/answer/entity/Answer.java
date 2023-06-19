@@ -15,6 +15,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class Answer extends Auditable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long answerId;
@@ -30,17 +31,28 @@ public class Answer extends Auditable {
     @JoinColumn(name = "QUESTION_ID")
     private Question question;
 
+    @Override
+    public String toString() {
+        return "Answer{" +
+                "answerId=" + answerId +
+                ", content='" + content + '\'' +
+                ", member=" + member +
+                ", question=" + question +
+                '}';
+    }
+
     public void addQuestion(Question question){
         this.question = question;
         if(this.question.getAnswers().contains(this)){
             this.question.getAnswers().add(this);
         }
     }
-
+/*
     public void addMember(Member member) {
         this.member = member;
         if(this.member.getAnswers().contains(this)){
             this.member.getAnswers().add(this);
         }
     }
+ */
 }
