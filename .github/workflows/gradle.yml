@@ -32,6 +32,10 @@ jobs:
         with:
           arguments: build
 
+      - name: Log JAR file location
+        run:
+          echo "JAR file location: ${{ steps.build.outputs.jarFile }}"
+
       - name: Make zip file
         run: zip -r ./stackoverflow-clone.zip .
         shell: bash
