@@ -1,10 +1,11 @@
 package com.stackoverflow.stackoverflowclone.member.service;
 
+
 import com.stackoverflow.stackoverflowclone.exception.BusinessLogicException;
 import com.stackoverflow.stackoverflowclone.exception.ExceptionCode;
-import com.stackoverflow.stackoverflowclone.member.auth.utils.CustomAuthorityUtils;
 import com.stackoverflow.stackoverflowclone.member.entity.Member;
 import com.stackoverflow.stackoverflowclone.member.repository.MemberRepository;
+import com.stackoverflow.stackoverflowclone.member.auth.utils.CustomAuthorityUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ import java.util.Optional;
 
 @Service
 public class MemberService {
-    private final MemberRepository memberRepository;
+    private MemberRepository memberRepository;
 
     private final PasswordEncoder passwordEncoder;
     private final CustomAuthorityUtils authorityUtils;
@@ -30,6 +31,14 @@ public class MemberService {
     /* 회원가입 */
     public Member createMember(Member member) {
         verifyExistsEmail(member.getEmail());
+
+        // 패스워드를 단방향 암호화
+        String encryptedPassword = passwordEncoder.encode(member.getPassword());
+        member.setPassword(encryptedPassword);
+
+        List<String> roles = authorityUtils.createRoles(member.getEmail());
+        member.setRoles(roles);
+
         return memberRepository.save(member);
     }
 

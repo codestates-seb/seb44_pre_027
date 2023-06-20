@@ -1,10 +1,10 @@
-package com.stackoverflow.stackoverflowclone.member.userdetails;
+package com.stackoverflow.stackoverflowclone.member.auth.userdetails;
 
 import com.stackoverflow.stackoverflowclone.exception.BusinessLogicException;
 import com.stackoverflow.stackoverflowclone.exception.ExceptionCode;
+import com.stackoverflow.stackoverflowclone.member.auth.utils.CustomAuthorityUtils;
 import com.stackoverflow.stackoverflowclone.member.entity.Member;
 import com.stackoverflow.stackoverflowclone.member.repository.MemberRepository;
-import com.stackoverflow.stackoverflowclone.member.utils.CustomAuthorityUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

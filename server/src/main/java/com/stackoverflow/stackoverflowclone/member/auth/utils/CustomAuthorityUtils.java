@@ -1,4 +1,4 @@
-package com.stackoverflow.stackoverflowclone.member.utils;
+package com.stackoverflow.stackoverflowclone.member.auth.utils;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
