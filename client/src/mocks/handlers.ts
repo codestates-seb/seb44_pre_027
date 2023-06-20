@@ -1,4 +1,4 @@
-import { todos, users, data, question } from './data';
+import { todos, users, data, question, questions } from './data';
 import { rest } from 'msw';
 
 const typeProvider = [
@@ -15,8 +15,16 @@ const typeProvider = [
 type DahamType = typeof typeProvider;
 
 const dahamHandlers: DahamType = [
-  rest.get('/questions/1', (_, res, ctx)=>{
+  rest.get(`/questions/1`, (_, res, ctx)=>{
     return res(ctx.status(200), ctx.json(question));
+  }),
+  rest.delete(`/questions/1`, (_, res, ctx)=>{
+    questions.splice(1, 1);
+    return res(ctx.status(200));
+  }),
+  rest.delete(`/questions/1/answers/1`, (_, res, ctx)=>{
+    questions.splice(1, 1);
+    return res(ctx.status(200));
   })
 ];
 

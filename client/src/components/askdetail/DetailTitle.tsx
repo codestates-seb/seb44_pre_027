@@ -27,7 +27,6 @@ const DetailTitle = ({ className, questionTitleData, answerNumber, ...attribute 
         </Link>
       </div>
       <div className=" flex border-b border-slate-200 pb-4 pt-2 text-xs text-slate-500">
-        {/* 작성 날짜, 수정 날짜, 조회수 */}
         <span className=" mr-4">Asked {answerNumber}</span>
         <span className=" mr-4">Modified {questionTitleData?.modified}</span>
         <span className=" mr-4">Viewed {questionTitleData?.views}</span>

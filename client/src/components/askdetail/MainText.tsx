@@ -10,12 +10,6 @@ const MainText = ({content}: MainTextProps) => {
       <p>
         {content}
       </p>
-
-      {/* button 컴포넌트 분리할지 안할지 */}
-      <div className=" flex gap-4 text-sm">
-        <button>Edit</button>
-        <button>Delete</button>
-      </div>
     </div>
   );
 };

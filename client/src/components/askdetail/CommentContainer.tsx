@@ -1,17 +1,17 @@
 import React from 'react';
 import CommentItem from './CommentItem';
-import { Board } from '../../types/QuestionAnswerType';
+import { Comment } from '../../types/QuestionAnswerType';
 
 interface CommentContainerProps {
-  comments: Array<Board>;
+  comments: Array<Comment>;
 }
 
 const CommentContainer = ({comments}: CommentContainerProps) => {
   return (
-    <section className=" ">
+    <section className=" pl-12">
       <ol className=" list-none">
         {comments.map((comment, id)=>{
-          return <CommentItem data={comment} id={++id} key={comment.id}/>;
+          return <CommentItem data={comment} id={++id} key={comment.commentId}/>;
         })
 
         }

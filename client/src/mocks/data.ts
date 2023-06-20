@@ -5,6 +5,8 @@ export interface UserType {
   userid: number;
 }
 
+export const questions = [{}];
+
 export const question = {
   questionId : "1",
   nickname : "Kim-DaHam",
@@ -34,14 +36,14 @@ export const question = {
   ],
   comments: [
     {
-      id : "1",
+      commentId : "1",
       nickname: 'Commenter',
       content : "example comment",
       createdAt : "2000-06-20 06:12:13",
       modifiedAt : "2000-06-21 07:11:12"
     },
     {
-      id : "2",
+      commentId : "2",
       nickname: 'Commenter',
       content : "example comment2",
       createdAt : "2000-06-20 06:12:13",

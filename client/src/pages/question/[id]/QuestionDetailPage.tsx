@@ -15,11 +15,10 @@ import { Question, QuestionData } from '../../../types/QuestionAnswerType';
 import { ColumnItemWrapper } from '@/common/style/Containers.styled';
 
 interface QuestionDetailPageProps {
-  id: number;
+  questionId: number;
 }
 
-const BoardInitData = {
-  id: 0,
+const DefaultData = {
   nickname: '',
   content: '',
   createdAt: '',
@@ -27,23 +26,24 @@ const BoardInitData = {
 }
 
 const QuestionInitData = {
-  ...BoardInitData,
+  questionId: 0,
+  ...DefaultData,
   title : '',
   views : 0,
   voteScore : 0,
-  answers: [{...BoardInitData,}],
-  comments: [{...BoardInitData}],
+  answers: [{answerId: 0, ...DefaultData,}],
+  comments: [{commentId: 0, ...DefaultData}],
 }
 
-const QuestionDetailPage = ({id}: QuestionDetailPageProps) => {
+const QuestionDetailPage = ({questionId}: QuestionDetailPageProps) => {
   const [data, setData] = useState<QuestionData>(QuestionInitData);
-  const [question, setQuestion] = useState<Question>({...BoardInitData, title:'', views: 0, voteScore:0});
+  const [question, setQuestion] = useState<Question>({...DefaultData, questionId:0, title:'', views: 0, voteScore:0});
 
   useEffect(()=>{
-    call(`/questions/${id}`, 'GET', null).then((res) => {
+    call(`/questions/${1}`, 'GET', null).then((res) => {
       setData(res);
       setQuestion({
-        id: res.id,
+        questionId: res.questionId,
         nickname: res.nickname,
         title: res.title,
         content: res.content,
@@ -57,7 +57,7 @@ const QuestionDetailPage = ({id}: QuestionDetailPageProps) => {
 
   const loadAnswers = ():JSX.Element[] =>{
     const answersArray = data.answers.map((answer)=>{
-      return <QuestionAnswerComponent data={answer} type='Answer' key={answer.id}/>
+      return <QuestionAnswerComponent data={answer} type='Answer' questionId={data.questionId} answerId={answer.answerId} key={answer.answerId}/>
     })
     return answersArray;
   }
@@ -76,7 +76,7 @@ const QuestionDetailPage = ({id}: QuestionDetailPageProps) => {
         />
         <div className="flex gap-10">
             <ColumnItemWrapper size='100%' gap={10}>
-              <QuestionAnswerComponent data={question} type='Question'/>
+              <QuestionAnswerComponent data={question} type='Question' questionId={data.questionId}/>
               <CommentContainer comments={data.comments}/>
               <div className=" flex flex-col text-xs">
                 <div className=" flex items-center justify-between py-4 gap-12">
