@@ -102,7 +102,7 @@ const handleDropdown01 = (): void => {
       ) : (
         <div className="my-4 text-sm mb-3">
           <Link to="/users/login">
-            <button className="bg-white text-sky-500 py-2 px-3 mx-2 border-zinc-200 w-[80px] rounded bg-sky-50 hover:bg-blue-200 font-normal">
+            <button className="text-sky-500 py-2 px-3 mx-2 border-zinc-200 w-[80px] rounded bg-sky-50 hover:bg-blue-200 font-normal">
               Log in
             </button>
           </Link>
