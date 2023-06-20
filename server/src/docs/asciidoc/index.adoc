@@ -7,6 +7,8 @@
 
 v1.0.0, 2023.06.19 정민지
 
+v1.0.1, 2023.06.20 정민지
+
 ***
 API 문서 개요
 
@@ -98,8 +100,101 @@ include::{snippets}/delete-question/path-parameters.adoc[]
 .http-response
 include::{snippets}/delete-question/http-response.adoc[]
 
+
+== AnswerController
+=== 답변 등록
+
+.http-request
+include::{snippets}/post-Answer/http-request.adoc[]
+
+.request-fields
+이 부분을 client 쪽에서 request body로 넘겨주시면 됩니다!
+include::{snippets}/post-Answer/request-fields.adoc[]
+
+.path-parameters
+include::{snippets}/post-Answer/path-parameters.adoc[]
+
+.http-response
+include::{snippets}/post-Answer/http-response.adoc[]
+
+.response-headers
+include::{snippets}/post-Answer/response-headers.adoc[]
+
+=== 답변 수정
+
+.http-request
+include::{snippets}/patch-answer/http-request.adoc[]
+
+.request-fields
+이 부분을 client 쪽에서 request body로 넘겨주시면 됩니다!
+include::{snippets}/patch-answer/request-fields.adoc[]
+
+.path-parameters
+include::{snippets}/patch-answer/path-parameters.adoc[]
+
+.http-response
+include::{snippets}/patch-answer/http-response.adoc[]
+
+=== 답변 삭제
+
+.http-request
+include::{snippets}/delete-answer/http-request.adoc[]
+
+.path-parameters
+include::{snippets}/delete-answer/path-parameters.adoc[]
+
+.http-response
+include::{snippets}/delete-answer/http-response.adoc[]
+
+
+== CommentController
+=== 댓글 등록
+
+.http-request
+include::{snippets}/post-comment/http-request.adoc[]
+
+.request-fields
+이 부분을 client 쪽에서 request body로 넘겨주시면 됩니다!
+include::{snippets}/post-comment/request-fields.adoc[]
+
+.path-parameters
+include::{snippets}/post-comment/path-parameters.adoc[]
+
+.http-response
+include::{snippets}/post-comment/http-response.adoc[]
+
+.response-headers
+include::{snippets}/post-comment/response-headers.adoc[]
+
+=== 댓글 수정
+
+.http-request
+include::{snippets}/patch-comment/http-request.adoc[]
+
+.request-fields
+이 부분을 client 쪽에서 request body로 넘겨주시면 됩니다!
+include::{snippets}/patch-comment/request-fields.adoc[]
+
+.path-parameters
+include::{snippets}/patch-comment/path-parameters.adoc[]
+
+.http-response
+include::{snippets}/patch-comment/http-response.adoc[]
+
+=== 댓글 삭제
+
+.http-request
+include::{snippets}/delete-comment/http-request.adoc[]
+
+.path-parameters
+include::{snippets}/delete-comment/path-parameters.adoc[]
+
+.http-response
+include::{snippets}/delete-comment/http-response.adoc[]
+
+
 == VoteController
-=== 질문 기능 (post 하나로)
+=== 투표 기능 (post 하나로)
 
 .http-request
 include::{snippets}/post-vote/http-request.adoc[]
