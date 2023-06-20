@@ -38,7 +38,7 @@ jobs:
 
       - name: Make zip file
         working-directory: ../seb44_pre_027
-        run: zip -r ./stackoverflow-clone.zip .
+        run: zip -r ../stackoverflow-clone.zip .
         shell: bash
 
       - name: Configure AWS credentials
