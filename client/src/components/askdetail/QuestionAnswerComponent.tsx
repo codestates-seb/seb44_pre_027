@@ -1,35 +1,23 @@
 import React from 'react';
-import CommentContainer from './CommentContainer';
 import MainText from './MainText';
 import VoteContainer from './VoteContainer';
+import CommentContainer from '@/components/askdetail/CommentContainer';
+import { Board, Question } from '../../types/QuestionAnswerType'
 
-interface QuestionAnswerComponentProps {}
+interface QuestionAnswerComponentProps {
+  type: string;
+  data: Board | Question;
+}
 
-const QuestionAnswerComponent = ({}: QuestionAnswerComponentProps) => {
+const QuestionAnswerComponent = ({type, data}: QuestionAnswerComponentProps) => {
+
   return (
     <section className="">
-      <div className=" flex pt-4">
-        <VoteContainer />
-        <MainText />
+      <div className=" flex pt-4 mb-6">
+        <VoteContainer voteScore={data.voteScore}/>
+        <MainText content={data.content}/>
       </div>
-
-      {/* 답변 정렬 코드 컴포넌트 분리 or 그대로 */}
-      <div className=" flex flex-col pl-16 text-xs">
-        <div className=" flex items-center justify-between py-4">
-          <span className=" text-sm ">{'2'} Answer</span>
-          <div className=" text-sm">
-            <label htmlFor="">Sorted by: </label>
-            <select name="" id="" className=" w-[300px] rounded-md border border-slate-200 p-2">
-              <option value="">Highest score (default)</option>
-              <option value="">Trending (recent votes count more)</option>
-              <option value="">Date modified (newest first)</option>
-              <option value="">Date created (oldest first)</option>
-            </select>
-          </div>
-        </div>
-
-        <CommentContainer />
-      </div>
+      {type === 'Answer' && <hr/>}
     </section>
   );
 };
