@@ -43,12 +43,11 @@ public class QuestionController {
         return ResponseEntity.created(location).build();
     }
 
+
     /** 질문 수정 **/
     @PatchMapping("/{question-id}")
     public ResponseEntity patchQuestion(@PathVariable("question-id") @Positive long questionId,
                                         @RequestBody QuestionDto.Patch patch){
-
-        // TODO : token으로 어떤 회원인지 알아야함
 
         patch.addQuestionId(questionId);
 
@@ -56,6 +55,17 @@ public class QuestionController {
 
         return ResponseEntity.ok().build();
     }
+
+
+    /** 개별 질문 조회 **/
+    @GetMapping("/{question-id}")
+    public ResponseEntity getQuestion(@Positive @PathVariable("question-id") long questionId){
+
+        Question findQuestion = questionService.findQuestion(questionId);
+
+        return new ResponseEntity<>(questionMapper.QuestionToQuestionResponseDto(findQuestion),HttpStatus.OK);
+    }
+
 
     /** 전체 질문 목록 조회 **/
     @GetMapping
@@ -69,6 +79,7 @@ public class QuestionController {
         HttpStatus.OK);
     }
 
+
     /** 질문 검색 **/
     @GetMapping("/search")
     public ResponseEntity SearchQuestion(@Positive @RequestParam int page,
@@ -80,7 +91,6 @@ public class QuestionController {
         return new ResponseEntity<>(new MultiResponseDto<>(questionMapper.QuestionsToQuestionSearchResponseDtos(questions),pageQuestions),
                 HttpStatus.OK);
     }
-
 
 
 

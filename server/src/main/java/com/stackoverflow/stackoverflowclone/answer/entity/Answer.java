@@ -47,12 +47,17 @@ public class Answer extends Auditable {
             this.question.getAnswers().add(this);
         }
     }
-/*
+
     public void addMember(Member member) {
         this.member = member;
         if(this.member.getAnswers().contains(this)){
             this.member.getAnswers().add(this);
         }
     }
- */
+
+
+    public Answer(String content) {
+        this.content = content;
+    }
+
 }
