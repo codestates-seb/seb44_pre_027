@@ -10,7 +10,7 @@ permissions:
     pattern: "**"
     owner: ubuntu
     group: ubuntu
-
+#1
 hooks:
   ApplicationStart:
     - location: scripts/deploy.sh
