@@ -39,7 +39,6 @@ const QuestionDetailPage = ({id}: QuestionDetailPageProps) => {
   const [data, setData] = useState<QuestionData>(QuestionInitData);
   const [question, setQuestion] = useState<Question>({...BoardInitData, title:'', views: 0, voteScore:0});
 
-  {/* GET 으로 질문 정보 받아오기 */}
   useEffect(()=>{
     call(`/questions/${id}`, 'GET', null).then((res) => {
       setData(res);
@@ -79,9 +78,9 @@ const QuestionDetailPage = ({id}: QuestionDetailPageProps) => {
             <ColumnItemWrapper size='100%' gap={10}>
               <QuestionAnswerComponent data={question} type='Question'/>
               <CommentContainer comments={data.comments}/>
-              <div className=" flex flex-col pl-16 text-xs">
-                <div className=" flex items-center justify-between py-4">
-                  <span className=" text-sm ">{data.answers.length} Answer</span>
+              <div className=" flex flex-col text-xs">
+                <div className=" flex items-center justify-between py-4 gap-12">
+                  <span className="text-xl">{data.answers.length} Answer</span>
                   <div className=" text-sm">
                     <label htmlFor="">Sorted by: </label>
                     <select name="" id="" className=" w-[300px] rounded-md border border-slate-200 p-2">
