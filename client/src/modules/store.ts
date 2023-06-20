@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import darkSlice from './darkSlice';
+import loginSlice from './loginSlice';
 import dahamReducer from './dahamSlice';
 
 const store = configureStore({
   reducer: {
-    dark: darkSlice.reducer,
     daham: dahamReducer.reducer,
+    login: loginSlice.reducer,
   },
 });
 

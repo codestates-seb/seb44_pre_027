@@ -3,7 +3,7 @@ import AskInput from '@/components/askquestion/AskInput';
 import AskTextArea from '@/components/askquestion/AskTextArea';
 import GoodQuestion from '@/components/askquestion/GoodQuestion';
 import WriteInputContainer from '@/components/askquestion/WriteInputContainer';
-import { Container, ContentContainer } from '@/common/style/Containers.styled';
+import { Container } from '@/common/style/Containers.styled';
 
 interface AskQuestionPageProps {}
 
