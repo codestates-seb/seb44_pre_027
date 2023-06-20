@@ -4,14 +4,14 @@ interface PhraseProps {
     text:string;
 }
 
-const Phrase = ({text}:PhraseProps) => {
-    const Phrase = styled.p`
-        font-size: 13px;
-        color: #232629;
-    `;
+const Text = styled.p`
+    font-size: 13px;
+    color: #232629;
+`;
 
+const Phrase = ({text}:PhraseProps) => {
     return(
-        <Phrase>{text}</Phrase>
+        <Text>{text}</Text>
     )
 }
 
