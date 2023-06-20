@@ -15,6 +15,9 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./server
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 11
@@ -28,12 +31,13 @@ jobs:
       - run: gradle init
 
       - name: Grant execute permissions to gradlew script
-        run: chmod +x ./server/gradlew
+        run: chmod +x gradlew
 
       - name: Build with Gradle
-        run: ./server/gradlew build
+        run: ./gradlew build
 
       - name: Make zip file
+        working-directory: ../
         run: zip -r ./stackoverflow-clone.zip .
         shell: bash
 
