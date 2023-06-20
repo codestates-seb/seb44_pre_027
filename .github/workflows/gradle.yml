@@ -29,7 +29,7 @@ jobs:
       - run: gradle init
 
       - name: Grant execute permissions to gradlew script
-        run: chmod +x gradlew
+        run: chmod +x ./server/gradlew
 
       - name: Build with Gradle
         run: ./server/gradlew build
