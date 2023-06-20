@@ -27,6 +27,11 @@ jobs:
       - name: init with Gradle
         uses: gradle/gradle-build-action@v2
       - run: gradle init
+
+      - name: Grant execute permissions to gradlew script
+        working-directory: ./server
+        run: chmod +x gradlew
+
       - name: Build with Gradle
         working-directory: ./server
         run: ./gradlew build
