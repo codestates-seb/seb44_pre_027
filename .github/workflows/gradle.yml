@@ -15,9 +15,6 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./server
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 11
@@ -34,10 +31,11 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build with Gradle
+        working-directory: ./server
         run: ./gradlew build
 
       - name: Make zip file
-        run: zip -r ../stackoverflow-clone.zip *
+        run: zip -r stackoverflow-clone.zip *
         shell: bash
 
       - name: Configure AWS credentials
