@@ -50,7 +50,7 @@ const AmendQuestion = ({}: AmendQue) => {
                     </button>
                 </div>
             </div>
-            <div className="flex flex-col min-w-[352px] md:w-auto hidden md:block  max-h-[223px] ml-5 bg-amber-100 bg-opacity-50 border border-orange-100 text-sm">
+            <div className="flex flex-col min-w-[352px] md:w-auto md:block  max-h-[223px] ml-5 bg-amber-100 bg-opacity-50 border border-orange-100 text-sm">
                 <div className="bg-amber-100 border-b border-orange-100 py-2 pl-5 font-normal">How to Edit</div>
                 <ul className="py-2 pl-8 list-disc text-xs">
                     <li className="pl-2 py-2">Correct minor typos or mistakes</li>

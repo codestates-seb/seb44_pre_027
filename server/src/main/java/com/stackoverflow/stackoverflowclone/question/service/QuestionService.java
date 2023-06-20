@@ -2,6 +2,8 @@ package com.stackoverflow.stackoverflowclone.question.service;
 
 import com.stackoverflow.stackoverflowclone.exception.BusinessLogicException;
 import com.stackoverflow.stackoverflowclone.exception.ExceptionCode;
+import com.stackoverflow.stackoverflowclone.member.entity.Member;
+import com.stackoverflow.stackoverflowclone.member.service.MemberService;
 import com.stackoverflow.stackoverflowclone.question.entity.Question;
 import com.stackoverflow.stackoverflowclone.question.repository.QuestionRepository;
 import com.stackoverflow.stackoverflowclone.utils.CustomBeanUtils;
@@ -23,7 +25,7 @@ public class QuestionService {
 
     private final QuestionRepository questionRepository;
 
-    // private final MemberService memberService;
+    private final MemberService memberService;
 
     private final CustomBeanUtils<Question> beanUtils;
 
@@ -32,7 +34,8 @@ public class QuestionService {
     /** 질문 등록 메서드 **/
     public Question createQuestion(Question question){
 
-        // TODO : 작성한 회원이 존재하는 회원인지 확인하는 메서드 (memberservice)에서
+        // 작성한 회원이 존재하는 회원인지 확인
+        Member member = memberService.findVerifiedMember(question.getMember().getMemberId());
 
         return questionRepository.save(question);
     }
@@ -50,11 +53,25 @@ public class QuestionService {
         return questionRepository.save(updatedQuestion);
     }
 
+    /** 질문 조회 메서드 (OK)
+     * - 상세 질문을 조회하면 조회수 1 증가
+     * - @transactional 때문에 save 안해도 조회수 반영
+     * **/
+    public Question findQuestion(long questionId){
+
+        Question findQuestion = findVerifiedQuestion(questionId);
+
+        // 조회수 +1 증가
+        findQuestion.addView(findQuestion.getViews());
+
+        return findQuestion;
+    }
 
     /**
      * 전체 질문 목록 조회 메서드
      * - 1페이지 당 질문 5개 (size : 5로 고정값)
      * - 정렬 sort (최신 순, 조회수 순, 투표순 OK)
+     * - request body
      */
     public Page<Question> findQuestions(int page, String sort){
 
@@ -68,19 +85,17 @@ public class QuestionService {
         }
         // 받아온 정렬 기준이 투표 순이면
         else if(sort.equals("votes")){
-            // TODO : 투표 순 구현
-            return questionRepository.findAll(PageRequest.of(page,5, Sort.by("questionId").descending()));
+            return questionRepository.findAll(PageRequest.of(page,5, Sort.by("voteScore").descending()));
         }
         // 정렬 3개 외 나머지는 에러 발생
         else {
-            // TODO : 에러 발생
+            // TODO : 예외 처리
             throw new RuntimeException();
         }
     }
 
-
     /**
-     * 질문 검색 메서드
+     * 질문 검색 메서드 (OK)
      * - 질문 제목이나 본문에 해당 단어가 포함되면 검색
      * - 최신 순으로 나열
      */
@@ -123,9 +138,4 @@ public class QuestionService {
         
         return question;
     }
-
-
-
-
-
 }
