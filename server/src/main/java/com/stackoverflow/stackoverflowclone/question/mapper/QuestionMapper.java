@@ -21,6 +21,21 @@ public interface QuestionMapper {
 
     List<QuestionDto.Response> QuestionsToQuestionResponseDtos(List<Question> questions);
 
+
+    default QuestionDto.SearchResponse QuestionToQuestionSearchResponseDto(Question question){
+
+        QuestionDto.SearchResponse questionSearchResponseDto =
+                QuestionDto.SearchResponse.builder()
+                        .questionId(question.getQuestionId())
+                        .title(question.getTitle())
+                        .content(question.getContent())
+                        .view(question.getViews())
+                        .voteScore(question.getVoteScore())
+                        .build();
+
+        return questionSearchResponseDto;
+    }
+
     /** mapper로 user, question, answer, comment, vote 같이 받아서 사용 **/
     default QuestionDto.Response QuestionToQuestionResponseDto(Question question){
 
@@ -33,6 +48,7 @@ public interface QuestionMapper {
                         .createdAt(question.getCreatedAt())
                         .modifiedAt(question.getModifiedAt())
                         .views(question.getViews())
+                        .voteScore(question.getVoteScore())
                         .build();
 
         if (question.getAnswers() != null) {

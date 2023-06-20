@@ -18,8 +18,10 @@ public class Vote {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long voteId;
 
+
     @Enumerated(EnumType.STRING)
     private voteStatus status; // 추천, 비추천
+
 
     @ManyToOne
     @JoinColumn(name = "QUESTION_ID")
@@ -28,7 +30,6 @@ public class Vote {
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
-
 
     public enum voteStatus {
         GOOD("추천"),
@@ -41,4 +42,5 @@ public class Vote {
             this.status = status;
         }
     }
+
 }
