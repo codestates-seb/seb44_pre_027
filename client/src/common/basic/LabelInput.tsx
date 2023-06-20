@@ -30,8 +30,6 @@ const Input = styled.input`
 `;
 
 const LabelInput = ({type, isWithLink, title, linkText}: LabelInputProps)=>{
-
-
     return(
         <ColumnItemWrapper size='100%' gap={2}>
             { isWithLink === true ?
