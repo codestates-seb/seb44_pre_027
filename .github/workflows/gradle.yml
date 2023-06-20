@@ -31,7 +31,7 @@ jobs:
         run: chmod +x ./server/gradlew
 
       - name: Build with Gradle
-        run: /server/gradlew build
+        run: ./server/gradlew build
 
       - name: Make zip file
         run: zip -r ./stackoverflow-clone.zip .
