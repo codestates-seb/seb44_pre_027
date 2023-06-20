@@ -1,6 +1,7 @@
 package com.stackoverflow.stackoverflowclone.question.mapper;
 
 import com.stackoverflow.stackoverflowclone.answer.dto.AnswerDto;
+import com.stackoverflow.stackoverflowclone.comment.dto.CommentDto;
 import com.stackoverflow.stackoverflowclone.question.dto.QuestionDto;
 import com.stackoverflow.stackoverflowclone.question.entity.Question;
 import org.mapstruct.Mapper;
@@ -66,6 +67,23 @@ public interface QuestionMapper {
                             .collect(Collectors.toList());
 
             questionResponseDto.setAnswers(answerResponseDtos);
+
+            if(question.getComments() != null){
+                List<CommentDto.Response> commentResponseDtos =
+                        question.getComments()
+                                .stream()
+                                .map(comment -> CommentDto.Response.builder()
+                                        .commentId(comment.getCommentId())
+                                        .content(comment.getContent())
+                                        .memberId(comment.getMember().getMemberId())
+                                                .createdAt(comment.getCreatedAt())
+                                                .modifiedAt(comment.getModifiedAt())
+                                                .build())
+                                .collect(Collectors.toList());
+
+                questionResponseDto.setComments(commentResponseDtos);
+            }
+
         }
 
         return questionResponseDto;
