@@ -3,6 +3,7 @@ package com.stackoverflow.stackoverflowclone.question.entity;
 
 import com.stackoverflow.stackoverflowclone.answer.entity.Answer;
 import com.stackoverflow.stackoverflowclone.audit.Auditable;
+import com.stackoverflow.stackoverflowclone.comment.entity.Comment;
 import com.stackoverflow.stackoverflowclone.member.entity.Member;
 import com.stackoverflow.stackoverflowclone.vote.entity.Vote;
 import lombok.Getter;
@@ -42,6 +43,8 @@ public class Question extends Auditable {
     @OneToMany(mappedBy = "question")
     private List<Vote> votes = new ArrayList<>();
 
+    @OneToMany(mappedBy = "question")
+    private List<Comment> comments = new ArrayList<>();
 
     /**
      * Member와 연관관계 설정

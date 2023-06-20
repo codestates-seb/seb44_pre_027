@@ -25,9 +25,7 @@ const ProductIcon = cva(
 );
 
 const Header = ({ changeNav }: HeaderProps) => {
-  const [dropdownVariant, setDropdownVariant] = useState('box');
-
-  const [isUser, setIsUser] = useState(false);
+  const [isUser, setIsUser] = useState(true);
   //changeNav 임시 props - true:로그인 상태 false:비로그인 상태
   const [isOpen, setIsOpen] = useState(false);
 
@@ -36,7 +34,7 @@ const Header = ({ changeNav }: HeaderProps) => {
   };
 
   return (
-    <nav className="sticky top-0 z-10 w-screen border-b border-gray-200 border-zinc-200 bg-white ">
+    <nav className="sticky top-0 z-10 w-screen border-b border-gray-200 bg-white ">
       <div className=" mx-auto flex h-12 items-center justify-center space-x-6">
         <div className="hover:bg-slate-200">
           <Link to="/">

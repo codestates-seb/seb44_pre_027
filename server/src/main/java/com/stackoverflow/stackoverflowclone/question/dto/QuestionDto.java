@@ -2,6 +2,7 @@ package com.stackoverflow.stackoverflowclone.question.dto;
 
 import com.stackoverflow.stackoverflowclone.answer.dto.AnswerDto;
 import com.stackoverflow.stackoverflowclone.answer.entity.Answer;
+import com.stackoverflow.stackoverflowclone.comment.dto.CommentDto;
 import com.stackoverflow.stackoverflowclone.member.entity.Member;
 import lombok.*;
 
@@ -76,6 +77,8 @@ public class QuestionDto {
         private int voteScore;
 
         private List<AnswerDto.Response> answers;
+
+        private List<CommentDto.Response> comments;
     }
 
 

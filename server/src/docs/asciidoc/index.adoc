@@ -1,0 +1,226 @@
+= StackOverflow 애플리케이션
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: 목차
+:source-highlighter: prettify
+
+v1.0.0, 2023.06.19 정민지
+
+v1.0.1, 2023.06.20 정민지
+
+***
+API 문서 개요
+
+  이 문서는 pre-project StackOverflow 애플리케이션의 문서이다.
+
+***
+== QuestionController
+=== 질문 등록
+.http-request
+include::{snippets}/post-question/http-request.adoc[]
+
+.request-body
+include::{snippets}/post-question/request-body.adoc[]
+
+.request-fields
+이 부분을 client 쪽에서 request body로 넘겨주시면 됩니다!
+include::{snippets}/post-question/request-fields.adoc[]
+
+.http-response
+include::{snippets}/post-question/http-response.adoc[]
+
+.response-headers
+include::{snippets}/post-question/response-headers.adoc[]
+
+
+=== 질문 수정
+.http-request
+include::{snippets}/patch-question/http-request.adoc[]
+
+.request-fields
+이 부분을 client 쪽에서 request body로 넘겨주시면 됩니다!
+include::{snippets}/patch-question/request-fields.adoc[]
+
+.path-parameters
+include::{snippets}/patch-question/path-parameters.adoc[]
+
+.http-response
+include::{snippets}/patch-question/http-response.adoc[]
+
+=== 질문 상세 조회
+.http-request
+include::{snippets}/get-question/http-request.adoc[]
+
+.path-parameters
+include::{snippets}/get-question/path-parameters.adoc[]
+
+.http-response
+서버에서 클라이언트 쪽으로 보내드리는 json 형식입니다!
+include::{snippets}/get-question/http-response.adoc[]
+
+.response-fields
+include::{snippets}/get-question/response-fields.adoc[]
+
+=== 질문 목록 전체 조회
+.http-request
+include::{snippets}/get-questions/http-request.adoc[]
+
+.request-parameters
+include::{snippets}/get-questions/request-parameters.adoc[]
+
+.http-response
+서버에서 클라이언트 쪽으로 보내드리는 json 형식입니다!
+include::{snippets}/get-questions/http-response.adoc[]
+
+.response-fields
+include::{snippets}/get-questions/response-fields.adoc[]
+
+=== 질문 검색
+.http-request
+include::{snippets}/search-question/http-request.adoc[]
+
+.request-parameters
+include::{snippets}/search-question/request-parameters.adoc[]
+
+.http-response
+서버에서 클라이언트 쪽으로 보내드리는 json 형식입니다!
+include::{snippets}/search-question/http-response.adoc[]
+
+.response-fields
+include::{snippets}/search-question/response-fields.adoc[]
+
+=== 질문 삭제
+.http-request
+include::{snippets}/delete-question/http-request.adoc[]
+
+.path-parameters
+include::{snippets}/delete-question/path-parameters.adoc[]
+
+.http-response
+include::{snippets}/delete-question/http-response.adoc[]
+
+
+== AnswerController
+=== 답변 등록
+
+.http-request
+include::{snippets}/post-Answer/http-request.adoc[]
+
+.request-fields
+이 부분을 client 쪽에서 request body로 넘겨주시면 됩니다!
+include::{snippets}/post-Answer/request-fields.adoc[]
+
+.path-parameters
+include::{snippets}/post-Answer/path-parameters.adoc[]
+
+.http-response
+include::{snippets}/post-Answer/http-response.adoc[]
+
+.response-headers
+include::{snippets}/post-Answer/response-headers.adoc[]
+
+=== 답변 수정
+
+.http-request
+include::{snippets}/patch-answer/http-request.adoc[]
+
+.request-fields
+이 부분을 client 쪽에서 request body로 넘겨주시면 됩니다!
+include::{snippets}/patch-answer/request-fields.adoc[]
+
+.path-parameters
+include::{snippets}/patch-answer/path-parameters.adoc[]
+
+.http-response
+include::{snippets}/patch-answer/http-response.adoc[]
+
+=== 답변 삭제
+
+.http-request
+include::{snippets}/delete-answer/http-request.adoc[]
+
+.path-parameters
+include::{snippets}/delete-answer/path-parameters.adoc[]
+
+.http-response
+include::{snippets}/delete-answer/http-response.adoc[]
+
+
+== CommentController
+=== 댓글 등록
+
+.http-request
+include::{snippets}/post-comment/http-request.adoc[]
+
+.request-fields
+이 부분을 client 쪽에서 request body로 넘겨주시면 됩니다!
+include::{snippets}/post-comment/request-fields.adoc[]
+
+.path-parameters
+include::{snippets}/post-comment/path-parameters.adoc[]
+
+.http-response
+include::{snippets}/post-comment/http-response.adoc[]
+
+.response-headers
+include::{snippets}/post-comment/response-headers.adoc[]
+
+=== 댓글 수정
+
+.http-request
+include::{snippets}/patch-comment/http-request.adoc[]
+
+.request-fields
+이 부분을 client 쪽에서 request body로 넘겨주시면 됩니다!
+include::{snippets}/patch-comment/request-fields.adoc[]
+
+.path-parameters
+include::{snippets}/patch-comment/path-parameters.adoc[]
+
+.http-response
+include::{snippets}/patch-comment/http-response.adoc[]
+
+=== 댓글 삭제
+
+.http-request
+include::{snippets}/delete-comment/http-request.adoc[]
+
+.path-parameters
+include::{snippets}/delete-comment/path-parameters.adoc[]
+
+.http-response
+include::{snippets}/delete-comment/http-response.adoc[]
+
+
+== VoteController
+=== 투표 기능 (post 하나로)
+
+.http-request
+include::{snippets}/post-vote/http-request.adoc[]
+
+.request-fields
+이 부분을 client 쪽에서 request body로 넘겨주시면 됩니다!
+include::{snippets}/post-vote/request-fields.adoc[]
+
+.path-parameters
+include::{snippets}/post-vote/path-parameters.adoc[]
+
+.request-parameters
+include::{snippets}/post-vote/request-parameters.adoc[]
+
+.http-response
+서버에서 클라이언트 쪽으로 보내드리는 json 형식입니다!
+include::{snippets}/post-vote/http-response.adoc[]
+
+.response-fields
+include::{snippets}/post-vote/response-fields.adoc[]
+
+
+
+
+
+
+
+
+
