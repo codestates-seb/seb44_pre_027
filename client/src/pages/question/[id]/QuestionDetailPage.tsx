@@ -77,7 +77,7 @@ const QuestionDetailPage = ({questionId}: QuestionDetailPageProps) => {
         <div className="flex gap-10">
             <ColumnItemWrapper size='100%' gap={10}>
               <QuestionAnswerComponent data={question} type='Question' questionId={data.questionId}/>
-              <CommentContainer comments={data.comments}/>
+              <CommentContainer comments={data.comments} questionId={data.questionId}/>
               <div className=" flex flex-col text-xs">
                 <div className=" flex items-center justify-between py-4 gap-12">
                   <span className="text-xl">{data.answers.length} Answer</span>

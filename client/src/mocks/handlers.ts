@@ -1,4 +1,4 @@
-import { todos, users, data, question, questions } from './data';
+import { todos, users, data, question, questions, comments } from './data';
 import { rest } from 'msw';
 
 const typeProvider = [
@@ -25,7 +25,14 @@ const dahamHandlers: DahamType = [
   rest.delete(`/questions/1/answers/1`, (_, res, ctx)=>{
     questions.splice(1, 1);
     return res(ctx.status(200));
-  })
+  }),
+  rest.post(`/comments`, async (req, res, ctx)=>{
+    comments.push(await req.json());
+    return res(ctx.status(200));
+  }),
+  rest.get('/comments', async (_, res, ctx)=>{
+    return res(ctx.status(200), ctx.json(comments));
+  }),
 ];
 
 const giljongHandlers: DahamType = [
