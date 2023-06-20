@@ -28,13 +28,8 @@ jobs:
         uses: gradle/gradle-build-action@v2
       - run: gradle init
       - name: Build with Gradle
-        uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
-        with:
-          arguments: build
-
-      - name: Log JAR file location
-        run:
-          echo "JAR file location: ${{ steps.build.outputs.jarFile }}"
+        working-directory: ./server
+        run: ./gradlew build
 
       - name: Make zip file
         run: zip -r ./stackoverflow-clone.zip .
