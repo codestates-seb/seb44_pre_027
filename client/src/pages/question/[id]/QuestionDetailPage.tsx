@@ -1,28 +1,35 @@
-import CommentContainer from '@/components/askdetail/CommentContainer';
+import { useEffect, useState } from 'react';
 import DetailTitle from '@/components/askdetail/DetailTitle';
-import LabelContainer from '@/components/askdetail/LabelContainer';
 import QuestionAnswerComponent from '@/components/askdetail/QuestionAnswerComponent';
+import CommentContainer from '@/components/askdetail/CommentContainer';
+import LabelContainer from '@/components/askdetail/LabelContainer';
 import QuestionScoreConatiner, {
   questionItemArray,
   relatedItemArray,
 } from '@/components/askdetail/QuestionScoreConatiner';
-import VoteContainer from '@/components/askdetail/VoteContainer';
-import React from 'react';
 import LeftSideBar from '@/components/LeftSideBar';
-import RightSideBar from '@/components/RightSideBar';
 import Wrapper from '@/common/Wrapper';
+import { call } from '../../../utils/ApiService';
 
-interface QuestionDetailPageProps {}
+interface QuestionDetailPageProps {
+  id: number;
+}
 
-const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
+const QuestionDetailPage = ({id}: QuestionDetailPageProps) => {
+  const [title, setTitle] = useState<string>('');
+
   {/* GET 으로 질문 정보 받아오기 */}
+  useEffect(()=>{
+    call(`/questions/${id}`, 'GET', null).then((res) => {setTitle(res.title)});
+  },[])
+
   return (
     <Wrapper>
     <main className=" px-6 flex flex-row ">
       <LeftSideBar/>
       <div className='p-6'>
         {/* 질문 id에 따라 제목 다르게 출력 */}
-        <DetailTitle />
+        <DetailTitle title={title}/>
         <div className="flex gap-10">
           {/* 질문 id에 따라 내용 다르게 출력 */}
           <QuestionAnswerComponent />

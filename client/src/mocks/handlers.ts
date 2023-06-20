@@ -1,4 +1,4 @@
-import { todos, users, data } from './data';
+import { todos, users, data, question } from './data';
 import { rest } from 'msw';
 
 const typeProvider = [
@@ -14,7 +14,11 @@ const typeProvider = [
 
 type DahamType = typeof typeProvider;
 
-const dahamHandlers: DahamType = [];
+const dahamHandlers: DahamType = [
+  rest.get('/questions/1', (_, res, ctx)=>{
+    return res(ctx.status(200), ctx.json(question));
+  })
+];
 
 const giljongHandlers: DahamType = [
   rest.post('/users/signup', async (req, res, ctx) => {

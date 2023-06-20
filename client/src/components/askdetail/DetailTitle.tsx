@@ -5,16 +5,16 @@ import {Link} from 'react-router-dom';
 
 interface DetailTitleProps extends HTMLAttributes<HTMLDivElement> {
   qnaData?: {};
+  title: string;
 }
 
-const DetailTitle = ({ className, qnaData, ...attribute }: DetailTitleProps) => {
+const DetailTitle = ({ className, qnaData, title, ...attribute }: DetailTitleProps) => {
   return (
     <div className={cn('  ' + className)} {...attribute}>
-      <div className=" flex justify-between">
+      <div className="flex justify-between">
+        {/* 제목 */}
         <h2 className=" pr-6 text-2xl text-slate-700">
-          {
-            'Invalid options object. Dev Server has been initialized using an options object that does not match the API schema'
-          }
+          {title}
         </h2>
         <Link to="/questions/ask">
           <button className=" h-[38px] w-[100px] rounded-sm bg-sky-500 text-xs text-white hover:bg-sky-700">
@@ -23,6 +23,7 @@ const DetailTitle = ({ className, qnaData, ...attribute }: DetailTitleProps) => 
         </Link>
       </div>
       <div className=" flex border-b border-slate-200 pb-4 pt-2 text-xs text-slate-500">
+        {/* 작성 날짜, 수정 날짜, 조회수 */}
         <span className=" mr-4">Asked {'1 year, 6 months ago'}</span>
         <span className=" mr-4">Modified {'2 days ago'}</span>
         <span className=" mr-4">Viewed {'111k times'}</span>
