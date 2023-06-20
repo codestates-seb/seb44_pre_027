@@ -33,7 +33,7 @@ jobs:
           arguments: build
 
       - name: Make zip file
-        run: zip -r ./server/stackoverflow-clone.zip
+        run: zip -r ./server/stackoverflow-clone.zip .
         shell: bash
 
       - name: Configure AWS credentials
