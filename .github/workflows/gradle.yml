@@ -28,7 +28,7 @@ jobs:
       - run: gradle init
 
       - name: Grant execute permissions to gradlew script
-        run: chmod +x gradlew
+        run: chmod +x ./gradlew
 
       - name: Build with Gradle
         working-directory: ./server
