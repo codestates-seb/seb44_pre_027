@@ -1,26 +1,36 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { getLocalStorage, setLocalStorage, utils } from '@/utils';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface InitialStateInterface {
-  isLogin: boolean;
+export interface LoginType {
   accesstoken: string;
   refreshtoken?: string;
 }
 
-const initialState: InitialStateInterface = {
+interface InitialStateInterface extends LoginType {
+  isLogin: boolean;
+}
+
+const LOGINKEY = 'login';
+
+const initialState: InitialStateInterface = getLocalStorage(LOGINKEY, {
   isLogin: false,
   accesstoken: '',
   refreshtoken: '',
-};
+});
 
 const loginSlice = createSlice({
   name: 'loginSlice',
   initialState,
   reducers: {
-    setLogin: (state, action) => {
-      return { ...state, isLogin: true, accesstoken: action.payload.accesstoken };
+    setLogin: (state, action: PayloadAction<LoginType>) => {
+      const loginData = { ...state, isLogin: true, accesstoken: action.payload.accesstoken };
+      setLocalStorage(LOGINKEY, loginData);
+      return loginData;
     },
-    setLogout: (state, action) => {
-      return { ...state, isLogin: false };
+    setLogout: (state) => {
+      const logoutData = { ...state, isLogin: false };
+      setLocalStorage(LOGINKEY, logoutData);
+      return logoutData;
     },
   },
 });

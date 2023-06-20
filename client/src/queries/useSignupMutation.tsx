@@ -4,10 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 const url = '';
 
-const getHeader = (response: Response, get: string) => {
-  return response.headers.get(get);
-};
-
 const postSignup = async (signupData: SignupType) => {
   const response = await fetch(`${url}/users/signup`, {
     method: 'POST',

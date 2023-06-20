@@ -36,7 +36,7 @@ export type SignupType = z.infer<typeof signupSchema>;
 
 const SignupPage = () => {
   const signupMutation = useSignupMutation();
-  const signup = useForm<SignupType>({ resolver: zodResolver(signupSchema) });
+  const signupForm = useForm<SignupType>({ resolver: zodResolver(signupSchema) });
   const onSubmit: SubmitHandler<SignupType> = async (data) => {
     const mutate = await signupMutation.mutateAsync(data);
   };
@@ -67,19 +67,19 @@ const SignupPage = () => {
             </OAuthButton>
           </div>
           <Card>
-            <form onSubmit={signup.handleSubmit(onSubmit)}>
+            <form onSubmit={signupForm.handleSubmit(onSubmit)}>
               <ColumnItemWrapper size="100%" gap={16}>
                 <LabelInput
                   title={'Display Name'}
                   isWithLink={false}
-                  {...signup.register('nickname')}
+                  {...signupForm.register('nickname')}
                 />
-                <LabelInput title={'Email'} isWithLink={false} {...signup.register('email')} />
+                <LabelInput title={'Email'} isWithLink={false} {...signupForm.register('email')} />
                 <LabelInput
                   title={'Password'}
                   isWithLink={false}
                   type={'password'}
-                  {...signup.register('password')}
+                  {...signupForm.register('password')}
                 />
               </ColumnItemWrapper>
               <p className="text-xs text-slate-400">
@@ -99,9 +99,9 @@ const SignupPage = () => {
               <PrimaryBtn size="100%" className="my-4" type="submit">
                 Sign up
               </PrimaryBtn>
-              {(signup.formState.errors.email ||
-                signup.formState.errors.password ||
-                signup.formState.errors.nickname) && (
+              {(signupForm.formState.errors.email ||
+                signupForm.formState.errors.password ||
+                signupForm.formState.errors.nickname) && (
                 <span className="  text-xs text-red-500">
                   something went wrong please check your password, email, name, daham
                 </span>

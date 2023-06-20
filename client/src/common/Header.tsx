@@ -5,6 +5,8 @@ import { cn } from '@/utils/cn';
 import LoginHeader from '../components/LoginHeader';
 import BigLogoIcon from '@/assets/icons/BigLogoIcon';
 import SearchIcon from '@/assets/icons/SearchIcon';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/modules/store';
 
 interface HeaderProps {
   changeNav: boolean;
@@ -25,9 +27,9 @@ const ProductIcon = cva(
 );
 
 const Header = ({ changeNav }: HeaderProps) => {
+  const isUser = useSelector((state: RootState) => state.login);
   const [dropdownVariant, setDropdownVariant] = useState('box');
 
-  const [isUser, setIsUser] = useState(false);
   //changeNav 임시 props - true:로그인 상태 false:비로그인 상태
   const [isOpen, setIsOpen] = useState(false);
 
@@ -133,7 +135,7 @@ const Header = ({ changeNav }: HeaderProps) => {
           </div>
         </div>
         <div>
-          <LoginHeader changeNav={isUser} />
+          <LoginHeader changeNav={isUser.isLogin} />
         </div>
       </div>
     </nav>
