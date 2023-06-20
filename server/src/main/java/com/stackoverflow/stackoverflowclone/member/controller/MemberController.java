@@ -64,6 +64,7 @@ public class MemberController {
         return new ResponseEntity<>(memberMapper.memberToMemberResponseDto(response), HttpStatus.OK);
     }
 
+    // 추가
     @GetMapping
     public ResponseEntity getMembers() {
         List<Member> members = memberService.findMembers();
@@ -76,6 +77,7 @@ public class MemberController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    // 추가
     @DeleteMapping("/{member-id}")
     public ResponseEntity deleteMember(
             @PathVariable("member-id") @Positive long memberId,
