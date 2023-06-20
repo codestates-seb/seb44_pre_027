@@ -86,7 +86,7 @@ public class AnswerControllerTest {
 //    }
 
     @Test
-    @DisplayName("Test if answer created successfully")
+    @DisplayName("답변 등록 테스트")
     public void createAnswerTest() throws Exception {
 
         // given

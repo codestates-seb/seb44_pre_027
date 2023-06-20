@@ -1,10 +1,7 @@
 package com.stackoverflow.stackoverflowclone.comment.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
@@ -14,6 +11,8 @@ import java.time.LocalDateTime;
 public class CommentDto {
     @Getter
     @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class Post {
         @JsonProperty("member-id")
         private long memberId;
@@ -23,6 +22,8 @@ public class CommentDto {
 
     @Getter
     @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class Patch {
         @JsonProperty("member-id")
         private long memberId;
@@ -30,6 +31,11 @@ public class CommentDto {
         private long commentId;
         @NotBlank
         private String content;
+
+        public Patch(long memberId, String content) {
+            this.memberId = memberId;
+            this.content = content;
+        }
     }
 
 
