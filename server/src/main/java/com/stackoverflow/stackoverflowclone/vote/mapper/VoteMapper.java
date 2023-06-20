@@ -2,11 +2,9 @@ package com.stackoverflow.stackoverflowclone.vote.mapper;
 
 import com.stackoverflow.stackoverflowclone.vote.dto.VoteDto;
 import com.stackoverflow.stackoverflowclone.vote.entity.Vote;
-import com.stackoverflow.stackoverflowclone.vote.repository.VoteRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface VoteMapper {

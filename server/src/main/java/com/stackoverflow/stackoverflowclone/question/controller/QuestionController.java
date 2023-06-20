@@ -51,7 +51,7 @@ public class QuestionController {
 
         patch.addQuestionId(questionId);
 
-        Question question = questionService.updateQuestion(questionMapper.QuestionPatchDtoToQuestion(patch));
+        questionService.updateQuestion(questionMapper.QuestionPatchDtoToQuestion(patch));
 
         return ResponseEntity.ok().build();
     }

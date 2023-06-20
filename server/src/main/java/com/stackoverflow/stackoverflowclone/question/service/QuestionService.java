@@ -27,15 +27,13 @@ public class QuestionService {
 
     private final MemberService memberService;
 
-    private final CustomBeanUtils<Question> beanUtils;
-
 
 
     /** 질문 등록 메서드 **/
     public Question createQuestion(Question question){
 
         // 작성한 회원이 존재하는 회원인지 확인
-        Member member = memberService.findVerifiedMember(question.getMember().getMemberId());
+        memberService.findVerifiedMember(question.getMember().getMemberId());
 
         return questionRepository.save(question);
     }
@@ -118,7 +116,6 @@ public class QuestionService {
         // TODO : 로그인 회원의 id를 얻어서 question을 등록한 회원의 id와 비교
 
         // 답변이 달린 경우에는 삭제가 불가능하다
-        // TODO : 삭제는 안되는데 ... 에러가 안난다..
         int deleteNum = questionRepository.deleteByAnswersIsEmptyAndQuestionId(questionId);
 
         // deleteNum이 1이면 잘 삭제된 경우, 0이면 답변이 달린 경우여서 삭제 볼가능
