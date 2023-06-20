@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 import static com.stackoverflow.stackoverflowclone.question.controller.QuestionController.QUESTION_DEFAULT_URL;
 
 @RestController
-@RequestMapping("/members")
+@RequestMapping("/users")
 @Validated
 public class MemberController {
     private final MemberService memberService;
@@ -35,7 +35,7 @@ public class MemberController {
         this.memberMapper = memberMapper;
     }
 
-    @PostMapping
+    @PostMapping("/signup")
     public ResponseEntity registerMember(@Valid @RequestBody MemberPostDto memberPostDto) {
         Member member = memberMapper.memberPostDtoToMember(memberPostDto);
 

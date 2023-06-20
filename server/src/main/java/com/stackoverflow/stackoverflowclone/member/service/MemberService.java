@@ -30,6 +30,9 @@ public class MemberService {
     /* 회원가입 */
     public Member createMember(Member member) {
         verifyExistsEmail(member.getEmail());
+        String encryptedPassword = passwordEncoder.encode(member.getPassword());
+        member.setPassword(encryptedPassword);
+
         return memberRepository.save(member);
     }
 
@@ -41,6 +44,10 @@ public class MemberService {
                 .ifPresent(nickname -> findMember.setNickname(nickname));
         Optional.ofNullable(member.getPassword())
                 .ifPresent(password -> findMember.setPassword(password));
+
+        String encryptedPassword = passwordEncoder.encode(member.getPassword());
+        member.setPassword(encryptedPassword);
+
         Optional.ofNullable(member.getLocation())
                 .ifPresent(location -> findMember.setLocation(location));
         Optional.ofNullable(member.getBioTitle())
