@@ -52,28 +52,31 @@ public class MemberController {
     }
 
     @GetMapping("/{member-id}")
-    public ResponseEntity getMember(
-            @PathVariable("member-id") @Positive long memberId) {
+    public ResponseEntity getMember(@PathVariable("member-id") @Positive long memberId) {
         Member response = memberService.findMember(memberId);
+
         return new ResponseEntity<>(memberMapper.memberToMemberResponseDto(response), HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity getMembers() {
         List<Member> members = memberService.findMembers();
+
         List<MemberResponseDto> response =
                 members.stream()
                         .map(member -> memberMapper.memberToMemberResponseDto(member))
                         .collect(Collectors.toList());
+
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/{member-id}")
     public ResponseEntity deleteMember(
-            @PathVariable("member-id") @Positive long memberId) {
+            @PathVariable("member-id") @Positive long memberId,
+            @RequestParam("password") String password) {
         memberService.deleteMember(memberId);
 
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
 }
