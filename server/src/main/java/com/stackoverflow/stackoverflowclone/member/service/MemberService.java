@@ -2,8 +2,10 @@ package com.stackoverflow.stackoverflowclone.member.service;
 
 import com.stackoverflow.stackoverflowclone.exception.BusinessLogicException;
 import com.stackoverflow.stackoverflowclone.exception.ExceptionCode;
+import com.stackoverflow.stackoverflowclone.member.auth.utils.CustomAuthorityUtils;
 import com.stackoverflow.stackoverflowclone.member.entity.Member;
 import com.stackoverflow.stackoverflowclone.member.repository.MemberRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,10 +14,17 @@ import java.util.Optional;
 
 @Service
 public class MemberService {
-    private MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
-    public MemberService(MemberRepository memberRepository) {
+    private final PasswordEncoder passwordEncoder;
+    private final CustomAuthorityUtils authorityUtils;
+
+    public MemberService(MemberRepository memberRepository,
+                         PasswordEncoder passwordEncoder,
+                         CustomAuthorityUtils authorityUtils) {
         this.memberRepository = memberRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.authorityUtils = authorityUtils;
     }
 
     /* 회원가입 */
