@@ -14,7 +14,7 @@ const QuestionAnswerComponent = ({}: QuestionAnswerComponentProps) => {
       </div>
 
       {/* 답변 정렬 코드 컴포넌트 분리 or 그대로 */}
-      <div className=" flex flex-col px-16 text-xs">
+      <div className=" flex flex-col pl-16 text-xs">
         <div className=" flex items-center justify-between py-4">
           <span className=" text-sm ">{'2'} Answer</span>
           <div className=" text-sm">
