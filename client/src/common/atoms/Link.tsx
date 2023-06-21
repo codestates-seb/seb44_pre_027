@@ -7,6 +7,7 @@ extends React.ComponentPropsWithRef<'a'>{
     url?:string|undefined;
 
 }
+
 const TextLink = styled.a`
     font-size: 12px;
     color: #0074cc;
@@ -17,17 +18,8 @@ const TextLink = styled.a`
 `;
 
 const Link = ({text, url, ...attributes}:LinkProps) => {
-    const Link = styled.a`
-        font-size: 12px;
-        color: #0074cc;
-        cursor: pointer;
-        &:hover{
-            color: #0a95ff;
-        }
-    `;
-
     return(
-        <Link href={url} {...attributes}>{text}</Link>
+        <TextLink href={url} {...attributes}>{text}</TextLink>
     )
 }
 

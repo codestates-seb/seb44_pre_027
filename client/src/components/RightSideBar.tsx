@@ -62,9 +62,9 @@ const RightSideBar = ():JSX.Element => {
 
             <Title>Related Tags</Title>
             <ColumnItemWrapper size='100%' gap={10}>
-                {Tags.map((tag:string)=>{
+                {Tags.map((tag:string, idx:number)=>{
                     return (
-                        <RowItemWrapper gap={5}>
+                        <RowItemWrapper gap={5} key={idx}>
                             <Tag>{tag}</Tag>
                             <span className='text-gray-400 text-13 leading-7'>×</span>
                             <span className='text-gray-400 text-xs leading-7'>{Math.floor(Math.random()*3241)}</span>
@@ -76,9 +76,9 @@ const RightSideBar = ():JSX.Element => {
             </ColumnItemWrapper>
 
             <Title>Hot Network Questions</Title>
-            {HotNetworkQuestions.map((item:{favicon:number; content:string})=>{
+            {HotNetworkQuestions.map((item:{favicon:number; content:string}, idx:number)=>{
                 return (
-                <RowItemWrapper gap={5}>
+                <RowItemWrapper gap={5} key={idx}>
                     <Favicon bgPosition={item.favicon}/>
                     <Link text={item.content}></Link>
                 </RowItemWrapper>)
