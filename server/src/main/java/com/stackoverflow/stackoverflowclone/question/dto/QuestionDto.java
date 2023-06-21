@@ -90,6 +90,8 @@ public class QuestionDto {
         @Positive
         private long questionId;
 
+        private String nickname;
+
         private String title;
 
         private String content;

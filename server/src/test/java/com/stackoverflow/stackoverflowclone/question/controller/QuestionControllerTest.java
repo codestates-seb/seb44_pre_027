@@ -190,6 +190,7 @@ public class QuestionControllerTest {
         AnswerDto.Response answerResponse = new AnswerDto.Response(
              1L,
                 1L,
+                "닉네임",
                 "답변 본문",
                 1L,
                 LocalDateTime.now(),
@@ -204,6 +205,7 @@ public class QuestionControllerTest {
                 1L,
                 "댓글",
                 1L,
+                "닉네임",
                 LocalDateTime.now(),
                 LocalDateTime.now()
         );
@@ -266,6 +268,7 @@ public class QuestionControllerTest {
                                         fieldWithPath("answers").type(JsonFieldType.ARRAY).description("답변 목록"),
                                         fieldWithPath("answers[].answerId").type(JsonFieldType.NUMBER).description("답변 식별자"),
                                         fieldWithPath("answers[].questionId").type(JsonFieldType.NUMBER).description("질문 식별자"),
+                                        fieldWithPath("answers[].nickname").type(JsonFieldType.STRING).description("답변자 닉네임"),
                                         fieldWithPath("answers[].content").type(JsonFieldType.STRING).description("답변 내용"),
                                         fieldWithPath("answers[].memberId").type(JsonFieldType.NUMBER).description("회원 식별자"),
                                         fieldWithPath("answers[].createdAt").type(JsonFieldType.STRING).description("답변 생성일"),
@@ -275,6 +278,7 @@ public class QuestionControllerTest {
                                         fieldWithPath("comments[].commentId").type(JsonFieldType.NUMBER).description("댓글 식별자"),
                                         fieldWithPath("comments[].content").type(JsonFieldType.STRING).description("댓글 내용"),
                                         fieldWithPath("comments[].memberId").type(JsonFieldType.NUMBER).description("댓글을 단 회원의 식별자"),
+                                        fieldWithPath("comments[].nickname").type(JsonFieldType.STRING).description("댓글을 단 회원의 닉네임"),
                                         fieldWithPath("comments[].createdAt").type(JsonFieldType.STRING).description("댓글 생성일"),
                                         fieldWithPath("comments[].modifiedAt").type(JsonFieldType.STRING).description("댓글 수정일")
                                 )
@@ -343,6 +347,7 @@ public class QuestionControllerTest {
         AnswerDto.Response answerResponse1 = new AnswerDto.Response(
                 1L,
                 1L,
+                "닉네임1",
                 "답변1",
                 1L,
                 LocalDateTime.now(),
@@ -355,6 +360,7 @@ public class QuestionControllerTest {
         AnswerDto.Response answerResponse2 = new AnswerDto.Response(
                 2L,
                 2L,
+                "닉네임2",
                 "답변2",
                 2L,
                 LocalDateTime.now(),
@@ -366,8 +372,9 @@ public class QuestionControllerTest {
 
         CommentDto.Response commentResponse1 = new CommentDto.Response(
                 1L,
-                "댓글",
+                "댓글1",
                 1L,
+                "닉네임1",
                 LocalDateTime.now(),
                 LocalDateTime.now()
         );
@@ -379,6 +386,7 @@ public class QuestionControllerTest {
                 2L,
                 "댓글2",
                 2L,
+                "닉네임2",
                 LocalDateTime.now(),
                 LocalDateTime.now()
         );
@@ -456,6 +464,7 @@ public class QuestionControllerTest {
                                         fieldWithPath("data[].answers").type(JsonFieldType.ARRAY).description("질문의 답변 목록"),
                                         fieldWithPath("data[].answers[].answerId").type(JsonFieldType.NUMBER).description("답변 식별자"),
                                         fieldWithPath("data[].answers[].questionId").type(JsonFieldType.NUMBER).description("질문 식별자"),
+                                        fieldWithPath("data[].answers[].nickname").type(JsonFieldType.STRING).description("답변자 닉네임"),
                                         fieldWithPath("data[].answers[].content").type(JsonFieldType.STRING).description("답변 내용"),
                                         fieldWithPath("data[].answers[].memberId").type(JsonFieldType.NUMBER).description("회원 식별자"),
                                         fieldWithPath("data[].answers[].createdAt").type(JsonFieldType.STRING).description("답변 생성일"),
@@ -465,6 +474,7 @@ public class QuestionControllerTest {
                                         fieldWithPath("data[].comments[].commentId").type(JsonFieldType.NUMBER).description("댓글 식별자"),
                                         fieldWithPath("data[].comments[].content").type(JsonFieldType.STRING).description("댓글 내용"),
                                         fieldWithPath("data[].comments[].memberId").type(JsonFieldType.NUMBER).description("댓글을 단 회원의 식별자"),
+                                        fieldWithPath("data[].comments[].nickname").type(JsonFieldType.STRING).description("댓글을 단 회원의 닉네임"),
                                         fieldWithPath("data[].comments[].createdAt").type(JsonFieldType.STRING).description("댓글 생성일"),
                                         fieldWithPath("data[].comments[].modifiedAt").type(JsonFieldType.STRING).description("댓글 수정일"),
 
@@ -497,6 +507,7 @@ public class QuestionControllerTest {
         List<QuestionDto.SearchResponse> responses = List.of(
                 new QuestionDto.SearchResponse(
                         1L,
+                        "닉네임1",
                         "제목1",
                         "본문1",
                         1,
@@ -504,6 +515,7 @@ public class QuestionControllerTest {
                 ),
                 new QuestionDto.SearchResponse(
                         2L,
+                        "닉네임2",
                         "제목2",
                         "본문2",
                         2,
@@ -541,6 +553,7 @@ public class QuestionControllerTest {
                                 List.of(
                                         fieldWithPath("data").type(JsonFieldType.ARRAY).description("질문 목록"),
                                         fieldWithPath("data[].questionId").type(JsonFieldType.NUMBER).description("질문 식별자"),
+                                        fieldWithPath("data[].nickname").type(JsonFieldType.STRING).description("작성자 닉네임"),
                                         fieldWithPath("data[].title").type(JsonFieldType.STRING).description("제목"),
                                         fieldWithPath("data[].content").type(JsonFieldType.STRING).description("본문"),
                                         fieldWithPath("data[].view").type(JsonFieldType.NUMBER).description("조회수"),
