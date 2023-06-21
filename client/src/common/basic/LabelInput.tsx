@@ -29,6 +29,25 @@ const Input = styled.input`
   border-radius: 3px;
 `;
 
+const LabelContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const Label = styled.label`
+  padding: 0px 2px;
+  text-align: left;
+  color: #0c0d0e;
+  font-size: 15px;
+  font-weight: 600;
+`;
+
+const Input = styled.input`
+  padding: 7.8px 9.1px;
+  border: 1px solid #babfc4;
+  border-radius: 3px;
+`;
+
 const LabelInput = (
   { type, isWithLink, title, linkText, ...attributes }: LabelInputProps,
   ref: Ref<HTMLInputElement>
