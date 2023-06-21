@@ -1,4 +1,4 @@
-import { todos, users, data, questions, comments } from './data';
+import { todos, users, data, questions, comments, answers } from './data';
 import { rest } from 'msw';
 import { NONAME } from 'dns';
 
@@ -18,7 +18,7 @@ type DahamType = typeof typeProvider;
 const dahamHandlers: DahamType = [
   rest.get(`/questions/:questionId`, (req, res, ctx)=>{
     const questionId = Number(req.params.questionId);
-    const filterQuestion = questions.filter((q)=>q.questionId === questionId);
+    const filterQuestion:any = questions.filter((q)=>q.questionId === questionId);
     return res(ctx.status(200), ctx.json(filterQuestion[0]));
   }),
   rest.post('/questions', async(req, res, ctx)=>{
@@ -30,17 +30,18 @@ const dahamHandlers: DahamType = [
       })
     );
   }),
-  rest.delete(`/questions/:questionId`, (_, res, ctx)=>{
-    questions.splice(1, 1);
+  rest.delete(`/questions/:questionId`, (req, res, ctx)=>{
+    const questionId = Number(req.params.questionId);
+    questions.splice(questionId-1, 1);
     return res(ctx.status(200));
   }),
-  rest.delete(`/questions/:questionId/answers/:answerId`, (_, res, ctx)=>{
-    questions.splice(1, 1);
+  rest.delete(`/questions/:questionId/answers/:answerId`, (req, res, ctx)=>{
+    const answerId = Number(req.params.answerId);
+    answers.splice(answerId-1, 1);
     return res(ctx.status(200));
   }),
   rest.post(`/questions/:questionId/comments`, async (req, res, ctx)=>{
     const questionId = Number(req.params.questionId);
-    console.log();
     const newComment = {
       content: (await req.json()).content.comment,
       questionId: questionId,
@@ -52,8 +53,18 @@ const dahamHandlers: DahamType = [
     comments.push(newComment);
     return res(ctx.status(200));
   }),
-  rest.get('/comments', async (_, res, ctx)=>{
-    return res(ctx.status(200), ctx.json(comments));
+  rest.post('/questions/:questionId/answers', async (req, res, ctx)=>{
+    const newAnswer = {
+      answerId: answers.length+1,
+      questionId: Number(req.params.questionId),
+      nickname: 'noname',
+      voteScore: 0,
+      content: (await req.json()).content.answer,
+      createdAt: String(new Date()),
+      modifiedAt: String(new Date())
+    }
+    answers.push(newAnswer);
+    return res(ctx.status(200));
   }),
 ];
 

@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import DetailTitle from '@/components/askdetail/DetailTitle';
 import QuestionAnswerComponent from '@/components/askdetail/QuestionAnswerComponent';
@@ -13,12 +14,16 @@ import { call } from '../../../utils/ApiService';
 
 import { Answer } from '../../../types/QuestionAnswerType';
 import { ColumnItemWrapper } from '@/common/style/Containers.styled';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { PrimaryBtn } from '@/common/style/Buttons.styled';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 
 interface QuestionDetailPageProps {}
 
 const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
+  const { register, handleSubmit } = useForm();
   const { questionId } = useParams();
+
   let onlyQuestionData = {
     questionId: 0,
     nickname: '',
@@ -32,8 +37,6 @@ const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
 
   const { data, isSuccess, isLoading, refetch } = useQuery(['question'],
   ()=>call(`/questions/${questionId}`, 'GET', null));
-
-  console.log(data)
 
   if(isSuccess){
     onlyQuestionData = {
@@ -50,6 +53,27 @@ const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
   if(isLoading){
     return <h2>Loading...</h2>
   }
+
+  const addNewAnswer = (data:FieldValues) => {
+    return call(`/questions/${questionId}/answers`, 'POST', {
+      content: data,
+    });
+  };
+
+  const mutation = useMutation(addNewAnswer);
+
+  const onSubmit: SubmitHandler<FieldValues> = useCallback(
+    (data:FieldValues) => {
+      mutation.mutate(data, {
+        onSuccess:() => {
+          console.log('success');
+          refetch();
+          // window.location.href=`/questions/${questionId}`;
+        }
+      });
+  },
+  [mutation]
+  )
 
   const loadAnswers = ():JSX.Element[] =>{
     const answersArray = data.answers.map((answer: Answer)=>{
@@ -86,6 +110,11 @@ const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
                 </div>
               </div>
               {loadAnswers()}
+              <span className="text-xl">Your Answer</span>
+                <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-8'>
+                      <textarea className='border border-slate-300 h-40' {...register('answer')}></textarea>
+                      <PrimaryBtn size='fit-content'>Post Your Answer</PrimaryBtn>
+                </form>
           </ColumnItemWrapper>
           <div className=" mt-4 flex flex-col">
             <LabelContainer className=" mb-4" />

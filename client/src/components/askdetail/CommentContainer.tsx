@@ -67,7 +67,7 @@ const CommentContainer = ({comments, questionId, refetch}: CommentContainerProps
           <form className='flex flex-row gap-3'
           onSubmit={handleSubmit(onSubmit)
           }>
-            <textarea className='basis-5/6'
+            <textarea className='basis-5/6 border border-slate-300'
             {...register('comment')}/>
             <PrimaryBtn size='fit-content basis-1/6'>Add</PrimaryBtn>
           </form>
