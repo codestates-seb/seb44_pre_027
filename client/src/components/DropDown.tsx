@@ -32,7 +32,7 @@ const DropDown = ({variant}: DropDownUI):JSX.Element | null => {
         return(
             <div className="z-10 absolute divide-y divide-gray-100 rounded-lg ">
                 <ul className={cn(handlePosition({data:variant}))}>
-                    <li className="block h-full flex flex-col cursor-pointer text-sxs font-extralight">
+                    <li className="h-full flex flex-col cursor-pointer text-sxs font-extralight">
                         <div className="flex flex-row p-2 bg-slate-200 justify-between border-b font-medium border-zinc-400">
                             <span >INBOX(ALL)</span>
                             <span className="text-sky-400">Mark all as red</span>
@@ -62,7 +62,7 @@ const DropDown = ({variant}: DropDownUI):JSX.Element | null => {
         return(
             <div className="z-10 absolute divide-y divide-gray-100 rounded-lg ">
                 <ul className={cn(handlePosition({data:variant}))}>
-                    <li className="block h-full flex flex-col cursor-pointer text-sxs font-extralight">
+                    <li className="h-full flex flex-col cursor-pointer text-sxs font-extralight">
                         <div className="flex flex-row p-2 bg-slate-200 justify-between font-normal border-b border-zinc-400">
                             <span >ACHIEVEMENTS</span>
                             <span className="text-sky-400">privilieges . badges</span>
@@ -82,7 +82,7 @@ const DropDown = ({variant}: DropDownUI):JSX.Element | null => {
         return(
             <div className="z-10 absolute divide-y divide-gray-100 rounded-lg ">
                 <div className={cn(handlePosition({data:variant}))}>
-                    <div className="block h-full flex flex-col cursor-pointer text-sxs">
+                    <div className="h-full flex flex-col cursor-pointer text-sxs">
                         <div className="flex flex-col py-3 px-2 border-b border-zinc-200 hover:bg-zinc-200">
                             <span className="font-normal pb-2 text-cyan-500">Tour</span>
                             <span className="font-light">Start here for a quick overview of the site</span>
@@ -107,7 +107,7 @@ const DropDown = ({variant}: DropDownUI):JSX.Element | null => {
         return(
             <div className="z-10 absolute divide-y divide-gray-100 rounded-lg ">
                 <ul className={cn(handlePosition({data:variant})) }>
-                    <li className="block flex flex-col cursor-pointer text-sxs">
+                    <li className="flex flex-col cursor-pointer text-sxs">
                         <span className="font-semibold bg-zinc-200 p-2 border-b border-zinc-300 text-sky-800">CURRENT COMMUNITY</span>
                         <div className="flex flex-col p-2 bg-blue-50 hover:bg-blue-100 justify-between font-normal border-b border-zinc-200">
                             <div className=" flex flex-row justify-between text-sxs">
@@ -125,7 +125,7 @@ const DropDown = ({variant}: DropDownUI):JSX.Element | null => {
                             </div>
                         </div>
                     </li>
-                    <li className="block flex flex-col cursor-pointer text-sxs">
+                    <li className="flex flex-col cursor-pointer text-sxs">
                         <div className="flex flex-row justify-between p-2 bg-zinc-200 border-b border-zinc-300 ">
                             <span className="font-semibold text-sky-800">YOUR COMMUNITIES</span>
                             <span className="flex flex-rowtext-sxs text-cyan-500">edit</span>
@@ -139,7 +139,7 @@ const DropDown = ({variant}: DropDownUI):JSX.Element | null => {
                             </div>
                         </div>
                     </li>
-                    <li className="block flex flex-col cursor-pointer text-sxs">
+                    <li className="flex flex-col cursor-pointer text-sxs">
                         <div className="flex flex-row justify-between p-2 bg-zinc-200 border-b border-zinc-300 ">
                             <span className="font-semibold text-sky-800">MORE STACK EXCHANGE COMMUNITIES</span>
                             <span className="flex flex-rowtext-sxs ext-cyan-500 text-cyan-500">company blog</span>
@@ -149,7 +149,7 @@ const DropDown = ({variant}: DropDownUI):JSX.Element | null => {
                             placeholder="Find a Stack Exchange community">{/*focus효과 적용 안됨 */}</input>
                         </div>
                     </li>
-                    <li className="block flex flex-col cursor-pointer text-sxs">
+                    <li className="flex flex-col cursor-pointer text-sxs">
                         <div className="flex flex-col p-2 bg-white hover:bg-blue-100 justify-between font-normal border-b border-zinc-200">
                             <div className=" flex flex-col justify-between text-sxs">
                                 <span className="font-semibold text-sky-500 pb-1">3D Printing</span>
@@ -159,7 +159,7 @@ const DropDown = ({variant}: DropDownUI):JSX.Element | null => {
                             </div>
                         </div>
                     </li>
-                    <li className="block flex flex-col cursor-pointer text-sxs">
+                    <li className="flex flex-col cursor-pointer text-sxs">
                         <div className="flex flex-col p-2 bg-white hover:bg-blue-100 justify-between font-normal border-b border-zinc-200">
                             <div className=" flex flex-col justify-between text-sxs">
                                 <span className="font-semibold text-sky-500 pb-1">Academic</span>

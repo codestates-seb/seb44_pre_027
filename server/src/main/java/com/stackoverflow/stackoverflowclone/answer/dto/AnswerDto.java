@@ -24,6 +24,8 @@ public class AnswerDto{
 
     @Getter
     @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class Patch {
 
 //        @JsonProperty("answer-id")
@@ -34,6 +36,11 @@ public class AnswerDto{
 
         @NotBlank
         private String content;
+
+        public Patch(long questionId, String content) {
+            this.questionId = questionId;
+            this.content = content;
+        }
     }
 
     @AllArgsConstructor

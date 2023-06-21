@@ -25,20 +25,36 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
+import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.List;
+
+import static com.stackoverflow.stackoverflowclone.util.ApiDocumentUtils.getRequestPreProcessor;
+import static com.stackoverflow.stackoverflowclone.util.ApiDocumentUtils.getResponsePreProcessor;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
+import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
+import static org.springframework.restdocs.headers.HeaderDocumentation.responseHeaders;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(AnswerController.class)
@@ -63,17 +79,19 @@ public class AnswerControllerTest {
     @Autowired
     private Gson gson;
 
-    private static String ANSWER_DEFAULT_URL = "/questions/1/answers";
 
 //    @BeforeAll
 //    void initData() {
 //        //TODO: 초기화
 //    }
 
-    @DisplayName("Test if answer created successfully")
     @Test
+    @DisplayName("답변 등록 테스트")
     public void createAnswerTest() throws Exception {
+
+        // given
         AnswerDto.Post post = new AnswerDto.Post(1L, 1L, "답변입니다.");
+        long Id = post.getQuestionId();
         String jsonizedPost = gson.toJson(post);
 
         given(answerMapper.answerPostToAnswer(Mockito.any(AnswerDto.Post.class))).willReturn(new Answer());
@@ -82,15 +100,115 @@ public class AnswerControllerTest {
         mockResultAnswer.setAnswerId(1L);
         given(answerService.createAnswer(Mockito.any(Answer.class))).willReturn(mockResultAnswer);
 
+        // when
         ResultActions actions =
                 mockMvc.perform(
-                        post(ANSWER_DEFAULT_URL)
+                        post("/questions/{question-id}/answers",Id)
                                 .accept(MediaType.APPLICATION_JSON)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(jsonizedPost)
                 );
 
+        // then
         actions
-                .andExpect(status().isCreated());
+                .andDo(print())
+                .andExpect(status().isCreated())
+                .andDo(document("post-answer",
+                        getRequestPreProcessor(),
+                        getResponsePreProcessor(),
+                        requestFields(
+                                List.of(
+                                        fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("회원 식별자"),
+                                        fieldWithPath("questionId").type(JsonFieldType.NUMBER).description("질문 식별자").ignored(),
+                                        fieldWithPath("content").type(JsonFieldType.STRING).description("답변")
+                                )
+                        ),
+                        pathParameters(
+                                parameterWithName("question-id").description("질문 식별자")
+                        ),
+                        /** response header **/
+                        responseHeaders(
+                                headerWithName(HttpHeaders.LOCATION).description("Location header. 등록된 리소스의 URI")
+                        )
+                ));
     }
+
+    @Test
+    @DisplayName("답변 수정 테스트")
+    public void patchAnswerTest() throws Exception{
+
+        // given
+        long answerId = 1L;
+        AnswerDto.Patch patch = new AnswerDto.Patch(1L,"답변");
+        patch.setAnswerId(answerId);
+
+        long questionId = patch.getQuestionId();
+
+        String content = gson.toJson(patch);
+
+        // stubbing
+        given(answerMapper.answerPatchToAnswer(Mockito.any(AnswerDto.Patch.class))).willReturn(new Answer());
+
+        given(answerService.updateAnswer(Mockito.any(Answer.class))).willReturn(new Answer());
+
+        // when
+        ResultActions actions = mockMvc.perform(
+                patch("/questions/{question-id}/answers/{answer-id}", questionId, answerId)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(content)
+        );
+
+        // then
+        actions
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andDo(document("patch-answer",
+                        getRequestPreProcessor(),
+                        getResponsePreProcessor(),
+                        /** 파라미터 **/
+                        pathParameters(
+                                parameterWithName("question-id").description("질문 식별자"),
+                                parameterWithName("answer-id").description("답변 식별자")
+                        ),
+                        /** request body **/
+                        requestFields(
+                                List.of(
+                                        fieldWithPath("answerId").type(JsonFieldType.NUMBER).description("답변 식별자").ignored(),
+                                        fieldWithPath("questionId").type(JsonFieldType.NUMBER).description("질문 식별자").ignored(),
+                                        fieldWithPath("content").type(JsonFieldType.STRING).description("답변")
+                                )
+                        )
+                ));
+    }
+
+    @Test
+    @DisplayName("답변 삭제 테스트")
+    public void deleteAnswerTest() throws Exception{
+
+        // given
+        long answerId = 1L;
+        long questionId = 1L;
+
+        // stubbing
+        doNothing().when(answerService).deleteAnswer(answerId);
+
+        // when
+        ResultActions actions = mockMvc.perform(
+                delete("/questions/{question-id}/answers/{answer-id}", questionId, answerId)
+        );
+
+        // then
+        actions.andDo(print())
+                .andExpect(status().isNoContent())
+                .andDo(document("delete-answer",
+                        getRequestPreProcessor(),
+                        getResponsePreProcessor(),
+                        pathParameters(
+                                parameterWithName("question-id").description("질문 식별자"),
+                                parameterWithName("answer-id").description("답변 식별자")
+                        )
+                ));
+    }
+
 }
