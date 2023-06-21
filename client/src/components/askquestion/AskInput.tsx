@@ -4,7 +4,7 @@ import React, { forwardRef, HTMLAttributes, Ref } from 'react';
 
 const AskInputVariants = cva(
   `
-  w-[80vw] max-w-[800px] rounded-md 
+  w-[80vw] max-w-[800px] rounded-md
   border border-slate-300 px-3 py-2 text-xs
   `,
   {

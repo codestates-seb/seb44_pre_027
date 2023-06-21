@@ -33,6 +33,15 @@ const dahamHandlers: DahamType = [
   rest.get('/comments', async (_, res, ctx)=>{
     return res(ctx.status(200), ctx.json(comments));
   }),
+  rest.post('/questions', async(req, res, ctx)=>{
+    questions.push(await req.json());
+    return res(
+      ctx.status(201),
+      ctx.json({
+      questionId: Math.floor(Math.random()*100)
+      })
+    );
+  })
 ];
 
 const giljongHandlers: DahamType = [

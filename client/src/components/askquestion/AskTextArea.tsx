@@ -1,6 +1,6 @@
 import { VariantProps, cva } from 'class-variance-authority';
 import { cn } from '@/utils/cn';
-import React, { forwardRef, HTMLAttributes, Ref } from 'react';
+import React, { forwardRef, Ref } from 'react';
 
 const AskTextAreaVariants = cva(
   `
@@ -26,14 +26,14 @@ interface AskTextAreaProps
 const AskTextArea = (
   { className, variant, ...attribute }: AskTextAreaProps,
   ref: Ref<HTMLTextAreaElement>
-) => {
-  return (
-    <textarea
+  ) => {
+    return (
+      <textarea
       className={cn(AskTextAreaVariants({ variant }) + ' ' + className)}
       {...attribute}
       ref={ref}
-    />
-  );
+      />
+    );
 };
 
 export default forwardRef(AskTextArea);
