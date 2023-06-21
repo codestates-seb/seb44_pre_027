@@ -4,6 +4,7 @@ import MainText from './MainText';
 import VoteContainer from './VoteContainer';
 import { Answer, Question } from '../../types/QuestionAnswerType'
 import { call } from '@/utils/ApiService';
+import { useMutation } from '@tanstack/react-query';
 
 interface QuestionAnswerComponentProps{
   questionId?: number;
@@ -14,12 +15,15 @@ interface QuestionAnswerComponentProps{
 
 const QuestionAnswerComponent = ({type, data, questionId, answerId}: QuestionAnswerComponentProps) => {
 
-  const deleteItem = ()=>{
+  const deleteData = ()=>{
     if(type === 'Question')
-      call(`/questions/${questionId}`, 'DELETE', null);
+      return call(`/questions/${questionId}`, 'DELETE', null);
     if(type === 'Answer')
-      call(`/questions/${questionId}/answers/${answerId}`, 'DELETE', null);
+      return call(`/questions/${questionId}/answers/${answerId}`, 'DELETE', null);
+    return call(`/questions/${questionId}`, 'DELETE', null);
   }
+
+  const { mutate } = useMutation(deleteData);
 
   return (
     <section className="">
@@ -35,7 +39,7 @@ const QuestionAnswerComponent = ({type, data, questionId, answerId}: QuestionAns
           }>
           <button>Edit</button>
         </Link>
-        <button onClick={deleteItem}>Delete</button>
+        <button onClick={()=>mutate()}>Delete</button>
       </div>
       {type === 'Answer' && <hr/>}
     </section>
