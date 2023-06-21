@@ -1,9 +1,9 @@
 import React from 'react';
-import {Board} from '../../types/QuestionAnswerType';
+import {Comment} from '../../types/QuestionAnswerType';
 import Link from '../../common/atoms/Link';
 
 interface CommentItemProps {
-  data: Board;
+  data: Comment;
   id: number;
 }
 

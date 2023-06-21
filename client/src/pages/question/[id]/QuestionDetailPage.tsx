@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import DetailTitle from '@/components/askdetail/DetailTitle';
 import QuestionAnswerComponent from '@/components/askdetail/QuestionAnswerComponent';
 import CommentContainer from '@/components/askdetail/CommentContainer';
@@ -11,52 +11,48 @@ import LeftSideBar from '@/components/LeftSideBar';
 import Wrapper from '@/common/Wrapper';
 import { call } from '../../../utils/ApiService';
 
-import { Question, QuestionData } from '../../../types/QuestionAnswerType';
+import { Answer } from '../../../types/QuestionAnswerType';
 import { ColumnItemWrapper } from '@/common/style/Containers.styled';
+import { useQuery } from '@tanstack/react-query';
 
-interface QuestionDetailPageProps {
-  questionId: number;
-}
+interface QuestionDetailPageProps {}
 
-const DefaultData = {
-  nickname: '',
-  content: '',
-  createdAt: '',
-  modifiedAt: '',
-}
+const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
+  const { questionId } = useParams();
+  let onlyQuestionData = {
+    questionId: 0,
+    nickname: '',
+    title: '',
+    content: '',
+    views: 0,
+    voteScore: 0,
+    createdAt: '',
+    modifiedAt: ''
+  };
 
-const QuestionInitData = {
-  questionId: 0,
-  ...DefaultData,
-  title : '',
-  views : 0,
-  voteScore : 0,
-  answers: [{answerId: 0, ...DefaultData,}],
-  comments: [{commentId: 0, ...DefaultData}],
-}
+  const { data, isSuccess, isLoading } = useQuery(['question'],
+  ()=>call(`/questions/${questionId}`, 'GET', null));
 
-const QuestionDetailPage = ({questionId}: QuestionDetailPageProps) => {
-  const [data, setData] = useState<QuestionData>(QuestionInitData);
-  const [question, setQuestion] = useState<Question>({...DefaultData, questionId:0, title:'', views: 0, voteScore:0});
+  console.log(data)
 
-  useEffect(()=>{
-    call(`/questions/${1}`, 'GET', null).then((res) => {
-      setData(res);
-      setQuestion({
-        questionId: res.questionId,
-        nickname: res.nickname,
-        title: res.title,
-        content: res.content,
-        views: res.vies,
-        voteScore: res.voteScore,
-        createdAt: res.createdAt,
-        modifiedAt: res.createdAt,
-      });
-    });
-  },[])
+  if(isSuccess){
+    onlyQuestionData = {
+      questionId: data.questionId,
+      nickname: data.nickname,
+      title: data.title,
+      content: data.content,
+      views: data.views,
+      voteScore: data.voteScore,
+      createdAt: data.createdAt,
+      modifiedAt: data.modifiedAt
+    }
+  }
+  if(isLoading){
+    return <h2>Loading...</h2>
+  }
 
   const loadAnswers = ():JSX.Element[] =>{
-    const answersArray = data.answers.map((answer)=>{
+    const answersArray = data.answers.map((answer: Answer)=>{
       return <QuestionAnswerComponent data={answer} type='Answer' questionId={data.questionId} answerId={answer.answerId} key={answer.answerId}/>
     })
     return answersArray;
@@ -68,15 +64,12 @@ const QuestionDetailPage = ({questionId}: QuestionDetailPageProps) => {
       <LeftSideBar/>
       <div className='p-6'>
         <DetailTitle
-          questionTitleData={{title:question.title,
-            views:question.views,
-            created:question.createdAt,
-            modified:question.modifiedAt}}
-          answerNumber={data.answers.length}
+          onlyQuestionData={onlyQuestionData}
+          answerNum={data.answers.length}
         />
         <div className="flex gap-10">
             <ColumnItemWrapper size='100%' gap={10}>
-              <QuestionAnswerComponent data={question} type='Question' questionId={data.questionId}/>
+              <QuestionAnswerComponent data={onlyQuestionData} type='Question' questionId={data.questionId}/>
               <CommentContainer comments={data.comments} questionId={data.questionId}/>
               <div className=" flex flex-col text-xs">
                 <div className=" flex items-center justify-between py-4 gap-12">

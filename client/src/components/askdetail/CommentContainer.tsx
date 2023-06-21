@@ -19,7 +19,7 @@ const CommentContainer = ({comments, questionId}: CommentContainerProps) => {
 
   useEffect(()=>{
     call('/comments', 'GET', null).then((res)=>setCommentList(res));
-  }, [commentList])
+  }, [])
 
   const addNewComment = async(data:FieldValues) => {
     await call(`/comments`, 'POST', {

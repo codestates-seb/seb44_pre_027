@@ -1,4 +1,4 @@
-import { todos, users, data, question, questions, comments } from './data';
+import { todos, users, data, questions, comments } from './data';
 import { rest } from 'msw';
 
 const typeProvider = [
@@ -15,14 +15,25 @@ const typeProvider = [
 type DahamType = typeof typeProvider;
 
 const dahamHandlers: DahamType = [
-  rest.get(`/questions/1`, (_, res, ctx)=>{
-    return res(ctx.status(200), ctx.json(question));
+  rest.get(`/questions/:questionId`, (req, res, ctx)=>{
+    const questionId = Number(req.params.questionId);
+    const filterQuestion = questions.filter((q)=>q.questionId === questionId);
+    return res(ctx.status(200), ctx.json(filterQuestion[0]));
   }),
-  rest.delete(`/questions/1`, (_, res, ctx)=>{
+  rest.post('/questions', async(req, res, ctx)=>{
+    questions.push(await req.json());
+    return res(
+      ctx.status(201),
+      ctx.json({
+      questionId: Math.floor(Math.random()*100)
+      })
+    );
+  }),
+  rest.delete(`/questions/:questionId`, (_, res, ctx)=>{
     questions.splice(1, 1);
     return res(ctx.status(200));
   }),
-  rest.delete(`/questions/1/answers/1`, (_, res, ctx)=>{
+  rest.delete(`/questions/:questionId/answers/:answerId`, (_, res, ctx)=>{
     questions.splice(1, 1);
     return res(ctx.status(200));
   }),
@@ -33,15 +44,6 @@ const dahamHandlers: DahamType = [
   rest.get('/comments', async (_, res, ctx)=>{
     return res(ctx.status(200), ctx.json(comments));
   }),
-  rest.post('/questions', async(req, res, ctx)=>{
-    questions.push(await req.json());
-    return res(
-      ctx.status(201),
-      ctx.json({
-      questionId: Math.floor(Math.random()*100)
-      })
-    );
-  })
 ];
 
 const giljongHandlers: DahamType = [
