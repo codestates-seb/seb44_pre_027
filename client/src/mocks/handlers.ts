@@ -1,5 +1,6 @@
 import { todos, users, data, questions, comments } from './data';
 import { rest } from 'msw';
+import { NONAME } from 'dns';
 
 const typeProvider = [
   rest.get('/todos', (_, res, ctx) => {
@@ -37,8 +38,18 @@ const dahamHandlers: DahamType = [
     questions.splice(1, 1);
     return res(ctx.status(200));
   }),
-  rest.post(`/comments`, async (req, res, ctx)=>{
-    comments.push(await req.json());
+  rest.post(`/questions/:questionId/comments`, async (req, res, ctx)=>{
+    const questionId = Number(req.params.questionId);
+    console.log();
+    const newComment = {
+      content: (await req.json()).content.comment,
+      questionId: questionId,
+      commentId: comments.length+1,
+      nickname: 'NONAME',
+      createdAt: String(new Date()),
+      modifiedAt: String(new Date())
+    }
+    comments.push(newComment);
     return res(ctx.status(200));
   }),
   rest.get('/comments', async (_, res, ctx)=>{

@@ -30,7 +30,7 @@ const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
     modifiedAt: ''
   };
 
-  const { data, isSuccess, isLoading } = useQuery(['question'],
+  const { data, isSuccess, isLoading, refetch } = useQuery(['question'],
   ()=>call(`/questions/${questionId}`, 'GET', null));
 
   console.log(data)
@@ -70,7 +70,7 @@ const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
         <div className="flex gap-10">
             <ColumnItemWrapper size='100%' gap={10}>
               <QuestionAnswerComponent data={onlyQuestionData} type='Question' questionId={data.questionId}/>
-              <CommentContainer comments={data.comments} questionId={data.questionId}/>
+              <CommentContainer comments={data.comments} questionId={data.questionId} refetch={refetch}/>
               <div className=" flex flex-col text-xs">
                 <div className=" flex items-center justify-between py-4 gap-12">
                   <span className="text-xl">{data.answers.length} Answer</span>
