@@ -17,7 +17,12 @@ type DahamType = typeof typeProvider;
 const dahamHandlers: DahamType = [
   rest.post('/questions', async(req, res, ctx)=>{
     questions.push(await req.json());
-    return res(ctx.status(201));
+    return res(
+      ctx.status(201),
+      ctx.json({
+      questionId: Math.floor(Math.random()*100)
+      })
+    );
   })
 ];
 

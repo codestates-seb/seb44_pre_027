@@ -1,6 +1,6 @@
-import React from 'react';
-import { SubmitHandler, FormProvider, useForm, FieldValues } from 'react-hook-form';
-
+import React, { useCallback, useState } from 'react';
+import { SubmitHandler, useForm, FieldValues } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
 import { AskInputInformation } from './askInputInformation';
 import AskInput from '@/components/askquestion/AskInput';
 import AskTextArea from '@/components/askquestion/AskTextArea';
@@ -9,18 +9,30 @@ import WriteInputContainer from '@/components/askquestion/WriteInputContainer';
 import { Container } from '@/common/style/Containers.styled';
 import { PrimaryBtn } from '@/common/style/Buttons.styled';
 import { call } from '@/utils/ApiService';
-import Wrapper from '@/common/Wrapper';
 
 interface AskQuestionPageProps {}
 
 const AskQuestionPage = ({}: AskQuestionPageProps) => {
   const { register, handleSubmit, formState: { isSubmitting } } = useForm();
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
-    call('/questions', 'POST', data);
-    // window.location.href=`/questions/${id}`;
+  const addNewQuestion = (data:FieldValues) => {
+    return call('/questions', 'POST', data)
+    .then((res)=> {return res.questionId});
   }
+
+  const mutation = useMutation(addNewQuestion);
+
+  const onSubmit: SubmitHandler<FieldValues> = useCallback(
+    (data:FieldValues) => {
+      mutation.mutate(data, {
+        onSuccess:(data) => {
+          console.log(data);
+          window.location.href=`/questions/${data}`;
+        }
+      });
+  },
+  [mutation]
+  )
 
   return (
     <Container color="#f8f9f9">
