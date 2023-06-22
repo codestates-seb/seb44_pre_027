@@ -10,6 +10,11 @@ interface DetailTitleProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const DetailTitle = ({ className, onlyQuestionData, answerNum, ...attribute }: DetailTitleProps) => {
+  let createdAt = '';
+  if(onlyQuestionData){
+    createdAt = new Date(onlyQuestionData.createdAt.substr(0,10)).toDateString();
+  }
+
   return (
     <div className={cn('  ' + className)} {...attribute}>
       <div className="flex justify-between">
@@ -24,7 +29,7 @@ const DetailTitle = ({ className, onlyQuestionData, answerNum, ...attribute }: D
       </div>
       <div className=" flex border-b border-slate-200 pb-4 pt-2 text-xs text-slate-500">
         <span className=" mr-4">Asked {answerNum}</span>
-        <span className=" mr-4">Modified {onlyQuestionData?.modifiedAt}</span>
+        <span className=" mr-4">Created {createdAt}</span>
         <span className=" mr-4">Viewed {onlyQuestionData?.views}</span>
       </div>
     </div>

@@ -30,6 +30,7 @@ const IconWrapper = styled.div`
 `;
 
 const CommentItem = ({data, id, questionId, commentId, refetch}: CommentItemProps) => {
+  const createdAt = new Date(data.createdAt.substr(0,10)).toDateString();
 
   const deleteComment = ()=>{
     return call(`/questions/${questionId}/comments/${commentId}`, 'DELETE', null);
@@ -48,7 +49,7 @@ const CommentItem = ({data, id, questionId, commentId, refetch}: CommentItemProp
         <span className='text-13'>{data.content}</span>
         <span className='text-13'>–</span>
         <Link text={data.nickname}/>
-        <span className=" text-slate-400 float-right text-13">{data.createdAt}</span>
+        <span className=" text-slate-400 float-right text-13">{createdAt}</span>
         <IconWrapper onClick={()=>mutate()}>
           <XIcon/>
         </IconWrapper>
