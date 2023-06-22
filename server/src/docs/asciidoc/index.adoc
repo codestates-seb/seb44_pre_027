@@ -103,6 +103,7 @@ include::{snippets}/post-question/request-body.adoc[]
 include::{snippets}/post-question/request-fields.adoc[]
 
 .http-response
+서버에서 클라이언트 쪽으로 보내드리는 json 형식입니다!
 include::{snippets}/post-question/http-response.adoc[]
 
 .response-headers
