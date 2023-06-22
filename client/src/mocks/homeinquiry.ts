@@ -1,19 +1,20 @@
 interface Question {
   questionId: number;
-  nickname: string;
+  nickname?: string;
   title: string;
   content: string;
   createdAt: string;
   modifiedAt: string;
   views: number;
-  voteScore: number;
+  voteScore?: number;
+  email?:string;
   answers: Answer[];
-  comments: Comment[];
+  comments?: Comment[];
 }
 
 interface Answer {
   answerId: number;
-  questionId: number;
+  questionId?: number;
   content: string;
   memberId: number;
   createdAt: string;
@@ -35,13 +36,24 @@ interface PageInfo {
   totalPages: number;
 }
 
-// interface UserInfo {
-//   message:string;
-// }
+interface User {
+  user_id:number;
+  user_nickname:string;
+  user_location:string;
+  bio_title:string;
+  bio_content:string;
+}
 
 export interface HomeInquiryType {
   data: Question[];
   pageInfo?: PageInfo;
+}
+
+export interface UserSettingType{
+  message:string;
+  status:string;
+  users:User;
+  questions: Question[];
 }
 
 
@@ -306,3 +318,37 @@ export const homeinquiry:HomeInquiryType[] = [
       
 ];
 
+export const userinquiry:UserSettingType[] = [
+  { 
+    "message" : "this is message",
+    "status" : "200",
+    "users" : {
+      "user_id" : 1,
+      "user_nickname" : "emma",
+      "user_location" : "seoul",
+      "bio_title" : "hello",
+      "bio_content" : "Really, Nice to meet you all!"
+    },
+    "questions": 
+    [
+      {
+        "questionId" : 1,
+        "title" : "value",
+        "content" : "value",
+        "email" : "value",
+        "createdAt" : "YYYY-MM-DD HH:MM:SS",
+        "modifiedAt" : "YYYY-MM-DD HH:MM:SS",
+        "views" : 222,
+        "answers": [
+          {
+            "answerId" : 1,
+            "content" : "value",
+            "memberId" : 333,
+            "createdAt" : "YYYY-MM-DD HH:MM:SS",
+            "modifiedAt" : "YYYY-MM-DD HH:MM:SS"
+          }
+        ]
+      }
+    ]
+  }
+];

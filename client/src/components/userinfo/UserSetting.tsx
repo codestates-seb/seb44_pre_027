@@ -1,19 +1,94 @@
-import React, {useState} from 'react';
+import React, {useState, memo, useEffect} from 'react';
 import {ReputationAlert} from '@/components/Alert';
 import TwitterIcon from '@/assets/icons/TwitterIcon';
 import GitHubIcon from '@/assets/icons/GithubIcon';
 import LinkIcon from '@/assets/icons/LinkIcon';
+import { WholeUserTypes } from './UserMain';
 
-const UserSetting = () => {
+interface ButtonProps {
+    onClick:React.MouseEventHandler<HTMLButtonElement>;
+    children:string;
+}
+const UserSetting = ({myInfo}:WholeUserTypes) => {
     const [isAlert, setIsAlert] = useState(false);
+    const [isButtonClick, setIsButtonClick] = useState(false);
+    const [textValue, setTextValue] = useState(
+        {
+
+            "user_nickname":`${myInfo.user_nickname}`,
+            "user_location":`${myInfo.user_location}`,
+            "bio_title":`${myInfo.bio_title}`,
+            "bio_content": `${myInfo.bio_content}`,
+
+        }
+    );
+    
+    //버튼이 동작 할 때마다 리렌더링 되면서 초기값으로 돌아오거나 저장된 내용이 반영됩니다.
+    useEffect(() => {
+    }, [isButtonClick])
 
     const handleReputation = () => {
         setIsAlert(!isAlert);
         
         setTimeout(() => {
             setIsAlert(false);
-        }, 2000); //2초 후에 isAlert false로 변경하여 사라지게 만듬.
+        }, 2000); 
     }
+
+    const handleUserName = (e:React.ChangeEvent<HTMLInputElement>) => {
+        const newValue = e.target.value;
+        const updateValue = {...textValue}
+        updateValue.user_nickname = newValue;
+        setTextValue(updateValue);
+    }
+
+    const handleUserLocation = (e:React.ChangeEvent<HTMLInputElement>) => {
+        const newValue = e.target.value;
+        const updateValue = {...textValue};
+        updateValue.user_location = newValue;
+        setTextValue(updateValue);
+    }
+
+    const handleUserTitle = (e:React.ChangeEvent<HTMLInputElement>) => {
+        const newValue = e.target.value;
+        const updateValue = {...textValue};
+        updateValue.bio_title = newValue;
+        setTextValue(updateValue);
+    }
+
+    const handleUserContent = (e:React.ChangeEvent<HTMLTextAreaElement>) => {
+        const newValue = e.target.value;
+        const updateValue = {...textValue};
+        updateValue.bio_content = newValue;
+        setTextValue(updateValue);
+    }
+
+    const ReRenderButton: React.FC<ButtonProps> = memo(({onClick, children}) => {
+        return (
+                <button className="bg-sky-50 text-sky-500 w-24 py-2 px-3 mx-2 hover:bg-blue-200 hover:rounded font-normal
+                                     border border-zinc-200"
+                        onClick={onClick}>{children}
+                </button>
+        );
+    });
+
+
+    const handleSaveBtn = () => {
+        setIsButtonClick(!isButtonClick);
+    }
+
+    const handleCancleBtn = () => {
+        setTextValue({
+
+            "user_nickname":`${myInfo.user_nickname}`,
+            "user_location":`${myInfo.user_location}`,
+            "bio_title":`${myInfo.bio_title}`,
+            "bio_content": `${myInfo.bio_content}`,
+
+        })
+        setIsButtonClick(!isButtonClick);
+    }
+    
 
     return(
         <div className=" ">
@@ -33,9 +108,9 @@ const UserSetting = () => {
                                         bg-slate-900 text-white text-xs p-2 text-center
                                         cursor-pointer"
                                         onClick={handleReputation}
-                                    >
+                                        >
                                         Change picture
-                                    </button>
+                                </button>
                             </div>
                         <div>
                             <div className="mb-2">
@@ -44,7 +119,11 @@ const UserSetting = () => {
                                     type="text"
                                     className=" w-96 rounded-md border border-slate-300 
                                                 px-3 py-2 text-xs"
-                                    maxLength={20}>
+                                    maxLength={20}
+                                    value={textValue.user_nickname}
+                                    onChange={handleUserName}
+                                    >
+                                        
                                 </input>
                             </div>
                         </div>
@@ -55,7 +134,11 @@ const UserSetting = () => {
                                     type="text"
                                     className=" w-96 rounded-md border border-slate-300 
                                                 px-3 py-2 text-xs "
-                                    maxLength={20}>
+                                    maxLength={20}
+                                    value={textValue.user_location}
+                                    onChange={handleUserLocation}
+                                    >
+
                                 </input>
                             </div>    
                         </div>
@@ -67,7 +150,11 @@ const UserSetting = () => {
                                     className=" w-96 rounded-md border border-slate-300 
                                                 px-3 py-2 text-xs"
                                     placeholder="No title has been set"
-                                    maxLength={20}>
+                                    maxLength={20}
+                                    value={textValue.bio_title}
+                                    onChange={handleUserTitle}
+                                    >
+
                                 </input>
                             </div>
                         </div>
@@ -77,7 +164,11 @@ const UserSetting = () => {
                                 <textarea 
                                     className=" w-full rounded-md border border-slate-300 
                                                 px-3 py-2 text-xs min-h-[180px]"
-                                    maxLength={100}>
+                                    maxLength={100}
+                                    value={textValue.bio_content}
+                                    onChange={handleUserContent}
+                                    >
+
                                 </textarea>
                             </div>
                         </div>
@@ -87,33 +178,31 @@ const UserSetting = () => {
                         <div className="flex flex-col"><span>WebsiteLink</span>
                             <div className="relative mt-1">
                                 <div className="absolute insert-y-0 left-0 flex items-center pt-2 pl-2 pointer-events-none"><LinkIcon className="fill-gray-500"/></div>
-                                <input className=" block w-52 rounded-md border border-slate-300 pl-7 py-2 text-xs"></input>
+                                <input className=" block w-52 mr-2 rounded-md border border-slate-300 pl-7 py-2 text-xs" onClick={handleReputation}></input>
                             </div>
                         </div>
                         <div className="flex flex-col"><span>Twitter link or username</span>
                             <div className="relative mt-1">
                                 <div className="absolute insert-y-0 left-0 flex items-center pt-2 pl-2 pointer-events-none"><TwitterIcon /></div>
-                                <input className=" block w-52 rounded-md border border-slate-300 pl-7 py-2 text-xs"></input>
+                                <input className=" block w-52 mr-2 rounded-md border border-slate-300 pl-7 py-2 text-xs" onClick={handleReputation}></input>
                             </div>
                         </div>
                         <div className="flex flex-col"><span>GitHub link or username</span>
                             <div className="relative mt-1">
                                 <div className="absolute insert-y-0 left-0 flex items-center pt-2 pl-2 pointer-events-none"><GitHubIcon /></div>
-                                <input className=" block w-52 rounded-md border border-slate-300 pl-7 py-2 text-xs"></input>
+                                <input className=" block w-52 rounded-md border border-slate-300 pl-7 py-2 text-xs" onClick={handleReputation}></input>
                             </div>
                         </div>
                     </div>
                     <div className="my-20 text-sm">
-                        <button 
-                            className="border border-zinc-200 bg-blue-400 py-2 px-3 
-                            hover:bg-sky-600 rounded text-white font-normal">
+                        <ReRenderButton
+                            onClick={handleSaveBtn}>
                             Save edits
-                        </button>
-                        <button 
-                            className="bg-white text-sky-500 py-2 px-3 mx-2 
-                                hover:bg-sky-50 hover:rounded font-normal">
+                        </ReRenderButton>
+                        <ReRenderButton
+                            onClick={handleCancleBtn}>
                             Cancel
-                        </button>
+                        </ReRenderButton>
                     </div>
                 </div>
             </div>

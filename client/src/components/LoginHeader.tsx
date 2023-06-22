@@ -26,7 +26,7 @@ const IconHover = cva(
   }
 );
 
-const LoginHeader = ({ changeNav }: LoginProps) => {
+const LoginHeader = ({ changeNav }: LoginProps) => {  //isUser.isLogin을 통해   true || false 값을 받고 있습니다. 
 const [dropdownVariant , setDropdownVariant] = useState('box');
 const [isOpen01, setIsOpen01] = useState(false);
 const [isOpen02, setIsOpen02] = useState(false);
@@ -58,7 +58,7 @@ const handleDropdown01 = (): void => {
       {changeNav ? (
         <ul className="flex flex-row space-x-2">
           <li className={cn(IconHover({ variant: 'hover' }))}>
-            <Link to="/users" className="block p-2 text-gray-500 bg-transparent">
+            <Link to="/users/:id" className="block p-2 text-gray-500 bg-transparent">
               <img
                 src="https://www.gravatar.com/avatar/9bcf7a89f50be51792a0ce9e6af9e917?s=48&d=identicon&r=PG"
                 alt="user image"
