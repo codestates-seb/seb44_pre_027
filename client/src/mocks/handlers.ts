@@ -66,6 +66,18 @@ const dahamHandlers: DahamType = [
     comments.push(newComment);
     return res(ctx.status(200));
   }),
+  rest.patch(`/questions/:questionId/comments/:commentId`, async (req, res, ctx)=>{
+    const commentId = Number(req.params.commentId);
+    const newComment = {
+      content: (await req.json()).content.comment,
+      modifiedAt: String(new Date())
+    }
+    comments.map((comment)=>{
+      if(comment.commentId === commentId)
+        Object.assign(comment, newComment);
+    })
+    return res(ctx.status(200));
+  }),
   rest.delete(`/questions/:questionId/comments/:commentId`, (req, res, ctx)=>{
     const commentId = Number(req.params.commentId);
     comments.splice(commentId-1, 1);
