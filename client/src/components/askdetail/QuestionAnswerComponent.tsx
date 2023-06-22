@@ -26,7 +26,10 @@ const QuestionAnswerComponent = ({type, data, questionId, answerId, refetch}: Qu
 
   const { mutate } = useMutation(deleteData,{
     onSettled: () => {
-      refetch();
+      if(type === 'Question')
+        window.location.href='/';
+      if(type === 'Answer')
+        refetch();
     }
   });
 
