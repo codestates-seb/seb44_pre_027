@@ -1,7 +1,7 @@
 import { cn } from '@/utils/cn';
 
 import { VariantProps, cva } from 'class-variance-authority';
-import React, { ButtonHTMLAttributes, HTMLAttributes } from 'react';
+import React, { ButtonHTMLAttributes, HTMLAttributes, useState } from 'react';
 
 const ButtonVariants = cva(
   `
@@ -25,11 +25,20 @@ interface PagenationBtnProps
   extends VariantProps<typeof ButtonVariants>,
     ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
+  total:number;
+  curpage:number;
+  basic:number;
+  setBasic:(value:number)=>void;
+
 }
 
-const PagenationBtn = ({ children, className, variant, ...attributes }: PagenationBtnProps) => {
+const PagenationBtn = ({ children, className, variant,total,curpage,basic,setBasic, ...attributes }: PagenationBtnProps) => {
+  const numPages = Math.ceil(total/curpage);
+
   return (
-    <button className={`${cn(ButtonVariants({ variant }))} ${className}`} {...attributes}>
+    <button 
+    className={`${cn(ButtonVariants({ variant }))} ${className}`} {...attributes}
+    >
       {children}
     </button>
   );

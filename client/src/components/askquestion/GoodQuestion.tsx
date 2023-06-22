@@ -8,31 +8,21 @@ const GoodQuestion = ({ className }: GoodQuestionProps) => {
       <div className="  max-w-[878px] flex-col rounded-sm border border-blue-300 bg-blue-100 bg-opacity-50 px-6 pb-8 pt-4">
         <h3 className=" mb-2 text-lg font-medium">Writing a good question</h3>
         <p className=" text-sm">
-          You’re ready to
-          <a
+          You’re ready to <a
             className=" text-blue-400 hover:text-blue-600"
             href="https://stackoverflow.com/help/how-to-ask"
-          >
-            ask
-          </a>
-          a
-          <a
+          > ask </a> a <a
             className=" text-blue-400 hover:text-blue-600"
             href="https://stackoverflow.com/help/on-topic"
-          >
-            programming-related question
-          </a>
-          and this form will help guide you through the process
-        </p>
+          > programming-related question
+          </a> and this form will help guide you through the process
+          </p>
         <p className=" text-sm">
-          See
-          <a
+          See <a
             className=" text-blue-400 hover:text-blue-600"
             href="https://stackoverflow.com/help/on-topic"
-          >
-            the topics here
-          </a>{' '}
-          to find a relevant site.
+          > the topics here
+          </a> to find a relevant site.
         </p>
 
         <div className="mt-6">
