@@ -1,10 +1,13 @@
+import React from 'react';
 import { css, styled } from 'styled-components';
 
-interface LinkProps {
+interface LinkProps
+extends React.ComponentPropsWithRef<'a'>{
     text:string|undefined;
     url?:string|undefined;
 
 }
+
 const TextLink = styled.a`
     font-size: 12px;
     color: #0074cc;
@@ -14,9 +17,9 @@ const TextLink = styled.a`
     }
 `;
 
-const Link = ({text, url}:LinkProps) => {
+const Link = ({text, url, ...attributes}:LinkProps) => {
     return(
-        <TextLink href={url}>{text}</TextLink>
+        <TextLink href={url} {...attributes}>{text}</TextLink>
     )
 }
 
