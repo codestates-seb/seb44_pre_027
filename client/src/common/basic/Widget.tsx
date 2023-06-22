@@ -4,7 +4,7 @@ import {css, styled} from 'styled-components';
 import { WidgetData } from '../../types/WidgetPropsType'
 
 interface WidgetProps extends WidgetData{
-    isStuck?: boolean | undefined;
+    isstuck?: boolean | undefined;
     children: ReactNode;
 };
 
@@ -61,9 +61,9 @@ const WidgetHeader = styled.div<{type:string|undefined}>`
     }
 `;
 
-const Widget = ({id, type, isStuck, title, children}:WidgetProps) => {
+const Widget = ({id, type, isstuck, title, children}:WidgetProps) => {
     return(
-        <WidgetContainer type={type} idx={id} isStuck={isStuck}>
+        <WidgetContainer type={type} idx={id} isStuck={isstuck}>
             <WidgetHeader type={type}>{title}</WidgetHeader>
             {children}
         </WidgetContainer>
