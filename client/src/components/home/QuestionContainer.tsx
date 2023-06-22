@@ -9,8 +9,8 @@ import { HomeInquiryType } from '@/mocks/homeinquiry';
 const QuestionContainer = () => {
   const [data, setData] = useState<HomeInquiryType[]>([]);
 
-  const [curpage, setCurPage] = useState<number>(2); // 한 화면에 표시될 데이터 갯수: 버튼 5개 확인 위한 임시 2
-  const [basic, setBasic] = useState<number>(1); //page
+  const [curpage, setCurPage] = useState(2); // 한 화면에 표시될 데이터 갯수: 버튼 5개 확인 위한 임시 2
+  const [basic, setBasic] = useState(1); //page
   const offset = (basic-1)*curpage;
   const numPages = Math.ceil(data.length/curpage);
 
