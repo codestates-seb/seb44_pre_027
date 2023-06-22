@@ -51,6 +51,14 @@ const giljongHandlers: DahamType = [
   rest.get('/users/logout', (_, res, ctx) => {
     return res(ctx.status(200), ctx.json('logout successful'));
   }),
+  rest.patch('/questions/:questionid', (req, res, ctx) => {
+    const { questionid } = req.params;
+    return res(ctx.status(200), ctx.json('we patched your request'));
+  }),
+  rest.patch('/questions/:questionid/answers/:answerid', (req, res, ctx) => {
+    const { questionid, answerid } = req.params;
+    return res(ctx.status(200), ctx.json('we patched your request'));
+  }),
 ];
 
 const hyejinHandlers: DahamType = [
