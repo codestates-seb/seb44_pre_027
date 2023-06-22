@@ -18,6 +18,7 @@ export const ContentContainer = styled.div<{size:number|string, direction:string
 
 export const ColumnItemWrapper = styled.div<{size:number|string, gap:number, align?:string|undefined}>`
     width: ${(props) => typeof props.size === 'string' ? props.size : `${props.size}px`};
+    height: 100%;
     ${ (props) => props.align === 'center' ?
       FlexColumnCenter
       :
