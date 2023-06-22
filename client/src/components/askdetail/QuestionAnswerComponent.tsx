@@ -24,7 +24,11 @@ const QuestionAnswerComponent = ({type, data, questionId, answerId, refetch}: Qu
     return call(`/questions/${questionId}`, 'DELETE', null);
   }
 
-  const { mutate } = useMutation(deleteData);
+  const { mutate } = useMutation(deleteData,{
+    onSettled: () => {
+      refetch();
+    }
+  });
 
   return (
     <section className="">
