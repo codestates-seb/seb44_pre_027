@@ -5,11 +5,12 @@ import { cn } from '@/utils/cn';
 import LoginHeader from '../components/LoginHeader';
 import BigLogoIcon from '@/assets/icons/BigLogoIcon';
 import SearchIcon from '@/assets/icons/SearchIcon';
+
 import { useSelector } from 'react-redux';
 import { RootState } from '@/modules/store';
 
-import { useQuery } from '@tanstack/react-query';
-import { UserType } from '@/mocks/data';
+// import { useQuery } from '@tanstack/react-query';
+// import { UserType } from '@/mocks/data';
 
 const fetchData = async (value:string) => {
   const response = await fetch('/searchbar');
@@ -41,7 +42,7 @@ type filtereProps = {
 
 const Header = ({ changeNav }: HeaderProps) => {
   const isUser = useSelector((state: RootState) => state.login);
-  const [dropdownVariant, setDropdownVariant] = useState('box');
+  // const [dropdownVariant, setDropdownVariant] = useState('box');
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [filteredData, setFilteredData] = useState<filtereProps[]>([])
@@ -66,7 +67,7 @@ const Header = ({ changeNav }: HeaderProps) => {
             );
           });
           setFilteredData(filtered);
-          console.log(filtered);
+          //console.log(filtered);
         } else {
           console.log('error', response.statusText);
         };
@@ -172,7 +173,7 @@ const Header = ({ changeNav }: HeaderProps) => {
         <div className="w-96 items-center justify-between p-3" id="navbar-search">
           <div className="relative mt-1">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-              <SearchIcon className="fill-gray-400 " />
+              <SearchIcon/>
             </div>
             <input
               type="text"

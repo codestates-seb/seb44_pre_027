@@ -1,5 +1,5 @@
 import { todos, users, data, searchData } from './data';
-import { homeinquiry } from './homeinquiry';
+import { homeinquiry, userinquiry } from './homeinquiry';
 import { rest } from 'msw';
 
 const typeProvider = [
@@ -68,16 +68,21 @@ const hyejinHandlers: DahamType = [
       }),
     )
   }),
-  rest.get('/users', (req, res, ctx) => {
-    const userId = req.url.searchParams.get('user-id')
+  rest.get('/users/:id', (req, res, ctx) => {
+    const userId = Number(req.params.id)
+    
+    const filteredUserData = userinquiry.find((user) => {
+      const user_id = user.users.user_id;
+      return user_id !== null && user_id === userId;
+    });
     return res(
       ctx.json({
-        data:homeinquiry,
+        data:filteredUserData,
         userId,
       })
     )
   }),
-
+  
 ];
 
 export const handlers = dahamHandlers

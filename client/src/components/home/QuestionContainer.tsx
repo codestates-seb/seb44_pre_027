@@ -37,7 +37,7 @@ const QuestionContainer = () => {
 
     fetchInquiryData();
   }, [])
-  console.log(data);
+  // console.log(data);
 
 
   return (
