@@ -22,19 +22,19 @@ const UserPage = () => {
     const isUser = useSelector((state: RootState) => state.login); //로그인 여부 : boolean
     const [myInfo, setMyInfo] = useState<UserSettingType>();
     //const userId=isUser.accesstoken; // 로그인 된 유저의 고유의 id를 가져옵니다.
-    const userId = 1; //임시
+    const Id = 1; //임시
 
     useEffect(() => {
         const fetchUserData = async () => {
             try{ 
-                const response = await fetch(`/users/${userId}`, {
+                const response = await fetch(`/users/${Id}`, {
                     method:'GET',
                     headers:{
                         'Accept': 'application/json',
                         'Host': 'localhost:8080',
                     }
                 });
-                const patchResponse = await fetch(`/users/${userId}`, {
+                const patchResponse = await fetch(`/users/${Id}`, {
                     method: 'PATCH',
                     headers:{
                         'Content-Type': 'application/json; charset=UTF-8',
@@ -72,7 +72,7 @@ const UserPage = () => {
     //DELETE 요청 실행 버튼 함수  
     const handleDeleteAccount = async () => {
         try{
-            const response = await fetch(`/users/${userId}`, {
+            const response = await fetch(`/users/${Id}`, {
                 method:'DELETE',
                 headers:{
                     'Accept': 'application/json',
