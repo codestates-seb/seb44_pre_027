@@ -16,7 +16,7 @@ interface CommentContainerProps {
 const CommentContainer = ({comments, questionId, refetch}: CommentContainerProps) => {
   const [showMoreComments, setShowMoreComments] = useState<boolean>(false);
   const [addComment, setAddComment] = useState<boolean>(false);
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
 
   const addNewComment = (data:FieldValues) => {
     return call(`/questions/${questionId}/comments`, 'POST', {
@@ -26,13 +26,12 @@ const CommentContainer = ({comments, questionId, refetch}: CommentContainerProps
 
   const mutation = useMutation(addNewComment);
 
-  const onSubmit: SubmitHandler<FieldValues> = useCallback(
+  const onSubmitComment: SubmitHandler<FieldValues> = useCallback(
     (data:FieldValues) => {
       mutation.mutate(data, {
-        onSuccess:() => {
-          console.log('success');
+        onSettled: () => {
           refetch();
-          // window.location.href=`/questions/${questionId}`;
+          setValue('comment', '');
         }
       });
   },
@@ -65,7 +64,7 @@ const CommentContainer = ({comments, questionId, refetch}: CommentContainerProps
         }
         { addComment &&
           <form className='flex flex-row gap-3'
-          onSubmit={handleSubmit(onSubmit)
+          onSubmit={handleSubmit(onSubmitComment)
           }>
             <textarea className='basis-5/6 border border-slate-300'
             {...register('comment')}/>

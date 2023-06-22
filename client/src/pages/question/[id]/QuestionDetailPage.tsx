@@ -21,7 +21,7 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 interface QuestionDetailPageProps {}
 
 const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
   const { questionId } = useParams();
   const { data, isSuccess, isLoading, refetch } = useQuery(['question'],
   ()=>call(`/questions/${questionId}`, 'GET', null));
@@ -43,15 +43,18 @@ const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
     });
   };
 
-  const mutation = useMutation(addNewAnswer);
+  const mutation = useMutation(addNewAnswer, {
+    onSuccess: () => {
+      console.log('success');
+    }
+  });
 
-  const onSubmit: SubmitHandler<FieldValues> = useCallback(
+  const onSubmitAnswer: SubmitHandler<FieldValues> = useCallback(
     (data:FieldValues) => {
       mutation.mutate(data, {
-        onSuccess:() => {
-          console.log('success');
+        onSettled: ()=>{
           refetch();
-          // window.location.href=`/questions/${questionId}`;
+          setValue('answer', '');
         }
       });
     },
@@ -60,7 +63,7 @@ const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
 
     const loadAnswers = ():JSX.Element[] =>{
       const answersArray = data.answers.map((answer: Answer)=>{
-      return <QuestionAnswerComponent data={answer} type='Answer' questionId={data.questionId} answerId={answer.answerId} key={answer.answerId}/>
+      return <QuestionAnswerComponent data={answer} type='Answer' questionId={data.questionId} answerId={answer.answerId} key={answer.answerId} refetch={refetch}/>
     })
     return answersArray;
   }
@@ -92,7 +95,7 @@ const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
         />
         <div className="flex gap-10">
             <ColumnItemWrapper size='100%' gap={10}>
-              <QuestionAnswerComponent data={onlyQuestionData} type='Question' questionId={data.questionId}/>
+              <QuestionAnswerComponent data={onlyQuestionData} type='Question' questionId={data.questionId} refetch={refetch}/>
               <CommentContainer comments={data.comments} questionId={data.questionId} refetch={refetch}/>
               <div className=" flex flex-col text-xs">
                 <div className=" flex items-center justify-between py-4 gap-12">
@@ -110,7 +113,7 @@ const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
               </div>
               {loadAnswers()}
               <span className="text-xl">Your Answer</span>
-                <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-8'>
+                <form onSubmit={handleSubmit(onSubmitAnswer)} className='flex flex-col gap-8'>
                       <textarea className='border border-slate-300 h-40' {...register('answer')}></textarea>
                       <PrimaryBtn size='fit-content'>Post Your Answer</PrimaryBtn>
                 </form>
