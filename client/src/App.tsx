@@ -8,29 +8,32 @@ import AskQuestionPage from './pages/question/ask/AskQuestionPage';
 import UserPage from './pages/userInfo/UserPage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
-import AmendQuestion from './components/amendQuestion/AmendQuestion';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 interface AppProps {}
 
 const App = ({}: AppProps) => {
   return (
+    <QueryClientProvider client={queryClient}>
     <BrowserRouter>
-      <div className="flex min-h-screen flex-col">
-        <Header changeNav={true} />
+    <div className="flex flex-col min-h-screen">
+        <Header changeNav={true}/>
         <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<QuestionsPage />} />
-            <Route path="/questions/:questionid" element={<AmendQuestion />} />
-            <Route path="/questions/ask" element={<AskQuestionPage />} />
-            <Route path="/questions" element={<QuestionDetailPage />} />
-            <Route path="/users/:id" element={<UserPage />} />
-            <Route path="/users/login" element={<LoginPage />} />
-            <Route path="/users/signup" element={<SignupPage />} />
-          </Routes>
-        </main>
-        <Footer />
+            <Routes>
+              <Route path="/" element={<QuestionsPage/>}/>
+              <Route path="/questions/ask" element={<AskQuestionPage/>}/>
+              <Route path="/questions/:questionId" element={<QuestionDetailPage/>}/>
+              <Route path="/users" element={<UserPage/>}/>
+              <Route path="/users/login" element={<LoginPage/>}/>
+              <Route path="/users/signup" element={<SignupPage/>}/>
+            </Routes>
+          </main>
+        <Footer/>
       </div>
     </BrowserRouter>
+    </QueryClientProvider>
   );
 };
 
