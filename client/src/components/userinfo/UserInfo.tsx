@@ -2,11 +2,12 @@ import React from 'react';
 import PencilIcon from '@/assets/icons/PencilIcon';
 //상단의 유저 정보에 대한 컴포넌트
 
-interface User {
-
-}
-
-const UserInfo = ({}: User) => {
+export type UserInfoProps = {
+    isSettingOn: boolean;
+    handleSetting?: () => void;
+  };
+  
+const UserInfo = ({isSettingOn, handleSetting}:UserInfoProps) => {
 
     return(
         <main className="mx-4 mt-4 max-w-full-xl flex flex-row justify-between">
@@ -32,7 +33,8 @@ const UserInfo = ({}: User) => {
                 <button 
                     className="px-3 py-2 m-2 w-32 h-10 border border-slate-400 rounded flex felx-row justify-center
                                 text-sm text-gray-500 font-normal bg-white
-                                hover:bg-slate-200">
+                                hover:bg-slate-200"
+                    onClick={handleSetting}>
                     <PencilIcon className="w-3 h-3 m-1"/>
                     Edit profile
                 </button>

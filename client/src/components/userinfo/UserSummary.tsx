@@ -6,8 +6,6 @@ import BadgeIcon from '@/assets/icons/BadgeIcon';
 import AstronautIcon from '@/assets/icons/AstronautIcon';
 import Wifiicon from '@/assets/icons/WifiIcon';
 
-interface UserSummary {}
-
 const FilterButton = cva(
     `
         px-3 h-full hover:bg-zinc-200 flex items-center cursor-pointer
@@ -15,7 +13,7 @@ const FilterButton = cva(
     `,
 );
 
-const UserSummary = ({}:UserSummary) => {
+const UserSummary = () => {
     return(
         <div className="flex flex-col ">
             <h2 className="pt-4 pb-1 text-[20px]">Summary</h2>
