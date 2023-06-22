@@ -5,7 +5,7 @@ import {cn} from '@/utils/cn';
 
 type UserTopNavProps = {
     variant?:'summary' | 'settings' | 'side';
-    handleSetting?: () => void;
+    setIsSettingOn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const UserButton = cva(
@@ -26,8 +26,15 @@ const UserButton = cva(
     }
 );
 
-export const UserTopNav = ({variant, handleSetting}:UserTopNavProps):JSX.Element => {
+export const UserTopNav = ({variant, setIsSettingOn}:UserTopNavProps):JSX.Element => {
 
+    const changeSet = () => {
+        setIsSettingOn(true);
+    }
+
+    const changeProfile = () => {
+        setIsSettingOn(false);
+    }
 
     return(
         <div className="h-10 mt-6 mx-4 ">
@@ -38,7 +45,7 @@ export const UserTopNav = ({variant, handleSetting}:UserTopNavProps):JSX.Element
                 <li>
                     <button 
                     className={cn(UserButton({variant:variant}))}
-                    onClick={handleSetting}>Activity</button>
+                    onClick={changeProfile}>Activity</button>
                 </li>
                 <li>
                     <button className={cn(UserButton({variant:variant}))}>Saves</button>
@@ -46,7 +53,7 @@ export const UserTopNav = ({variant, handleSetting}:UserTopNavProps):JSX.Element
                 <li>
                     <button 
                     className={cn(UserButton({variant:variant}))}
-                    onClick={handleSetting}>Settings</button>
+                    onClick={changeSet}>Settings</button>
                 </li>
             </ul>
         </div>
