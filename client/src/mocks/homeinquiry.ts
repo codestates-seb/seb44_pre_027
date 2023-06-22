@@ -36,24 +36,19 @@ interface PageInfo {
   totalPages: number;
 }
 
-interface User {
-  user_id:number;
-  user_nickname:string;
-  user_location:string;
-  bio_title:string;
-  bio_content:string;
+export interface UserSettingType {
+  memberId?:number;
+  email?:string;
+  nickname:string;
+  password?:string;
+  location:string;
+  bioTitle:string;
+  bioContent:string;
 }
 
 export interface HomeInquiryType {
   data: Question[];
   pageInfo?: PageInfo;
-}
-
-export interface UserSettingType{
-  message:string;
-  status:string;
-  users:User;
-  questions: Question[];
 }
 
 
@@ -319,36 +314,13 @@ export const homeinquiry:HomeInquiryType[] = [
 ];
 
 export const userinquiry:UserSettingType[] = [
-  { 
-    "message" : "this is message",
-    "status" : "200",
-    "users" : {
-      "user_id" : 1,
-      "user_nickname" : "emma",
-      "user_location" : "seoul",
-      "bio_title" : "hello",
-      "bio_content" : "Really, Nice to meet you all!"
-    },
-    "questions": 
-    [
-      {
-        "questionId" : 1,
-        "title" : "value",
-        "content" : "value",
-        "email" : "value",
-        "createdAt" : "YYYY-MM-DD HH:MM:SS",
-        "modifiedAt" : "YYYY-MM-DD HH:MM:SS",
-        "views" : 222,
-        "answers": [
-          {
-            "answerId" : 1,
-            "content" : "value",
-            "memberId" : 333,
-            "createdAt" : "YYYY-MM-DD HH:MM:SS",
-            "modifiedAt" : "YYYY-MM-DD HH:MM:SS"
-          }
-        ]
-      }
-    ]
+  {
+    "memberId" : 1,
+    "email" : "dham@example.com",
+    "nickname" : "다함님이 다함",
+    "password" : "password1234",
+    "location" : "시크릿",
+    "bioTitle" : "안녕",
+    "bioContent" : "안ㄴ녕 다함님이 다함 프로젝트의 팀장 다함님이 다함이야"
   }
 ];

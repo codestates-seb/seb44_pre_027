@@ -9,16 +9,16 @@ interface ButtonProps {
     onClick:React.MouseEventHandler<HTMLButtonElement>;
     children:string;
 }
-const UserSetting = ({myInfo}:WholeUserTypes) => {
+const UserSetting = ({myInfo, setMyInfo}:WholeUserTypes) => {
     const [isAlert, setIsAlert] = useState(false);
     const [isButtonClick, setIsButtonClick] = useState(false);
     const [textValue, setTextValue] = useState(
         {
 
-            "user_nickname":`${myInfo.user_nickname}`,
-            "user_location":`${myInfo.user_location}`,
-            "bio_title":`${myInfo.bio_title}`,
-            "bio_content": `${myInfo.bio_content}`,
+            "nickname":`${myInfo.nickname}`,
+            "location":`${myInfo.location}`,
+            "bioTitle":`${myInfo.bioTitle}`,
+            "bioContent": `${myInfo.bioContent}`,
 
         }
     );
@@ -38,28 +38,28 @@ const UserSetting = ({myInfo}:WholeUserTypes) => {
     const handleUserName = (e:React.ChangeEvent<HTMLInputElement>) => {
         const newValue = e.target.value;
         const updateValue = {...textValue}
-        updateValue.user_nickname = newValue;
+        updateValue.nickname = newValue;
         setTextValue(updateValue);
     }
 
     const handleUserLocation = (e:React.ChangeEvent<HTMLInputElement>) => {
         const newValue = e.target.value;
         const updateValue = {...textValue};
-        updateValue.user_location = newValue;
+        updateValue.location = newValue;
         setTextValue(updateValue);
     }
 
     const handleUserTitle = (e:React.ChangeEvent<HTMLInputElement>) => {
         const newValue = e.target.value;
         const updateValue = {...textValue};
-        updateValue.bio_title = newValue;
+        updateValue.bioTitle = newValue;
         setTextValue(updateValue);
     }
 
     const handleUserContent = (e:React.ChangeEvent<HTMLTextAreaElement>) => {
         const newValue = e.target.value;
         const updateValue = {...textValue};
-        updateValue.bio_content = newValue;
+        updateValue.bioContent = newValue;
         setTextValue(updateValue);
     }
 
@@ -75,21 +75,22 @@ const UserSetting = ({myInfo}:WholeUserTypes) => {
 
     const handleSaveBtn = () => {
         setIsButtonClick(!isButtonClick);
+        setMyInfo(textValue)
     }
 
     const handleCancleBtn = () => {
         setTextValue({
 
-            "user_nickname":`${myInfo.user_nickname}`,
-            "user_location":`${myInfo.user_location}`,
-            "bio_title":`${myInfo.bio_title}`,
-            "bio_content": `${myInfo.bio_content}`,
+            "nickname":`${myInfo.nickname}`,
+            "location":`${myInfo.location}`,
+            "bioTitle":`${myInfo.bioTitle}`,
+            "bioContent": `${myInfo.bioContent}`,
 
         })
         setIsButtonClick(!isButtonClick);
     }
     
-
+    //console.log(textValue);
     return(
         <div className=" ">
             {isAlert ? <ReputationAlert/> : null}
@@ -120,7 +121,7 @@ const UserSetting = ({myInfo}:WholeUserTypes) => {
                                     className=" w-96 rounded-md border border-slate-300 
                                                 px-3 py-2 text-xs"
                                     maxLength={20}
-                                    value={textValue.user_nickname}
+                                    value={textValue.nickname}
                                     onChange={handleUserName}
                                     >
                                         
@@ -135,7 +136,7 @@ const UserSetting = ({myInfo}:WholeUserTypes) => {
                                     className=" w-96 rounded-md border border-slate-300 
                                                 px-3 py-2 text-xs "
                                     maxLength={20}
-                                    value={textValue.user_location}
+                                    value={textValue.location}
                                     onChange={handleUserLocation}
                                     >
 
@@ -151,7 +152,7 @@ const UserSetting = ({myInfo}:WholeUserTypes) => {
                                                 px-3 py-2 text-xs"
                                     placeholder="No title has been set"
                                     maxLength={20}
-                                    value={textValue.bio_title}
+                                    value={textValue.bioTitle}
                                     onChange={handleUserTitle}
                                     >
 
@@ -165,7 +166,7 @@ const UserSetting = ({myInfo}:WholeUserTypes) => {
                                     className=" w-full rounded-md border border-slate-300 
                                                 px-3 py-2 text-xs min-h-[180px]"
                                     maxLength={100}
-                                    value={textValue.bio_content}
+                                    value={textValue.bioContent}
                                     onChange={handleUserContent}
                                     >
 

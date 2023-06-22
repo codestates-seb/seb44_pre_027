@@ -4,10 +4,14 @@ import PencilIcon from '@/assets/icons/PencilIcon';
 
 export type UserInfoProps = {
     isSettingOn: boolean;
-    handleSetting?: () => void;
+    setIsSettingOn: React.Dispatch<React.SetStateAction<boolean>>;
   };
   
-const UserInfo = ({isSettingOn, handleSetting}:UserInfoProps) => {
+const UserInfo = ({isSettingOn, setIsSettingOn}:UserInfoProps) => {
+
+    const changeSet = () => {
+        setIsSettingOn(true);
+    }
 
     return(
         <main className="mx-4 mt-4 max-w-full-xl flex flex-row justify-between">
@@ -34,7 +38,7 @@ const UserInfo = ({isSettingOn, handleSetting}:UserInfoProps) => {
                     className="px-3 py-2 m-2 w-32 h-10 border border-slate-400 rounded flex felx-row justify-center
                                 text-sm text-gray-500 font-normal bg-white
                                 hover:bg-slate-200"
-                    onClick={handleSetting}>
+                    onClick={changeSet}>
                     <PencilIcon className="w-3 h-3 m-1"/>
                     Edit profile
                 </button>
