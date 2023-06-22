@@ -35,6 +35,19 @@ const dahamHandlers: DahamType = [
     questions.splice(questionId-1, 1);
     return res(ctx.status(200));
   }),
+  rest.post('/questions/:questionId/answers', async (req, res, ctx)=>{
+    const newAnswer = {
+      answerId: answers.length+1,
+      questionId: Number(req.params.questionId),
+      nickname: 'noname',
+      voteScore: 0,
+      content: (await req.json()).content.answer,
+      createdAt: String(new Date()),
+      modifiedAt: String(new Date())
+    }
+    answers.push(newAnswer);
+    return res(ctx.status(200));
+  }),
   rest.delete(`/questions/:questionId/answers/:answerId`, (req, res, ctx)=>{
     const answerId = Number(req.params.answerId);
     answers.splice(answerId-1, 1);
@@ -53,17 +66,9 @@ const dahamHandlers: DahamType = [
     comments.push(newComment);
     return res(ctx.status(200));
   }),
-  rest.post('/questions/:questionId/answers', async (req, res, ctx)=>{
-    const newAnswer = {
-      answerId: answers.length+1,
-      questionId: Number(req.params.questionId),
-      nickname: 'noname',
-      voteScore: 0,
-      content: (await req.json()).content.answer,
-      createdAt: String(new Date()),
-      modifiedAt: String(new Date())
-    }
-    answers.push(newAnswer);
+  rest.delete(`/questions/:questionId/comments/:commentId`, (req, res, ctx)=>{
+    const commentId = Number(req.params.commentId);
+    comments.splice(commentId-1, 1);
     return res(ctx.status(200));
   }),
   rest.post('/questions/:questionId/votes', async (req, res, ctx)=>{

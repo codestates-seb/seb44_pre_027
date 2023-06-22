@@ -43,7 +43,7 @@ const CommentContainer = ({comments, questionId, refetch}: CommentContainerProps
       <ol className=" list-none">
         {comments.map((comment, id)=>{
           if(id < 5)
-            return <CommentItem data={comment} id={++id} key={comment.commentId}/>;
+            return <CommentItem data={comment} id={++id} key={comment.commentId} refetch={refetch} questionId={questionId} commentId={comment.commentId}/>;
           })
         }
         { (comments.length > 5) && !showMoreComments &&
@@ -53,7 +53,7 @@ const CommentContainer = ({comments, questionId, refetch}: CommentContainerProps
         { showMoreComments &&
           comments.map((comment, id)=>{
             if(id>4)
-            return <CommentItem data={comment} id={++id} key={comment.commentId}/>;
+            return <CommentItem data={comment} id={++id} key={comment.commentId} refetch={refetch} questionId={questionId} commentId={comment.commentId}/>;
           })
         }
       </ol>
