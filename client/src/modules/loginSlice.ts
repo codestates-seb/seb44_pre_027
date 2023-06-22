@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage, utils } from '@/utils';
+import { getLocalStorage, setLocalStorage, utils } from '../utils';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface LoginType {
@@ -13,7 +13,7 @@ interface InitialStateInterface extends LoginType {
 const LOGINKEY = 'login';
 
 const initialState: InitialStateInterface = getLocalStorage(LOGINKEY, {
-  isLogin: false,
+  isLogin: true,
   accesstoken: '',
   refreshtoken: '',
 });
