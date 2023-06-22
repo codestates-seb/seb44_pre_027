@@ -91,6 +91,29 @@ public class QuestionDto {
         private List<CommentDto.Response> comments;
     }
 
+    @Getter @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    public static class questionResponse {
+
+        @Positive
+        private long questionId;
+
+        private String title;
+
+        private String content;
+
+        private LocalDateTime createdAt;
+
+        private LocalDateTime modifiedAt;
+
+        private int views;
+
+        private int voteScore;
+
+    }
+
 
     @Getter @Setter
     @Builder

@@ -1,15 +1,16 @@
 package com.stackoverflow.stackoverflowclone.member.controller;
 
 import com.google.gson.Gson;
-import com.stackoverflow.stackoverflowclone.member.dto.MemberPatchDto;
-import com.stackoverflow.stackoverflowclone.member.dto.MemberPostDto;
-import com.stackoverflow.stackoverflowclone.member.dto.MemberResponseDto;
+import com.stackoverflow.stackoverflowclone.answer.dto.AnswerDto;
+import com.stackoverflow.stackoverflowclone.answer.entity.Answer;
+import com.stackoverflow.stackoverflowclone.member.dto.*;
 import com.stackoverflow.stackoverflowclone.member.entity.Member;
 import com.stackoverflow.stackoverflowclone.member.mapper.MemberMapper;
 import com.stackoverflow.stackoverflowclone.member.service.MemberService;
+import com.stackoverflow.stackoverflowclone.question.dto.QuestionDto;
+import com.stackoverflow.stackoverflowclone.question.entity.Question;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -28,19 +29,17 @@ import java.util.List;
 
 import static com.stackoverflow.stackoverflowclone.util.ApiDocumentUtils.getRequestPreProcessor;
 import static com.stackoverflow.stackoverflowclone.util.ApiDocumentUtils.getResponsePreProcessor;
-import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.responseHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
-import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /** Spring security 적용 전 **/
 @WebMvcTest(MemberController.class)
@@ -65,7 +64,7 @@ public class MemberControllerTest {
     public void registerMemberTest() throws Exception{
 
         // given
-        MemberPostDto post = new MemberPostDto("닉네임", "name@example.com", "password1234", "서울", "자기소개", "내용");
+        MemberPostDto post = new MemberPostDto("닉네임", "name@example.com", "password1234");
         String content = gson.toJson(post);
 
         // stubbing
@@ -94,10 +93,7 @@ public class MemberControllerTest {
                                 List.of(
                                         fieldWithPath("nickname").type(JsonFieldType.STRING).description("닉네임"),
                                         fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
-                                        fieldWithPath("password").type(JsonFieldType.STRING).description("비밀번호"),
-                                        fieldWithPath("location").type(JsonFieldType.STRING).description("지역"),
-                                        fieldWithPath("bioTitle").type(JsonFieldType.STRING).description("자기소개 제목"),
-                                        fieldWithPath("bioContent").type(JsonFieldType.STRING).description("자기소개 본문")
+                                        fieldWithPath("password").type(JsonFieldType.STRING).description("비밀번호")
                                 )
                         ),
                         responseHeaders(
@@ -117,12 +113,13 @@ public class MemberControllerTest {
         patch.setMemberId(memberId);
         String content = gson.toJson(patch);
 
-        MemberResponseDto response = new MemberResponseDto(patch.getMemberId(), "name@example.com","닉네임",  "password1234", "서울", "자기소개", "내용" );
+        MemberPatchResponseDto response = new MemberPatchResponseDto(patch.getMemberId(), "name@example.com","닉네임",  "password1234", "서울", "자기소개", "내용");
+
 
         // stubbing
         given(memberMapper.memberPatchDtoToMember(Mockito.any(MemberPatchDto.class))).willReturn(new Member());
         given(memberService.updateMember(Mockito.any(Member.class))).willReturn(new Member());
-        given(memberMapper.memberToMemberResponseDto(Mockito.any(Member.class))).willReturn(response);
+        given(memberMapper.memberToMemberPatchResponeDto(Mockito.any(Member.class))).willReturn(response);
 
         // when
         ResultActions actions = mockMvc.perform(
@@ -166,6 +163,8 @@ public class MemberControllerTest {
     }
 
 
+
+
     @Test
     @DisplayName("회원 조회 테스트")
     public void getMemberTest() throws Exception{
@@ -175,7 +174,49 @@ public class MemberControllerTest {
         Member member = new Member("닉네임", "name@example.com", "password1234", "서울", "자기소개", "내용");
         member.setMemberId(memberId);
 
-        MemberResponseDto response = new MemberResponseDto(member.getMemberId(), "name@example.com","닉네임",  "password1234", "서울", "자기소개", "내용" );
+        Question question = new Question("제목1","본문1",1,1);
+        question.setQuestionId(1L);
+        List<Question> questions = new ArrayList<>();
+        questions.add(question);
+
+        member.setQuestions(questions);
+
+        List<Answer> answers = new ArrayList<>();
+        Answer answer = new Answer("답변1");
+        answer.setAnswerId(1L);
+        answers.add(answer);
+
+        member.setAnswers(answers);
+
+        AnswerDto.Response answerResponse = new AnswerDto.Response(
+                1L,
+                1L,
+                "닉네임1",
+                "답변1",
+                1L,
+                LocalDateTime.now(),
+                LocalDateTime.now()
+        );
+
+        List<AnswerDto.Response> answerResponses = new ArrayList<>();
+        answerResponses.add(answerResponse);
+
+        QuestionDto.questionResponse questionResponse =
+                new QuestionDto.questionResponse(
+                        1L,
+                        "제목1",
+                        "본문1",
+                        LocalDateTime.now(),
+                        LocalDateTime.now(),
+                        1,
+                        1
+                );
+
+        List<QuestionDto.questionResponse> questionResponses = new ArrayList<>();
+        questionResponses.add(questionResponse);
+
+        MemberResponseDto response = new MemberResponseDto(member.getMemberId(), "name@example.com","닉네임",  "password1234", "서울", "자기소개", "내용", questionResponses, answerResponses);
+
 
         // stubbing
         given(memberService.findMember(Mockito.anyLong())).willReturn(new Member());
@@ -204,7 +245,23 @@ public class MemberControllerTest {
                                         fieldWithPath("password").type(JsonFieldType.STRING).description("비밀 번호"),
                                         fieldWithPath("location").type(JsonFieldType.STRING).description("지역"),
                                         fieldWithPath("bioTitle").type(JsonFieldType.STRING).description("자기소개 제목"),
-                                        fieldWithPath("bioContent").type(JsonFieldType.STRING).description("자기소개 본문")
+                                        fieldWithPath("bioContent").type(JsonFieldType.STRING).description("자기소개 본문"),
+                                        fieldWithPath("questions").type(JsonFieldType.ARRAY).description("회원이 작성한 질문 목록"),
+                                        fieldWithPath("questions[].questionId").type(JsonFieldType.NUMBER).description("질문 식별자"),
+                                        fieldWithPath("questions[].title").type(JsonFieldType.STRING).description("제목"),
+                                        fieldWithPath("questions[].content").type(JsonFieldType.STRING).description("본문"),
+                                        fieldWithPath("questions[].createdAt").type(JsonFieldType.STRING).description("생성일"),
+                                        fieldWithPath("questions[].modifiedAt").type(JsonFieldType.STRING).description("수정일"),
+                                        fieldWithPath("questions[].views").type(JsonFieldType.NUMBER).description("조회수"),
+                                        fieldWithPath("questions[].voteScore").type(JsonFieldType.NUMBER).description("투표 수"),
+                                        fieldWithPath("answers").type(JsonFieldType.ARRAY).description("회원이 작성한 답변 목록"),
+                                        fieldWithPath("answers[].answerId").type(JsonFieldType.NUMBER).description("답변 식별자"),
+                                        fieldWithPath("answers[].questionId").type(JsonFieldType.NUMBER).description("질문 식별자"),
+                                        fieldWithPath("answers[].nickname").type(JsonFieldType.STRING).description("답변자 닉네임"),
+                                        fieldWithPath("answers[].content").type(JsonFieldType.STRING).description("답변 내용"),
+                                        fieldWithPath("answers[].memberId").type(JsonFieldType.NUMBER).description("회원 식별자"),
+                                        fieldWithPath("answers[].createdAt").type(JsonFieldType.STRING).description("답변 생성일"),
+                                        fieldWithPath("answers[].modifiedAt").type(JsonFieldType.STRING).description("답변 수정일")
                                 )
                         )
                 ));
@@ -222,18 +279,17 @@ public class MemberControllerTest {
         members.add(member1);
         members.add(member2);
 
-        MemberResponseDto response1 = new MemberResponseDto(1L, "name@example.com","닉네임",  "password1234", "서울", "자기소개", "내용" );
-        MemberResponseDto response2 = new MemberResponseDto(2L, "name2@example.com","닉네임2",  "password12345", "서울", "자기소개", "내용" );
+        MemberListResponseDto response1 = new MemberListResponseDto(1L, "name@example.com","닉네임", "서울");
+        MemberListResponseDto response2 = new MemberListResponseDto(2L, "nam2e@example.com","닉네임2", "서울");
 
-        List<MemberResponseDto> response = new ArrayList<>();
+
+        List<MemberListResponseDto> response = new ArrayList<>();
         response.add(response1);
         response.add(response2);
 
         // stubbing
         given(memberService.findMembers()).willReturn(members);
-        given(memberMapper.memberToMemberResponseDto(member1)).willReturn(response1);
-        given(memberMapper.memberToMemberResponseDto(member2)).willReturn(response2);
-        given(memberMapper.membersToMemberResponseDtos(Mockito.anyList())).willReturn(response);
+        given(memberMapper.membersToMemberListResponseDtos(Mockito.anyList())).willReturn(response);
 
         // when
         ResultActions actions = mockMvc.perform(
@@ -254,10 +310,7 @@ public class MemberControllerTest {
                                         fieldWithPath("[].memberId").type(JsonFieldType.NUMBER).description("회원 식별자"),
                                         fieldWithPath("[].email").type(JsonFieldType.STRING).description("이메일"),
                                         fieldWithPath("[].nickname").type(JsonFieldType.STRING).description("닉네임"),
-                                        fieldWithPath("[].password").type(JsonFieldType.STRING).description("비밀번호"),
-                                        fieldWithPath("[].location").type(JsonFieldType.STRING).description("지역"),
-                                        fieldWithPath("[].bioTitle").type(JsonFieldType.STRING).description("자기소개 제목"),
-                                        fieldWithPath("[].bioContent").type(JsonFieldType.STRING).description("자기소개 본문")
+                                        fieldWithPath("[].location").type(JsonFieldType.STRING).description("지역")
                                 )
                         )
                 ));

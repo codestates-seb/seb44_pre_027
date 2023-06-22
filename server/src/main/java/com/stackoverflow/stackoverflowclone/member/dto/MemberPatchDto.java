@@ -17,7 +17,6 @@ public class MemberPatchDto {
     private long memberId;
     private String nickname;
 
-    // @Min이 아니라 @Size를 사용해야해서 고쳤습니다!
     @Size(min = 8, message = "비밀번호는 8자 이상이어야합니다.")
     private String password;
     private String location;

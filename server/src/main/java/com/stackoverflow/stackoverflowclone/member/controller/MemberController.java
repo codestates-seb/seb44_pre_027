@@ -1,10 +1,8 @@
 package com.stackoverflow.stackoverflowclone.member.controller;
 
 
-import com.stackoverflow.stackoverflowclone.member.dto.MemberDto;
 import com.stackoverflow.stackoverflowclone.member.dto.MemberPatchDto;
 import com.stackoverflow.stackoverflowclone.member.dto.MemberPostDto;
-import com.stackoverflow.stackoverflowclone.member.dto.MemberResponseDto;
 import com.stackoverflow.stackoverflowclone.member.entity.Member;
 import com.stackoverflow.stackoverflowclone.member.mapper.MemberMapper;
 import com.stackoverflow.stackoverflowclone.member.service.MemberService;
@@ -19,7 +17,6 @@ import javax.validation.constraints.Positive;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @RestController
@@ -55,9 +52,10 @@ public class MemberController {
         Member response =
                 memberService.updateMember(memberMapper.memberPatchDtoToMember(memberPatchDto));
 
-        return new ResponseEntity<>(memberMapper.memberToMemberResponseDto(response),
+        return new ResponseEntity<>(memberMapper.memberToMemberPatchResponeDto(response),
                 HttpStatus.OK);
     }
+
     @GetMapping("/{member-id}")
     public ResponseEntity getMember(@PathVariable("member-id") @Positive long memberId) {
         Member response = memberService.findMember(memberId);
@@ -65,17 +63,12 @@ public class MemberController {
         return new ResponseEntity<>(memberMapper.memberToMemberResponseDto(response), HttpStatus.OK);
     }
 
-    // 추가
+    /** 회원 목록 조회 **/
     @GetMapping
     public ResponseEntity getMembers() {
         List<Member> members = memberService.findMembers();
 
-        List<MemberResponseDto> response =
-                members.stream()
-                        .map(member -> memberMapper.memberToMemberResponseDto(member))
-                        .collect(Collectors.toList());
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(memberMapper.membersToMemberListResponseDtos(members), HttpStatus.OK);
     }
 
     // 추가

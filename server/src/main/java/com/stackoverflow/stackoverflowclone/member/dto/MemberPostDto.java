@@ -21,8 +21,5 @@ public class MemberPostDto {
     /* 패스워드 유효성 검사 */
     @Size(min = 8, message = "비밀번호는 8자 이상이어야합니다.")
     private String password;
-    private String location;
-    private String bioTitle;
-    private String bioContent;
 
 }
