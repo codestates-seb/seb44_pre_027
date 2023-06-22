@@ -11,7 +11,7 @@ interface Userpage {}
 const UserPage = ({}:Userpage) => {
     return(
         <Wrapper>
-            <div className="flex flex-row">
+            <div className="flex flex-row ">
                 <LeftSideBar/>
                 <main className="mx-auto mb-20 flex flex-col">
                     <UserInfo/>

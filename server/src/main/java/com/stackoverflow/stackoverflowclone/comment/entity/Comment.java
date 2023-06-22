@@ -3,12 +3,16 @@ package com.stackoverflow.stackoverflowclone.comment.entity;
 import com.stackoverflow.stackoverflowclone.audit.Auditable;
 import com.stackoverflow.stackoverflowclone.member.entity.Member;
 import com.stackoverflow.stackoverflowclone.question.entity.Question;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
 @Entity
+@Getter
+@Setter
 public class Comment extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

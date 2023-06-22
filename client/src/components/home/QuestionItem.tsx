@@ -1,27 +1,42 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PagenationBtn from './PagenationBtn';
+import { HomeInquiryType } from '@/mocks/homeinquiry';
 
-interface QuestionItemProps {}
+interface QuestionItemProps {
+  createdAt:string;
+  voteScore:number;
+  answers:string;
+  views:number;
+  title:string;
+  content:string;
+  nickname:string;
+}
 
-const QuestionItem = ({}: QuestionItemProps) => {
+const QuestionItem = ({data}: QuestionItemProps | any) => {
+
+  const createdAt = new Date(data.createdAt);
+  const formattedDate = createdAt.toLocaleString("en-US", {
+    month:'short',
+    day:'numeric',
+    hour:'numeric',
+    minute:'numeric',
+  })
   return (
     <li className=" flex border-y border-slate-200 px-8 py-4">
       <div className=" flex flex-shrink-0 flex-col items-end justify-center gap-2 text-sm">
-        <span className="">{'3'} votes</span>
+        <span className="">{data.voteScore} votes</span>
         <span className=" rounded-sm border border-slate-300 px-1 text-slate-500">
-          {'2'} answers
+          {data.answers.length} answers
         </span>
-        <span className=" text-slate-400">{'219'} views</span>
+        <span className=" text-slate-400">{data.views} views</span>
         <span className=" rounded-sm bg-blue-500 px-2 py-1 text-white">+100</span>
       </div>
-      <div className=" flex flex-col px-5">
+      <div className=" flex flex-col px-5 min-w-[600px]">
         <h3 className=" cursor-pointer text-sky-500">
-          {'Lost order between file save and file quit'}
+          {data.title}
         </h3>
         <p className=" break-words pt-3 text-xs text-slate-500">
-          I want to save a file, on top of my old file after python running vba script but problem
-          that i every time need press save to overwrite my old file what i can do with this code to
-          make press
+          {data.content}
         </p>
 
         <div className=" flex items-center justify-between">
@@ -37,9 +52,9 @@ const QuestionItem = ({}: QuestionItemProps) => {
             </li>
           </ol>
           <div className=" flex gap-2 text-xs text-slate-400">
-            <span className=" text-sky-500">{'HelloCw'}</span>
+            <span className=" text-sky-500">{data.nickname}</span>
             <span>
-              {'1051'} asked {'Jun 6 at 11:07'}
+              {'1051'} asked {formattedDate}
             </span>
           </div>
         </div>

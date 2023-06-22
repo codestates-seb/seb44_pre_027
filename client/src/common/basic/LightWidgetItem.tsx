@@ -30,7 +30,6 @@ const IconWrapper = styled.div`
 `;
 
 const LightWidgetItem = ({type, contents}: LightWidgetItemProps) => {
-
     return (
         <ColumnItemWrapper size='100%' gap={0} align='center'>
             { type  === 'CUSTOM_FILTERS' &&

@@ -1,6 +1,7 @@
 package com.stackoverflow.stackoverflowclone.question.mapper;
 
 import com.stackoverflow.stackoverflowclone.answer.dto.AnswerDto;
+import com.stackoverflow.stackoverflowclone.comment.dto.CommentDto;
 import com.stackoverflow.stackoverflowclone.question.dto.QuestionDto;
 import com.stackoverflow.stackoverflowclone.question.entity.Question;
 import org.mapstruct.Mapper;
@@ -21,6 +22,21 @@ public interface QuestionMapper {
 
     List<QuestionDto.Response> QuestionsToQuestionResponseDtos(List<Question> questions);
 
+
+    default QuestionDto.SearchResponse QuestionToQuestionSearchResponseDto(Question question){
+
+        QuestionDto.SearchResponse questionSearchResponseDto =
+                QuestionDto.SearchResponse.builder()
+                        .questionId(question.getQuestionId())
+                        .title(question.getTitle())
+                        .content(question.getContent())
+                        .view(question.getViews())
+                        .voteScore(question.getVoteScore())
+                        .build();
+
+        return questionSearchResponseDto;
+    }
+
     /** mapper로 user, question, answer, comment, vote 같이 받아서 사용 **/
     default QuestionDto.Response QuestionToQuestionResponseDto(Question question){
 
@@ -33,6 +49,7 @@ public interface QuestionMapper {
                         .createdAt(question.getCreatedAt())
                         .modifiedAt(question.getModifiedAt())
                         .views(question.getViews())
+                        .voteScore(question.getVoteScore())
                         .build();
 
         if (question.getAnswers() != null) {
@@ -50,6 +67,23 @@ public interface QuestionMapper {
                             .collect(Collectors.toList());
 
             questionResponseDto.setAnswers(answerResponseDtos);
+
+            if(question.getComments() != null){
+                List<CommentDto.Response> commentResponseDtos =
+                        question.getComments()
+                                .stream()
+                                .map(comment -> CommentDto.Response.builder()
+                                        .commentId(comment.getCommentId())
+                                        .content(comment.getContent())
+                                        .memberId(comment.getMember().getMemberId())
+                                                .createdAt(comment.getCreatedAt())
+                                                .modifiedAt(comment.getModifiedAt())
+                                                .build())
+                                .collect(Collectors.toList());
+
+                questionResponseDto.setComments(commentResponseDtos);
+            }
+
         }
 
         return questionResponseDto;

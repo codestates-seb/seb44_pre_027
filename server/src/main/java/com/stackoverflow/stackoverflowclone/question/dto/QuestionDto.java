@@ -2,6 +2,7 @@ package com.stackoverflow.stackoverflowclone.question.dto;
 
 import com.stackoverflow.stackoverflowclone.answer.dto.AnswerDto;
 import com.stackoverflow.stackoverflowclone.answer.entity.Answer;
+import com.stackoverflow.stackoverflowclone.comment.dto.CommentDto;
 import com.stackoverflow.stackoverflowclone.member.entity.Member;
 import lombok.*;
 
@@ -34,6 +35,7 @@ public class QuestionDto {
     }
 
     @Getter
+    @NoArgsConstructor
     public static class Patch {
 
         @Positive
@@ -47,10 +49,15 @@ public class QuestionDto {
             this.questionId = questionId;
         }
 
+        public Patch(String title, String content) {
+            this.title = title;
+            this.content = content;
+        }
     }
 
     @Getter @Setter
     @Builder
+    @AllArgsConstructor
     public static class Response {
         @Positive
         private long questionId;
@@ -67,15 +74,20 @@ public class QuestionDto {
 
         private int views;
 
+        private int voteScore;
+
         private List<AnswerDto.Response> answers;
+
+        private List<CommentDto.Response> comments;
     }
 
 
-    // TODO : 나중에 vote도 추가해야함
     @Getter @Setter
     @Builder
+    @AllArgsConstructor
     public static class SearchResponse {
 
+        @Positive
         private long questionId;
 
         private String title;
@@ -83,5 +95,7 @@ public class QuestionDto {
         private String content;
 
         private int view;
+
+        private int voteScore;
     }
 }

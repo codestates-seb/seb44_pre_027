@@ -1,4 +1,5 @@
-import { todos, users, data } from './data';
+import { todos, users, data, searchData } from './data';
+import { homeinquiry } from './homeinquiry';
 import { rest } from 'msw';
 
 const typeProvider = [
@@ -60,7 +61,32 @@ const giljongHandlers: DahamType = [
   }),
 ];
 
-const hyejinHandlers: DahamType = [];
+const hyejinHandlers: DahamType = [
+  rest.get('/searchbar', (_, res, ctx) => {
+    return res(ctx.status(200), ctx.json(searchData));
+  }),
+  rest.get('/questions', (req, res, ctx) => {
+    const page = req.url.searchParams.get('page')
+    const sort = req.url.searchParams.get('sort')
+    return res(
+      ctx.json({
+        data:homeinquiry,
+        page,
+        sort,
+      }),
+    )
+  }),
+  rest.get('/users', (req, res, ctx) => {
+    const userId = req.url.searchParams.get('user-id')
+    return res(
+      ctx.json({
+        data:homeinquiry,
+        userId,
+      })
+    )
+  }),
+
+];
 
 export const handlers = dahamHandlers
   .concat(giljongHandlers)
