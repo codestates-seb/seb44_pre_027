@@ -33,6 +33,13 @@ const QuestionAnswerComponent = ({type, data, questionId, answerId, refetch}: Qu
     }
   });
 
+  const gotoEditPage = ()=>{
+    if(type === 'Question')
+      window.location.href = `/questions/${questionId}/edit`;
+    if(type === 'Answer')
+      window.location.href = `/answers/${answerId}/edit`;
+  }
+
   return (
     <section className="">
       <div className=" flex pt-4 mb-6">
@@ -45,7 +52,7 @@ const QuestionAnswerComponent = ({type, data, questionId, answerId, refetch}: Qu
           :
           `/questions/${questionId}/answers/${answerId}`
           }>
-          <button>Edit</button>
+          <button onClick={gotoEditPage}>Edit</button>
         </Link>
         <button onClick={()=>mutate()}>Delete</button>
       </div>
