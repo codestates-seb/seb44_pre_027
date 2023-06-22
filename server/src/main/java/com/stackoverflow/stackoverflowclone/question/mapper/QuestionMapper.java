@@ -22,12 +22,15 @@ public interface QuestionMapper {
 
     List<QuestionDto.Response> QuestionsToQuestionResponseDtos(List<Question> questions);
 
+    QuestionDto.postResponse QuestionToQuestionPostResponseDto(Question question);
+
 
     default QuestionDto.SearchResponse QuestionToQuestionSearchResponseDto(Question question){
 
         QuestionDto.SearchResponse questionSearchResponseDto =
                 QuestionDto.SearchResponse.builder()
                         .questionId(question.getQuestionId())
+                        .nickname(question.getMember().getNickname())
                         .title(question.getTitle())
                         .content(question.getContent())
                         .view(question.getViews())
@@ -59,6 +62,7 @@ public interface QuestionMapper {
                             .map(answer -> AnswerDto.Response.builder()
                                 .answerId(answer.getAnswerId())
                                 .questionId(answer.getQuestion().getQuestionId())
+                                    .nickname(answer.getMember().getNickname())
                                 .content(answer.getContent())
                                 .memberId(answer.getMember().getMemberId())
                                 .createdAt(answer.getCreatedAt())
@@ -76,9 +80,10 @@ public interface QuestionMapper {
                                         .commentId(comment.getCommentId())
                                         .content(comment.getContent())
                                         .memberId(comment.getMember().getMemberId())
-                                                .createdAt(comment.getCreatedAt())
-                                                .modifiedAt(comment.getModifiedAt())
-                                                .build())
+                                        .nickname(comment.getMember().getNickname())
+                                        .createdAt(comment.getCreatedAt())
+                                        .modifiedAt(comment.getModifiedAt())
+                                        .build())
                                 .collect(Collectors.toList());
 
                 questionResponseDto.setComments(commentResponseDtos);

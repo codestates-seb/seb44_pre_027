@@ -53,6 +53,8 @@ public class AnswerDto{
 
         private long questionId;
 
+        private String nickname;
+
         @NotBlank
         private String content;
 
