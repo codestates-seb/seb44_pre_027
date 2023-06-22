@@ -15,6 +15,81 @@ API 문서 개요
   이 문서는 pre-project StackOverflow 애플리케이션의 문서이다.
 
 ***
+
+== MemberController
+=== 회원 가입
+.http-request
+include::{snippets}/signup-user/http-request.adoc[]
+
+.request-fields
+이 부분을 client 쪽에서 request body로 넘겨주시면 됩니다!
+include::{snippets}/signup-user/request-fields.adoc[]
+
+.http-response
+include::{snippets}/signup-user/http-response.adoc[]
+
+.response-headers
+include::{snippets}/signup-user/response-headers.adoc[]
+
+=== 회원 수정
+.http-request
+include::{snippets}/patch-user/http-request.adoc[]
+
+.request-fields
+이 부분을 client 쪽에서 request body로 넘겨주시면 됩니다!
+include::{snippets}/patch-user/request-fields.adoc[]
+
+.path-parameters
+include::{snippets}/patch-user/path-parameters.adoc[]
+
+.http-response
+서버에서 클라이언트 쪽으로 보내드리는 json 형식입니다!
+include::{snippets}/patch-user/http-response.adoc[]
+
+.response-fields
+include::{snippets}/patch-user/response-fields.adoc[]
+
+=== 회원 상세 조회
+.http-request
+include::{snippets}/get-member/http-request.adoc[]
+
+.path-parameters
+include::{snippets}/get-member/path-parameters.adoc[]
+
+.http-response
+서버에서 클라이언트 쪽으로 보내드리는 json 형식입니다!
+include::{snippets}/get-member/http-response.adoc[]
+
+.response-fields
+include::{snippets}/get-member/response-fields.adoc[]
+
+=== 회원 목록 조회
+.http-request
+include::{snippets}/get-members/http-request.adoc[]
+
+.http-response
+서버에서 클라이언트 쪽으로 보내드리는 json 형식입니다!
+include::{snippets}/get-members/http-response.adoc[]
+
+.response-fields
+include::{snippets}/get-members/response-fields.adoc[]
+
+=== 회원 탈퇴
+.http-request
+include::{snippets}/delete-member/http-request.adoc[]
+
+.path-parameters
+include::{snippets}/delete-member/path-parameters.adoc[]
+
+.request-parameters
+include::{snippets}/delete-member/request-parameters.adoc[]
+
+.http-response
+서버에서 클라이언트 쪽으로 보내드리는 json 형식입니다!
+include::{snippets}/delete-member/http-response.adoc[]
+
+
+
 == QuestionController
 === 질문 등록
 .http-request

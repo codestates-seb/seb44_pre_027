@@ -22,6 +22,8 @@ public interface QuestionMapper {
 
     List<QuestionDto.Response> QuestionsToQuestionResponseDtos(List<Question> questions);
 
+    QuestionDto.postResponse QuestionToQuestionPostResponseDto(Question question);
+
 
     default QuestionDto.SearchResponse QuestionToQuestionSearchResponseDto(Question question){
 

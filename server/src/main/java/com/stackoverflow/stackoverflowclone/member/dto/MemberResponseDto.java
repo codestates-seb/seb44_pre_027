@@ -1,12 +1,15 @@
 package com.stackoverflow.stackoverflowclone.member.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.Min;
 
 @Builder
-@Getter
+@Getter @Setter
+@AllArgsConstructor
 public class MemberResponseDto {
     private long memberId;
     private String email;

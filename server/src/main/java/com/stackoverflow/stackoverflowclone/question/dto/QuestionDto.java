@@ -56,6 +56,16 @@ public class QuestionDto {
     }
 
     @Getter @Setter
+    @AllArgsConstructor
+    @Builder
+    /** 회원 등록 response **/
+    public static class postResponse {
+
+        @Positive
+        private long questionId;
+    }
+
+    @Getter @Setter
     @Builder
     @AllArgsConstructor
     public static class Response {

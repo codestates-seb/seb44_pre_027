@@ -78,6 +78,8 @@ public class QuestionControllerTest {
         QuestionDto.Post post = new QuestionDto.Post(member.getMemberId(), "질문", "내용");
         String content = gson.toJson(post);  // json으로 변경
 
+        QuestionDto.postResponse response = new QuestionDto.postResponse(1L);
+
         // stubbing
         given(mapper.QuestionPostDtoToQuestion(Mockito.any(QuestionDto.Post.class))).willReturn(new Question());
 
@@ -85,6 +87,7 @@ public class QuestionControllerTest {
         mockResultQuestion.setQuestionId(1L);
 
         given(questionService.createQuestion(Mockito.any(Question.class))).willReturn(mockResultQuestion);
+        given(mapper.QuestionToQuestionPostResponseDto(mockResultQuestion)).willReturn(response);
 
         // when
         ResultActions actions = mockMvc.perform(
@@ -114,6 +117,10 @@ public class QuestionControllerTest {
 
                         responseHeaders(
                                 headerWithName(HttpHeaders.LOCATION).description("Location header. 등록된 리소스의 URI")
+                        ),
+
+                        responseFields(
+                                fieldWithPath("questionId").type(JsonFieldType.NUMBER).description("질문 식별자")
                         )
                 ));
         //============ API 문서화 관련 코드 끝 ==========//
