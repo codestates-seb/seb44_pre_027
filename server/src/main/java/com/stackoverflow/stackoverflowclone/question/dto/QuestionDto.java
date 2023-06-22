@@ -56,6 +56,16 @@ public class QuestionDto {
     }
 
     @Getter @Setter
+    @AllArgsConstructor
+    @Builder
+    /** 회원 등록 response **/
+    public static class postResponse {
+
+        @Positive
+        private long questionId;
+    }
+
+    @Getter @Setter
     @Builder
     @AllArgsConstructor
     public static class Response {
@@ -81,6 +91,29 @@ public class QuestionDto {
         private List<CommentDto.Response> comments;
     }
 
+    @Getter @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    public static class questionResponse {
+
+        @Positive
+        private long questionId;
+
+        private String title;
+
+        private String content;
+
+        private LocalDateTime createdAt;
+
+        private LocalDateTime modifiedAt;
+
+        private int views;
+
+        private int voteScore;
+
+    }
+
 
     @Getter @Setter
     @Builder
@@ -89,6 +122,8 @@ public class QuestionDto {
 
         @Positive
         private long questionId;
+
+        private String nickname;
 
         private String title;
 

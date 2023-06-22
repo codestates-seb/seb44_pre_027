@@ -51,6 +51,8 @@ public class CommentDto {
 
         private long memberId;
 
+        private String nickname;
+
         private LocalDateTime createdAt;
 
         private LocalDateTime modifiedAt;
