@@ -3,6 +3,8 @@ export interface UserType {
   password: string;
   nickname: string;
   userid: number;
+  title?: string;
+  tag?: string;
 }
 
 export const answers =  [
@@ -131,3 +133,30 @@ export const questions = [
 
 /* Tags */
 export const tags = ['javascript', 'css', 'java', 'jquery', 'c++', 'c#', 'react', 'react-query', 'react-dom', 'react-redux', 'redux'];
+
+export const searchData:UserType[] = [
+  {
+    userid: 1,
+    nickname:"emma",
+    email:"cjd191058@naver.com",
+    password:"catcatf",
+    title:"listening to Object changes ..",
+    tag:"javascript",
+  },
+  {
+    userid: 2,
+    nickname:"daham",
+    email:"daham333@naver.com",
+    password:"rere",
+    title:"rec-query ..",
+    tag:"reactQeury",
+  },
+  {
+    userid: 3,
+    nickname:"giljong",
+    email:"giljong111@naver.com",
+    password:"god",
+    title:"why redux-Toolkit does not work?",
+    tag:"reduxtookit",
+  },
+];

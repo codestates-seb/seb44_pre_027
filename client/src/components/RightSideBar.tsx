@@ -1,5 +1,5 @@
 import { css, styled } from 'styled-components';
-import { RSideBarWidgetData, HotNetworkQuestions, Tags } from '../common/msgs.js';
+import { RSideBarWidgetData, HotNetworkQuestions, Tags } from '../common/msgs';
 
 import { ColumnItemWrapper, RowItemWrapper } from '../common/style/Containers.styled.js';
 import { Favicon } from '../common/style/Images.styled.js';
@@ -38,7 +38,7 @@ const RightSideBar = ():JSX.Element => {
             <div>
                 {RSideBarWidgetData.Basic.map((data:BasicWidgetData):JSX.Element => {
                     return (
-                        <Widget type="Basic" title={data.title} key={data.id} id={data.id} isStuck={true}>
+                        <Widget type="Basic" title={data.title} key={data.id} id={data.id} isstuck={true}>
                             {data.items.map((item:WidgetItem)=>{
                                 return <BasicWidgetItem item={item} key={item.id}/>})
                             }

@@ -1,4 +1,6 @@
-import { todos, users, data, questions, comments, answers } from './data';
+import { todos, users, data, questions, comments, answers, searchData } from './data';
+import UserSetting from '@/components/userinfo/UserSetting';
+import { UserSettingType, homeinquiry, userinquiry } from './homeinquiry';
 import { rest } from 'msw';
 import { NONAME } from 'dns';
 
@@ -130,9 +132,55 @@ const giljongHandlers: DahamType = [
   rest.get('/users/logout', (_, res, ctx) => {
     return res(ctx.status(200), ctx.json('logout successful'));
   }),
+  rest.patch('/questions/:questionid', (req, res, ctx) => {
+    const { questionid } = req.params;
+    return res(ctx.status(200), ctx.json('we patched your request'));
+  }),
+  rest.patch('/questions/:questionid/answers/:answerid', (req, res, ctx) => {
+    const { questionid, answerid } = req.params;
+    return res(ctx.status(200), ctx.json('we patched your request'));
+  }),
 ];
 
-const hyejinHandlers: DahamType = [];
+const hyejinHandlers: DahamType = [
+  rest.get('/searchbar', (_, res, ctx) => {
+    return res(ctx.status(200), ctx.json(searchData));
+  }),
+  rest.get('/questions', (req, res, ctx) => {
+    const page = req.url.searchParams.get('page')
+    const sort = req.url.searchParams.get('sort')
+    return res(
+      ctx.json({
+        data:homeinquiry,
+        page,
+        sort,
+      }),
+    )
+  }),
+  rest.get('/users/:id', (req, res, ctx) => {
+    const userId = Number(req.params.id)
+    return res(
+      ctx.json({
+        data:userinquiry,
+        userId,
+      }),
+    )
+  }),
+  rest.patch('/users/:id', (req, res,ctx) => {
+    const userId = Number(req.params.id);
+
+
+    return res(ctx.json({
+      data:userinquiry,
+    }));
+  }),
+  rest.delete('/users/:id', (req,res,ctx) => {
+    const userId = Number(req.params.id);
+
+    return res(ctx.status(200));
+  })
+
+];
 
 export const handlers = dahamHandlers
   .concat(giljongHandlers)

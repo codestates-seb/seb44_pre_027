@@ -2,10 +2,11 @@ import React from 'react';
 import {cva} from 'class-variance-authority';
 import {cn} from '@/utils/cn';
 
-interface UserNav {
-    variant?: 'summary' | 'settings' | 'side'
-}
 
+type UserTopNavProps = {
+    variant?:'summary' | 'settings' | 'side';
+    setIsSettingOn: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 const UserButton = cva(
     `
@@ -25,7 +26,16 @@ const UserButton = cva(
     }
 );
 
-export const UserTopNav = ({variant}:UserNav):JSX.Element => {
+export const UserTopNav = ({variant, setIsSettingOn}:UserTopNavProps):JSX.Element => {
+
+    const changeSet = () => {
+        setIsSettingOn(true);
+    }
+
+    const changeProfile = () => {
+        setIsSettingOn(false);
+    }
+
     return(
         <div className="h-10 mt-6 mx-4 ">
             <ul className="flex flex-row justify-between w-1/4">
@@ -33,13 +43,17 @@ export const UserTopNav = ({variant}:UserNav):JSX.Element => {
                     <button className={cn(UserButton({variant:variant}))}>Profile</button>
                 </li>
                 <li>
-                    <button className={cn(UserButton({variant:variant}))}>Activity</button>
+                    <button 
+                    className={cn(UserButton({variant:variant}))}
+                    onClick={changeProfile}>Activity</button>
                 </li>
                 <li>
                     <button className={cn(UserButton({variant:variant}))}>Saves</button>
                 </li>
                 <li>
-                    <button className={cn(UserButton({variant:variant}))}>Settings</button>
+                    <button 
+                    className={cn(UserButton({variant:variant}))}
+                    onClick={changeSet}>Settings</button>
                 </li>
             </ul>
         </div>
@@ -48,7 +62,7 @@ export const UserTopNav = ({variant}:UserNav):JSX.Element => {
 
 
 
-export const UserInfoNav = ({}:UserNav):JSX.Element => {
+export const UserInfoNav = ():JSX.Element => {
     return(
         <div className="w-32 px-2 m-1">
             <div className="list-none">
@@ -67,35 +81,35 @@ export const UserInfoNav = ({}:UserNav):JSX.Element => {
     )
 };
 
-export const UserSettingNav = ({}:UserNav):JSX.Element => {
+export const UserSettingNav = ():JSX.Element => {
     return(
-        <div className="w-full px-2 mt-3 mx-1">
+        <div className="w-content px-2 mt-3 mx-1">
             <div className="list-none flex flex-col text-start">
-                <ul className="mb-6">
-                    <li className="font-semibold text-xs pl-2">PERSONAL INFORMATION</li>
-                    <li><button className={cn(UserButton({variant:"setting"}))}>Summary</button></li>
-                    <li><button className={cn(UserButton({variant:"setting"}))}>Answers</button></li>
+                <ul className="mb-6 w-[150px]">
+                    <li className="font-semibold text-sxs pl-2">PERSONAL INFORMATION</li>
+                    <li><button className={cn(UserButton({variant:"setting"}))}>Edit profile</button></li>
+                    <li><button className={cn(UserButton({variant:"setting"}))}>Delete profile</button></li>
                 </ul>
                 <ul className="mb-6">
-                    <li className="font-semibold text-xs pl-2">EMAIL SETTINGS</li>
+                    <li className="font-semibold text-sxs pl-2">EMAIL SETTINGS</li>
                     <li><button className={cn(UserButton({variant:"setting"}))}>Tags</button></li>
                     <li><button className={cn(UserButton({variant:"setting"}))}>Articles</button></li>
                     <li><button className={cn(UserButton({variant:"setting"}))}>Badges</button></li>
                     <li><button className={cn(UserButton({variant:"setting"}))}>Following</button></li>
                 </ul>
                 <ul className="mb-6">
-                    <li className="font-semibold text-xs pl-2">SITE SETTINGS</li>
+                    <li className="font-semibold text-sxs pl-2">SITE SETTINGS</li>
                     <li><button className={cn(UserButton({variant:"setting"}))}>Bounties</button></li>
                     <li><button className={cn(UserButton({variant:"setting"}))}>Reputation</button></li>
                     <li><button className={cn(UserButton({variant:"setting"}))}>All actions</button></li>
                 </ul>
                 <ul className="mb-6">
-                    <li className="font-semibold text-xs pl-2">ACESS</li>
+                    <li className="font-semibold text-sxs pl-2">ACESS</li>
                     <li><button className={cn(UserButton({variant:"setting"}))}>Responses</button></li>
                     <li><button className={cn(UserButton({variant:"setting"}))}>Votes</button></li>
                 </ul>
                 <ul className="mb-6">
-                    <li className="font-semibold text-xs pl-2">API</li>
+                    <li className="font-semibold text-sxs pl-2">API</li>
                     <li><button className={cn(UserButton({variant:"setting"}))}>Responses</button></li>
                 </ul>
             </div>

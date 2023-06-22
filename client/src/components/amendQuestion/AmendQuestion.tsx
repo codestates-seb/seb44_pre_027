@@ -1,10 +1,12 @@
-import React from 'react';
-import AmendWithTag from './AmendWithTag';
+import React, {useState} from 'react';
+import {AmendTag, AmendTitle} from './AmendTagTitle';
 
 interface AmendQue {};
 
 
 const AmendQuestion = ({}: AmendQue) => {
+    //질문 수정 : true, 답변 수정 :  false
+    const [isQueAmend, setIsQueAmend] = useState(true);
 
 
     return(
@@ -14,17 +16,12 @@ const AmendQuestion = ({}: AmendQue) => {
                     <span className="mb-3">Your edit will be placed in a queue until it is peer reviewed.</span>
                     <span>We welcome edits that make the post easier to understand and more valuable for readers. Because community members review edits, please try to make the post substantially better than how you found it, for example, by fixing grammar or adding additional resources and hyperlinks.</span>
                 </div>
-                <div className="mb-2">
-                    <div className=" mt-4 rounded-sm mb-3 ">
-                        Title
-                    </div>
-                    <input 
-                        type="text"
-                        className=" w-full rounded-md border border-slate-300 
-                                    px-3 py-2 text-xs"
-                        maxLength={20}>
-                    </input>
-                </div>
+
+                {
+                    isQueAmend ? <AmendTitle/> : null
+                }
+
+
                 {/* main 답변 수정 칸 */}
                 <div className="mb-2">
                     <div className=" mt-4 rounded-sm mb-3 ">
@@ -36,7 +33,11 @@ const AmendQuestion = ({}: AmendQue) => {
                         maxLength={100}>
                     </textarea>
                 </div>
-                {/* {  질문 수정 | 답변 수정 상태에 따른 삼항연산자 ? <AmendWithTag/> : null} */}
+
+                {
+                    isQueAmend ? <AmendTag/> : null
+                }
+
                 <div className="my-4 text-sm mb-3 ">
                     <button 
                         className="border border-zinc-200 bg-blue-500 py-2 px-3 
