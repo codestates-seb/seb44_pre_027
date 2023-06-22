@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import UserInfo from '../../components/userinfo/UserInfo';
 import {UserTopNav} from '../../components/userinfo/UserNav';
-import UserMain from '@/components/userinfo/UserMain';
-import Wrapper from '@/common/Wrapper';
-import LeftSideBar from '@/components/LeftSideBar';
-import {DeletAlert} from '@/components/Alert';
+import UserMain from '../../components/userinfo/UserMain';
+import Wrapper from '../../common/Wrapper';
+import LeftSideBar from '../../components/LeftSideBar';
+import {DeletAlert} from '../../components/Alert';
 
 import { useSelector } from 'react-redux';
-import { RootState } from '@/modules/store';
-import { UserSettingType } from '@/mocks/homeinquiry';
+import { RootState } from '../../modules/store';
+import { UserSettingType } from '../../mocks/homeinquiry';
 
 export interface indexUser {
     myinfo:UserSettingType[];
