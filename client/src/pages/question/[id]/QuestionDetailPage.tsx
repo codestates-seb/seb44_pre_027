@@ -23,6 +23,8 @@ interface QuestionDetailPageProps {}
 const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
   const { register, handleSubmit } = useForm();
   const { questionId } = useParams();
+  const { data, isSuccess, isLoading, refetch } = useQuery(['question'],
+  ()=>call(`/questions/${questionId}`, 'GET', null));
 
   let onlyQuestionData = {
     questionId: 0,
@@ -34,25 +36,6 @@ const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
     createdAt: '',
     modifiedAt: ''
   };
-
-  const { data, isSuccess, isLoading, refetch } = useQuery(['question'],
-  ()=>call(`/questions/${questionId}`, 'GET', null));
-
-  if(isSuccess){
-    onlyQuestionData = {
-      questionId: data.questionId,
-      nickname: data.nickname,
-      title: data.title,
-      content: data.content,
-      views: data.views,
-      voteScore: data.voteScore,
-      createdAt: data.createdAt,
-      modifiedAt: data.modifiedAt
-    }
-  }
-  if(isLoading){
-    return <h2>Loading...</h2>
-  }
 
   const addNewAnswer = (data:FieldValues) => {
     return call(`/questions/${questionId}/answers`, 'POST', {
@@ -71,15 +54,31 @@ const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
           // window.location.href=`/questions/${questionId}`;
         }
       });
-  },
-  [mutation]
-  )
+    },
+    [mutation]
+    )
 
-  const loadAnswers = ():JSX.Element[] =>{
-    const answersArray = data.answers.map((answer: Answer)=>{
+    const loadAnswers = ():JSX.Element[] =>{
+      const answersArray = data.answers.map((answer: Answer)=>{
       return <QuestionAnswerComponent data={answer} type='Answer' questionId={data.questionId} answerId={answer.answerId} key={answer.answerId}/>
     })
     return answersArray;
+  }
+
+  if(isSuccess){
+    onlyQuestionData = {
+      questionId: data.questionId,
+      nickname: data.nickname,
+      title: data.title,
+      content: data.content,
+      views: data.views,
+      voteScore: data.voteScore,
+      createdAt: data.createdAt,
+      modifiedAt: data.modifiedAt
+    }
+  }
+  if(isLoading){
+    return <h2>Loading...</h2>
   }
 
   return (

@@ -28,7 +28,7 @@ const QuestionAnswerComponent = ({type, data, questionId, answerId}: QuestionAns
   return (
     <section className="">
       <div className=" flex pt-4 mb-6">
-        <VoteContainer voteScore={data.voteScore}/>
+        <VoteContainer voteScore={data.voteScore} postId={type === 'Question' ? questionId : answerId}/>
         <MainText content={data.content}/>
       </div>
       <div className=" flex gap-4 text-sm pl-12 pb-4">

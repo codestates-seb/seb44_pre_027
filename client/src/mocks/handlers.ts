@@ -66,6 +66,17 @@ const dahamHandlers: DahamType = [
     answers.push(newAnswer);
     return res(ctx.status(200));
   }),
+  rest.post('/questions/:questionId/votes', async (req, res, ctx)=>{
+    const status = req.url.searchParams.get('status');
+    const questionId = Number(req.params.questionId);
+    questions.map(question => {
+      if(question.questionId === questionId){
+        if(status === 'good') question.voteScore++;
+        if(status === 'bad') question.voteScore--;
+      }
+    })
+    return res(ctx.status(200));
+  }),
 ];
 
 const giljongHandlers: DahamType = [
