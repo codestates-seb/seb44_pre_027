@@ -20,7 +20,8 @@ const CommentContainer = ({comments, questionId, refetch}: CommentContainerProps
 
   const addNewComment = (data:FieldValues) => {
     return call(`/questions/${questionId}/comments`, 'POST', {
-      content: data,
+      ...data,
+      memberId: 4
     });
   };
 
@@ -67,7 +68,7 @@ const CommentContainer = ({comments, questionId, refetch}: CommentContainerProps
           onSubmit={handleSubmit(onSubmitComment)
           }>
             <textarea className='basis-5/6 border border-slate-300'
-            {...register('comment')}/>
+            {...register('content')}/>
             <PrimaryBtn size='fit-content basis-1/6'>Add</PrimaryBtn>
           </form>
         }
