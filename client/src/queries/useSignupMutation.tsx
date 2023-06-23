@@ -9,17 +9,12 @@ const postSignup = async (signupData: SignupType) => {
     method: 'POST',
     body: JSON.stringify(signupData),
     headers: {
-      Origin: 'http://localhost:5173',
-      'Access-Control-Request-Method': 'POST',
       'Content-Type': 'application/json;charset=utf-8',
     },
-
-    credentials: 'include',
   });
 
   // const header = getHeader(response, 'authorization');
   const result = await response.json();
-  console.log('회원가입', result);
   return result;
 };
 
