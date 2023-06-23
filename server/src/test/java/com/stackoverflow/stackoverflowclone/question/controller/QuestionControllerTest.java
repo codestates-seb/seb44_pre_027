@@ -1,7 +1,6 @@
 package com.stackoverflow.stackoverflowclone.question.controller;
 
 import com.google.gson.Gson;
-import com.stackoverflow.stackoverflowclone.answer.controller.AnswerController;
 import com.stackoverflow.stackoverflowclone.answer.dto.AnswerDto;
 import com.stackoverflow.stackoverflowclone.answer.entity.Answer;
 import com.stackoverflow.stackoverflowclone.comment.dto.CommentDto;
