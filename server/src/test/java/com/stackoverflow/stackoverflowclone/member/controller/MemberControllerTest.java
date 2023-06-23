@@ -54,6 +54,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
                         classes = SecurityConfiguration.class)
         }
 )
+
 @MockBean(JpaMetamodelMappingContext.class)
 @AutoConfigureRestDocs
 public class MemberControllerTest {
