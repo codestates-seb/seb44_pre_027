@@ -1,15 +1,24 @@
 package com.stackoverflow.stackoverflowclone.member.service;
 
+import com.stackoverflow.stackoverflowclone.answer.repository.AnswerRepository;
+import com.stackoverflow.stackoverflowclone.answer.service.AnswerService;
+import com.stackoverflow.stackoverflowclone.comment.service.CommentService;
 import com.stackoverflow.stackoverflowclone.exception.BusinessLogicException;
 import com.stackoverflow.stackoverflowclone.exception.ExceptionCode;
 import com.stackoverflow.stackoverflowclone.member.entity.Member;
 import com.stackoverflow.stackoverflowclone.member.repository.MemberRepository;
+import com.stackoverflow.stackoverflowclone.question.repository.QuestionRepository;
+import com.stackoverflow.stackoverflowclone.question.service.QuestionService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
 
 @Service
+@RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
 
@@ -26,10 +35,6 @@ public class MemberService {
     }
 
      */
-
-    public MemberService(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-    }
 
     /* 회원가입 */
     public Member createMember(Member member) {
@@ -66,11 +71,12 @@ public class MemberService {
         return findVerifiedMember(memberId);
     }
 
+    @Transactional
     /* 회원 정보 삭제 */
     public void deleteMember(long memberId) {
         Member findMember = findVerifiedMember(memberId);
 
-        memberRepository.delete(findMember);
+        memberRepository.deleteById(findMember.getMemberId());
     }
 
     /* 이미 존재하는 회원인지를 검증하는 메서드 */

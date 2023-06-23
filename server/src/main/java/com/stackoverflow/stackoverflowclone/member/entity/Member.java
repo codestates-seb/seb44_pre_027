@@ -6,7 +6,7 @@ import com.stackoverflow.stackoverflowclone.comment.entity.Comment;
 import com.stackoverflow.stackoverflowclone.question.entity.Question;
 
 
-
+import com.stackoverflow.stackoverflowclone.vote.entity.Vote;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -39,19 +39,18 @@ public class Member extends Auditable {
     private String bioContent;
 
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Question> questions = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Answer> answers = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Comment> comments = new ArrayList<>();
 
-    /*
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Vote> votes = new ArrayList<>();
-     */
+
 
     public Member(String nickname, String email, String password, String location, String bioTitle, String bioContent) {
         this.nickname = nickname;

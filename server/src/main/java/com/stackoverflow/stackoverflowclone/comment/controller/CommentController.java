@@ -20,7 +20,7 @@ import java.net.URI;
 
 @RestController
 @Slf4j
-@RequestMapping("/questions/{question-id}/comments") //api명세서랑다름
+@RequestMapping("/questions/{question-id}/comments")
 public class CommentController {
     private final CommentMapper commentMapper;
     private final CommentService commentService;

@@ -75,6 +75,7 @@ public class MemberController {
     public ResponseEntity deleteMember(
             @PathVariable("member-id") @Positive long memberId,
             @RequestParam("password") String password) {
+
         memberService.deleteMember(memberId);
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
