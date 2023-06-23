@@ -3,6 +3,7 @@ package com.stackoverflow.stackoverflowclone.member.controller;
 import com.google.gson.Gson;
 import com.stackoverflow.stackoverflowclone.answer.dto.AnswerDto;
 import com.stackoverflow.stackoverflowclone.answer.entity.Answer;
+import com.stackoverflow.stackoverflowclone.member.auth.config.SecurityConfiguration;
 import com.stackoverflow.stackoverflowclone.member.dto.*;
 import com.stackoverflow.stackoverflowclone.member.entity.Member;
 import com.stackoverflow.stackoverflowclone.member.mapper.MemberMapper;
@@ -13,9 +14,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -42,7 +46,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /** Spring security 적용 전 **/
-@WebMvcTest(MemberController.class)
+@WebMvcTest(
+        controllers = {MemberController.class}, // 테스트 하고자 하는 Controller를 지정한다.
+        excludeAutoConfiguration = SecurityAutoConfiguration.class, // Spring Security의 자동 구성을 사용하지 않도록 한다.
+        excludeFilters = {      // 테스트 수행 시, 사용하지 않을 필터를 지정한다. 여기서는 SecurityConfiguration에서 설정하는 필터를 제외한다.
+                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,
+                        classes = SecurityConfiguration.class)
+        }
+)
 @MockBean(JpaMetamodelMappingContext.class)
 @AutoConfigureRestDocs
 public class MemberControllerTest {
@@ -64,11 +75,11 @@ public class MemberControllerTest {
     public void registerMemberTest() throws Exception{
 
         // given
-        MemberPostDto post = new MemberPostDto("닉네임", "name@example.com", "password1234");
+        MemberDto.Post post = new MemberDto.Post("닉네임", "name@example.com", "password1234");
         String content = gson.toJson(post);
 
         // stubbing
-        given(memberMapper.memberPostDtoToMember(Mockito.any(MemberPostDto.class))).willReturn(new Member());
+        given(memberMapper.memberPostDtoToMember(Mockito.any(MemberDto.Post.class))).willReturn(new Member());
 
         Member member = new Member();
         member.setMemberId(1L);
@@ -109,15 +120,15 @@ public class MemberControllerTest {
         // given
         long memberId = 1L;
 
-        MemberPatchDto patch = new MemberPatchDto("닉네임",  "password1234", "서울", "자기소개", "내용");
+        MemberDto.Patch patch = new MemberDto.Patch("닉네임",  "password1234", "서울", "자기소개", "내용");
         patch.setMemberId(memberId);
         String content = gson.toJson(patch);
 
-        MemberPatchResponseDto response = new MemberPatchResponseDto(patch.getMemberId(), "name@example.com","닉네임",  "password1234", "서울", "자기소개", "내용");
+        MemberDto.PatchResponse response = new MemberDto.PatchResponse(patch.getMemberId(), "name@example.com","닉네임",  "password1234", "서울", "자기소개", "내용");
 
 
         // stubbing
-        given(memberMapper.memberPatchDtoToMember(Mockito.any(MemberPatchDto.class))).willReturn(new Member());
+        given(memberMapper.memberPatchDtoToMember(Mockito.any(MemberDto.Patch.class))).willReturn(new Member());
         given(memberService.updateMember(Mockito.any(Member.class))).willReturn(new Member());
         given(memberMapper.memberToMemberPatchResponeDto(Mockito.any(Member.class))).willReturn(response);
 
@@ -215,7 +226,7 @@ public class MemberControllerTest {
         List<QuestionDto.questionResponse> questionResponses = new ArrayList<>();
         questionResponses.add(questionResponse);
 
-        MemberResponseDto response = new MemberResponseDto(member.getMemberId(), "name@example.com","닉네임",  "password1234", "서울", "자기소개", "내용", questionResponses, answerResponses);
+        MemberDto.Response response = new MemberDto.Response(member.getMemberId(), "name@example.com","닉네임",  "password1234", "서울", "자기소개", "내용", questionResponses, answerResponses);
 
 
         // stubbing
@@ -279,11 +290,11 @@ public class MemberControllerTest {
         members.add(member1);
         members.add(member2);
 
-        MemberListResponseDto response1 = new MemberListResponseDto(1L, "name@example.com","닉네임", "서울");
-        MemberListResponseDto response2 = new MemberListResponseDto(2L, "nam2e@example.com","닉네임2", "서울");
+        MemberDto.ListResponse response1 = new MemberDto.ListResponse(1L, "name@example.com","닉네임", "서울");
+        MemberDto.ListResponse response2 = new MemberDto.ListResponse(2L, "nam2e@example.com","닉네임2", "서울");
 
 
-        List<MemberListResponseDto> response = new ArrayList<>();
+        List<MemberDto.ListResponse> response = new ArrayList<>();
         response.add(response1);
         response.add(response2);
 

@@ -12,15 +12,15 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring")
 public interface MemberMapper {
 
-    Member memberPostDtoToMember(MemberPostDto memberPostDto);
-    Member memberPatchDtoToMember(MemberPatchDto memberPatchDto);
+    Member memberPostDtoToMember(MemberDto.Post memberPostDto);
+    Member memberPatchDtoToMember(MemberDto.Patch memberPatchDto);
 
-    MemberPatchResponseDto memberToMemberPatchResponeDto(Member member);
+    MemberDto.PatchResponse memberToMemberPatchResponeDto(Member member);
 
     /** 회원 정보 조희 **/
-    default MemberResponseDto memberToMemberResponseDto(Member member){
+    default MemberDto.Response memberToMemberResponseDto(Member member){
 
-        MemberResponseDto memberResponseDto = MemberResponseDto.builder()
+        MemberDto.Response memberResponseDto = MemberDto.Response.builder()
                 .memberId(member.getMemberId())
                 .email(member.getEmail())
                 .nickname(member.getNickname())
@@ -70,8 +70,8 @@ public interface MemberMapper {
     }
 
 
-    MemberListResponseDto memberToMemberListResponseDto(Member member);
+    MemberDto.ListResponse memberToMemberListResponseDto(Member member);
 
-    List<MemberListResponseDto> membersToMemberListResponseDtos(List<Member> members);
+    List<MemberDto.ListResponse> membersToMemberListResponseDtos(List<Member> members);
 
 }
