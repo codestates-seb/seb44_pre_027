@@ -9,10 +9,11 @@ import { UserSettingType } from '@/mocks/homeinquiry';
 export interface WholeUserTypes {
     isSettingOn?: boolean;
     myInfo:UserSettingType;
-    setMyInfo:React.Dispatch<React.SetStateAction<UserSettingType>>
+    setMyInfo:React.Dispatch<React.SetStateAction<UserSettingType>>;
+    handlePathAccount:() => void;
 }
 
-const UserMain = ({isSettingOn, myInfo, setMyInfo}:WholeUserTypes) => {
+const UserMain = ({isSettingOn, myInfo, setMyInfo, handlePathAccount}:WholeUserTypes) => {
 
     return(
         <main className="ml-4 flex flex-row flex-grow-1">
@@ -22,7 +23,7 @@ const UserMain = ({isSettingOn, myInfo, setMyInfo}:WholeUserTypes) => {
                     <UserSettingNav/>
                 </div>
                 <div className="mr-4 pl-4 basis-10/12">
-                    <UserSetting myInfo={myInfo} setMyInfo={setMyInfo}/>
+                    <UserSetting myInfo={myInfo} setMyInfo={setMyInfo} handlePathAccount={handlePathAccount}/>
                 </div>
                 </>
             ) : (

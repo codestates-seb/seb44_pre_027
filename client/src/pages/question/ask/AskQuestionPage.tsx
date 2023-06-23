@@ -16,8 +16,10 @@ const AskQuestionPage = ({}: AskQuestionPageProps) => {
   const { register, handleSubmit, formState: { isSubmitting } } = useForm();
 
   const addNewQuestion = (data:FieldValues) => {
-    return call('/questions', 'POST', data)
-    .then((res)=> {return res.questionId});
+    return call('/questions', 'POST', {
+      title: data.title,
+      content: data.problem + `\n\n` + data.expected,
+    });
   }
 
   const mutation = useMutation(addNewQuestion);
@@ -25,9 +27,9 @@ const AskQuestionPage = ({}: AskQuestionPageProps) => {
   const onSubmit: SubmitHandler<FieldValues> = useCallback(
     (data:FieldValues) => {
       mutation.mutate(data, {
-        onSuccess:(data) => {
-          console.log(data);
-          window.location.href=`/questions/${data}`;
+        onSettled:(data) => {
+          console.log(data)
+          window.location.href=`/questions/${data.questionId}`;
         }
       });
   },

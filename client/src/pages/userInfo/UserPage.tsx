@@ -34,16 +34,6 @@ const UserPage = () => {
                         'Host': 'localhost:8080',
                     }
                 });
-                const patchResponse = await fetch(`/users/${Id}`, {
-                    method: 'PATCH',
-                    headers:{
-                        'Content-Type': 'application/json; charset=UTF-8',
-                        'Accept': 'application/json',
-                        'Content-Length': '169',
-                        'Host': 'localhost:8080',
-                    },
-                    body:JSON.stringify(myInfo),
-                });
                 
                 //GET
                 if(response.ok){
@@ -52,14 +42,9 @@ const UserPage = () => {
                     // const finalFiltere = filteredData.users;
                     setMyInfo(myUserData[0]); 
                 } 
-                //PATCH
-                else if(patchResponse.ok){
-                    const userData = await patchResponse.json();
-                    //PATCH요청의 body 등 필요한 정보 설정. 
-                } 
                 //ERROR
                 else{
-                    console.log('화나지만 ERROR 발생');
+                    console.log('화나지만 GET ERROR 발생');
                 }
             } catch (error) {
                 console.log('Error:', error);
@@ -93,6 +78,35 @@ const UserPage = () => {
         }
 
     }
+    
+    //PATH요청 실행 버튼 함수 
+    const handlePathAccount = async () => {
+        try{
+            const pathResponse = await fetch(`/users/${Id}`, {
+                method:'PATCH',
+                headers:{
+                    'Content-Type': 'application/json; charset=UTF-8',
+                    'Accept': 'application/json',
+                    'Content-Length': '169',
+                    'Host': 'localhost:8080',
+                },
+                body:JSON.stringify(myInfo),
+            });
+
+            //PATCH
+            if(pathResponse.ok){
+                const userData = await pathResponse.json();
+                const myUserData = userData.data;
+                setMyInfo(myUserData[0]); 
+                //PATCH요청의 body 등 필요한 정보 설정. 
+            } else {
+                console.log('PATCH 실패')
+            }
+
+        } catch (error) {
+            console.log('Error: ', error);
+        }
+    }
 
 
     console.log(myInfo);
@@ -110,7 +124,11 @@ const UserPage = () => {
                     <UserInfo isSettingOn={isSettingOn} setIsSettingOn={setIsSettingOn}/>
                     <div>
                         <UserTopNav setIsSettingOn={setIsSettingOn}/>
-                        <UserMain isSettingOn={isSettingOn} myInfo={myInfo as UserSettingType } setMyInfo={setMyInfo as React.Dispatch<React.SetStateAction<UserSettingType>>} />
+                        <UserMain 
+                        isSettingOn={isSettingOn} 
+                        myInfo={myInfo as UserSettingType } 
+                        setMyInfo={setMyInfo as React.Dispatch<React.SetStateAction<UserSettingType>>}
+                        handlePathAccount={handlePathAccount} />
                     </div>
                     <div>
                         <button 

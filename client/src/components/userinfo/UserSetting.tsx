@@ -9,7 +9,7 @@ interface ButtonProps {
     onClick:React.MouseEventHandler<HTMLButtonElement>;
     children:string;
 }
-const UserSetting = ({myInfo, setMyInfo}:WholeUserTypes) => {
+const UserSetting = ({myInfo, setMyInfo, handlePathAccount}:WholeUserTypes) => {
     const [isAlert, setIsAlert] = useState(false);
     const [isButtonClick, setIsButtonClick] = useState(false);
     const [textValue, setTextValue] = useState(
@@ -75,7 +75,9 @@ const UserSetting = ({myInfo, setMyInfo}:WholeUserTypes) => {
 
     const handleSaveBtn = () => {
         setIsButtonClick(!isButtonClick);
-        setMyInfo(textValue)
+        setMyInfo(textValue);
+        handlePathAccount();
+        console.log('PATH 성ㅇ공', textValue)
     }
 
     const handleCancleBtn = () => {

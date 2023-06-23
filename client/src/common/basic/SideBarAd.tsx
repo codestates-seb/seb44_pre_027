@@ -21,8 +21,8 @@ const AdImage = styled.img`
 const IconWrapper = styled.div`
     position: absolute;
     cursor: pointer;
-    top: 0.5px;
-    left: 277px;
+    top: 1px;
+    left: 249px;
     z-index: 10;
 
     & svg {

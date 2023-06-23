@@ -24,11 +24,25 @@ const dahamHandlers: DahamType = [
     return res(ctx.status(200), ctx.json(filterQuestion[0]));
   }),
   rest.post('/questions', async(req, res, ctx)=>{
-    questions.push(await req.json());
+    const questionId = Math.floor(Math.random()*100);
+    const body = await req.json();
+    const newQuestion = {
+      questionId: questionId,
+      nickname: 'noname',
+      title: String(body.content),
+      content: String(body.title),
+      createdAt: String(new Date()),
+      modifiedAt: '',
+      views: 0,
+      voteScore: 0,
+      answers:[],
+      comments:[]
+    }
+    questions.push(newQuestion);
     return res(
       ctx.status(201),
       ctx.json({
-      questionId: Math.floor(Math.random()*100)
+        questionId: questionId
       })
     );
   }),
