@@ -1,6 +1,5 @@
 package com.stackoverflow.stackoverflowclone.answer.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -13,7 +12,7 @@ public class AnswerDto{
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Post {
-        @JsonProperty("member-id")
+
         private long memberId;
 
         private long questionId;
@@ -28,10 +27,8 @@ public class AnswerDto{
     @NoArgsConstructor
     public static class Patch {
 
-//        @JsonProperty("answer-id")
         private long answerId;
 
-        @JsonProperty("question-id")
         private long questionId;
 
         @NotBlank

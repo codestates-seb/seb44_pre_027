@@ -125,7 +125,6 @@ public class QuestionService {
         }
     }
 
-
     /** 질문이 등록된 질문인지 확인 메서드 **/
     public Question findVerifiedQuestion(long questionId){
 

@@ -1,10 +1,17 @@
 package com.stackoverflow.stackoverflowclone.member.service;
 
+import com.stackoverflow.stackoverflowclone.answer.repository.AnswerRepository;
+import com.stackoverflow.stackoverflowclone.answer.service.AnswerService;
+import com.stackoverflow.stackoverflowclone.comment.service.CommentService;
 import com.stackoverflow.stackoverflowclone.exception.BusinessLogicException;
 import com.stackoverflow.stackoverflowclone.exception.ExceptionCode;
 import com.stackoverflow.stackoverflowclone.member.auth.utils.CustomAuthorityUtils;
 import com.stackoverflow.stackoverflowclone.member.entity.Member;
 import com.stackoverflow.stackoverflowclone.member.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -68,11 +75,12 @@ public class MemberService {
         return findVerifiedMember(memberId);
     }
 
+    @Transactional
     /* 회원 정보 삭제 */
     public void deleteMember(long memberId) {
         Member findMember = findVerifiedMember(memberId);
 
-        memberRepository.delete(findMember);
+        memberRepository.deleteById(findMember.getMemberId());
     }
 
     /* 이미 존재하는 회원인지를 검증하는 메서드 */

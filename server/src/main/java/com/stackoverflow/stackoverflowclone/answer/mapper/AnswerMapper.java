@@ -18,7 +18,11 @@ public interface AnswerMapper {
         //user set 필요
         return answer;
     }
+
+    @Mapping(source = "memberId", target = "member.memberId")
+    @Mapping(source = "questionId", target = "question.questionId")
     Answer answerPostToAnswer(AnswerDto.Post requestBody);
+
     Answer answerPatchToAnswer(AnswerDto.Patch requestBody);
 
     AnswerDto.Response answerToAnswerResponse(Answer answer);
