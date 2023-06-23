@@ -7,9 +7,9 @@ export interface PatchInterface {
     'answer-id'?: number | string;
   };
   body: {
-    'question-title': string;
+    'question-title'?: string;
     'qeustion-content': string;
-    tags: { 'tag-name': string }[];
+    tags?: { 'tag-name': string }[];
   };
 }
 
