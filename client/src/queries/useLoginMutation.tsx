@@ -13,8 +13,7 @@ const postLogin = async (loginData: any) => {
     body: JSON.stringify(loginData),
     credentials: 'include',
     headers: {
-      Origin: 'http://localhost:5173',
-      'Access-Control-Request-Method': 'POST',
+      'Content-Type': 'application/json;charset=utf-8',
     },
   });
   const header = getHeader(response, 'authorization');
