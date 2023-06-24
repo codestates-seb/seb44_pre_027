@@ -31,13 +31,13 @@ const IconWrapper = styled.div`
 
 const CommentItem = ({data, id, questionId, commentId, refetch}: CommentItemProps) => {
   const [editMode, setEditMode] = useState<boolean>(false);
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
   const createdAt = new Date(data.createdAt.substr(0,10)).toDateString();
 
   const editComment = (data:FieldValues)=>{
     return call(`/questions/${questionId}/comments/${commentId}`, 'PATCH', {
-      commentId: commentId,
-      content: data
+      memberId: 4,
+      content: data.content
     })
   }
 
@@ -46,6 +46,7 @@ const CommentItem = ({data, id, questionId, commentId, refetch}: CommentItemProp
       editCom(data, {
         onSettled: ()=>{
           refetch();
+          setValue('content', '');
           setEditMode(false);
         }
       });
@@ -83,7 +84,7 @@ const CommentItem = ({data, id, questionId, commentId, refetch}: CommentItemProp
         }
         { editMode &&
           <form className='flex gap-2 w-full' onSubmit={handleSubmit(onEditComment)}>
-            <input className='border border-slate-300 rounded-lg' {...register('comment')}/>
+            <input className='border border-slate-300 rounded-lg' {...register('content')}/>
             <button className='text-13 bg-slate-300 hover:bg-slate-200 p-1.5 rounded-lg'>Save</button>
             <button className='text-13 bg-slate-300 hover:bg-slate-200 p-1.5 rounded-lg' onClick={()=>setEditMode(!editMode)}>Back</button>
           </form>

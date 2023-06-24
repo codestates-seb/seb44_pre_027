@@ -17,6 +17,7 @@ const AskQuestionPage = ({}: AskQuestionPageProps) => {
 
   const addNewQuestion = (data:FieldValues) => {
     return call('/questions', 'POST', {
+      memberId: 4,
       title: data.title,
       content: data.problem + `\n\n` + data.expected,
     });
@@ -28,7 +29,6 @@ const AskQuestionPage = ({}: AskQuestionPageProps) => {
     (data:FieldValues) => {
       mutation.mutate(data, {
         onSettled:(data) => {
-          console.log(data)
           window.location.href=`/questions/${data.questionId}`;
         }
       });

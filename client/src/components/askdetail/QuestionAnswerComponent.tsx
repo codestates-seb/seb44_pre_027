@@ -25,13 +25,26 @@ const QuestionAnswerComponent = ({type, data, questionId, answerId, refetch}: Qu
   }
 
   const { mutate } = useMutation(deleteData,{
-    onSettled: () => {
+    onSuccess: () => {
       if(type === 'Question')
         window.location.href='/';
+      },
+    onSettled:()=>{
       if(type === 'Answer')
         refetch();
+    },
+    onError: ()=>{
+      if(type === 'Question')
+        alert('답변이 등록된 질문은 삭제가 불가능합니다.')
     }
   });
+
+  const gotoEditPage = ()=>{
+    if(type === 'Question')
+      window.location.href = `/questions/${questionId}/edit`;
+    if(type === 'Answer')
+      window.location.href = `/answers/${answerId}/edit`;
+  }
 
   return (
     <section className="">
@@ -45,7 +58,7 @@ const QuestionAnswerComponent = ({type, data, questionId, answerId, refetch}: Qu
           :
           `/questions/${questionId}/answers/${answerId}`
           }>
-          <button>Edit</button>
+          <button onClick={gotoEditPage}>Edit</button>
         </Link>
         <button onClick={()=>mutate()}>Delete</button>
       </div>

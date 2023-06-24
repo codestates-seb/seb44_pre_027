@@ -8,12 +8,12 @@ interface WidgetProps extends WidgetData{
     children: ReactNode;
 };
 
-const WidgetContainer = styled.div<{type:string|undefined, idx:number, isStuck:boolean|undefined}>`
+const WidgetContainer = styled.div<{type:string|undefined, idx:number, isstuck:boolean|undefined}>`
     height  : 100%;
     border: 1px solid;
     border-radius: 3px 3px 0 0;
 
-    ${(props) => props.isStuck &&
+    ${(props) => props.isstuck &&
         css`
             border-radius: ${props.idx !== 1 && '0'};
             border-top: ${props.idx !== 1 && '0px'};
@@ -63,7 +63,7 @@ const WidgetHeader = styled.div<{type:string|undefined}>`
 
 const Widget = ({id, type, isstuck, title, children}:WidgetProps) => {
     return(
-        <WidgetContainer type={type} idx={id} isStuck={isstuck}>
+        <WidgetContainer type={type} idx={id} isstuck={isstuck}>
             <WidgetHeader type={type}>{title}</WidgetHeader>
             {children}
         </WidgetContainer>

@@ -40,7 +40,6 @@ const LoginPage = () => {
   const loginMutation = useLoginMutation();
   const loginForm = useForm<LoginType>({ resolver: zodResolver(loginSchema) });
   const onSubmit: SubmitHandler<LoginType> = (data) => {
-    console.log(data);
     loginMutation.mutate(data);
   };
 

@@ -5,6 +5,8 @@ import com.stackoverflow.stackoverflowclone.answer.dto.AnswerDto;
 import com.stackoverflow.stackoverflowclone.answer.entity.Answer;
 import com.stackoverflow.stackoverflowclone.answer.mapper.AnswerMapper;
 import com.stackoverflow.stackoverflowclone.answer.service.AnswerService;
+import com.stackoverflow.stackoverflowclone.member.auth.config.SecurityConfiguration;
+import com.stackoverflow.stackoverflowclone.member.controller.MemberController;
 import com.stackoverflow.stackoverflowclone.member.entity.Member;
 import com.stackoverflow.stackoverflowclone.member.service.MemberService;
 import com.stackoverflow.stackoverflowclone.question.entity.Question;
@@ -19,11 +21,14 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -57,7 +62,14 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(AnswerController.class)
+@WebMvcTest(
+        controllers = {AnswerController.class}, // 테스트 하고자 하는 Controller를 지정한다.
+        excludeAutoConfiguration = SecurityAutoConfiguration.class, // Spring Security의 자동 구성을 사용하지 않도록 한다.
+        excludeFilters = {      // 테스트 수행 시, 사용하지 않을 필터를 지정한다. 여기서는 SecurityConfiguration에서 설정하는 필터를 제외한다.
+                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,
+                        classes = SecurityConfiguration.class)
+        }
+)
 @MockBean(JpaMetamodelMappingContext.class)
 @AutoConfigureRestDocs
 public class AnswerControllerTest {

@@ -37,8 +37,8 @@ export type SignupType = z.infer<typeof signupSchema>;
 const SignupPage = () => {
   const signupMutation = useSignupMutation();
   const signupForm = useForm<SignupType>({ resolver: zodResolver(signupSchema) });
-  const onSubmit: SubmitHandler<SignupType> = async (data) => {
-    const mutate = await signupMutation.mutateAsync(data);
+  const onSubmit: SubmitHandler<SignupType> = (data) => {
+    signupMutation.mutate(data);
   };
 
   return (
