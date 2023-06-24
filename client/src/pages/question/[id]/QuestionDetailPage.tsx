@@ -26,6 +26,8 @@ const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
   const { data, isSuccess, isLoading, refetch } = useQuery(['question'],
   ()=>call(`/questions/${questionId}`, 'GET', null));
 
+
+
   let onlyQuestionData = {
     questionId: 0,
     nickname: '',
@@ -38,23 +40,17 @@ const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
   };
 
   const addNewAnswer = (data:FieldValues) => {
-    return call(`/questions/${questionId}/answers`, 'POST', {
-      content: data,
-    });
+    return call(`/questions/${questionId}/answers`, 'POST', {memberId:4,...data});
   };
 
-  const mutation = useMutation(addNewAnswer, {
-    onSuccess: () => {
-      console.log('success');
-    }
-  });
+  const mutation = useMutation(addNewAnswer);
 
   const onSubmitAnswer: SubmitHandler<FieldValues> = useCallback(
     (data:FieldValues) => {
       mutation.mutate(data, {
         onSettled: ()=>{
+          setValue('content', '');
           refetch();
-          setValue('answer', '');
         }
       });
     },
@@ -114,7 +110,7 @@ const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
               {loadAnswers()}
               <span className="text-xl">Your Answer</span>
                 <form onSubmit={handleSubmit(onSubmitAnswer)} className='flex flex-col gap-8'>
-                      <textarea className='border border-slate-300 h-40' {...register('answer')}></textarea>
+                      <textarea className='border border-slate-300 h-40' {...register('content')}></textarea>
                       <PrimaryBtn size='fit-content'>Post Your Answer</PrimaryBtn>
                 </form>
           </ColumnItemWrapper>
