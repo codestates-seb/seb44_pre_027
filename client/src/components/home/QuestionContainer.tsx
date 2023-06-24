@@ -2,43 +2,48 @@ import React,{useState, useEffect} from 'react';
 import Button from '../Button';
 import PagenationBtn from './PagenationBtn';
 import QuestionItem from './QuestionItem';
-import {Fetcher, Link} from 'react-router-dom';
-// import { useQuery, QueryFunctionContext  } from '@tanstack/react-query';
+import {Link} from 'react-router-dom';
+
+import { useParams } from 'react-router-dom';
 import { HomeInquiryType } from '@/mocks/homeinquiry';
+import { call } from '@/utils/ApiService';
+
 
 const QuestionContainer = () => {
   const [data, setData] = useState<HomeInquiryType[]>([]);
-
-  const [curpage, setCurPage] = useState(2); // 한 화면에 표시될 데이터 갯수: 버튼 5개 확인 위한 임시 2
+  let { page, sort } = useParams();
+  
+  const [isSort, setIsSort] = useState('new'); //필터 적용 시작 new: 수정 필요
+  const [curpage, setCurPage] = useState(5); // 한 화면에 표시될 데이터 갯수: 버튼 5개 확인 위한 임시 2
   const [basic, setBasic] = useState(1); //page
-  const offset = (basic-1)*curpage;
-  const numPages = Math.ceil(data.length/curpage);
+  const offset = (basic-1)*curpage; // 현재 페이지에 보여져야 할 데이터의 시작 위치 
+  const numPages = Math.ceil(data.length/curpage); //현재 출력 버튼 갯수 
 
   const handlePage = (pageNum:number) => {
     setBasic(pageNum);
   };
 
-  useEffect(() => {
-    const fetchInquiryData = async () => {
-      try{
-        const response = await fetch(`/questions?page=${curpage}`);
-        if(response.ok){
-          const data = await response.json();
-          const filteredData = data.data;
-          setData(filteredData[0].data);
-        } else {
-          console.log('error');
-        }
-    
-      } catch (error){
-        console.log(error);
-      }
-    };
 
-    fetchInquiryData();
-  }, [])
+  const fetchInquiryData = async (
+    page:number =1,
+    sort:string = isSort,
+  ) => {
+    return call(`/questions?page=${page}&sort=${sort}`, 'GET', null)
+    .then((res) => {
+      setData(res.data);
+    })
+  };
+
+  React.useEffect(() => {
+    fetchInquiryData(basic, isSort);
+  }, [isSort]);
+
   // console.log(data);
+  console.log(`현재 페이지 basic : ${basic}, ${isSort}`);
 
+  const handleSort = (value:string  ) => {
+    setIsSort(value);
+  }
 
   return (
     <main className=" flex flex-col">
@@ -51,9 +56,9 @@ const QuestionContainer = () => {
         <div className=" flex items-center justify-between gap-3">
           <p>{data.length} questions with bounties</p>
           <div className=" flex rounded-md border border-slate-300 text-sm text-slate-600">
-            <button className=" border-r px-2 py-2">Newest</button>
-            <button className=" border-r px-2 py-2">Views</button>
-            <button className=" border-r px-2 py-2">Votes</button>
+            <button className=" border-r px-2 py-2" onClick={() => handleSort('new')} >Newest</button>
+            <button className=" border-r px-2 py-2" onClick={() => handleSort('views')} >Views</button>
+            <button className=" border-r px-2 py-2" onClick={() => handleSort('votes')} >Votes</button>
           </div>
         </div>
       </div>
@@ -61,8 +66,8 @@ const QuestionContainer = () => {
       {
       data.slice(offset, offset + curpage).map((e:any) => {
         return (
-          <Link to="/questions" key={e.id}>
-            <QuestionItem data={e}/>
+          <Link to={`/questions/${e.questionId}`} key={e.questionId}>
+            <QuestionItem data={e} key={e.questionId}/>
           </Link>
         )
       })
@@ -92,7 +97,7 @@ const QuestionContainer = () => {
               setBasic={setBasic}
               variant={basic === i + 1 ? 'active' : 'default'}
               key={i} // key 속성 추가
-              onClick={()=> handlePage(i + 1)}
+              onClick={()=> handlePage(i+1)}
             >{i+1}</PagenationBtn>
           );
         })};
@@ -102,27 +107,3 @@ const QuestionContainer = () => {
 };
 
 export default QuestionContainer;
-
-  //react-query : 보류
-  // const page = 1; //나중에 함수 생성 
-  // const {data, error, isLoading} = useQuery<HomeInquiryType[] | any>(['inquiryData'], async () => 
-  // {
-  //   const resData = await fetch(`/questions?page=${page}`);
-  //   if(resData.ok){
-  //     const realdata = await resData.json();
-  //     return realdata;
-  //   }
-  // }, {staleTime:Infinity},);
-  // console.log(data);
-  // if(isLoading){return <div> Loading ... </div>}
-  // if(error instanceof Error ) {return <div>ERROR ERROR SORRY : {error.message}</div>}
-
-    {/* {isLoading ? (
-  <div className="relative top-0 p-10">Loading...</div>
-) : error instanceof Error ? ( // error:unknown
-  <div className="relative top-0 p-10">Error: {error.message}</div>
-) : (
-  <div>{Array.from({length:5}).map((e, i) => {
-    return <QuestionItem data={data} key={i}/>
-  })}</div>
-)} */}

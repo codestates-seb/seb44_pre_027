@@ -26,7 +26,7 @@ const QuestionItem = ({data}: QuestionItemProps | any) => {
       <div className=" flex flex-shrink-0 flex-col items-end justify-center gap-2 text-sm">
         <span className="">{data.voteScore} votes</span>
         <span className=" rounded-sm border border-slate-300 px-1 text-slate-500">
-          {data.answers.length} answers
+          {/* {data.answers.length} answers */}
         </span>
         <span className=" text-slate-400">{data.views} views</span>
         <span className=" rounded-sm bg-blue-500 px-2 py-1 text-white">+100</span>
@@ -54,7 +54,7 @@ const QuestionItem = ({data}: QuestionItemProps | any) => {
           <div className=" flex gap-2 text-xs text-slate-400">
             <span className=" text-sky-500">{data.nickname}</span>
             <span>
-              {'1051'} asked {formattedDate}
+              {data.views} asked {formattedDate}
             </span>
           </div>
         </div>

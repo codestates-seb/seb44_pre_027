@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import DropDown from '../components/DropDown';
 import { cva } from 'class-variance-authority';
@@ -10,6 +10,7 @@ import HeadCupIcon from '@/assets/icons/HeadCupIcon';
 
 type LoginProps = {
   changeNav: boolean;
+  userID?: number;
 };
 
 const IconHover = cva(
@@ -26,43 +27,49 @@ const IconHover = cva(
   }
 );
 
-const LoginHeader = ({ changeNav }: LoginProps) => {  //isUser.isLogin을 통해   true || false 값을 받고 있습니다. 
-const [dropdownVariant , setDropdownVariant] = useState('box');
-const [isOpen01, setIsOpen01] = useState(false);
-const [isOpen02, setIsOpen02] = useState(false);
-const [isOpen03, setIsOpen03] = useState(false);
-const [isOpen04, setIsOpen04] = useState(false);
 
-const handleDropdown01 = (): void => {
-        setIsOpen01(!isOpen01);
-        setDropdownVariant('box');
-      };
-    
-      const handleDropdown02 = (): void => {
-        setIsOpen02(!isOpen02);
-        setDropdownVariant('cup');
-      };
-    
-      const handleDropdown03 = (): void => {
-        setIsOpen03(!isOpen03);
-        setDropdownVariant('question');
-      };
-    
-      const handleDropdown04 = (): void => {
-        setIsOpen04(!isOpen04);
-        setDropdownVariant('menu');
-      };
+const LoginHeader = ({changeNav, userID}:LoginProps) => {  //isUser.isLogin을 통해   true || false 값을 받고 있습니다. 
+  const [dropdownVariant , setDropdownVariant] = useState('box');
+  const [isOpen01, setIsOpen01] = useState(false);
+  const [isOpen02, setIsOpen02] = useState(false);
+  const [isOpen03, setIsOpen03] = useState(false);
+  const [isOpen04, setIsOpen04] = useState(false);
+
+  const handleDropdown01 = (): void => {
+          setIsOpen01(!isOpen01);
+          setDropdownVariant('box');
+  };
+      
+  const handleDropdown02 = (): void => {
+    setIsOpen02(!isOpen02);
+    setDropdownVariant('cup');
+  };
+
+  const handleDropdown03 = (): void => {
+    setIsOpen03(!isOpen03);
+    setDropdownVariant('question');
+  };
+
+  const handleDropdown04 = (): void => {
+    setIsOpen04(!isOpen04);
+    setDropdownVariant('menu');
+  };
+  //console.log(userID) : OK
 
   return (
     <>
       {changeNav ? (
-        <ul className="flex flex-row space-x-2">
+        <ul className="flex flex-row space-x-2 items-center">
           <li className={cn(IconHover({ variant: 'hover' }))}>
-            <Link to="/users/:id" className="block p-2 text-gray-500 bg-transparent">
+            <Link to={`/users/${userID}`}
+            state={{userID: userID}}
+            className="relative p-2 text-gray-500 bg-transparent"
+            >
               <img
                 src="https://www.gravatar.com/avatar/9bcf7a89f50be51792a0ce9e6af9e917?s=48&d=identicon&r=PG"
                 alt="user image"
-                className="w-5 h-5"
+                className="h-5 w-5 mb-1"
+                
               />
             </Link>
           </li>

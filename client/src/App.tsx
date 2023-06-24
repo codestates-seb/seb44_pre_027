@@ -25,7 +25,7 @@ const App = ({}: AppProps) => {
               <Route path="/" element={<QuestionsPage/>}/>
               <Route path="/questions/ask" element={<AskQuestionPage/>}/>
               <Route path="/questions/:questionId" element={<QuestionDetailPage/>}/>
-              <Route path="/users" element={<UserPage/>}/>
+              <Route path="/users/:memberId" element={<UserPage/>}/>
               <Route path="/users/login" element={<LoginPage/>}/>
               <Route path="/users/signup" element={<SignupPage/>}/>
             </Routes>
