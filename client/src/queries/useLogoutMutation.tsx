@@ -11,7 +11,6 @@ const url = '';
 const getLogout = async () => {
   const response = await fetch(`${url}/users/logout`);
   const result = await response.json();
-  console.log(result);
   return result;
 };
 

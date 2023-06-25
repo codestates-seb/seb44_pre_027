@@ -11,7 +11,7 @@ interface QuestionsPageProps {
 const QuestionsPage = ({}: QuestionsPageProps) => {
   return (
     <Wrapper>
-      <main className=" flex px-6 py-3">
+      <main className="flex px-6 py-3">
         <LeftSideBar />
         <QuestionContainer />
         <RightSideBar/>

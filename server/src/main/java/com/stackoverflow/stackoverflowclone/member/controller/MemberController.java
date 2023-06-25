@@ -1,8 +1,7 @@
 package com.stackoverflow.stackoverflowclone.member.controller;
 
 
-import com.stackoverflow.stackoverflowclone.member.dto.MemberPatchDto;
-import com.stackoverflow.stackoverflowclone.member.dto.MemberPostDto;
+import com.stackoverflow.stackoverflowclone.member.dto.MemberDto;
 import com.stackoverflow.stackoverflowclone.member.entity.Member;
 import com.stackoverflow.stackoverflowclone.member.mapper.MemberMapper;
 import com.stackoverflow.stackoverflowclone.member.service.MemberService;
@@ -34,7 +33,7 @@ public class MemberController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity registerMember(@Valid @RequestBody MemberPostDto memberPostDto) {
+    public ResponseEntity registerMember(@Valid @RequestBody MemberDto.Post memberPostDto) {
         Member member = memberMapper.memberPostDtoToMember(memberPostDto);
 
         Member response = memberService.createMember(member);
@@ -46,7 +45,7 @@ public class MemberController {
 
     @PatchMapping("/{member-id}")
     public ResponseEntity patchMember(@PathVariable("member-id") @Positive long memberId,
-                                      @Valid @RequestBody MemberPatchDto memberPatchDto) {
+                                      @Valid @RequestBody MemberDto.Patch memberPatchDto) {
         memberPatchDto.setMemberId(memberId);
 
         Member response =
@@ -76,6 +75,7 @@ public class MemberController {
     public ResponseEntity deleteMember(
             @PathVariable("member-id") @Positive long memberId,
             @RequestParam("password") String password) {
+
         memberService.deleteMember(memberId);
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);

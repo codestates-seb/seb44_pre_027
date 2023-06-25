@@ -6,7 +6,6 @@ import com.stackoverflow.stackoverflowclone.question.entity.Question;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.aspectj.weaver.patterns.TypePatternQuestions;
 
 import javax.persistence.*;
 
@@ -54,7 +53,6 @@ public class Answer extends Auditable {
             this.member.getAnswers().add(this);
         }
     }
-
 
     public Answer(String content) {
         this.content = content;

@@ -1,19 +1,24 @@
 package com.stackoverflow.stackoverflowclone.comment.controller;
 
 import com.google.gson.Gson;
+import com.stackoverflow.stackoverflowclone.answer.controller.AnswerController;
 import com.stackoverflow.stackoverflowclone.comment.dto.CommentDto;
 import com.stackoverflow.stackoverflowclone.comment.entity.Comment;
 import com.stackoverflow.stackoverflowclone.comment.mapper.CommentMapper;
 import com.stackoverflow.stackoverflowclone.comment.service.CommentService;
+import com.stackoverflow.stackoverflowclone.member.auth.config.SecurityConfiguration;
 import com.stackoverflow.stackoverflowclone.member.service.MemberService;
 import com.stackoverflow.stackoverflowclone.question.service.QuestionService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -38,7 +43,14 @@ import static org.springframework.restdocs.request.RequestDocumentation.pathPara
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(CommentController.class)
+@WebMvcTest(
+        controllers = {CommentController.class}, // 테스트 하고자 하는 Controller를 지정한다.
+        excludeAutoConfiguration = SecurityAutoConfiguration.class, // Spring Security의 자동 구성을 사용하지 않도록 한다.
+        excludeFilters = {      // 테스트 수행 시, 사용하지 않을 필터를 지정한다. 여기서는 SecurityConfiguration에서 설정하는 필터를 제외한다.
+                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,
+                        classes = SecurityConfiguration.class)
+        }
+)
 @MockBean(JpaMetamodelMappingContext.class)
 @AutoConfigureRestDocs
 public class CommentControllerTest {

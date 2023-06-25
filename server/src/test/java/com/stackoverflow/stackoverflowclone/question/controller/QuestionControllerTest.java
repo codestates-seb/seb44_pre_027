@@ -5,6 +5,7 @@ import com.stackoverflow.stackoverflowclone.answer.dto.AnswerDto;
 import com.stackoverflow.stackoverflowclone.answer.entity.Answer;
 import com.stackoverflow.stackoverflowclone.comment.dto.CommentDto;
 import com.stackoverflow.stackoverflowclone.comment.entity.Comment;
+import com.stackoverflow.stackoverflowclone.member.auth.config.SecurityConfiguration;
 import com.stackoverflow.stackoverflowclone.member.entity.Member;
 import com.stackoverflow.stackoverflowclone.question.dto.QuestionDto;
 import com.stackoverflow.stackoverflowclone.question.entity.Question;
@@ -14,9 +15,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -49,7 +53,14 @@ import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(QuestionController.class) //Controller를 테스트 하기 위한 구조
+@WebMvcTest(
+        controllers = {QuestionController.class}, // 테스트 하고자 하는 Controller를 지정한다.
+        excludeAutoConfiguration = SecurityAutoConfiguration.class, // Spring Security의 자동 구성을 사용하지 않도록 한다.
+        excludeFilters = {      // 테스트 수행 시, 사용하지 않을 필터를 지정한다. 여기서는 SecurityConfiguration에서 설정하는 필터를 제외한다.
+                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,
+                        classes = SecurityConfiguration.class)
+        }
+) //Controller를 테스트 하기 위한 구조
 @MockBean(JpaMetamodelMappingContext.class)  // JPA에서 사용하는 Bean들을 Mock 객체로 주입하는 설정
 @AutoConfigureRestDocs // Spring Rest Docs에 대한 자동 구성
 public class QuestionControllerTest {
