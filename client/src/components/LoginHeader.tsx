@@ -7,6 +7,7 @@ import HeadMenuIcon from '@/assets/icons/HeadMenuIcon';
 import HeadQuestionIcon from '@/assets/icons/HeadQuestionIcon';
 import HeadBoxIcon from '@/assets/icons/HeadBoxIcon';
 import HeadCupIcon from '@/assets/icons/HeadCupIcon';
+import { useMemberId } from '@/utils/useMemberId';
 
 type LoginProps = {
   changeNav: boolean;
@@ -28,7 +29,7 @@ const IconHover = cva(
 );
 
 
-const LoginHeader = ({changeNav, userID}:LoginProps) => {  //isUser.isLogin을 통해   true || false 값을 받고 있습니다. 
+const LoginHeader = ({ changeNav }:LoginProps) => {  //isUser.isLogin을 통해   true || false 값을 받고 있습니다. 
   const [dropdownVariant , setDropdownVariant] = useState('box');
   const [isOpen01, setIsOpen01] = useState(false);
   const [isOpen02, setIsOpen02] = useState(false);
@@ -54,7 +55,10 @@ const LoginHeader = ({changeNav, userID}:LoginProps) => {  //isUser.isLogin을 �
     setIsOpen04(!isOpen04);
     setDropdownVariant('menu');
   };
-  //console.log(userID) : OK
+ 
+  //memberID [0] 호출
+  const userID  = useMemberId();
+
 
   return (
     <>
