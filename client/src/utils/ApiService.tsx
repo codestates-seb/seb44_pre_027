@@ -1,4 +1,5 @@
-const API_BASE_URL = 'http://ec2-3-35-27-217.ap-northeast-2.compute.amazonaws.com:8080';
+const API_BASE_URL = 'https://dahamoverflow.store';
+const ACCESS_TOKEN = 'accessToken';
 
 interface OptionsProps {
     headers: Headers;
@@ -13,12 +14,12 @@ export function call(api:string, method:string, request:any) {
         "Content-Type": "application/json",
     });
 
-    /*
-    const accessToken = localStorage.getItem(ACCCESS_TOKEN);
+
+    const accessToken = localStorage.getItem(ACCESS_TOKEN);
     if(accessToken) {
-        headers.append("Authorization", "Bearer " + acccessToken);
+        headers.append("Authorization", "Bearer " + accessToken);
     }
-    */
+
 
     let options:OptionsProps = {
         headers: headers,
