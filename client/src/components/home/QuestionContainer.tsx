@@ -3,7 +3,6 @@ import Button from '../Button';
 import PagenationBtn from './PagenationBtn';
 import QuestionItem from './QuestionItem';
 import {Link} from 'react-router-dom';
-import { BASE_URL } from '@/queries/factory';
 
 import { useParams } from 'react-router-dom';
 import { HomeInquiryType } from '@/mocks/homeinquiry';
