@@ -16,6 +16,8 @@ const postLogin = async (loginData: LoginType) => {
       'Content-Type': 'application/json;charset=utf-8',
     },
   });
+  console.log(response.headers);
+  console.log(response.headers['Authrization']);
   const ACCESS_TOKEN = response.headers['Authorization'];
   const REFRESH_TOKEN = response.headers['Refresh'];
   const status = isSuccessStatus(response);
@@ -41,7 +43,7 @@ const useLoginMutation = () => {
           refreshtoken: data.refreshtoken,
         })
       );
-      navigate('/');
+      // navigate('/');
     },
   });
   return loginMutation;
