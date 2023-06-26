@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface LoginType {
   accesstoken: string;
-  refreshtoken?: string;
+  refreshtoken: string;
 }
 
 interface InitialStateInterface extends LoginType {
@@ -23,12 +23,16 @@ const loginSlice = createSlice({
   initialState,
   reducers: {
     setLogin: (state, action: PayloadAction<LoginType>) => {
-      const loginData = { ...state, isLogin: true, accesstoken: action.payload.accesstoken };
+      const loginData = {
+        isLogin: true,
+        accesstoken: action.payload.accesstoken,
+        refreshtoken: action.payload.refreshtoken,
+      };
       setLocalStorage(LOGINKEY, loginData);
       return loginData;
     },
     setLogout: (state) => {
-      const logoutData = { ...state, isLogin: false };
+      const logoutData = { ...state, isLogin: false, accesstoken: '' };
       setLocalStorage(LOGINKEY, logoutData);
       return logoutData;
     },
