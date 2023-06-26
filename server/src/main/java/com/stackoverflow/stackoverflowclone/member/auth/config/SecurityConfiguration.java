@@ -63,8 +63,10 @@ public class SecurityConfiguration {
         http
                 .headers().frameOptions().sameOrigin()
                 .and()
+                // 추가
+                .cors().and()
                 .csrf().disable()
-                .cors(withDefaults())
+                //.cors(withDefaults())
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .formLogin().disable()
@@ -83,6 +85,7 @@ public class SecurityConfiguration {
                         // 나머지는 비회원도 가능
                         .anyRequest().permitAll()
                 );
+
 
         return http.build();
 
