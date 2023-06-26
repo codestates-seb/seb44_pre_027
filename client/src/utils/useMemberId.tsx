@@ -14,7 +14,6 @@ export const useMemberId = () => {
 
         fetchMember();
     }, []);
-    console.log('맴버 아이디'+isMember);
     return isMember;
 
 };

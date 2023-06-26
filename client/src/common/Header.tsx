@@ -65,9 +65,6 @@ const Header = ({changeNav}) => {
     })
   })
 
-  console.log(filteredData);
-  console.log( data);
-
   const handleDropdown = () => {
     setIsOpen(!isOpen);
   };
@@ -89,8 +86,6 @@ const Header = ({changeNav}) => {
 
     userGetData();
   }, [])
-
-  console.log(userData)
 
   return (
     <nav className="sticky top-0 z-10 w-screen border-b border-gray-200 bg-white ">
