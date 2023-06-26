@@ -17,12 +17,15 @@ import { ColumnItemWrapper } from '@/common/style/Containers.styled';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { PrimaryBtn } from '@/common/style/Buttons.styled';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { RootState } from '@/modules/store';
+import { useSelector } from 'react-redux';
 
 interface QuestionDetailPageProps {}
 
 const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
   const { register, handleSubmit, setValue } = useForm();
   const { questionid } = useParams();
+  const isUser = useSelector((state: RootState) => state.login);
 
   let onlyQuestionData = {
     questionId: 0,
@@ -46,12 +49,18 @@ const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
 
   const onSubmitAnswer: SubmitHandler<FieldValues> = useCallback(
     (data:FieldValues) => {
-      mutation.mutate(data, {
-        onSettled: ()=>{
-          setValue('content', '');
-          refetch();
-        }
-      });
+      if(isUser.isLogin){
+        mutation.mutate(data, {
+          onSettled: ()=>{
+            setValue('content', '');
+            refetch();
+          }
+        });
+      }
+      else {
+        alert('회원만 답변 작성이 가능합니다.');
+        setValue('content', '');
+      }
     },
     [mutation]
     )
