@@ -1,6 +1,7 @@
 package com.stackoverflow.stackoverflowclone.question.controller;
 
 import com.stackoverflow.stackoverflowclone.dto.MultiResponseDto;
+import com.stackoverflow.stackoverflowclone.member.auth.userdetails.MemberDetailsService;
 import com.stackoverflow.stackoverflowclone.question.dto.QuestionDto;
 import com.stackoverflow.stackoverflowclone.question.entity.Question;
 import com.stackoverflow.stackoverflowclone.question.mapper.QuestionMapper;
@@ -10,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Positive;

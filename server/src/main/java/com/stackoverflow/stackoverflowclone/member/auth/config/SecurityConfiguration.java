@@ -8,6 +8,7 @@ import com.stackoverflow.stackoverflowclone.member.auth.jwt.JwtTokenizer;
 import com.stackoverflow.stackoverflowclone.member.auth.utils.CustomAuthorityUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -62,11 +63,21 @@ public class SecurityConfiguration {
                 .and()
                 .formLogin().disable()
                 .httpBasic().disable()
-                .apply(new CustomFilterConfigurer())   // (1)
+                .apply(new CustomFilterConfigurer())
                 .and()
                 .authorizeHttpRequests(authorize -> authorize
+                        // 질문 등록의 경우, 회원만 작성 가능
+                        .antMatchers(HttpMethod.POST, "/questions").hasRole("USER")
+                        // 질문 수정의 경우, 회원만 수정 가능
+                        .antMatchers(HttpMethod.PATCH, "/questions/**").hasRole("USER")
+                        // 답변 수정의 경우, 회원만 수정 가능
+                        .antMatchers(HttpMethod.PATCH,"/questions/**/answers/**").hasRole("USER")
+                        // 회원 정보 조회의 경우, 회원만 조회 가능
+                        .antMatchers(HttpMethod.GET, "/users/**").hasRole("USER")
+                        // 나머지는 비회원도 가능
                         .anyRequest().permitAll()
                 );
+
         return http.build();
 
     }
@@ -81,7 +92,8 @@ public class SecurityConfiguration {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://dahamoverflow.netlify.app/","http://localhost:5173/"));
+        // 추가
+        configuration.setAllowedOrigins(Arrays.asList("https://dahamoverflow.netlify.app/","http://localhost:5173/", "http://localhost:8080/"));
         configuration.setAllowedMethods(Arrays.asList("GET","POST", "PATCH", "DELETE"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setMaxAge(86400L);
