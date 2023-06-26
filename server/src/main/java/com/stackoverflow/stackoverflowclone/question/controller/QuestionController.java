@@ -36,6 +36,8 @@ public class QuestionController {
     @PostMapping
     public ResponseEntity postQuestion(@RequestBody QuestionDto.Post post){
 
+        // memberId 따로 안받음
+
         Question createdQuestion = questionService.createQuestion(questionMapper.QuestionPostDtoToQuestion(post));
 
         URI location = UriCreator.createUri(QUESTION_DEFAULT_URL, createdQuestion.getQuestionId());

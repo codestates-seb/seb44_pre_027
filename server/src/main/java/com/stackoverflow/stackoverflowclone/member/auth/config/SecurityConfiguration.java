@@ -6,6 +6,8 @@ import com.stackoverflow.stackoverflowclone.member.auth.handler.MemberAuthentica
 import com.stackoverflow.stackoverflowclone.member.auth.handler.MemberAuthenticationSuccessHandler;
 import com.stackoverflow.stackoverflowclone.member.auth.jwt.JwtTokenizer;
 import com.stackoverflow.stackoverflowclone.member.auth.utils.CustomAuthorityUtils;
+import com.stackoverflow.stackoverflowclone.member.repository.MemberRepository;
+import com.stackoverflow.stackoverflowclone.member.service.MemberService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -29,10 +31,14 @@ public class SecurityConfiguration {
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
 
-    public SecurityConfiguration(JwtTokenizer jwtTokenizer, CustomAuthorityUtils authorityUtils) {
+    private final MemberRepository memberRepository;
+
+    public SecurityConfiguration(JwtTokenizer jwtTokenizer, CustomAuthorityUtils authorityUtils, MemberRepository memberRepository) {
         this.jwtTokenizer = jwtTokenizer;
         this.authorityUtils = authorityUtils;
+        this.memberRepository = memberRepository;
     }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         /*
@@ -112,7 +118,8 @@ public class SecurityConfiguration {
             // JwtAuthenticationFilter에서 사용되는 AuthenticationManager와 JwtTokenizer를 DI
             JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenizer);
             jwtAuthenticationFilter.setFilterProcessesUrl("/login");
-            jwtAuthenticationFilter.setAuthenticationSuccessHandler(new MemberAuthenticationSuccessHandler());
+            // 추가
+            jwtAuthenticationFilter.setAuthenticationSuccessHandler(new MemberAuthenticationSuccessHandler(memberRepository));
             jwtAuthenticationFilter.setAuthenticationFailureHandler(new MemberAuthenticationFailureHandler());
 
             JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer, authorityUtils);
