@@ -38,9 +38,6 @@ const QuestionContainer = () => {
     fetchInquiryData(basic, isSort);
   }, [isSort]);
 
-  // console.log(data);
-  console.log(`현재 페이지 basic : ${basic}, ${isSort}`);
-
   const handleSort = (value:string  ) => {
     setIsSort(value);
   }
