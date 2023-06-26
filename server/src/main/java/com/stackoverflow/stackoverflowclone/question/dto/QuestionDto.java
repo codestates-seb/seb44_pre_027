@@ -68,11 +68,15 @@ public class QuestionDto {
     @Getter @Setter
     @Builder
     @AllArgsConstructor
+    @NoArgsConstructor
     public static class Response {
         @Positive
         private long questionId;
 
         private String nickname;
+
+        @Positive
+        private long memberId;
 
         private String title;
 

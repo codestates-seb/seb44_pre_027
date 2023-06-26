@@ -235,6 +235,7 @@ public class QuestionControllerTest {
         QuestionDto.Response response = new QuestionDto.Response(
                 1L,
                 "닉네임",
+                1L,
                 "제목",
                 "본문",
                 LocalDateTime.now(),
@@ -276,6 +277,7 @@ public class QuestionControllerTest {
                                 List.of(
                                         fieldWithPath("questionId").type(JsonFieldType.NUMBER).description("질문 식별자"),
                                         fieldWithPath("nickname").type(JsonFieldType.STRING).description("닉네임"),
+                                        fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("회원 식별자"),
                                         fieldWithPath("title").type(JsonFieldType.STRING).description("제목"),
                                         fieldWithPath("content").type(JsonFieldType.STRING).description("본문"),
                                         fieldWithPath("createdAt").type(JsonFieldType.STRING).description("생성일"),
@@ -416,6 +418,7 @@ public class QuestionControllerTest {
                 new QuestionDto.Response(
                         1L,
                         "닉네임1",
+                        1L,
                         "제목1",
                         "본문1",
                         LocalDateTime.now(),
@@ -428,6 +431,7 @@ public class QuestionControllerTest {
                 new QuestionDto.Response(
                         2L,
                         "닉네임2",
+                        2L,
                         "제목2",
                         "본문2",
                         LocalDateTime.now(),
@@ -472,6 +476,7 @@ public class QuestionControllerTest {
                                         fieldWithPath("data").type(JsonFieldType.ARRAY).description("질문 목록"),
                                         fieldWithPath("data[].questionId").type(JsonFieldType.NUMBER).description("질문 식별자"),
                                         fieldWithPath("data[].nickname").type(JsonFieldType.STRING).description("닉네임"),
+                                        fieldWithPath("data[].memberId").type(JsonFieldType.NUMBER).description("회원 식별자"),
                                         fieldWithPath("data[].title").type(JsonFieldType.STRING).description("제목"),
                                         fieldWithPath("data[].content").type(JsonFieldType.STRING).description("본문"),
                                         fieldWithPath("data[].createdAt").type(JsonFieldType.STRING).description("생성일"),
