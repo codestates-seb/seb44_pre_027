@@ -1,3 +1,4 @@
+import { BASE_URL } from './factory';
 import { useMutation } from '@tanstack/react-query';
 
 export interface PatchInterface {
@@ -13,8 +14,6 @@ export interface PatchInterface {
   };
 }
 
-const url = 'http://ec2-3-35-27-217.ap-northeast-2.compute.amazonaws.com:8080';
-
 const urlCreator = (baseurl: string, patchData: PatchInterface) => {
   switch (patchData.type) {
     case 'question':
@@ -22,12 +21,12 @@ const urlCreator = (baseurl: string, patchData: PatchInterface) => {
     case 'answer':
       return `${baseurl}/questions/${patchData.id['question-id']}/answers/${patchData.id['answer-id']}`;
     default:
-      return url;
+      return BASE_URL;
   }
 };
 
 const patchQnA = async (patchData: PatchInterface) => {
-  const patchurl = urlCreator(url, patchData);
+  const patchurl = urlCreator(BASE_URL, patchData);
   const response = await fetch(patchurl, {
     method: 'PATCH',
     body: JSON.stringify(patchData),

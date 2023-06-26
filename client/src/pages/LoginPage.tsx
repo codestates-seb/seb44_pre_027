@@ -39,8 +39,8 @@ type LoginType = z.infer<typeof loginSchema>;
 const LoginPage = () => {
   const loginMutation = useLoginMutation();
   const loginForm = useForm<LoginType>({ resolver: zodResolver(loginSchema) });
-  const onSubmit: SubmitHandler<LoginType> = (data) => {
-    loginMutation.mutate(data);
+  const onSubmit: SubmitHandler<LoginType> = async (data) => {
+    await loginMutation.mutate(data);
   };
 
   return (

@@ -3,12 +3,11 @@ import { useMutation } from '@tanstack/react-query';
 import { setLogin } from '@/modules/loginSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from './factory';
 import { getHeader, isSuccessStatus } from '@/utils';
 
-const url = '';
-
 const postLogin = async (loginData: any) => {
-  const response = await fetch(`${url}/users/login`, {
+  const response = await fetch(`${BASE_URL}/users/login`, {
     method: 'POST',
     body: JSON.stringify(loginData),
     credentials: 'include',

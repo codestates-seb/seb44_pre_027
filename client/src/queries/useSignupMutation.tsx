@@ -1,11 +1,10 @@
 import { SignupType } from '@/pages/SignupPage';
+import { BASE_URL } from './factory';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
-const url = 'http://ec2-3-35-27-217.ap-northeast-2.compute.amazonaws.com:8080';
-
 const postSignup = async (signupData: SignupType) => {
-  const response = await fetch(`${url}/users/signup`, {
+  const response = await fetch(`${BASE_URL}/users/signup`, {
     method: 'POST',
     body: JSON.stringify(signupData),
     headers: {
