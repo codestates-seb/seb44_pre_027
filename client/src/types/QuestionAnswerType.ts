@@ -1,4 +1,5 @@
 export interface QAC_DefaultData {
+    memberId: number;
     nickname: string;
     content: string;
     voteScore?: number;

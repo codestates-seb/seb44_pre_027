@@ -29,6 +29,7 @@ const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
 
   let onlyQuestionData = {
     questionId: 0,
+    memberId: 0,
     nickname: '',
     title: '',
     content: '',
@@ -43,7 +44,7 @@ const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
   {enabled: onlyQuestionData.questionId === 0});
 
   const addNewAnswer = (data:FieldValues) => {
-    return call(`/questions/${questionid}/answers`, 'POST', {memberId:4,...data});
+    return call(`/questions/${questionid}/answers`, 'POST', {...data});
   };
   const mutation = useMutation(addNewAnswer);
 
@@ -75,6 +76,7 @@ const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
   if(isSuccess){
     onlyQuestionData = {
       questionId: data.questionId,
+      memberId: data.memberId,
       nickname: data.nickname,
       title: data.title,
       content: data.content,
