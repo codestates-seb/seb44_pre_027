@@ -74,13 +74,13 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeHttpRequests(authorize -> authorize
                         // 질문 등록의 경우, 회원만 작성 가능
-                        .antMatchers(HttpMethod.POST, "/questions").hasRole("USER")
+                        //.antMatchers(HttpMethod.POST, "/questions").hasRole("USER")
                         // 질문 수정의 경우, 회원만 수정 가능
-                        .antMatchers(HttpMethod.PATCH, "/questions/**").hasRole("USER")
+                        //.antMatchers(HttpMethod.PATCH, "/questions/**").hasRole("USER")
                         // 답변 수정의 경우, 회원만 수정 가능
-                        .antMatchers(HttpMethod.PATCH,"/questions/**/answers/**").hasRole("USER")
+                        //.antMatchers(HttpMethod.PATCH,"/questions/**/answers/**").hasRole("USER")
                         // 회원 정보 조회의 경우, 회원만 조회 가능
-                        .antMatchers(HttpMethod.GET, "/users/**").hasRole("USER")
+                        //.antMatchers(HttpMethod.GET, "/users/**").hasRole("USER")
                         // 나머지는 비회원도 가능
                         .anyRequest().permitAll()
                 );
@@ -121,6 +121,7 @@ public class SecurityConfiguration {
 
             // JwtAuthenticationFilter에서 사용되는 AuthenticationManager와 JwtTokenizer를 DI
             JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenizer);
+
             jwtAuthenticationFilter.setFilterProcessesUrl("/login");
             // 추가
             jwtAuthenticationFilter.setAuthenticationSuccessHandler(new MemberAuthenticationSuccessHandler(memberRepository));
