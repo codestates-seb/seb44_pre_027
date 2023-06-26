@@ -16,6 +16,7 @@ const postLogin = async (loginData: LoginType) => {
       'Content-Type': 'application/json;charset=utf-8',
     },
   });
+
   console.log(response);
   console.log(JSON.stringify(response.headers))
   console.log(response.headers);
