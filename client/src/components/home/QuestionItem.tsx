@@ -35,7 +35,7 @@ const QuestionItem = ({data}: QuestionItemProps | any) => {
         <h3 className=" cursor-pointer text-sky-500">
           {data.title}
         </h3>
-        <p className=" break-words pt-3 text-xs text-slate-500">
+        <p className=" break-words pt-3 text-xs text-slate-500 overflow-hidden text-ellipsis max-h-[42px]">
           {data.content}
         </p>
 
