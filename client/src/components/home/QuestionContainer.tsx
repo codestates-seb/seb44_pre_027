@@ -3,7 +3,6 @@ import Button from '../Button';
 import PagenationBtn from './PagenationBtn';
 import QuestionItem from './QuestionItem';
 import {Link} from 'react-router-dom';
-import { BASE_URL } from '@/queries/factory';
 
 import { useParams } from 'react-router-dom';
 import { HomeInquiryType } from '@/mocks/homeinquiry';
@@ -26,18 +25,19 @@ const QuestionContainer = () => {
 
 
   const fetchInquiryData = async (
-    page:number =1,
+    page:number = basic,
     sort:string = isSort,
   ) => {
-    return call(`${BASE_URL}/questions?page=${page}&sort=${sort}`, 'GET', null)
+    return call(`/questions?page=${page}&sort=${sort}`, 'GET', null)
     .then((res) => {
       setData(res.data);
+      
     })
   };
 
   React.useEffect(() => {
     fetchInquiryData(basic, isSort);
-  }, [isSort]);
+  }, [basic, isSort]);
 
   const handleSort = (value:string  ) => {
     setIsSort(value);
