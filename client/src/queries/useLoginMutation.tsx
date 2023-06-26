@@ -8,13 +8,11 @@ import { BASE_URL } from './factory';
 import { getHeader, isSuccessStatus } from '@/utils';
 
 const postLogin = async (loginData: LoginType) => {
-  const response = await fetch(`https://dahamoverflow.store/users/login`, {
+  const response = await fetch(`${BASE_URL}/users/login`, {
     method: 'POST',
     body: JSON.stringify(loginData),
     credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-    },
+    headers: {'Content-Type': 'text/plain', },
   });
   const ACCESS_TOKEN = getHeader(response, 'Authorization');
   const REFRESH_TOKEN = getHeader(response, 'Refresh');
