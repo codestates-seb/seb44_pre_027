@@ -96,14 +96,15 @@ public class QuestionController {
 
 
 
-    /** 질문 삭제
-     *  TODO : JWT에 따라 어떤 회원인지도 파라미터로 questionService에 보내야할 수도 있음
+    /**
+     *  질문 삭제
      * **/
     @DeleteMapping("/{question-id}")
-    public ResponseEntity deleteQuestion(@PathVariable("question-id") @Positive long questionId){
+    public ResponseEntity deleteQuestion(@PathVariable("question-id") @Positive long questionId,
+                                         @RequestHeader("authorization") String token){
 
         // TODO : token으로 어떤 회원인지 알아야함
-        questionService.deleteQuestion(questionId);
+        questionService.deleteQuestion(questionId, token);
 
         return ResponseEntity.noContent().build();
     }

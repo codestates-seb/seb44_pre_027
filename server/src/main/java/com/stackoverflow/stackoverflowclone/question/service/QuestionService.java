@@ -114,28 +114,30 @@ public class QuestionService {
      *  - 작성자는 자신의 질문을 삭제할 수 있다
      *  - 답변이 달린 경우에는 삭제가 불가능하다
      * **/
-    public void deleteQuestion(long questionId){
+    public void deleteQuestion(long questionId, String token){
 
-        System.out.println("jwtTokenizer = " + jwtTokenizer.getSecretKey());
+        Question findQuestion = findVerifiedQuestion(questionId);
 
-        // TODO : token으로 로그인 한 회원을 알아야함
-        // TODO : 로그인 회원의 id를 얻어서 question을 등록한 회원의 id와 비교
-        //Question findQuestion = findVerifiedQuestion(questionId);
+        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
 
-        //long loginId = jwtTokenizer.getMemberIdFromToken(token, jwtTokenizer.getSecretKey());
-        //long memberId = findQuestion.getMember().getMemberId();
+        long loginId = jwtTokenizer.getMemberIdFromToken(token, base64EncodedSecretKey);
 
+        long memberId = findQuestion.getMember().getMemberId();
 
+        // 로그인 한 회원이 작성자이면
+        if(loginId == memberId){
             // 답변이 달린 경우에는 삭제가 불가능하다
             int deleteNum = questionRepository.deleteByAnswersIsEmptyAndQuestionId(questionId);
 
             // deleteNum이 1이면 잘 삭제된 경우, 0이면 답변이 달린 경우여서 삭제 볼가능
-            // TODO : throw 날려서 catch해서 repsonse에 뜰수 있도록 해야함
             if(deleteNum != 1){
                 throw new BusinessLogicException(ExceptionCode.QUESTION_EXIST_ANSWER);
             }
-
+        }else {
+            throw new RuntimeException("등록한 작성자가 아닙니다");
         }
+
+    }
 
 
     /** 질문이 등록된 질문인지 확인 메서드 **/

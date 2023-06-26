@@ -32,6 +32,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -41,8 +42,7 @@ import static com.stackoverflow.stackoverflowclone.util.ApiDocumentUtils.getRequ
 import static com.stackoverflow.stackoverflowclone.util.ApiDocumentUtils.getResponsePreProcessor;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.doNothing;
-import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
-import static org.springframework.restdocs.headers.HeaderDocumentation.responseHeaders;
+import static org.springframework.restdocs.headers.HeaderDocumentation.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
@@ -595,13 +595,15 @@ public class QuestionControllerTest {
 
         // given
         long Id = 1L;
+        String token = "hihihihihih";
 
         // stubbing
-        doNothing().when(questionService).deleteQuestion(Id);
+        doNothing().when(questionService).deleteQuestion(Id, token);
 
         // when
         ResultActions actions = mockMvc.perform(
                 delete("/questions/{question-id}", Id)
+                        .header("authorization",token)
         );
 
         // then
@@ -612,6 +614,9 @@ public class QuestionControllerTest {
                         getResponsePreProcessor(),
                         pathParameters(
                                 parameterWithName("question-id").description("질문 식별자")
+                        ),
+                        requestHeaders(
+                                headerWithName("authorization").description("accessToken")
                         )
                 ));
     }
