@@ -84,12 +84,13 @@ public class JwtTokenizer {
         return claims;
     }
 
+    // TODO : Long에서 long으로 수정함
     // token으로 memberId 추출
-    public static Long getMemberIdFromToken(String token, String secretKey) {
+    public long getMemberIdFromToken(String token, String secretKey) {
         Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
         Claims claims = claimsJws.getBody();
 
-        Long memberId = claims.get("memberId", Long.class);
+        long memberId = claims.get("memberId", long.class);
 
         return memberId;
     }

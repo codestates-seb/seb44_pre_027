@@ -2,6 +2,7 @@ package com.stackoverflow.stackoverflowclone.member.auth.userdetails;
 
 import com.stackoverflow.stackoverflowclone.exception.BusinessLogicException;
 import com.stackoverflow.stackoverflowclone.exception.ExceptionCode;
+import com.stackoverflow.stackoverflowclone.member.auth.utils.CustomAuthorityUtils;
 import com.stackoverflow.stackoverflowclone.member.entity.Member;
 import com.stackoverflow.stackoverflowclone.member.repository.MemberRepository;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,15 +16,17 @@ import java.util.Collections;
 import java.util.Optional;
 
 // DB에서 사용자의 정보를 조회한 후 AuthenticationManager에게 전달하는 역할
+// TODO : 권한 부여 안하셔서 권한 부여함
 @Component
 public class MemberDetailsService implements UserDetailsService {
     private final MemberRepository memberRepository;
+    private final CustomAuthorityUtils authorityUtils; // 추가
 
 
-    public MemberDetailsService(MemberRepository memberRepository) {
+    public MemberDetailsService(MemberRepository memberRepository, CustomAuthorityUtils authorityUtils) {
         this.memberRepository = memberRepository;
+        this.authorityUtils = authorityUtils;
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -33,16 +36,18 @@ public class MemberDetailsService implements UserDetailsService {
         return new MemberDetails(findMember);
     }
 
-    private final class MemberDetails extends Member implements UserDetails {
+    // public
+    public final class MemberDetails extends Member implements UserDetails {
         MemberDetails(Member member) {
             setMemberId(member.getMemberId());
             setEmail(member.getEmail());
             setPassword(member.getPassword());
+            setRoles(member.getRoles());  //추가
         }
 
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
-            return Collections.emptyList();
+            return authorityUtils.createAuthorities(this.getRoles()); // 추가
         }
 
         @Override
