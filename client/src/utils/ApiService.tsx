@@ -8,6 +8,7 @@ interface OptionsProps {
 }
 
 export function call(api:string, method:string, request:any) {
+
     let headers = new Headers({
         "Content-Type": "application/json",
     });
@@ -28,7 +29,6 @@ export function call(api:string, method:string, request:any) {
 
     if(request) {
         options.body = JSON.stringify(request);
-        console.log(options.body)
     }
     else{
         delete options.body;
