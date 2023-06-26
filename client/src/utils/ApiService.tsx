@@ -1,5 +1,5 @@
-const API_BASE_URL = 'https://dahamoverflow.store';
-const ACCESS_TOKEN = 'accessToken' ;
+const API_BASE_URL = 'https://dahamoverflow.store'
+const ACCESS_TOKEN = 'accesstoken';
 
 interface OptionsProps {
     headers: Headers;

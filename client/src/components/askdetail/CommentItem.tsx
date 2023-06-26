@@ -36,7 +36,6 @@ const CommentItem = ({data, id, questionId, commentId, refetch}: CommentItemProp
 
   const editComment = (data:FieldValues)=>{
     return call(`/questions/${questionId}/comments/${commentId}`, 'PATCH', {
-      memberId: 4,
       content: data.content
     })
   }
@@ -48,7 +47,7 @@ const CommentItem = ({data, id, questionId, commentId, refetch}: CommentItemProp
           refetch();
           setValue('content', '');
           setEditMode(false);
-        }
+        },
       });
     },
     []

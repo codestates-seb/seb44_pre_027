@@ -6,6 +6,8 @@ import { PrimaryBtn } from '@/common/style/Buttons.styled';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { call } from '@/utils/ApiService';
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters, useMutation } from '@tanstack/react-query';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/modules/store';
 
 interface CommentContainerProps {
   questionId: number;
@@ -17,6 +19,7 @@ const CommentContainer = ({comments, questionId, refetch}: CommentContainerProps
   const [showMoreComments, setShowMoreComments] = useState<boolean>(false);
   const [addComment, setAddComment] = useState<boolean>(false);
   const { register, handleSubmit, setValue } = useForm();
+  const isUser = useSelector((state: RootState) => state.login);
 
   const addNewComment = (data:FieldValues) => {
     return call(`/questions/${questionId}/comments`, 'POST', {
@@ -29,12 +32,18 @@ const CommentContainer = ({comments, questionId, refetch}: CommentContainerProps
 
   const onSubmitComment: SubmitHandler<FieldValues> = useCallback(
     (data:FieldValues) => {
-      mutation.mutate(data, {
-        onSettled: () => {
-          refetch();
-          setValue('comment', '');
-        }
-      });
+      if(isUser.isLogin){
+        mutation.mutate(data, {
+          onSettled: () => {
+            refetch();
+            setValue('comment', '');
+          }
+        });
+      }
+      else {
+        alert('회원만 댓글 작성이 가능합니다.');
+        setValue('comment', '');
+      }
   },
   [mutation]
   )
