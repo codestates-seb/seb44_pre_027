@@ -13,7 +13,7 @@ interface InitialStateInterface extends LoginType {
 const LOGINKEY = 'login';
 
 const initialState: InitialStateInterface = getLocalStorage(LOGINKEY, {
-  isLogin: true,
+  isLogin: false,
   accesstoken: '',
   refreshtoken: '',
 });
