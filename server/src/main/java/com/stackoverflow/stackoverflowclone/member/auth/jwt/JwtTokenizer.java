@@ -97,7 +97,6 @@ public class JwtTokenizer {
 
         Claims claims = claimsJws.getBody();
 
-
         Long memberId = claims.get("memberId", Long.class);
 
         return memberId;
