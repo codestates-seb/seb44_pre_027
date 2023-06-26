@@ -8,7 +8,7 @@ import { BASE_URL } from './factory';
 import { getHeader, isSuccessStatus } from '@/utils';
 
 const postLogin = async (loginData: LoginType) => {
-  const response = await fetch(`${BASE_URL}/users/login`, {
+  const response = await fetch(`${BASE_URL}/login`, {
     method: 'POST',
     body: JSON.stringify(loginData),
     credentials: 'include',
