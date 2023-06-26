@@ -22,11 +22,7 @@ interface QuestionDetailPageProps {}
 
 const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
   const { register, handleSubmit, setValue } = useForm();
-  const { questionId } = useParams();
-  const { data, isSuccess, isLoading, refetch } = useQuery(['question'],
-  ()=>call(`/questions/${questionId}`, 'GET', null));
-
-
+  const { questionid } = useParams();
 
   let onlyQuestionData = {
     questionId: 0,
@@ -39,10 +35,13 @@ const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
     modifiedAt: ''
   };
 
-  const addNewAnswer = (data:FieldValues) => {
-    return call(`/questions/${questionId}/answers`, 'POST', {memberId:4,...data});
-  };
+  const { data, isSuccess, isLoading, refetch } = useQuery(['question'],
+  ()=>call(`/questions/${questionid}`, 'GET', null),
+  {enabled: onlyQuestionData.questionId === 0});
 
+  const addNewAnswer = (data:FieldValues) => {
+    return call(`/questions/${questionid}/answers`, 'POST', {memberId:4,...data});
+  };
   const mutation = useMutation(addNewAnswer);
 
   const onSubmitAnswer: SubmitHandler<FieldValues> = useCallback(
