@@ -74,13 +74,13 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeHttpRequests(authorize -> authorize
                         // 질문 등록의 경우, 회원만 작성 가능
-                        //.antMatchers(HttpMethod.POST, "/questions").hasRole("USER")
+                        .antMatchers(HttpMethod.POST, "/questions").hasRole("USER")
                         // 질문 수정의 경우, 회원만 수정 가능
-                        //.antMatchers(HttpMethod.PATCH, "/questions/**").hasRole("USER")
+                        .antMatchers(HttpMethod.PATCH, "/questions/**").hasRole("USER")
                         // 답변 수정의 경우, 회원만 수정 가능
-                        //.antMatchers(HttpMethod.PATCH,"/questions/**/answers/**").hasRole("USER")
+                        .antMatchers(HttpMethod.PATCH,"/questions/**/answers/**").hasRole("USER")
                         // 회원 정보 조회의 경우, 회원만 조회 가능
-                        //.antMatchers(HttpMethod.GET, "/users/**").hasRole("USER")
+                        .antMatchers(HttpMethod.GET, "/users/**").hasRole("USER")
                         // 나머지는 비회원도 가능
                         .anyRequest().permitAll()
                 );
@@ -100,8 +100,10 @@ public class SecurityConfiguration {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
+
         // 추가
-        configuration.setAllowedOrigins(Arrays.asList("https://dahamoverflow.netlify.app/","http://localhost:5173/", "http://localhost:8080/"));
+        configuration.addAllowedOriginPattern("*"); // ?
+        //configuration.setAllowedOrigins(Arrays.asList("https://dahamoverflow.netlify.app/","http://localhost:5173/", "http://localhost:8080/"));
         configuration.setAllowedMethods(Arrays.asList("GET","POST", "PATCH", "DELETE"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         // 추가
