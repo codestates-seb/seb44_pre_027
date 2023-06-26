@@ -32,7 +32,7 @@ const App = ({}: AppProps) => {
                 path="/questions/:questionid/answeredit/:answerid"
                 element={<AnswerEditPage />}
               />
-              <Route path="/users" element={<UserPage />} />
+              <Route path="/users/:memberId" element={<UserPage />} />
               <Route path="/users/login" element={<LoginPage />} />
               <Route path="/users/signup" element={<SignupPage />} />
             </Routes>
