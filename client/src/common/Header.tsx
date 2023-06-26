@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext, createContext } from 'react';
 import { Link } from 'react-router-dom';
 import { cva } from 'class-variance-authority';
 import { cn } from '@/utils/cn';
@@ -8,18 +8,10 @@ import SearchIcon from '@/assets/icons/SearchIcon';
 
 import { useSelector } from 'react-redux';
 import { RootState } from '@/modules/store';
+import { call } from '@/utils/ApiService';
 
-// import { useQuery } from '@tanstack/react-query';
-// import { UserType } from '@/mocks/data';
+import { useQuery } from '@tanstack/react-query';
 
-const fetchData = async (value:string) => {
-  const response = await fetch('/searchbar');
-  return response.json();
-};
-
-interface HeaderProps {
-  changeNav: boolean;
-}
 /*dropwdown이름 겹침 -> ProductIcon 수정완료 */
 const ProductIcon = cva(
   `
@@ -35,48 +27,46 @@ const ProductIcon = cva(
   }
 );
 
-type filtereProps = {
-  userid:number;
+interface headerSearchType {
+  questionId:number;
+  nickname:string;
   title:string;
-};
+  content:string;
+  view:number;
+  voteScore:number;
+}
 
-const Header = ({ changeNav }: HeaderProps) => {
+interface WholeUserType{
+  memberId:number;
+  eamil?:string;
+  nickname:string;
+  location:string;
+
+}
+
+const Header = ({changeNav}) => {
   const isUser = useSelector((state: RootState) => state.login);
-  // const [dropdownVariant, setDropdownVariant] = useState('box');
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
-  const [filteredData, setFilteredData] = useState<filtereProps[]>([])
+  const [filteredData, setFilteredData] = useState<headerSearchType[]>([])
+  const [userData, setUserData] = useState<WholeUserType>();
+  const page = 1;
 
-  useEffect(() => { 
-    const fetchData = async (value: string) => {
-      try{
-        const response = await fetch('/searchbar');
-        if(response.ok){
-          const data = await response.json();
-          const filtered = data.filter((e: { title: string; tag: string; nickname: string; userid?: number; }) => {
-            return (
-              value &&
-              e.title &&
-              e.tag &&
-              e.nickname &&
-              (
-                e.title.toLowerCase().includes(value.toLowerCase()) ||
-                e.tag.toLowerCase().includes(value.toLowerCase()) ||
-                e.nickname.toLowerCase().includes(value.toLowerCase())
-              )
-            );
-          });
-          setFilteredData(filtered);
-          //console.log(filtered);
-        } else {
-          console.log('error', response.statusText);
-        };
-      } catch (error) {
-        console.log('Error :', error);
-      }
-    };
-    fetchData(input);
-  }, [input]);
+  const {data, isLoading, error} = useQuery(['searchData', input], ( ) => {
+    if(!input){
+      return console.log('입력값 없습니다. ',error);
+    }
+
+    //데이터 가져오는 비동기 함수 
+    return call(`/questions/search?page=${page}&keyword=${input}`, 'GET', null)
+    .then((res) => {
+      setFilteredData(res.data);
+      return filteredData;
+    })
+  })
+
+  console.log(filteredData);
+  console.log( data);
 
   const handleDropdown = () => {
     setIsOpen(!isOpen);
@@ -84,10 +74,23 @@ const Header = ({ changeNav }: HeaderProps) => {
 
   const handleInput = (value:string)=> {
     setInput(value);
-    fetchData(value);
   };
 
-  /*엔터 치면 mainquestionPage로 값 보내줘야 함 */
+
+  // //로그인 유저 정보 memberId테스트위한 GET요청 : 전체 유저 목록 조회 
+  useEffect(() => {
+    const userGetData = async () => {
+      return call(`/users`, 'GET', null)
+      .then((res) => {
+        const data = res[0]
+        setUserData(data.data);
+      });
+    };
+
+    userGetData();
+  }, [])
+
+  console.log(userData)
 
   return (
     <nav className="sticky top-0 z-10 w-screen border-b border-gray-200 bg-white ">
@@ -188,12 +191,12 @@ const Header = ({ changeNav }: HeaderProps) => {
             { input === '' ? 
             null 
             : (
-              <ul className="bg-white py-2 px-3 h-content border border-zinc-200 rounded 
+              <ul className="bg-white p-1 h-content border border-zinc-200 rounded 
               absolute w-full">
-                {filteredData.map((item:{userid:number; title:string;}) => {
-                  return <li key={item.userid}
-                             className="text-xs mb-1"
-                          >[title]: {item.title}</li>
+                {filteredData.map((item:headerSearchType) => {
+                  return <Link to={`/questions/${item.questionId}`}><li key={item.questionId}
+                             className="text-xs mb-1 py-2 px-3  hover:bg-sky-100"
+                          >[name] {item.nickname} : [title] {item.title}</li></Link>
                 })}
               </ul>
             )}
@@ -201,7 +204,8 @@ const Header = ({ changeNav }: HeaderProps) => {
           </div>
         </div>
         <div>
-          <LoginHeader changeNav={isUser.isLogin} />
+          <LoginHeader changeNav={isUser.isLogin}  />
+          {/* userID={userID} */}
         </div>
       </div>
     </nav>
