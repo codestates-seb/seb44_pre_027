@@ -70,7 +70,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         claims.put("memberId", member.getMemberId()); // 식별자 포함
         claims.put("username", member.getEmail());
-        claims.put("roles", member.getRoles());  //
+        claims.put("roles", member.getRoles());
 
         String subject = member.getEmail();
         Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes());

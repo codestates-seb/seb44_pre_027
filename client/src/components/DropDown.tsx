@@ -4,6 +4,10 @@ import {cn} from '@/utils/cn';
 import ShortLogoIcon from '@/assets/icons/ShortLogoIcon';
 import SmallMailIcon from '@/assets/icons/SmallMailIcon';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '@/modules/store';
+import {setLogout} from '@/modules/loginSlice';
+import { any } from 'zod';
 
 interface DropDownUI {
     variant: 'box' | 'cup' | 'question' | 'menu';
@@ -28,6 +32,14 @@ const handlePosition = cva(
 
 
 const DropDown = ({variant}: DropDownUI):JSX.Element | null => {
+    const isUser = useSelector((state: RootState) => state.login);
+    const dispatch = useDispatch();
+
+    const handleLogout = () => {
+        dispatch(setLogout())
+        console.log('로그 아웃 되었습니다.')
+    }
+
     if(variant === 'box'){
         return(
             <div className="z-10 absolute divide-y divide-gray-100 rounded-lg ">
@@ -117,7 +129,8 @@ const DropDown = ({variant}: DropDownUI):JSX.Element | null => {
                                     <li className="pl-4">chat</li>
                                     <li className="pl-4">
                                         {/* logOut 기능 구현 예정*/}
-                                        <button>
+                                        <button className="hover:text-black hover:border-blue-700 hover:rounded"
+                                                onClick={handleLogout}>
                                             log out
                                         </button>
                                     </li>

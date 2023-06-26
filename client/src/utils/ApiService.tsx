@@ -1,5 +1,4 @@
-const API_BASE_URL = 'https://dahamoverflow.store';
-const ACCESS_TOKEN = 'accesstoken';
+const API_BASE_URL = 'http://ec2-3-35-27-217.ap-northeast-2.compute.amazonaws.com:8080';
 
 interface OptionsProps {
     headers: Headers;
