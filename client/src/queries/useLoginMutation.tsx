@@ -12,7 +12,9 @@ const postLogin = async (loginData: LoginType) => {
     method: 'POST',
     body: JSON.stringify(loginData),
     credentials: 'include',
-    headers: {'Content-Type': 'text/plain', },
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
   });
   const ACCESS_TOKEN = getHeader(response, 'Authorization');
   const REFRESH_TOKEN = getHeader(response, 'Refresh');
