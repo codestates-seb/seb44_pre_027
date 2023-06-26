@@ -10,10 +10,9 @@ export interface WholeUserTypes {
     isSettingOn?: boolean;
     myInfo:UserSettingType;
     setMyInfo:React.Dispatch<React.SetStateAction<UserSettingType>>;
-    handlePathAccount:() => void;
 }
 
-const UserMain = ({isSettingOn, myInfo, setMyInfo, handlePathAccount}:WholeUserTypes) => {
+const UserMain = ({isSettingOn, myInfo, setMyInfo}:WholeUserTypes) => {
 
     return(
         <main className="ml-4 flex flex-row flex-grow-1">
@@ -23,7 +22,7 @@ const UserMain = ({isSettingOn, myInfo, setMyInfo, handlePathAccount}:WholeUserT
                     <UserSettingNav/>
                 </div>
                 <div className="mr-4 pl-4 basis-10/12">
-                    <UserSetting myInfo={myInfo} setMyInfo={setMyInfo} handlePathAccount={handlePathAccount}/>
+                    <UserSetting myInfo={myInfo} setMyInfo={setMyInfo}/>
                 </div>
                 </>
             ) : (

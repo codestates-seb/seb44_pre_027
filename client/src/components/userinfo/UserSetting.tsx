@@ -4,12 +4,13 @@ import TwitterIcon from '@/assets/icons/TwitterIcon';
 import GitHubIcon from '@/assets/icons/GithubIcon';
 import LinkIcon from '@/assets/icons/LinkIcon';
 import { WholeUserTypes } from './UserMain';
+import { call } from '@/utils/ApiService';
 
 interface ButtonProps {
     onClick:React.MouseEventHandler<HTMLButtonElement>;
     children:string;
 }
-const UserSetting = ({myInfo, setMyInfo, handlePathAccount}:WholeUserTypes) => {
+const UserSetting = ({myInfo, setMyInfo}:WholeUserTypes) => {
     const [isAlert, setIsAlert] = useState(false);
     const [isButtonClick, setIsButtonClick] = useState(false);
     const [textValue, setTextValue] = useState(
@@ -73,11 +74,15 @@ const UserSetting = ({myInfo, setMyInfo, handlePathAccount}:WholeUserTypes) => {
     });
 
 
-    const handleSaveBtn = () => {
-        setIsButtonClick(!isButtonClick);
-        setMyInfo(textValue);
-        handlePathAccount();
-        console.log('PATH 성ㅇ공', textValue)
+    const handleSaveBtn = async (memberId) => {
+        return call(`/users/${memberId}`, 'PATCH', {memberId:memberId, ...textValue})
+        .then((res) => {
+            console.log('PATCH 성공');
+            setMyInfo(textValue);
+            setIsButtonClick(!isButtonClick);
+            setMyInfo(res);
+        })
+        .catch((Err) => console.log('PATCH 실패 : '+ Err));
     }
 
     const handleCancleBtn = () => {
@@ -199,7 +204,7 @@ const UserSetting = ({myInfo, setMyInfo, handlePathAccount}:WholeUserTypes) => {
                     </div>
                     <div className="my-20 text-sm">
                         <ReRenderButton
-                            onClick={handleSaveBtn}>
+                            onClick={() => handleSaveBtn(myInfo.memberId)}>
                             Save edits
                         </ReRenderButton>
                         <ReRenderButton
