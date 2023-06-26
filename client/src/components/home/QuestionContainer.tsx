@@ -26,18 +26,19 @@ const QuestionContainer = () => {
 
 
   const fetchInquiryData = async (
-    page:number =1,
+    page:number = basic,
     sort:string = isSort,
   ) => {
-    return call(`${BASE_URL}/questions?page=${page}&sort=${sort}`, 'GET', null)
+    return call(`/questions?page=${page}&sort=${sort}`, 'GET', null)
     .then((res) => {
       setData(res.data);
+      
     })
   };
 
   React.useEffect(() => {
     fetchInquiryData(basic, isSort);
-  }, [isSort]);
+  }, [basic, isSort]);
 
   const handleSort = (value:string  ) => {
     setIsSort(value);
