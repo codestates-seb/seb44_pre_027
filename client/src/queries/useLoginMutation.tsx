@@ -16,8 +16,8 @@ const postLogin = async (loginData: LoginType) => {
       'Content-Type': 'application/json;charset=utf-8',
     },
   });
-  const ACCESS_TOKEN = getHeader(response, 'Authorization');
-  const REFRESH_TOKEN = getHeader(response, 'Refresh');
+  const ACCESS_TOKEN = response.headers['Authorization'];
+  const REFRESH_TOKEN = response.headers['Refresh'];
   const status = isSuccessStatus(response);
   const result = await response.json();
   return {
