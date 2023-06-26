@@ -84,13 +84,21 @@ public class JwtTokenizer {
         return claims;
     }
 
-    // TODO : Long에서 long으로 수정함
-    // token으로 memberId 추출
-    public long getMemberIdFromToken(String token, String secretKey) {
-        Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
+    /**
+     *  token으로 memberId 추출 메서드 (수정 완)
+     */
+    public long getMemberIdFromToken(String token, String base64EncodedSecretKey) {
+
+        Key key = getKeyFromBase64EncodedKey(base64EncodedSecretKey);
+
+        String jwtToken = token.substring("Bearer ".length());
+
+        Jws<Claims> claimsJws = Jwts.parser().setSigningKey(key).parseClaimsJws(jwtToken);
+
         Claims claims = claimsJws.getBody();
 
-        long memberId = claims.get("memberId", long.class);
+
+        Long memberId = claims.get("memberId", Long.class);
 
         return memberId;
     }
