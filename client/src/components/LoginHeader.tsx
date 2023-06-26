@@ -30,6 +30,7 @@ const IconHover = cva(
 
 
 const LoginHeader = ({ changeNav }:LoginProps) => {  //isUser.isLogin을 통해   true || false 값을 받고 있습니다. 
+
   const [dropdownVariant , setDropdownVariant] = useState('box');
   const [isOpen01, setIsOpen01] = useState(false);
   const [isOpen02, setIsOpen02] = useState(false);
@@ -55,10 +56,9 @@ const LoginHeader = ({ changeNav }:LoginProps) => {  //isUser.isLogin을 통해 
     setIsOpen04(!isOpen04);
     setDropdownVariant('menu');
   };
- 
+
   //memberID [0] 호출
   const userID  = useMemberId();
-
 
   return (
     <>
