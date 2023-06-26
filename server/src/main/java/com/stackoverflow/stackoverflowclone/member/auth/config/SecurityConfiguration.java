@@ -100,10 +100,12 @@ public class SecurityConfiguration {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
+
         // 추가
+        //configuration.addAllowedOriginPattern("*");
         configuration.setAllowedOrigins(Arrays.asList("https://dahamoverflow.netlify.app/","http://localhost:5173/", "http://localhost:8080/"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PATCH", "DELETE"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PATCH", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));  // * 수정
         // 추가
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(86400L);
@@ -121,6 +123,7 @@ public class SecurityConfiguration {
 
             // JwtAuthenticationFilter에서 사용되는 AuthenticationManager와 JwtTokenizer를 DI
             JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenizer);
+
             jwtAuthenticationFilter.setFilterProcessesUrl("/login");
             // 추가
             jwtAuthenticationFilter.setAuthenticationSuccessHandler(new MemberAuthenticationSuccessHandler(memberRepository));
