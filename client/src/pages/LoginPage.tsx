@@ -34,7 +34,7 @@ const loginSchema = z.object({
   password: z.string().min(8).regex(passwordRegex),
 });
 
-type LoginType = z.infer<typeof loginSchema>;
+export type LoginType = z.infer<typeof loginSchema>;
 
 const LoginPage = () => {
   const loginMutation = useLoginMutation();
