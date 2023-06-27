@@ -14,7 +14,7 @@ interface AskQuestionPageProps {}
 
 const AskQuestionPage = ({}: AskQuestionPageProps) => {
   const { register, handleSubmit, formState: { isSubmitting } } = useForm();
-  const nowMemberId = JSON.parse(localStorage.getItem('memberId'));
+  const nowMemberId = window.localStorage.getItem('memberId');
 
   const addNewQuestion = (data:FieldValues) => {
     return call('/questions', 'POST', {
