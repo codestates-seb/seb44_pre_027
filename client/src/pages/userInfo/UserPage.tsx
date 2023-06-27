@@ -36,6 +36,7 @@ const UserPage = () => {
                 setMyInfo({
                     memberId: res.memberId,
                     email: res.email,
+                    password: res.password,
                     nickname: res.nickname,
                     location: res.location,
                     bioTitle: res.bioTitle, 
@@ -50,8 +51,8 @@ const UserPage = () => {
 
 
     //DELETE 요청 실행 버튼 함수  
-    const handleDeleteAccount = async (localmemberId) => {
-        return call(`users/${localmemberId}?password=password1234`, 'DELETE', {...myInfo})
+    const handleDeleteAccount = async (memberId, pwd) => {
+        return call(`users/${memberId}?password=${pwd}`, 'DELETE', {...myInfo})
         .then((res) =>{
             setIsAlert(true);
             setTimeout(() => {
@@ -84,7 +85,7 @@ const UserPage = () => {
                             className="px-3 py-2 mx-3 w-32 h-10 border border-slate-400 rounded flex felx-row justify-center
                             text-sm text-gray-500 font-normal bg-sky-200
                             hover:bg-slate-200"
-                            onClick={() => handleDeleteAccount(myInfo.memberId)}>
+                            onClick={() => handleDeleteAccount(myInfo.memberId, myInfo.password)}>
                                 회원 탈퇴
                             </button>
                         </Link>
