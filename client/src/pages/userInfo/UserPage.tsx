@@ -24,13 +24,13 @@ const UserPage = () => {
     const [isAlert, setIsAlert] = useState(false); //알림창 
     const isUser = useSelector((state: RootState) => state.login); //로그인 여부 : boolean
     const [myInfo, setMyInfo] = useState<UserSettingType>();
-    //const userId=isUser.accesstoken; // 로그인 된 유저의 고유의 id를 가져옵니다.
-    // const Id = 1; //임시
     const { memberId } = useParams();
 
     useEffect(() => {
         const fetchUserData = async () => {
-            return call(`/users/${memberId}`, 'GET', null)
+            const storeMemberId = localStorage.getItem('memberId');
+            const localmemberId = memberId || storeMemberId;
+            return call(`/users/${localmemberId}`, 'GET', null)
             .then((res) => {
                 setMyInfo(res);
             })
@@ -40,7 +40,7 @@ const UserPage = () => {
         fetchUserData();
     }, [])
 
-    console.log(memberId);
+    console.log('UserPage: '+ memberId);
     console.log(myInfo);
 
     //DELETE 요청 실행 버튼 함수  
