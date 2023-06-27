@@ -35,7 +35,7 @@ const CommentItem = ({data, id, questionId, commentId, refetch}: CommentItemProp
   const [editMode, setEditMode] = useState<boolean>(false);
   const { register, handleSubmit, setValue } = useForm();
   const createdAt = new Date(data.createdAt.substr(0,10)).toDateString();
-  const nowMemberId = useSelector((state: RootState) => state.login.memberId);
+  const nowMemberId = useSelector((state: RootState) => state.login).memberId;
 
   const editComment = (data:FieldValues)=>{
     return call(`/questions/${questionId}/comments/${commentId}`, 'PATCH', {

@@ -5,6 +5,8 @@ import VoteContainer from './VoteContainer';
 import { Answer, Question } from '../../types/QuestionAnswerType'
 import { call } from '@/utils/ApiService';
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters, useMutation } from '@tanstack/react-query';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/modules/store';
 
 interface QuestionAnswerComponentProps{
   questionId?: number;
@@ -15,7 +17,7 @@ interface QuestionAnswerComponentProps{
 }
 
 const QuestionAnswerComponent = ({type, data, questionId, answerId, refetch}: QuestionAnswerComponentProps) => {
-  const nowMemberId = localStorage.getItem('memberId');
+  const nowMemberId = useSelector((state: RootState) => state.login).memberId;
 
   const deleteData = ()=>{
     if(type === 'Question')

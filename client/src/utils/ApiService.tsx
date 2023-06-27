@@ -18,7 +18,7 @@ export function call(api:string, method:string, request:any) {
     });
 
 
-    const accesstoken = useSelector((state: RootState) => state.login.accesstoken);
+    const accesstoken = useSelector((state: RootState) => state.login).accesstoken;
     console.log('accessToken: '+ accesstoken);
     if(accesstoken) {
         headers.append("Authorization", accesstoken);
