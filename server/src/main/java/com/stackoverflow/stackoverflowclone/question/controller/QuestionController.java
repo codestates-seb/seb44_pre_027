@@ -43,7 +43,7 @@ public class QuestionController {
         URI location = UriCreator.createUri(QUESTION_DEFAULT_URL, createdQuestion.getQuestionId());
 
         QuestionDto.postResponse postResponse = questionMapper.QuestionToQuestionPostResponseDto(createdQuestion);
-
+        
         return ResponseEntity.created(location).body(postResponse);
     }
 
