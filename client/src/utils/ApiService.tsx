@@ -18,10 +18,10 @@ export function call(api:string, method:string, request:any) {
     });
 
 
-    const isUser = useSelector((state: RootState) => state.login);
-    console.log('accessToken: '+ isUser.accesstoken);
-    if(isUser.accesstoken) {
-        headers.append("Authorization", isUser.accesstoken);
+    const accessToken = JSON.parse(localStorage.getItem('login')).accessToken;
+    console.log('accessToken: '+ accessToken);
+    if(accessToken) {
+        headers.append("Authorization", accessToken);
     }
 
 
