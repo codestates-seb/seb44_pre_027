@@ -72,7 +72,7 @@ const UserPage = () => {
             <div className="flex flex-row ">
                 <LeftSideBar/>
                 <main className="mx-auto mb-20 flex flex-col">
-                    <UserInfo isSettingOn={isSettingOn} setIsSettingOn={setIsSettingOn} myInfo={myInfo}/>
+                    <UserInfo isSettingOn={isSettingOn} setIsSettingOn={setIsSettingOn}/>
                     <div>
                         <UserTopNav setIsSettingOn={setIsSettingOn}/>
                         <UserMain 
