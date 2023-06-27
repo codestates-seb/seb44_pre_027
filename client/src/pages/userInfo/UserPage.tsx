@@ -10,7 +10,6 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../modules/store';
 import { UserSettingType } from '../../mocks/homeinquiry';
 import { call } from '@/utils/ApiService';
-import { useParams } from 'react-router-dom';
 import { FieldValues } from 'react-hook-form';
 
 export interface indexUser {
@@ -24,15 +23,14 @@ const UserPage = () => {
     const [isAlert, setIsAlert] = useState(false); //알림창 
     const isUser = useSelector((state: RootState) => state.login); //로그인 여부 : boolean
     const [myInfo, setMyInfo] = useState<UserSettingType>();
-    const { memberId } = useParams();
 
     useEffect(() => {
         const fetchUserData = async () => {
             const storeMemberId = localStorage.getItem('memberId');
-            const localmemberId = memberId || storeMemberId;
-            return call(`/users/${localmemberId}`, 'GET', null)
+            return call(`/users/${storeMemberId}`, 'GET', null)
             .then((res) => {
                 setMyInfo(res);
+                console.log('UserPage: '+ storeMemberId);
             })
             .catch((Err) => console.log('유저정보 GET 에러 발생: ' + Err));
         };
@@ -40,8 +38,7 @@ const UserPage = () => {
         fetchUserData();
     }, [])
 
-    console.log('UserPage: '+ memberId);
-    console.log(myInfo);
+    console.log('내정보' + myInfo);
 
     //DELETE 요청 실행 버튼 함수  
     const handleDeleteAccount = async (memberId) => {
@@ -79,7 +76,7 @@ const UserPage = () => {
                         className="px-3 py-2 mx-3 w-32 h-10 border border-slate-400 rounded flex felx-row justify-center
                         text-sm text-gray-500 font-normal bg-sky-200
                         hover:bg-slate-200"
-                        onClick={() => handleDeleteAccount(memberId)}>
+                        onClick={() => handleDeleteAccount(myInfo.memberId)}>
                             회원 탈퇴
                         </button>
                     </div>
