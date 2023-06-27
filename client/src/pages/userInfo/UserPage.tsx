@@ -10,7 +10,6 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../modules/store';
 import { UserSettingType } from '../../mocks/homeinquiry';
 import { call } from '@/utils/ApiService';
-import { FieldValues } from 'react-hook-form';
 
 export interface indexUser {
     myinfo:UserSettingType[];
@@ -24,13 +23,16 @@ const UserPage = () => {
     const isUser = useSelector((state: RootState) => state.login); //로그인 여부 : boolean
     const [myInfo, setMyInfo] = useState<UserSettingType>();
 
+    //memberId가져오기 
+    const isLogin = useSelector((state:RootState) => (state.login));
+    const localmemberId = isLogin.memberId;
+
     useEffect(() => {
         const fetchUserData = async () => {
-            const storeMemberId = localStorage.getItem('memberId');
-            return call(`/users/${storeMemberId}`, 'GET', null)
+            return call(`/users/${localmemberId}`, 'GET', null)
             .then((res) => {
                 setMyInfo(res);
-                console.log('UserPage: '+ storeMemberId);
+                console.log('UserPage: '+ localmemberId);
             })
             .catch((Err) => console.log('유저정보 GET 에러 발생: ' + Err));
         };
@@ -62,7 +64,7 @@ const UserPage = () => {
             <div className="flex flex-row ">
                 <LeftSideBar/>
                 <main className="mx-auto mb-20 flex flex-col">
-                    <UserInfo isSettingOn={isSettingOn} setIsSettingOn={setIsSettingOn}/>
+                    <UserInfo isSettingOn={isSettingOn} setIsSettingOn={setIsSettingOn} myInfo={myInfo}/>
                     <div>
                         <UserTopNav setIsSettingOn={setIsSettingOn}/>
                         <UserMain 
