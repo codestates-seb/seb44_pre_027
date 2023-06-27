@@ -8,7 +8,7 @@ import { BASE_URL } from './factory';
 import { getHeader, isSuccessStatus } from '@/utils';
 
 const postLogin = async (loginData: LoginType) => {
-  console.log('10:32')
+  console.log('10:39')
   const response = await fetch(`${BASE_URL}/login`, {
     method: 'POST',
     body: JSON.stringify(loginData),
@@ -17,7 +17,7 @@ const postLogin = async (loginData: LoginType) => {
       'Content-Type': 'application/json;charset=utf-8',
     },
   });
-  const ACCESS_TOKEN = JSON.parse(response.headers.get('Authorization'));
+  const ACCESS_TOKEN = response.headers.get('Authorization');
   const REFRESH_TOKEN = response.headers.get('Refresh');
   const status = isSuccessStatus(response);
   const result = await response.json();
