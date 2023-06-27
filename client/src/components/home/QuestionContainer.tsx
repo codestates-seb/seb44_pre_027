@@ -14,29 +14,32 @@ const QuestionContainer = () => {
   let { page, sort } = useParams();
   
   const [isSort, setIsSort] = useState('new'); //필터 적용 시작 new: 수정 필요
-  const [curpage, setCurPage] = useState(5); // 한 화면에 표시될 데이터 갯수: 버튼 5개 확인 위한 임시 2
+  const curpage = 5;// 한 화면에 표시될 데이터 갯수: 버튼 5개 확인 위한 임시 2
   const [basic, setBasic] = useState(1); //page
   const offset = (basic-1)*curpage; // 현재 페이지에 보여져야 할 데이터의 시작 위치 
   const numPages = Math.ceil(data.length/curpage); //현재 출력 버튼 갯수 
 
+  // btn 클릭 시 page변동 및 get요청 
+  const lastPage = (basic-1)*curpage + curpage;
+
   const handlePage = (pageNum:number) => {
     setBasic(pageNum);
-  };
+  }; 
 
-
-  const fetchInquiryData = async (
-    page:number = basic,
-    sort:string = isSort,
-  ) => {
-    return call(`/questions?page=${page}&sort=${sort}`, 'GET', null)
-    .then((res) => {
-      setData(res.data);
-      
-    })
-  };
+    const fetchInquiryData = async (
+      page:number = basic,
+      sort:string = isSort,
+    ) => {
+      return call(`/questions?page=${page}&sort=${sort}`, 'GET', null)
+      .then((res) => {
+        setData(res.data);
+        console.log(res.data);
+        
+      })
+    };
 
   React.useEffect(() => {
-    fetchInquiryData(basic, isSort);
+    fetchInquiryData( );
   }, [basic, isSort]);
 
   const handleSort = (value:string  ) => {
@@ -62,7 +65,8 @@ const QuestionContainer = () => {
       </div>
 
       {
-      data.slice(offset, offset + curpage).map((e:any) => {
+      data.slice(0, curpage).map((e:any) => {
+        console.log('link part : ' + e.questionId);
         return (
           <Link to={`/questions/${e.questionId}`} key={e.questionId}>
             <QuestionItem data={e} key={e.questionId}/>
@@ -77,7 +81,6 @@ const QuestionContainer = () => {
             return(
               <PagenationBtn
                 total={data.length}
-                curpage={curpage}
                 basic={basic}
                 setBasic={setBasic}
                 variant={basic === i + 1 ? 'active' : 'default'}
@@ -90,7 +93,6 @@ const QuestionContainer = () => {
           return (
             <PagenationBtn
               total={data.length}
-              curpage={curpage}
               basic={basic}
               setBasic={setBasic}
               variant={basic === i + 1 ? 'active' : 'default'}

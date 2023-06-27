@@ -26,14 +26,13 @@ interface PagenationBtnProps
     ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   total:number;
-  curpage:number;
+
   basic:number;
   setBasic:(value:number)=>void;
 
 }
 
-const PagenationBtn = ({ children, className, variant,total,curpage,basic,setBasic, ...attributes }: PagenationBtnProps) => {
-  const numPages = Math.ceil(total/curpage);
+const PagenationBtn = ({ children, className, variant,total, basic,setBasic, ...attributes }: PagenationBtnProps) => {
 
   return (
     <button 
