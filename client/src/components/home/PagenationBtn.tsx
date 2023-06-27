@@ -32,7 +32,7 @@ interface PagenationBtnProps
 }
 
 const PagenationBtn = ({ children, className, variant,total, basic,setBasic, ...attributes }: PagenationBtnProps) => {
-
+  
   return (
     <button 
     className={`${cn(ButtonVariants({ variant }))} ${className}`} {...attributes}
