@@ -35,6 +35,7 @@ const AskQuestionPage = ({}: AskQuestionPageProps) => {
       mutation.mutate(data, {
         onSettled:(data) => {
           navigate(`/questions/${data.questionId}`);;
+          window.scrollTo(0,0);
         }
       });
   },
