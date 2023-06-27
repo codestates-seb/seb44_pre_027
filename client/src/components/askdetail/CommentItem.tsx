@@ -33,7 +33,7 @@ const CommentItem = ({data, id, questionId, commentId, refetch}: CommentItemProp
   const [editMode, setEditMode] = useState<boolean>(false);
   const { register, handleSubmit, setValue } = useForm();
   const createdAt = new Date(data.createdAt.substr(0,10)).toDateString();
-  const nowMemberID = JSON.parse(localStorage.getItem('memberId'));
+  const nowMemberID = window.localStorage.getItem('memberId');
 
   const editComment = (data:FieldValues)=>{
     return call(`/questions/${questionId}/comments/${commentId}`, 'PATCH', {
