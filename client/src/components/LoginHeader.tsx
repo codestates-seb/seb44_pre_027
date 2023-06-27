@@ -8,6 +8,9 @@ import HeadQuestionIcon from '@/assets/icons/HeadQuestionIcon';
 import HeadBoxIcon from '@/assets/icons/HeadBoxIcon';
 import HeadCupIcon from '@/assets/icons/HeadCupIcon';
 
+import { useSelector } from 'react-redux';
+import { RootState } from '@/modules/store';
+
 type LoginProps = {
   changeNav: boolean;
   userID?: number;
@@ -58,10 +61,12 @@ const LoginHeader = ({ changeNav }:LoginProps) => {  //isUser.isLogin을 통해 
 
   //memberID [0] 호출
   // const userID  = useMemberId();
-  const storedData = window.localStorage.getItem('login');
-  const memberId = Number(storedData);
+  const storedData = JSON.parse(window.localStorage.getItem('login'));
+  const memberId = Number(storedData[0].memberId);
   console.log('type ' + typeof memberId);
-  console.log('V05_ID : ' + storedData);
+  console.log('V06_ID : ' + storedData);
+
+  const reduxId = useSelector((state:RootState) => state.login.memberId);
 
   return (
     <>
