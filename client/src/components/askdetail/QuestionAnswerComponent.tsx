@@ -15,6 +15,7 @@ interface QuestionAnswerComponentProps{
 }
 
 const QuestionAnswerComponent = ({type, data, questionId, answerId, refetch}: QuestionAnswerComponentProps) => {
+  const nowMemberId = localStorage.getItem('memberId');
 
   const deleteData = ()=>{
     if(type === 'Question')
@@ -52,16 +53,18 @@ const QuestionAnswerComponent = ({type, data, questionId, answerId, refetch}: Qu
         <VoteContainer voteScore={data.voteScore} postId={type === 'Question' ? questionId : answerId} refetch={refetch}/>
         <MainText content={data.content}/>
       </div>
-      <div className=" flex gap-4 text-sm pl-12 pb-4">
-        <Link to={ type === 'Question' ?
-          `/posts/${questionId}/edit`
-          :
-          `/questions/${questionId}/answers/${answerId}`
-          }>
-          <button onClick={gotoEditPage}>Edit</button>
-        </Link>
-        <button onClick={()=>mutate()}>Delete</button>
-      </div>
+      { Number(nowMemberId) === data.memberId &&
+        <div className=" flex gap-4 text-sm pl-12 pb-4">
+          <Link to={ type === 'Question' ?
+            `/posts/${questionId}/edit`
+            :
+            `/questions/${questionId}/answers/${answerId}`
+            }>
+            <button onClick={gotoEditPage}>Edit</button>
+          </Link>
+          <button onClick={()=>mutate()}>Delete</button>
+        </div>
+      }
       {type === 'Answer' && <hr/>}
     </section>
   );

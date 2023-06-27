@@ -23,8 +23,7 @@ const CommentContainer = ({comments, questionId, refetch}: CommentContainerProps
 
   const addNewComment = (data:FieldValues) => {
     return call(`/questions/${questionId}/comments`, 'POST', {
-      ...data,
-      memberId: 4
+      ...data
     });
   };
 
