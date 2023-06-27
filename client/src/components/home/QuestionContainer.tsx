@@ -45,11 +45,6 @@ const QuestionContainer = () => {
     setIsSort(value);
   }
 
-  //페이지네이션 다음 버튼 추가 
-  const handleNextPage = () => {
-    setBasic((prev) => prev + 1);
-  }
-
   return (
     <main className=" flex flex-col">
       <div className=" px-4 py-4">

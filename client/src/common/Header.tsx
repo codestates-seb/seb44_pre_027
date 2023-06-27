@@ -74,7 +74,7 @@ const Header = ({changeNav}) => {
   };
 
 
-  // //로그인 유저 정보 memberId테스트위한 GET요청 : 전체 유저 목록 조회 
+  //로그인 유저 정보 memberId테스트위한 GET요청 : 전체 유저 목록 조회 
   useEffect(() => {
     const userGetData = async () => {
       return call(`/users`, 'GET', null)
