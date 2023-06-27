@@ -11,13 +11,17 @@ import SignupPage from './pages/SignupPage';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import QuestionEditPage from './pages/question/[id]/questionedit/QuestionEditPage';
 import AnswerEditPage from './pages/question/[id]/answeredit/[answerid]/AnswerEditPage';
+import { useSelector } from 'react-redux';
+import { RootState } from './modules/store';
 
 const queryClient = new QueryClient();
 
 interface AppProps {}
 
 const App = ({}: AppProps) => {
-  console.log('12:40')
+  console.log('12:45')
+  const isUser = useSelector((state: RootState) => state.login);
+  console.log(isUser.memberId);
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
