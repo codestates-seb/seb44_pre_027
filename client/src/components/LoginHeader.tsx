@@ -62,11 +62,11 @@ const LoginHeader = ({ changeNav }:LoginProps) => {  //isUser.isLogin을 통해 
   //memberID [0] 호출
   // const userID  = useMemberId();
   const storedData = JSON.parse(window.localStorage.getItem('login'));
-  const memberId = Number(storedData[0].memberId);
-  console.log('type ' + typeof memberId);
-  console.log('V06_ID : ' + storedData);
+  const memberId = (storedData[0].memberId);
+  // console.log('type ' + typeof memberId);
+  console.log('V07_ID : ' + storedData);
 
-  const reduxId = useSelector((state:RootState) => state.login.memberId);
+  const reduxId = useSelector((state:RootState) => state.login).memberId;
   console.log(reduxId);
 
   return (
