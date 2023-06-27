@@ -204,7 +204,7 @@ const UserSetting = ({myInfo, setMyInfo}:WholeUserTypes) => {
                     </div>
                     <div className="my-20 text-sm">
                         <ReRenderButton
-                            onClick={() => handleSaveBtn(myInfo.memberId)}>
+                            onClick={handleReputation}>
                             Save edits
                         </ReRenderButton>
                         <ReRenderButton
