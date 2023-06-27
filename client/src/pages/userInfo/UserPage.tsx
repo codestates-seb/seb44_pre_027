@@ -26,14 +26,15 @@ const UserPage = () => {
     //memberId가져오기 
     const isLogin = useSelector((state:RootState) => (state.login));
     const localmemberId = isLogin.memberId;
-    console.log('userPage ID: ' + localmemberId);
+    console.log('userPage ID: ' + localmemberId); //동작 완
 
     useEffect(() => {
         const fetchUserData = async () => {
             return call(`/users/${localmemberId}`, 'GET', null)
             .then((res) => {
                 setMyInfo(res);
-                console.log(`User PAGE GET 성공입니다\n ${res}`);
+                console.log(`USER 정보 출력:  ${res}`);
+                console.log(`USER 정보 2차 출력: ${res.nickname}`)
             })
             .catch((Err) => console.log('유저정보 GET 에러 발생: ' + Err));
         };
