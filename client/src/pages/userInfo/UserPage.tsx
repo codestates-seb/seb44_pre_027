@@ -51,7 +51,7 @@ const UserPage = () => {
 
     //DELETE 요청 실행 버튼 함수  
     const handleDeleteAccount = async (localmemberId) => {
-        return call(`users/${localmemberId}`, 'DELETE', {...myInfo})
+        return call(`users/${localmemberId}?password=password1234`, 'DELETE', {...myInfo})
         .then((res) =>{
             setIsAlert(true);
             setTimeout(() => {
