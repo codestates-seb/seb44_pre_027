@@ -35,8 +35,8 @@ const CommentContainer = ({comments, questionId, refetch}: CommentContainerProps
       if(isUser.isLogin){
         mutation.mutate(data, {
           onSettled: () => {
-            refetch();
             setValue('comment', '');
+            refetch();
           }
         });
       }

@@ -19,9 +19,8 @@ const queryClient = new QueryClient();
 interface AppProps {}
 
 const App = ({}: AppProps) => {
-  console.log('12:45')
-  const isUser = useSelector((state: RootState) => state.login);
-  console.log(isUser.memberId);
+  console.log('01:00')
+
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>

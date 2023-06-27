@@ -18,8 +18,9 @@ export function call(api:string, method:string, request:any) {
     });
 
 
-    const accessToken = JSON.parse(localStorage.getItem('login')).accessToken;
-    console.log('accessToken: '+ accessToken);
+    const accessToken = JSON.parse(localStorage.getItem('login'));
+    console.log(accessToken);
+    console.log(accessToken['accesstoken']);
     if(accessToken) {
         headers.append("Authorization", accessToken);
     }
