@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { useLocation } from 'react-router-dom';
 import UserInfo from '../../components/userinfo/UserInfo';
 import {UserTopNav} from '../../components/userinfo/UserNav';
 import UserMain from '../../components/userinfo/UserMain';
@@ -25,12 +26,15 @@ const UserPage = () => {
 
     //memberId가져오기 
     const isLogin = useSelector((state:RootState) => (state.login));
-    const localmemberId = isLogin.memberId;
-    console.log('userPage ID: ' + localmemberId); //동작 완
+    const localmemberId = isLogin.memberId;//동작 완
+
+    const location = useLocation();
+    const userID = location.state.userID;
+    console.log('LINKG PROPS : : ' + userID);
 
     useEffect(() => {
         const fetchUserData = async () => {
-            return call(`/users/${localmemberId}`, 'GET', null)
+            return call(`/users/31`, 'GET', null)
             .then((res) => {
                 setMyInfo(res);
                 console.log(`USER 정보 출력:  ${res}`);
