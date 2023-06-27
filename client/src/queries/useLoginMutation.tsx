@@ -24,6 +24,7 @@ const postLogin = async (loginData: LoginType) => {
   return {
     accesstoken: ACCESS_TOKEN,
     refreshtoken: REFRESH_TOKEN,
+    memberId: result.memberId,
     body: result,
     status: status,
   };
@@ -40,9 +41,10 @@ const useLoginMutation = () => {
         setLogin({
           accesstoken: data.accesstoken,
           refreshtoken: data.refreshtoken,
+          memberId: data.memberId,
         })
       );
-      // navigate('/');
+      navigate('/');
     },
   });
   return loginMutation;

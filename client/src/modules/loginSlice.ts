@@ -4,6 +4,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export interface LoginType {
   accesstoken: string;
   refreshtoken: string;
+  memberId: number;
 }
 
 interface InitialStateInterface extends LoginType {
@@ -16,6 +17,7 @@ const initialState: InitialStateInterface = getLocalStorage(LOGINKEY, {
   isLogin: false,
   accesstoken: '',
   refreshtoken: '',
+  memberId: 0,
 });
 
 const loginSlice = createSlice({
@@ -27,6 +29,7 @@ const loginSlice = createSlice({
         isLogin: true,
         accesstoken: action.payload.accesstoken,
         refreshtoken: action.payload.refreshtoken,
+        memberId: action.payload.memberId,
       };
       setLocalStorage(LOGINKEY, loginData);
       return loginData;
