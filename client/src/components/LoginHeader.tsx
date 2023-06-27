@@ -60,7 +60,7 @@ const LoginHeader = ({ changeNav }:LoginProps) => {  //isUser.isLogin을 통해 
   // const userID  = useMemberId();
   const storedData = JSON.parse(localStorage.getItem('login'));
   const memberId = storedData.memberId;
-  console.log('LoginHEader ID: ' + memberId);
+  console.log('V03_ID : ' + storedData);
 
   return (
     <>
