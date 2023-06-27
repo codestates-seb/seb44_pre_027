@@ -13,9 +13,7 @@ interface VoteButtonProps {
 
 const VoteButton = ({ direction, postId, refetch }: VoteButtonProps) => {
   const isUser = useSelector((state: RootState) => state.login);
-  console.log(isUser)
-  const nowMemberId = window.localStorage.getItem('login');
-  console.log(nowMemberId);
+  const nowMemberId = useSelector((state: RootState) => state.login.memberId);
 
   const updownVote = () => {
     const status = direction === 'up'? 'good' : 'bad';
