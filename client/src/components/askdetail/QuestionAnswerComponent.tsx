@@ -29,11 +29,9 @@ const QuestionAnswerComponent = ({type, data, questionId, answerId, refetch}: Qu
   }
 
   const { mutate } = useMutation(deleteData,{
-    onSuccess: () => {
+    onSettled:()=>{
       if(type === 'Question')
         navigate('/');
-      },
-    onSettled:()=>{
       if(type === 'Answer')
         refetch();
     }
