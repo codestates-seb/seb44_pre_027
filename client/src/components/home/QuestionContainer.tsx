@@ -44,6 +44,11 @@ const QuestionContainer = () => {
     setIsSort(value);
   }
 
+  //페이지네이션 다음 버튼 추가 
+  const handleNextPage = () => {
+    setBasic((prev) => prev + 1);
+  }
+
   return (
     <main className=" flex flex-col">
       <div className=" px-4 py-4">
@@ -73,17 +78,51 @@ const QuestionContainer = () => {
       }
 
       <div className=" mx-24 mb-24 mt-12 flex">
-        {Array.from({length:5}).map((e,i) => {
-          if(i===0){
+      {basic > 5 && (
+        <PagenationBtn onClick={() => handlePage(1)}>
+          1
+        </PagenationBtn>
+      )}
+      {basic > 5 && (
+        <PagenationBtn onClick={() => handlePage(basic - 1)}>
+          &lt;
+        </PagenationBtn>
+      )}
+      {Array.from({ length: 5 }).map((_, i) => {
+        const pageNumber = basic - (5 - i);
+        if (pageNumber > 0) {
+          return (
+            <PagenationBtn
+              total={data.length}
+              basic={basic}
+              setBasic={setBasic}
+              variant={basic === pageNumber ? 'active' : 'default'}
+              key={i}
+              onClick={() => handlePage(pageNumber)}
+            >
+              {pageNumber}
+            </PagenationBtn>
+          );
+        }
+        return null;
+      })}
+      {basic <= 5 && (
+        <PagenationBtn onClick={handleNextPage}>
+          &gt;
+        </PagenationBtn>
+      )}
+        {/* {Array.from({length:5}).map((e,i) => {
+          const pageNumber = i + 1;
+          if(pageNumber <= 5){
             return(
               <PagenationBtn
                 total={data.length}
                 basic={basic}
                 setBasic={setBasic}
-                variant={basic === i + 1 ? 'active' : 'default'}
+                variant={basic === pageNumber ? 'active' : 'default'}
                 key={i} // key 속성 추가
-                onClick={()=> handlePage(i + 1)}
-              >{i+1}</PagenationBtn>
+                onClick={()=> handlePage(pageNumber)}
+              >{pageNumber}</PagenationBtn>
             );
           }
 
@@ -92,12 +131,12 @@ const QuestionContainer = () => {
               total={data.length}
               basic={basic}
               setBasic={setBasic}
-              variant={basic === i + 1 ? 'active' : 'default'}
+              variant={basic === pageNumber ? 'active' : 'default'}
               key={i} // key 속성 추가
-              onClick={()=> handlePage(i+1)}
-            >{i+1}</PagenationBtn>
-          );
-        })};
+              onClick={()=> handlePage(pageNumber)}
+            >{pageNumber}</PagenationBtn>
+          )
+        })}; */}
       </div>
     </main>
   );
