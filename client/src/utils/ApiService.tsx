@@ -16,6 +16,7 @@ export function call(api:string, method:string, request:any) {
 
 
     const accessToken = localStorage.getItem(ACCESS_TOKEN);
+    console.log('accessToken: '+accessToken);
     if(accessToken) {
         headers.append("Authorization", accessToken);
     }

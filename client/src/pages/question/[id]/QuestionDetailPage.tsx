@@ -26,7 +26,7 @@ const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
   const { register, handleSubmit, setValue } = useForm();
   const { questionid } = useParams();
   const isUser = useSelector((state: RootState) => state.login);
-  const nowMemberId = localStorage.getItem('memberId');
+  const nowMemberId = JSON.parse(localStorage.getItem('memberId'));
 
   let onlyQuestionData = {
     questionId: 0,
