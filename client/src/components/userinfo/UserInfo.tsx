@@ -10,6 +10,7 @@ export type UserInfoProps = {
   };
   
 const UserInfo = ({isSettingOn, setIsSettingOn, myInfo}:UserInfoProps) => {
+    console.log('UserInfo위치입니다. ' + myInfo);
 
     const changeSet = () => {
         setIsSettingOn(true);

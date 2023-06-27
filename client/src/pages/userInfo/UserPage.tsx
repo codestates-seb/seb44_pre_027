@@ -26,13 +26,14 @@ const UserPage = () => {
     //memberId가져오기 
     const isLogin = useSelector((state:RootState) => (state.login));
     const localmemberId = isLogin.memberId;
+    console.log('userPage ID: ' + localmemberId);
 
     useEffect(() => {
         const fetchUserData = async () => {
             return call(`/users/${localmemberId}`, 'GET', null)
             .then((res) => {
                 setMyInfo(res);
-                console.log('UserPage: '+ localmemberId);
+                console.log(`User PAGE GET 성공입니다\n ${res}`);
             })
             .catch((Err) => console.log('유저정보 GET 에러 발생: ' + Err));
         };
@@ -40,11 +41,9 @@ const UserPage = () => {
         fetchUserData();
     }, [])
 
-    console.log('내정보' + myInfo);
-
     //DELETE 요청 실행 버튼 함수  
-    const handleDeleteAccount = async (memberId) => {
-        return call(`users/${memberId}`, 'DELETE', {...myInfo})
+    const handleDeleteAccount = async (localmemberId) => {
+        return call(`users/${localmemberId}`, 'DELETE', {...myInfo})
         .then((res) =>{
             setIsAlert(true);
             setTimeout(() => {
