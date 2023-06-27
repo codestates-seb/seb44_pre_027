@@ -28,23 +28,23 @@ const UserPage = () => {
     const isLogin = useSelector((state:RootState) => (state.login));
     const localmemberId = isLogin.memberId;//동작 완
 
-    const location = useLocation();
-    const userID = location.state.userID;
-    console.log('LINKG PROPS : : ' + userID);
+    // const location = useLocation();
+    // const userID = location.state.userID;
+    // console.log('LINKG PROPS : : ' + userID);
 
-    useEffect(() => {
-        const fetchUserData = async () => {
-            return call(`/users/31`, 'GET', null)
-            .then((res) => {
-                setMyInfo(res);
-                console.log(`USER 정보 출력:  ${res}`);
-                console.log(`USER 정보 2차 출력: ${res.nickname}`)
-            })
-            .catch((Err) => console.log('유저정보 GET 에러 발생: ' + Err));
-        };
+    // useEffect(() => {
+    //     const fetchUserData = async () => {
+    //         return call(`/users/31`, 'GET', null)
+    //         .then((res) => {
+    //             setMyInfo(res);
+    //             console.log(`USER 정보 출력:  ${res}`);
+    //             console.log(`USER 정보 2차 출력: ${res.nickname}`)
+    //         })
+    //         .catch((Err) => console.log('유저정보 GET 에러 발생: ' + Err));
+    //     };
 
-        fetchUserData();
-    }, [])
+    //     fetchUserData();
+    // }, [])
 
     //DELETE 요청 실행 버튼 함수  
     const handleDeleteAccount = async (localmemberId) => {
