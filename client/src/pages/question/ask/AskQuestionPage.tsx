@@ -17,7 +17,6 @@ const AskQuestionPage = ({}: AskQuestionPageProps) => {
 
   const addNewQuestion = (data:FieldValues) => {
     return call('/questions', 'POST', {
-      memberId: 4,
       title: data.title,
       content: data.problem + `\n\n` + data.expected,
     });
