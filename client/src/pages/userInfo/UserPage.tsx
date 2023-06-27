@@ -16,8 +16,6 @@ export interface indexUser {
     myinfo:UserSettingType[];
 }
 
-
-
 const UserPage = () => {
     const [isSettingOn, setIsSettingOn] = useState<boolean>(false);
     const [isAlert, setIsAlert] = useState(false); //알림창 
@@ -72,7 +70,7 @@ const UserPage = () => {
             <div className="flex flex-row ">
                 <LeftSideBar/>
                 <main className="mx-auto mb-20 flex flex-col">
-                    <UserInfo isSettingOn={isSettingOn} setIsSettingOn={setIsSettingOn}/>
+                    <UserInfo isSettingOn={isSettingOn} setIsSettingOn={setIsSettingOn} userName={myInfo.nickname}/>
                     <div>
                         <UserTopNav setIsSettingOn={setIsSettingOn}/>
                         <UserMain 

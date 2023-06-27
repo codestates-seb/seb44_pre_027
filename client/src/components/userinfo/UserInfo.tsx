@@ -6,10 +6,10 @@ import { UserSettingType } from '@/mocks/homeinquiry';
 export type UserInfoProps = {
     isSettingOn: boolean;
     setIsSettingOn: React.Dispatch<React.SetStateAction<boolean>>;
-    myInfo?:UserSettingType;
-  };
+    userName?:string
+};
   
-const UserInfo = ({isSettingOn, setIsSettingOn, }:UserInfoProps) => {
+const UserInfo = ({isSettingOn, setIsSettingOn, userName}:UserInfoProps) => {
     // console.log('UserInfo위치입니다. ' + myInfo);
 
     const changeSet = () => {
@@ -27,11 +27,11 @@ const UserInfo = ({isSettingOn, setIsSettingOn, }:UserInfoProps) => {
                 </div>
                 <div className="ml-3 flex flex-col justify-center">
                     {/*유저 이름 + 생년 월일 */}
-                    <div className=" text-[32px] font-normal mb-2"></div>   
+                    <div className=" text-[32px] font-normal mb-2">{userName}</div>   
                     <div className=" text-slate-500 font-normal text-sm">
-                        <span>생일</span>
-                        <span>정보</span>    
-                        <span>하드코딩중</span>        
+                        <span className="mr-1">2023. 06. 27</span>
+                        <span className="mr-1">코드스테이츠</span>    
+                        <span className="mr-1">다함께 코딩 성공</span>        
                     </div>             
                 </div>
             </div>
