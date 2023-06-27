@@ -58,9 +58,10 @@ const LoginHeader = ({ changeNav }:LoginProps) => {  //isUser.isLogin을 통해 
 
   //memberID [0] 호출
   // const userID  = useMemberId();
-  const storedData = localStorage.getItem('login');
-  const memberId = storedData;
-  console.log('V04_ID : ' + storedData);
+  const storedData = window.localStorage.getItem('login');
+  const memberId = Number(storedData);
+  console.log('type ' + typeof memberId);
+  console.log('V05_ID : ' + storedData);
 
   return (
     <>
