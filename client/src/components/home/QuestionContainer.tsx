@@ -22,6 +22,7 @@ const QuestionContainer = () => {
   // btn 클릭 시 page변동 및 get요청 
   const lastPage = (basic-1)*curpage + curpage;
 
+  //현재 페이지 적용
   const handlePage = (pageNum:number) => {
     setBasic(pageNum);
   }; 
@@ -77,42 +78,14 @@ const QuestionContainer = () => {
       })
       }
 
-      <div className=" mx-24 mb-24 mt-12 flex">
-      {basic > 5 && (
-        <PagenationBtn onClick={() => handlePage(1)}>
-          1
-        </PagenationBtn>
-      )}
-      {basic > 5 && (
-        <PagenationBtn onClick={() => handlePage(basic - 1)}>
-          &lt;
-        </PagenationBtn>
-      )}
-      {Array.from({ length: 5 }).map((_, i) => {
-        const pageNumber = basic - (5 - i);
-        if (pageNumber > 0) {
-          return (
-            <PagenationBtn
-              total={data.length}
-              basic={basic}
-              setBasic={setBasic}
-              variant={basic === pageNumber ? 'active' : 'default'}
-              key={i}
-              onClick={() => handlePage(pageNumber)}
-            >
-              {pageNumber}
-            </PagenationBtn>
-          );
-        }
-        return null;
-      })}
-      {basic <= 5 && (
-        <PagenationBtn onClick={handleNextPage}>
-          &gt;
-        </PagenationBtn>
-      )}
-        {/* {Array.from({length:5}).map((e,i) => {
+      <div className=" mx-24 mb-24 mt-12 flex justify-center">
+      <PagenationBtn onClick={() => setBasic(basic-1)} >
+      &lt;
+      </PagenationBtn>
+      {Array.from({length: data.length}).map((e, i) => {
           const pageNumber = i + 1;
+          // console.log('num' + numPages);
+          // console.log(pageNumber);
           if(pageNumber <= 5){
             return(
               <PagenationBtn
@@ -124,19 +97,25 @@ const QuestionContainer = () => {
                 onClick={()=> handlePage(pageNumber)}
               >{pageNumber}</PagenationBtn>
             );
+          }else if (pageNumber > 5){
+            return(
+              <PagenationBtn
+                total={data.length}
+                basic={basic}
+                setBasic={setBasic}
+                variant={basic === pageNumber ? 'active' : 'default'}
+                key={i} // key 속성 추가
+                onClick={()=> handlePage(pageNumber)}
+              > {} </PagenationBtn>
+            );
           }
+         
 
-          return (
-            <PagenationBtn
-              total={data.length}
-              basic={basic}
-              setBasic={setBasic}
-              variant={basic === pageNumber ? 'active' : 'default'}
-              key={i} // key 속성 추가
-              onClick={()=> handlePage(pageNumber)}
-            >{pageNumber}</PagenationBtn>
-          )
-        })}; */}
+        })}
+      <PagenationBtn onClick={() => setBasic(basic+1)} >
+      &gt;
+      </PagenationBtn>
+        
       </div>
     </main>
   );
