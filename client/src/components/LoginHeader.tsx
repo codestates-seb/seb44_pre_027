@@ -64,20 +64,19 @@ const LoginHeader = ({ changeNav }:LoginProps) => {  //isUser.isLogin을 통해 
   const localmemberId = isLogin.memberId;
   console.log(localmemberId);
 
-  //임시 테스트
-  useEffect(() => {
-    const fetchUserData = async () => {
-        return call(`/users/${localmemberId}`, 'GET', null)
-        .then((res) => {
-            const temp = JSON.parse(res);
-            console.log(`USER 정보 출력:  ${temp}`);
-            console.log(`USER 정보 2차 출력: ${res.nickname}`)
-        })
-        .catch((Err) => console.log('유저정보 GET 에러 발생: ' + Err));
-    };
+  // //임시 테스트
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //       return call(`/users/${localmemberId}`, 'GET', null)
+  //       .then((res) => {
+  //           // const temp = JSON.parse(res); ==> 불가 [Objec, Objec] xx 
+  //           console.log(`USER 정보 2차 출력: ${res.nickname}`)
+  //       })
+  //       .catch((Err) => console.log('유저정보 GET 에러 발생: ' + Err));
+  //   };
 
-    fetchUserData();
-  }, [])
+  //   fetchUserData();
+  // }, [])
 
 
   return (
