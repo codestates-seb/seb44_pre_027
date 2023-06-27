@@ -25,10 +25,9 @@ interface PagenationBtnProps
   extends VariantProps<typeof ButtonVariants>,
     ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  total:number;
-
-  basic:number;
-  setBasic:(value:number)=>void;
+  total?:number;
+  basic?:number;
+  setBasic?:(value:number)=>void;
 
 }
 
