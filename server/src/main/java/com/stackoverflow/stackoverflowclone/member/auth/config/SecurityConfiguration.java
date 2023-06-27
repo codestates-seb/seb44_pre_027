@@ -105,9 +105,9 @@ public class SecurityConfiguration {
         //configuration.addAllowedOriginPattern("*");
         configuration.setAllowedOrigins(Arrays.asList("https://dahamoverflow.netlify.app/","http://localhost:5173/", "http://localhost:8080/"));
         configuration.setAllowedMethods(Arrays.asList("GET","POST", "PATCH", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));  // * 수정
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));  // * 수정
         configuration.setExposedHeaders(Arrays.asList("*"));
-        
+
         // 추가
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(86400L);
