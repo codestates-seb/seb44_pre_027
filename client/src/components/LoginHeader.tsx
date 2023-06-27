@@ -67,6 +67,7 @@ const LoginHeader = ({ changeNav }:LoginProps) => {  //isUser.isLogin을 통해 
   console.log('V06_ID : ' + storedData);
 
   const reduxId = useSelector((state:RootState) => state.login.memberId);
+  console.log(reduxId);
 
   return (
     <>
