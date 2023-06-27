@@ -11,10 +11,12 @@ import { PrimaryBtn } from '@/common/style/Buttons.styled';
 import { call } from '@/utils/ApiService';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/modules/store';
+import { useNavigate } from 'react-router-dom';
 
 interface AskQuestionPageProps {}
 
 const AskQuestionPage = ({}: AskQuestionPageProps) => {
+  const navigate = useNavigate();
   const { register, handleSubmit, formState: { isSubmitting } } = useForm();
   const isUser = useSelector((state: RootState) => state.login);
 
@@ -32,7 +34,7 @@ const AskQuestionPage = ({}: AskQuestionPageProps) => {
     (data:FieldValues) => {
       mutation.mutate(data, {
         onSettled:(data) => {
-          window.location.href=`/questions/${data.questionId}`;
+          navigate(`/questions/${data.questionId}`);;
         }
       });
   },
