@@ -9,12 +9,14 @@ import WriteInputContainer from '@/components/askquestion/WriteInputContainer';
 import { Container } from '@/common/style/Containers.styled';
 import { PrimaryBtn } from '@/common/style/Buttons.styled';
 import { call } from '@/utils/ApiService';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/modules/store';
 
 interface AskQuestionPageProps {}
 
 const AskQuestionPage = ({}: AskQuestionPageProps) => {
   const { register, handleSubmit, formState: { isSubmitting } } = useForm();
-  const nowMemberId = window.localStorage.getItem('memberId');
+  const nowMemberId = useSelector((state: RootState) => state.login.memberId);
 
   const addNewQuestion = (data:FieldValues) => {
     return call('/questions', 'POST', {
