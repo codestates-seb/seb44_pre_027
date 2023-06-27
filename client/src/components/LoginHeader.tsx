@@ -7,7 +7,6 @@ import HeadMenuIcon from '@/assets/icons/HeadMenuIcon';
 import HeadQuestionIcon from '@/assets/icons/HeadQuestionIcon';
 import HeadBoxIcon from '@/assets/icons/HeadBoxIcon';
 import HeadCupIcon from '@/assets/icons/HeadCupIcon';
-import { useMemberId } from '@/utils/useMemberId';
 
 type LoginProps = {
   changeNav: boolean;
@@ -59,7 +58,8 @@ const LoginHeader = ({ changeNav }:LoginProps) => {  //isUser.isLogin을 통해 
 
   //memberID [0] 호출
   // const userID  = useMemberId();
-  const memberId = localStorage.getItem('memberId')
+  const memberId = JSON.parse(localStorage.getItem('memberId'));
+  console.log('LoginHEader ID: ' + memberId);
 
   return (
     <>

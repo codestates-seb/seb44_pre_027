@@ -32,9 +32,7 @@ const QuestionContainer = () => {
     ) => {
       return call(`/questions?page=${page}&sort=${sort}`, 'GET', null)
       .then((res) => {
-        setData(res.data);
-        console.log(res.data);
-        
+        setData(res.data);      
       })
     };
 
@@ -66,7 +64,6 @@ const QuestionContainer = () => {
 
       {
       data.slice(0, curpage).map((e:any) => {
-        console.log('link part : ' + e.questionId);
         return (
           <Link to={`/questions/${e.questionId}`} key={e.questionId}>
             <QuestionItem data={e} key={e.questionId}/>
