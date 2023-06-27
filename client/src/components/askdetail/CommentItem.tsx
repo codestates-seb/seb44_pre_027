@@ -37,6 +37,7 @@ const CommentItem = ({data, id, questionId, commentId, refetch}: CommentItemProp
 
   const editComment = (data:FieldValues)=>{
     return call(`/questions/${questionId}/comments/${commentId}`, 'PATCH', {
+      memberId: nowMemberID,
       content: data.content
     })
   }
