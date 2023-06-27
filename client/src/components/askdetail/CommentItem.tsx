@@ -35,11 +35,11 @@ const CommentItem = ({data, id, questionId, commentId, refetch}: CommentItemProp
   const [editMode, setEditMode] = useState<boolean>(false);
   const { register, handleSubmit, setValue } = useForm();
   const createdAt = new Date(data.createdAt.substr(0,10)).toDateString();
-  const nowMemberId = useSelector((state: RootState) => state.login).memberId;
+  const isUser = useSelector((state: RootState) => state.login);
 
   const editComment = (data:FieldValues)=>{
     return call(`/questions/${questionId}/comments/${commentId}`, 'PATCH', {
-      memberId: nowMemberId,
+      memberId: isUser.memberId,
       content: data.content
     })
   }
@@ -93,7 +93,7 @@ const CommentItem = ({data, id, questionId, commentId, refetch}: CommentItemProp
           </form>
         }
       </div>
-      { !editMode && (Number(nowMemberId) === data.memberId) &&
+      { !editMode && (isUser.memberId === data.memberId) &&
         <div className='flex gap-2'>
           <span className='text-13 hover:cursor-pointer text-slate-400' onClick={()=>setEditMode(!editMode)}>Edit</span>
           <IconWrapper onClick={()=>deleteCom()}>
