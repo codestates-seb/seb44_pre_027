@@ -17,7 +17,7 @@ const queryClient = new QueryClient();
 interface AppProps {}
 
 const App = ({}: AppProps) => {
-  console.log('12:25')
+  console.log('12:40')
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>

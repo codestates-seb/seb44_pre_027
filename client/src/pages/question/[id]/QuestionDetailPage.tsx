@@ -26,6 +26,7 @@ const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
   const { register, handleSubmit, setValue } = useForm();
   const { questionid } = useParams();
   const isUser = useSelector((state: RootState) => state.login);
+  console.log(isUser.memberId);
 
   let onlyQuestionData = {
     questionId: 0,

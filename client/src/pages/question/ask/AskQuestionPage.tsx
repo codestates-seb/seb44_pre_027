@@ -16,11 +16,11 @@ interface AskQuestionPageProps {}
 
 const AskQuestionPage = ({}: AskQuestionPageProps) => {
   const { register, handleSubmit, formState: { isSubmitting } } = useForm();
-  const nowMemberId = useSelector((state: RootState) => state.login.memberId);
+  const isUser = useSelector((state: RootState) => state.login);
 
   const addNewQuestion = (data:FieldValues) => {
     return call('/questions', 'POST', {
-      memberId:nowMemberId,
+      memberId:isUser.memberId,
       title: data.title,
       content: data.problem + `\n\n` + data.expected,
     });
