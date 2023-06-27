@@ -17,7 +17,7 @@ interface QuestionAnswerComponentProps{
 }
 
 const QuestionAnswerComponent = ({type, data, questionId, answerId, refetch}: QuestionAnswerComponentProps) => {
-  const nowMemberId = useSelector((state: RootState) => state.login).memberId;
+  const isUser = useSelector((state: RootState) => state.login);
 
   const deleteData = ()=>{
     if(type === 'Question')
@@ -55,7 +55,7 @@ const QuestionAnswerComponent = ({type, data, questionId, answerId, refetch}: Qu
         <VoteContainer voteScore={data.voteScore} postId={type === 'Question' ? questionId : answerId} refetch={refetch}/>
         <MainText content={data.content}/>
       </div>
-      { Number(nowMemberId) === data.memberId &&
+      { Number(isUser.memberId) === data.memberId &&
         <div className=" flex gap-4 text-sm pl-12 pb-4">
           <Link to={ type === 'Question' ?
             `/posts/${questionId}/edit`

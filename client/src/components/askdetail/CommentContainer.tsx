@@ -20,11 +20,10 @@ const CommentContainer = ({comments, questionId, refetch}: CommentContainerProps
   const [addComment, setAddComment] = useState<boolean>(false);
   const { register, handleSubmit, setValue } = useForm();
   const isUser = useSelector((state: RootState) => state.login);
-  const nowMemberId = useSelector((state: RootState) => state.login).memberId;
 
   const addNewComment = (data:FieldValues) => {
     return call(`/questions/${questionId}/comments`, 'POST', {
-      memberId: nowMemberId,
+      memberId: isUser.memberId,
       ...data
     });
   };
