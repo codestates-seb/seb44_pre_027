@@ -58,15 +58,16 @@ const LoginHeader = ({ changeNav }:LoginProps) => {  //isUser.isLogin을 통해 
   };
 
   //memberID [0] 호출
-  const userID  = useMemberId();
+  // const userID  = useMemberId();
+  const memberId = localStorage.getItem('memberId')
 
   return (
     <>
       {changeNav ? (
         <ul className="flex flex-row space-x-2 items-center">
           <li className={cn(IconHover({ variant: 'hover' }))}>
-            <Link to={`/users/${userID}`}
-            state={{userID: userID}}
+            <Link to={`/users/${memberId}`}
+            state={{userID: memberId}}
             className="relative p-2 text-gray-500 bg-transparent"
             >
               <img
