@@ -1,13 +1,15 @@
 import React from 'react';
 import PencilIcon from '@/assets/icons/PencilIcon';
+import { UserSettingType } from '@/mocks/homeinquiry';
 //상단의 유저 정보에 대한 컴포넌트
 
 export type UserInfoProps = {
     isSettingOn: boolean;
     setIsSettingOn: React.Dispatch<React.SetStateAction<boolean>>;
+    myInfo:UserSettingType;
   };
   
-const UserInfo = ({isSettingOn, setIsSettingOn}:UserInfoProps) => {
+const UserInfo = ({isSettingOn, setIsSettingOn, myInfo}:UserInfoProps) => {
 
     const changeSet = () => {
         setIsSettingOn(true);
@@ -24,7 +26,7 @@ const UserInfo = ({isSettingOn, setIsSettingOn}:UserInfoProps) => {
                 </div>
                 <div className="ml-3 flex flex-col justify-center">
                     {/*유저 이름 + 생년 월일 */}
-                    <div className=" text-[32px] font-normal mb-2">Emma</div>   
+                    <div className=" text-[32px] font-normal mb-2">{myInfo.nickname}</div>   
                     <div className=" text-slate-500 font-normal text-sm">
                         <span>생일</span>
                         <span>정보</span>    
