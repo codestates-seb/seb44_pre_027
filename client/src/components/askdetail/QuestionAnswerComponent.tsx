@@ -36,10 +36,6 @@ const QuestionAnswerComponent = ({type, data, questionId, answerId, refetch}: Qu
     onSettled:()=>{
       if(type === 'Answer')
         refetch();
-    },
-    onError: ()=>{
-      if(type === 'Question')
-        alert('답변이 등록된 질문은 삭제가 불가능합니다.')
     }
   });
 
