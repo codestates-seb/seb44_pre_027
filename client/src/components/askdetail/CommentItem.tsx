@@ -33,6 +33,7 @@ const CommentItem = ({data, id, questionId, commentId, refetch}: CommentItemProp
   const [editMode, setEditMode] = useState<boolean>(false);
   const { register, handleSubmit, setValue } = useForm();
   const createdAt = new Date(data.createdAt.substr(0,10)).toDateString();
+  const nowMemberID = localStorage.getItem('memberId');
 
   const editComment = (data:FieldValues)=>{
     return call(`/questions/${questionId}/comments/${commentId}`, 'PATCH', {
@@ -89,7 +90,7 @@ const CommentItem = ({data, id, questionId, commentId, refetch}: CommentItemProp
           </form>
         }
       </div>
-      { !editMode &&
+      { !editMode && (Number(nowMemberID) === data.memberId) &&
         <div className='flex gap-2'>
           <span className='text-13 hover:cursor-pointer text-slate-400' onClick={()=>setEditMode(!editMode)}>Edit</span>
           <IconWrapper onClick={()=>deleteCom()}>
