@@ -17,6 +17,7 @@ const VoteButton = ({ direction, postId, refetch }: VoteButtonProps) => {
   const updownVote = () => {
     const status = direction === 'up'? 'good' : 'bad';
     return call(`/questions/${postId}/votes?status=${status}`, 'POST', {
+      memberId: isUser.memberId,
       questionId: postId
     })
   }

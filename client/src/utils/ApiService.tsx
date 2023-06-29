@@ -1,5 +1,8 @@
+import { RootState } from "@/modules/store";
+import { useSelector } from "react-redux";
+
 const API_BASE_URL = 'https://dahamoverflow.store'
-const ACCESS_TOKEN = 'accesstoken';
+const ACCESS_TOKEN = 'login';
 
 interface OptionsProps {
     headers: Headers;
@@ -15,9 +18,9 @@ export function call(api:string, method:string, request:any) {
     });
 
 
-    const accessToken = localStorage.getItem(ACCESS_TOKEN);
+    const accessToken = JSON.parse(localStorage.getItem('login'))['accesstoken'];
     if(accessToken) {
-        headers.append("Authorization", "Bearer " + accessToken);
+        headers.append("Authorization", accessToken);
     }
 
 

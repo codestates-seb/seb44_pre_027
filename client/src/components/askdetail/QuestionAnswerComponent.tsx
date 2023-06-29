@@ -1,10 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import MainText from './MainText';
 import VoteContainer from './VoteContainer';
 import { Answer, Question } from '../../types/QuestionAnswerType'
 import { call } from '@/utils/ApiService';
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters, useMutation } from '@tanstack/react-query';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/modules/store';
 
 interface QuestionAnswerComponentProps{
   questionId?: number;
@@ -15,6 +17,8 @@ interface QuestionAnswerComponentProps{
 }
 
 const QuestionAnswerComponent = ({type, data, questionId, answerId, refetch}: QuestionAnswerComponentProps) => {
+  const navigate = useNavigate();
+  const isUser = useSelector((state: RootState) => state.login);
 
   const deleteData = ()=>{
     if(type === 'Question')
@@ -25,25 +29,20 @@ const QuestionAnswerComponent = ({type, data, questionId, answerId, refetch}: Qu
   }
 
   const { mutate } = useMutation(deleteData,{
-    onSuccess: () => {
-      if(type === 'Question')
-        window.location.href='/';
-      },
+
     onSettled:()=>{
+      if(type === 'Question')
+        navigate('/');
       if(type === 'Answer')
         refetch();
-    },
-    onError: ()=>{
-      if(type === 'Question')
-        alert('답변이 등록된 질문은 삭제가 불가능합니다.')
     }
   });
 
   const gotoEditPage = ()=>{
     if(type === 'Question')
-      window.location.href = `/questions/${questionId}/edit`;
+      navigate(`/questions/${questionId}/edit`);
     if(type === 'Answer')
-      window.location.href = `/answers/${answerId}/edit`;
+      navigate(`/answers/${answerId}/edit`);
   }
 
   return (
@@ -52,16 +51,12 @@ const QuestionAnswerComponent = ({type, data, questionId, answerId, refetch}: Qu
         <VoteContainer voteScore={data.voteScore} postId={type === 'Question' ? questionId : answerId} refetch={refetch}/>
         <MainText content={data.content}/>
       </div>
-      <div className=" flex gap-4 text-sm pl-12 pb-4">
-        <Link to={ type === 'Question' ?
-          `/posts/${questionId}/edit`
-          :
-          `/questions/${questionId}/answers/${answerId}`
-          }>
-          <button onClick={gotoEditPage}>Edit</button>
-        </Link>
-        <button onClick={()=>mutate()}>Delete</button>
-      </div>
+      { isUser.memberId === data.memberId &&
+        <div className=" flex gap-4 text-sm pl-12 pb-4">
+            <button onClick={gotoEditPage}>Edit</button>
+            <button onClick={()=>mutate()}>Delete</button>
+        </div>
+      }
       {type === 'Answer' && <hr/>}
     </section>
   );

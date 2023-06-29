@@ -59,13 +59,6 @@ const LoginHeader = ({ changeNav }:LoginProps) => {  //isUser.isLogin을 통해 
     setDropdownVariant('menu');
   };
 
-  //memberId TEST Re: 1차 시도
-  // const storedData = window.localStorage.getItem('login');
-  // const jsonID = JSON.parse(storedData);
-  // console.log('1차 json처리: ' + jsonID);
-  // const memberId = jsonID.memberId;
-  // console.log('1차 memberID : ' + memberId);
-
   const isLogin = useSelector((state:RootState) => (state.login));
   const localmemberId = isLogin.memberId;
 
@@ -75,7 +68,7 @@ const LoginHeader = ({ changeNav }:LoginProps) => {  //isUser.isLogin을 통해 
         <ul className="flex flex-row space-x-2 items-center">
           <li className={cn(IconHover({ variant: 'hover' }))}>
             <Link to={`/users/${localmemberId}`}
-            state={{userID: localmemberId}}
+
             className="relative p-2 text-gray-500 bg-transparent"
             >
               <img

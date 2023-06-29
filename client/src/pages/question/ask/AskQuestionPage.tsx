@@ -9,15 +9,20 @@ import WriteInputContainer from '@/components/askquestion/WriteInputContainer';
 import { Container } from '@/common/style/Containers.styled';
 import { PrimaryBtn } from '@/common/style/Buttons.styled';
 import { call } from '@/utils/ApiService';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/modules/store';
+import { useNavigate } from 'react-router-dom';
 
 interface AskQuestionPageProps {}
 
 const AskQuestionPage = ({}: AskQuestionPageProps) => {
+  const navigate = useNavigate();
   const { register, handleSubmit, formState: { isSubmitting } } = useForm();
+  const isUser = useSelector((state: RootState) => state.login);
 
   const addNewQuestion = (data:FieldValues) => {
     return call('/questions', 'POST', {
-      memberId: 4,
+      memberId:isUser.memberId,
       title: data.title,
       content: data.problem + `\n\n` + data.expected,
     });
@@ -29,7 +34,8 @@ const AskQuestionPage = ({}: AskQuestionPageProps) => {
     (data:FieldValues) => {
       mutation.mutate(data, {
         onSettled:(data) => {
-          window.location.href=`/questions/${data.questionId}`;
+          window.scrollTo(0,0);
+          navigate(`/questions/${data.questionId}`);;
         }
       });
   },

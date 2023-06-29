@@ -11,6 +11,8 @@ import SignupPage from './pages/SignupPage';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import QuestionEditPage from './pages/question/[id]/questionedit/QuestionEditPage';
 import AnswerEditPage from './pages/question/[id]/answeredit/[answerid]/AnswerEditPage';
+import { useSelector } from 'react-redux';
+import { RootState } from './modules/store';
 
 const queryClient = new QueryClient();
 

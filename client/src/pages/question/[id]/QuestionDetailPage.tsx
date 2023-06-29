@@ -26,6 +26,7 @@ const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
   const { register, handleSubmit, setValue } = useForm();
   const { questionid } = useParams();
   const isUser = useSelector((state: RootState) => state.login);
+  console.log(isUser.memberId);
 
   let onlyQuestionData = {
     questionId: 0,
@@ -44,7 +45,7 @@ const QuestionDetailPage = ({}: QuestionDetailPageProps) => {
   {enabled: onlyQuestionData.questionId === 0});
 
   const addNewAnswer = (data:FieldValues) => {
-    return call(`/questions/${questionid}/answers`, 'POST', {...data});
+    return call(`/questions/${questionid}/answers`, 'POST', {memberId:isUser.memberId,...data});
   };
   const mutation = useMutation(addNewAnswer);
 

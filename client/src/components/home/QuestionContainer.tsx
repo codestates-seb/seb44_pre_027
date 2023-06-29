@@ -22,6 +22,7 @@ const QuestionContainer = () => {
   // btn 클릭 시 page변동 및 get요청 
   const lastPage = (basic-1)*curpage + curpage;
 
+  //현재 페이지 적용
   const handlePage = (pageNum:number) => {
     setBasic(pageNum);
   }; 
@@ -72,32 +73,44 @@ const QuestionContainer = () => {
       })
       }
 
-      <div className=" mx-24 mb-24 mt-12 flex">
-        {Array.from({length:5}).map((e,i) => {
-          if(i===0){
+      <div className=" mx-24 mb-24 mt-12 flex justify-center">
+      <PagenationBtn onClick={() => setBasic(basic-1)} >
+      &lt;
+      </PagenationBtn>
+      {Array.from({length: data.length}).map((e, i) => {
+          const pageNumber = i + 1;
+          // console.log('num' + numPages);
+          // console.log(pageNumber);
+          if(pageNumber <= 5){
             return(
               <PagenationBtn
                 total={data.length}
                 basic={basic}
                 setBasic={setBasic}
-                variant={basic === i + 1 ? 'active' : 'default'}
+                variant={basic === pageNumber ? 'active' : 'default'}
                 key={i} // key 속성 추가
-                onClick={()=> handlePage(i + 1)}
-              >{i+1}</PagenationBtn>
+                onClick={()=> handlePage(pageNumber)}
+              >{pageNumber}</PagenationBtn>
+            );
+          }else if (pageNumber > 5){
+            return(
+              <PagenationBtn
+                total={data.length}
+                basic={basic}
+                setBasic={setBasic}
+                variant={basic === pageNumber ? 'active' : 'default'}
+                key={i} // key 속성 추가
+                onClick={()=> handlePage(pageNumber)}
+              > {} </PagenationBtn>
             );
           }
+         
 
-          return (
-            <PagenationBtn
-              total={data.length}
-              basic={basic}
-              setBasic={setBasic}
-              variant={basic === i + 1 ? 'active' : 'default'}
-              key={i} // key 속성 추가
-              onClick={()=> handlePage(i+1)}
-            >{i+1}</PagenationBtn>
-          );
-        })};
+        })}
+      <PagenationBtn onClick={() => setBasic(basic+1)} >
+      &gt;
+      </PagenationBtn>
+        
       </div>
     </main>
   );
